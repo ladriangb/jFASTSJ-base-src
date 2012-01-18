@@ -38,19 +38,44 @@ public class Cobertura extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private String nombre;
     /**
-     * 
+     * Ramo al que pertenece
      */
-    //@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @ManyToOne
     @NotNull
-    //TODO bussines key
     private Ramo ramo;
     /**
+     * si es un Gasto clinico
+     */
+    @Column
+    private Boolean gastosClinicos;
+    /**
+     * booleano que dice si es un gasto por honorarios medicos
+     */
+    @Column
+    private Boolean honorariosMedicos;
+    /**
+     * booleano que dice si aplica no para la base imponible
+     */
+    @Column
+    private Boolean baseImponible;
+    /**
+     * aplica IVA
+     */
+    @Column
+    private Boolean iva;
+    /**
+     * aplica ISLR
+     */
+    @Column
+    private Boolean islr;
+    /**
+     * version
      */
     @Version
     @Column
     private Integer optLock;
     /**
+     * bitacora del sistema
      */
     @Embedded
     @BusinessKey
@@ -123,4 +148,85 @@ public class Cobertura extends BeanVO implements Serializable, Auditable {
             return nombreCompleto;
         }
     }
+
+    /**
+     * booleano que dice si aplica no para la base imponible
+     * @return the baseImponible
+     */
+    public Boolean getBaseImponible() {
+        return baseImponible;
+    }
+
+    /**
+     * si es un Gasto clinico
+     * @return the gastosClinicos
+     */
+    public Boolean getGastosClinicos() {
+        return gastosClinicos;
+    }
+
+    /**
+     * booleano que dice si es un gasto por honorarios medicos
+     * @return the honorariosMedicos
+     */
+    public Boolean getHonorariosMedicos() {
+        return honorariosMedicos;
+    }
+
+    /**
+     * aplica ISLR
+     * @return the islr
+     */
+    public Boolean getIslr() {
+        return islr;
+    }
+
+    /**
+     * aplica IVA
+     * @return the iva
+     */
+    public Boolean getIva() {
+        return iva;
+    }
+
+    /**
+     * booleano que dice si aplica no para la base imponible
+     * @param baseImponible the baseImponible to set
+     */
+    public void setBaseImponible(Boolean baseImponible) {
+        this.baseImponible = baseImponible;
+    }
+
+    /**
+     * si es un Gasto clinico
+     * @param gastosClinicos the gastosClinicos to set
+     */
+    public void setGastosClinicos(Boolean gastosClinicos) {
+        this.gastosClinicos = gastosClinicos;
+    }
+
+    /**
+     * booleano que dice si es un gasto por honorarios medicos
+     * @param honorariosMedicos the honorariosMedicos to set
+     */
+    public void setHonorariosMedicos(Boolean honorariosMedicos) {
+        this.honorariosMedicos = honorariosMedicos;
+    }
+
+    /**
+     * aplica ISLR
+     * @param islr the islr to set
+     */
+    public void setIslr(Boolean islr) {
+        this.islr = islr;
+    }
+
+    /**
+     * aplica IVA
+     * @param iva the iva to set
+     */
+    public void setIva(Boolean iva) {
+        this.iva = iva;
+    }
+    
 }

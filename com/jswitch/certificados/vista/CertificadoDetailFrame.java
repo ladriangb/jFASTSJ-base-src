@@ -260,6 +260,7 @@ public class CertificadoDetailFrame extends DefaultDetailFrame {
         gridControl4.setEditButton(editButton6);
         gridControl4.setEditOnSingleRow(true);
         gridControl4.setFilterButton(filterButton6);
+        gridControl4.setFunctionId("asegurados_certificado");
         gridControl4.setMaxNumberOfRowsOnInsert(4);
         gridControl4.setReloadButton(reloadButton6);
         gridControl4.setSaveButton(saveButton6);

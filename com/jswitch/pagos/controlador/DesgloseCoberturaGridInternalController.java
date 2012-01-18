@@ -4,7 +4,6 @@ import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.controlador.util.DefaultGridInternalController;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.configuracion.modelo.dominio.Cobertura;
-import com.jswitch.configuracion.modelo.maestra.ConfiguracionCobertura;
 import com.jswitch.pagos.modelo.maestra.Factura;
 import com.jswitch.pagos.modelo.transaccional.DesgloseCobertura;
 import com.jswitch.pagos.modelo.transaccional.DesgloseSumaAsegurada;
@@ -121,35 +120,51 @@ public class DesgloseCoberturaGridInternalController extends DefaultGridInternal
      * @param  factura 
      */
     private void updateFactura(Factura factura) {
-        Double islr = factura.getTipoConceptoSeniat().getPorcentajeRetencionIslr();
+        Double islr = factura.getPorcentajeRetencionIsrl();
         Double montoNoAmparado = 0d;
-        Double montoSujeto = 0d;
+        Double montoAmparado = 0d;
         Double montoIva = 0d;
+        Double montoIslr = 0d;
+        Double gastosClinicos = 0d;
+        Double honorariosMedicos = 0d;
 
         for (DesgloseCobertura dc : factura.getDesgloseCobertura()) {
             if (dc.getAuditoria().getActivo()) {
-                ConfiguracionCobertura c = getConfiCober(dc.getCobertura());
+                Cobertura c = dc.getCobertura();
                 if (c.getBaseImponible()) {
                     double iva = !c.getIva() ? 0
                             : (factura.getPorcentajeIva());
                     double isl = !c.getIslr() ? 0 : islr;
-                    montoNoAmparado += dc.getMontoNoAmparado() * (1 - iva) * (1 - isl);
-                    montoSujeto += dc.getMontoAmparado() * (1 - iva) * (1 - isl);
-                    montoIva += dc.getMontoFacturado() * iva;
+                    montoNoAmparado += dc.getMontoNoAmparado();
+                    montoAmparado += dc.getMontoAmparado();
+                    montoIva += dc.getMontoAmparado() * iva;
+                    montoIslr += dc.getMontoAmparado() * isl;
+                    if (c.getGastosClinicos()) {
+                        gastosClinicos += dc.getMontoAmparado();
+                    }
+                    if (c.getHonorariosMedicos()) {
+                        honorariosMedicos += dc.getMontoAmparado();
+                    }
                 }
             }
         }
 
         factura.setMontoNoAmparado(montoNoAmparado);
-        factura.setMontoSujetoRetencion(montoSujeto);
+        factura.setMontoSujetoRetencion(montoIslr);
         factura.setMontoIva(montoIva);
+        factura.setGastosClinicos(gastosClinicos);
+        factura.setHonorariosMedicos(honorariosMedicos);
 
-        factura.setMontoRetencionIva(factura.getMontoIva() * factura.getPorcentajeRetencionIva());
-        factura.setMontoReteniconIsrl(montoSujeto * islr);
+        factura.setMontoRetencionIva(
+                factura.getMontoIva() * factura.getPorcentajeRetencionIva());
+        factura.setMontoRetencionIsrl(montoIslr);
 
-        factura.setTotalRetenido(factura.getMontoRetencionIva() + factura.getMontoReteniconIsrl());
-        factura.setTotalLiquidado(montoIva + montoSujeto);
-        factura.setTotalACancelar(factura.getTotalLiquidado() - factura.getTotalRetenido());
+        factura.setTotalRetenido(
+                factura.getMontoRetencionIva() + factura.getMontoRetencionIsrl());
+        factura.setTotalLiquidado(
+                montoIva + montoIslr + montoAmparado);
+        factura.setTotalACancelar(
+                factura.getTotalLiquidado() - factura.getTotalRetenido());
 
         Session s = null;
         try {
@@ -166,25 +181,5 @@ public class DesgloseCoberturaGridInternalController extends DefaultGridInternal
         vista.getMainPanel().getReloadButton().doClick();
     }
 
-    /**
-     * configuracion cobertura para una cobertura
-     * @param cobertura
-     * @return the ConfiguracionCobertura
-     */
-    private ConfiguracionCobertura getConfiCober(Cobertura cobertura) {
-        Session s = null;
-        ConfiguracionCobertura c = null;
-        try {
-            s = HibernateUtil.getSessionFactory().openSession();
-            c = (ConfiguracionCobertura) s.createQuery("FROM " + ConfiguracionCobertura.class.getName() + " C "
-                    + "WHERE C.cobertura.id = ?").setLong(0, cobertura.getId()).uniqueResult();
-
-        } catch (Exception e) {
-            LoggerUtil.error(DesgloseCoberturaGridInternalController.class,
-                    "getConfiCober", e);
-        } finally {
-            s.close();
-        }
-        return c;
-    }
+   
 }

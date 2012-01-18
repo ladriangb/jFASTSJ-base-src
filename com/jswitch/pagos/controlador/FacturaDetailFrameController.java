@@ -6,7 +6,6 @@ import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.vista.util.DefaultDetailFrame;
 import com.jswitch.configuracion.modelo.dominio.Cobertura;
-import com.jswitch.configuracion.modelo.maestra.ConfiguracionCobertura;
 import com.jswitch.pagos.modelo.maestra.Factura;
 import com.jswitch.pagos.modelo.transaccional.DesgloseCobertura;
 import com.jswitch.pagos.modelo.transaccional.DesgloseSumaAsegurada;
@@ -59,18 +58,18 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
     @Override
     protected Response logicaNegocioConCambioEnVista(ValueObject persistentObject, boolean mostrarMensajeError) {
         Response response = null;
-            response = logicaNegocio(persistentObject);
-            if (!response.isError()) {
-                vista.getMainPanel().getVOModel().setValueObject((ValueObject) ((VOResponse) response).getVo());
-                vista.getMainPanel().pull();
-            } else if (mostrarMensajeError) {
-                OptionPane.showMessageDialog(
-                        ClientUtils.getParentFrame(vista.getMainPanel()),
-                        ClientSettings.getInstance().getResources().getResource("Error aplicando la logica del negocio:") + "\n"
-                        + ClientSettings.getInstance().getResources().getResource(response.getErrorMessage()),
-                        ClientSettings.getInstance().getResources().getResource("Error Logica de Negocio"),
-                        JOptionPane.WARNING_MESSAGE);
-            }
+        response = logicaNegocio(persistentObject);
+        if (!response.isError()) {
+            vista.getMainPanel().getVOModel().setValueObject((ValueObject) ((VOResponse) response).getVo());
+            vista.getMainPanel().pull();
+        } else if (mostrarMensajeError) {
+            OptionPane.showMessageDialog(
+                    ClientUtils.getParentFrame(vista.getMainPanel()),
+                    ClientSettings.getInstance().getResources().getResource("Error aplicando la logica del negocio:") + "\n"
+                    + ClientSettings.getInstance().getResources().getResource(response.getErrorMessage()),
+                    ClientSettings.getInstance().getResources().getResource("Error Logica de Negocio"),
+                    JOptionPane.WARNING_MESSAGE);
+        }
         return response;
     }
 
@@ -132,6 +131,8 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
     @Override
     public Response logicaNegocio(ValueObject persistentObject) {
         Factura factura = (Factura) persistentObject;
+        factura.setPorcentajeRetencionIsrl(
+                factura.getTipoConceptoSeniat().getPorcentajeRetencionIslr());
         Date fF = factura.getFechaFactura();
         Date fR = factura.getFechaRecepcion();
         if (fF.compareTo(fR) > 0) {
@@ -162,35 +163,51 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
         if (x.doubleValue() > factura.getTotalFacturado().doubleValue()) {
             return new ErrorResponse("monto menor al reflejado");
         }
-        Double islr = factura.getTipoConceptoSeniat().getPorcentajeRetencionIslr();
+        Double islr = factura.getPorcentajeRetencionIsrl();
         Double montoNoAmparado = 0d;
-        Double montoSujeto = 0d;
+        Double montoAmparado = 0d;
         Double montoIva = 0d;
+        Double montoIslr = 0d;
+        Double gastosClinicos = 0d;
+        Double honorariosMedicos = 0d;
 
         for (DesgloseCobertura dc : factura.getDesgloseCobertura()) {
             if (dc.getAuditoria().getActivo()) {
-                ConfiguracionCobertura c = getConfiCober(dc.getCobertura());
+                Cobertura c = dc.getCobertura();
                 if (c.getBaseImponible()) {
                     double iva = !c.getIva() ? 0
                             : (factura.getPorcentajeIva());
                     double isl = !c.getIslr() ? 0 : islr;
-                    montoNoAmparado += dc.getMontoNoAmparado() * (1 - iva) * (1 - isl);
-                    montoSujeto += dc.getMontoAmparado() * (1 - iva) * (1 - isl);
-                    montoIva += dc.getMontoFacturado() * iva;
+                    montoNoAmparado += dc.getMontoNoAmparado();
+                    montoAmparado += dc.getMontoAmparado();
+                    montoIva += dc.getMontoAmparado() * iva;
+                    montoIslr += dc.getMontoAmparado() * isl;
+                    if (c.getGastosClinicos()) {
+                        gastosClinicos += dc.getMontoAmparado();
+                    }
+                    if (c.getHonorariosMedicos()) {
+                        honorariosMedicos += dc.getMontoAmparado();
+                    }
                 }
             }
         }
 
         factura.setMontoNoAmparado(montoNoAmparado);
-        factura.setMontoSujetoRetencion(montoSujeto);
+        factura.setMontoSujetoRetencion(montoIslr);
         factura.setMontoIva(montoIva);
+        factura.setGastosClinicos(gastosClinicos);
+        factura.setHonorariosMedicos(honorariosMedicos);
 
-        factura.setMontoRetencionIva(factura.getMontoIva() * factura.getPorcentajeRetencionIva());
-        factura.setMontoReteniconIsrl(montoSujeto * islr);
+        factura.setMontoRetencionIva(
+                factura.getMontoIva() * factura.getPorcentajeRetencionIva());
+        factura.setMontoRetencionIsrl(montoIslr);
 
-        factura.setTotalRetenido(factura.getMontoRetencionIva() + factura.getMontoReteniconIsrl());
-        factura.setTotalLiquidado(montoIva + montoSujeto);
-        factura.setTotalACancelar(factura.getTotalLiquidado() - factura.getTotalRetenido());
+        factura.setTotalRetenido(
+                factura.getMontoRetencionIva() + factura.getMontoRetencionIsrl());
+        factura.setTotalLiquidado(
+                montoIva + montoIslr + montoAmparado);
+        factura.setTotalACancelar(
+                factura.getTotalLiquidado() - factura.getTotalRetenido());
 
         return new VOResponse(factura);
     }
@@ -218,27 +235,5 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
 
     public DefaultDetailFrame getVista() {
         return vista;
-    }
-
-    /**
-     * configuracion cobertura para una cobertura
-     * @param cobertura
-     * @return the ConfiguracionCobertura
-     */
-    private ConfiguracionCobertura getConfiCober(Cobertura cobertura) {
-        Session s = null;
-        ConfiguracionCobertura c = null;
-        try {
-            s = HibernateUtil.getSessionFactory().openSession();
-            c = (ConfiguracionCobertura) s.createQuery("FROM " + ConfiguracionCobertura.class.getName() + " C "
-                    + "WHERE C.cobertura.id = ?").setLong(0, cobertura.getId()).uniqueResult();
-
-        } catch (Exception e) {
-            LoggerUtil.error(DesgloseCoberturaGridInternalController.class,
-                    "getConfiCober", e);
-        } finally {
-            s.close();
-        }
-        return c;
     }
 }

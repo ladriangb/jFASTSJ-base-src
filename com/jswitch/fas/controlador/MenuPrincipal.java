@@ -67,7 +67,6 @@ import com.jswitch.certificados.modelo.utilitario.CertificadoNuevo;
 import com.jswitch.certificados.vista.CertificadoNuevoDetailFrame;
 import com.jswitch.configuracion.controlador.patologias.RamoGridFrameController;
 import com.jswitch.configuracion.modelo.dominio.Cobertura;
-import com.jswitch.configuracion.modelo.maestra.ConfiguracionCobertura;
 import com.jswitch.pagos.vista.CoberturaGridFrame;
 import com.jswitch.configuracion.vista.ConfiguracionCoberturaGridFrame;
 import com.jswitch.configuracion.vista.PlanesGridFrame;
@@ -409,7 +408,7 @@ public class MenuPrincipal implements ClientFacade {
 
     // <editor-fold defaultstate="collapsed" desc="Coberturas">
     public void getConfiguracionCoberturas() {
-        new DefaultAllGridFrameController(ConfiguracionCoberturaGridFrame.class.getName(), null, ConfiguracionCobertura.class.getName(),
+        new DefaultAllGridFrameController(ConfiguracionCoberturaGridFrame.class.getName(), null, Cobertura.class.getName(),
                 "Configuracion Cobertura");
     }
 

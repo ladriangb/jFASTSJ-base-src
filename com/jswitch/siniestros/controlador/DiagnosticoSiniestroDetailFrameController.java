@@ -53,6 +53,7 @@ public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFram
         this.gridControl = migrid;
         this.beanVO = null;
         this.aplicarLogicaNegocio = b;
+        this.detalleSin = detalleSin;
         try {
             Class<DefaultDetailFrame> t = (Class<com.jswitch.base.vista.util.DefaultDetailFrame>) Class.forName(DiagnosticoSiniestroDetailFrame.class.getName());
             vista = t.newInstance();
@@ -82,11 +83,9 @@ public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFram
                     + agotamiento.agotamiento.getMontoPendiente()));
             vista.getMainPanel().pull("totalDisponible");
         }
-
-        this.detalleSin = detalleSin;
-        this.frame = frame;
+  this.frame = frame;
         ((DiagnosticoSiniestroDetailFrame) vista).setDetalleSiniestro(detalleSin);
-
+      
     }
 
     @Override
@@ -188,9 +187,9 @@ public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFram
 
     @Override
     public void afterReloadData() {
-         frame.getMainPanel().getReloadButton().doClick();
+        frame.getMainPanel().getReloadButton().doClick();
     }
- 
+
     private class TratamientoLookupParent implements LookupParent {
 
         @Override
@@ -254,7 +253,8 @@ public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFram
             agotamiento = (Agotamiento) s.createQuery("FROM "
                     + Agotamiento.class.getName()
                     + " WHERE ayo=:ayo AND asegurado.id=:aseg AND diagnostico.id=:diag").
-                    setInteger("ayo", Calendar.getInstance().get(Calendar.YEAR) - 1).
+                    setInteger("ayo", detalleSin.getSiniestro().getAyo()).
+                    // Calendar.getInstance().get(Calendar.YEAR) - 1).
                     setLong("aseg", asegurado.getId()).
                     setLong("diag", diagnostico.getId()).
                     uniqueResult();
