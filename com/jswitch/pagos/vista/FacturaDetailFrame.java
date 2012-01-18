@@ -42,6 +42,7 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
         saveButton1 = new org.openswing.swing.client.SaveButton();
         reloadButton1 = new org.openswing.swing.client.ReloadButton();
         form1 = new org.openswing.swing.form.client.Form();
+        jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         labelControl3 = new org.openswing.swing.client.LabelControl();
         textControl3 = new org.openswing.swing.client.TextControl();
@@ -51,15 +52,25 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
         labelControl8 = new org.openswing.swing.client.LabelControl();
         labelControl9 = new org.openswing.swing.client.LabelControl();
         codLookupControl1 = new org.openswing.swing.client.CodLookupControl();
-        labelControl10 = new org.openswing.swing.client.LabelControl();
-        numericControl2 = new org.openswing.swing.client.NumericControl();
-        labelControl11 = new org.openswing.swing.client.LabelControl();
-        currencyControl1 = new org.openswing.swing.client.CurrencyControl();
-        jPanel5 = new javax.swing.JPanel();
         dateControl2 = new org.openswing.swing.client.DateControl();
-        dateControl1 = new org.openswing.swing.client.DateControl();
         labelControl6 = new org.openswing.swing.client.LabelControl();
         labelControl5 = new org.openswing.swing.client.LabelControl();
+        dateControl1 = new org.openswing.swing.client.DateControl();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        numericControl2 = new org.openswing.swing.client.NumericControl();
+        labelControl10 = new org.openswing.swing.client.LabelControl();
+        currencyControl1 = new org.openswing.swing.client.CurrencyControl();
+        labelControl11 = new org.openswing.swing.client.LabelControl();
+        labelControl15 = new org.openswing.swing.client.LabelControl();
+        currencyControl2 = new org.openswing.swing.client.CurrencyControl();
+        labelControl16 = new org.openswing.swing.client.LabelControl();
+        numericControl3 = new org.openswing.swing.client.NumericControl();
+        labelControl19 = new org.openswing.swing.client.LabelControl();
+        currencyControl3 = new org.openswing.swing.client.CurrencyControl();
+        labelControl20 = new org.openswing.swing.client.LabelControl();
+        numericControl9 = new org.openswing.swing.client.NumericControl();
+        jPanel5 = new javax.swing.JPanel();
         labelControl7 = new org.openswing.swing.client.LabelControl();
         numericControl1 = new org.openswing.swing.client.NumericControl();
         labelControl12 = new org.openswing.swing.client.LabelControl();
@@ -68,6 +79,10 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
         numericControl5 = new org.openswing.swing.client.NumericControl();
         labelControl14 = new org.openswing.swing.client.LabelControl();
         numericControl6 = new org.openswing.swing.client.NumericControl();
+        labelControl17 = new org.openswing.swing.client.LabelControl();
+        numericControl7 = new org.openswing.swing.client.NumericControl();
+        labelControl18 = new org.openswing.swing.client.LabelControl();
+        numericControl8 = new org.openswing.swing.client.NumericControl();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel14 = new javax.swing.JPanel();
         gridControl5 = new org.openswing.swing.client.GridControl();
@@ -121,17 +136,16 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
                 .addComponent(saveButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(reloadButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(744, Short.MAX_VALUE))
+                .addContainerGap(709, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(reloadButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(saveButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         form1.setVOClassName(com.jswitch.pagos.modelo.maestra.Factura.class.getName());
@@ -139,6 +153,8 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
         form1.setReloadButton(reloadButton1);
         form1.setSaveButton(saveButton1);
         form1.setLayout(new java.awt.GridLayout(1, 2));
+
+        jPanel3.setLayout(new java.awt.GridLayout());
 
         labelControl3.setLabel("detalleSiniestro.ramo.nombre");
 
@@ -162,26 +178,20 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
         codLookupControl1.setAttributeName("tipoConceptoSeniat.nombre");
         codLookupControl1.setRequired(true);
 
-        labelControl10.setLabel("montoReteniconIsrl");
+        dateControl2.setAttributeName("fechaRecepcion");
+        dateControl2.setRequired(true);
+        dateControl2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dateControl2ActionPerformed(evt);
+            }
+        });
 
-        numericControl2.setAttributeName("montoReteniconIsrl");
-        numericControl2.setDecimals(2);
-        numericControl2.setEnabledOnEdit(false);
-        numericControl2.setEnabledOnInsert(false);
-        numericControl2.setMaxValue(100.0);
-        numericControl2.setRequired(true);
-        numericControl2.setToolTipText("Porcentaje ");
+        labelControl6.setLabel("fechaRecepcion");
 
-        labelControl11.setLabel("porcentajeRetencionIva");
+        labelControl5.setLabel("fechaFactura");
 
-        currencyControl1.setToolTipText("valor Porcentual");
-        currencyControl1.setAttributeName("porcentajeRetencionIva");
-        currencyControl1.setCurrencySymbol("%");
-        currencyControl1.setCurrencySymbolOnLeft(false);
-        currencyControl1.setDecimals(2);
-        currencyControl1.setGrouping(false);
-        currencyControl1.setMaxValue(100.0);
-        currencyControl1.setRequired(true);
+        dateControl1.setAttributeName("fechaFactura");
+        dateControl1.setRequired(true);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -190,38 +200,38 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(labelControl9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(textControl2, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(labelControl3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textControl3, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE))
+                        .addComponent(textControl3, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(labelControl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE))
+                        .addComponent(textControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(labelControl8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelControl8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelControl9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(codLookupControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+                            .addComponent(codLookupControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(labelControl10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelControl6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(numericControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE))
+                        .addComponent(dateControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(labelControl11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelControl5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(currencyControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)))
+                        .addComponent(dateControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {labelControl10, labelControl11, labelControl2, labelControl3, labelControl8, labelControl9});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {labelControl2, labelControl3, labelControl5, labelControl6, labelControl8, labelControl9});
 
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelControl3, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
@@ -232,41 +242,179 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
                     .addComponent(textControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(textControl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelControl9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelControl9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textControl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelControl8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(codLookupControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(labelControl10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(numericControl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelControl5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dateControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(labelControl11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(currencyControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11))
+                    .addComponent(labelControl6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dateControl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {codLookupControl1, labelControl10, labelControl11, labelControl2, labelControl3, labelControl8, labelControl9, numericControl2, textControl1, textControl2, textControl3});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {codLookupControl1, labelControl2, labelControl3, labelControl8, labelControl9, textControl1, textControl2, textControl3});
 
-        form1.add(jPanel4);
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {dateControl1, labelControl5});
 
-        dateControl2.setAttributeName("fechaRecepcion");
-        dateControl2.setRequired(true);
-        dateControl2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dateControl2ActionPerformed(evt);
-            }
-        });
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {dateControl2, labelControl6});
 
-        dateControl1.setAttributeName("fechaFactura");
-        dateControl1.setRequired(true);
+        jPanel3.add(jPanel4);
 
-        labelControl6.setLabel("fechaRecepcion");
+        form1.add(jPanel3);
 
-        labelControl5.setLabel("fechaFactura");
+        jPanel2.setLayout(new java.awt.GridLayout());
+
+        numericControl2.setAttributeName("montoIva");
+        numericControl2.setDecimals(2);
+        numericControl2.setEnabledOnEdit(false);
+        numericControl2.setEnabledOnInsert(false);
+        numericControl2.setMaxValue(100.0);
+        numericControl2.setRequired(true);
+        numericControl2.setToolTipText("Monto IVA");
+
+        labelControl10.setLabel("montoReteniconIva");
+
+        currencyControl1.setToolTipText("valor Porcentual");
+        currencyControl1.setAttributeName("porcentajeRetencionIva");
+        currencyControl1.setCurrencySymbol("%");
+        currencyControl1.setCurrencySymbolOnLeft(false);
+        currencyControl1.setDecimals(2);
+        currencyControl1.setGrouping(false);
+        currencyControl1.setMaxValue(100.0);
+        currencyControl1.setRequired(true);
+
+        labelControl11.setLabel("retencionIva");
+
+        labelControl15.setLabel("porcentajeIva");
+        labelControl15.setToolTipText("Impuesto Valor Agregado");
+
+        currencyControl2.setToolTipText("Impuesto Valor Agregado");
+        currencyControl2.setAttributeName("porcentajeIva");
+        currencyControl2.setCurrencySymbol("%");
+        currencyControl2.setCurrencySymbolOnLeft(false);
+        currencyControl2.setDecimals(2);
+        currencyControl2.setGrouping(false);
+        currencyControl2.setMaxValue(100.0);
+        currencyControl2.setRequired(true);
+
+        labelControl16.setLabel("montoIva");
+        labelControl16.setToolTipText("Monto IVA");
+
+        numericControl3.setAttributeName("montoRetencionIva");
+        numericControl3.setDecimals(2);
+        numericControl3.setEnabledOnEdit(false);
+        numericControl3.setEnabledOnInsert(false);
+        numericControl3.setMaxValue(100.0);
+        numericControl3.setRequired(true);
+        numericControl3.setToolTipText("Monto IVA");
+
+        labelControl19.setLabel("retencionIslr");
+
+        currencyControl3.setToolTipText("valor Porcentual");
+        currencyControl3.setAttributeName("porcentajeRetencionIsrl");
+        currencyControl3.setCurrencySymbol("%");
+        currencyControl3.setCurrencySymbolOnLeft(false);
+        currencyControl3.setDecimals(2);
+        currencyControl3.setEnabledOnEdit(false);
+        currencyControl3.setEnabledOnInsert(false);
+        currencyControl3.setGrouping(false);
+        currencyControl3.setMaxValue(100.0);
+
+        labelControl20.setLabel("montoRetencionIslr");
+
+        numericControl9.setAttributeName("montoRetencionIsrl");
+        numericControl9.setDecimals(2);
+        numericControl9.setEnabledOnEdit(false);
+        numericControl9.setEnabledOnInsert(false);
+        numericControl9.setMaxValue(100.0);
+        numericControl9.setToolTipText("Monto IVA");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(labelControl15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(currencyControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(labelControl16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(numericControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(labelControl11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(currencyControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(labelControl10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(numericControl3, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(labelControl19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(currencyControl3, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(labelControl20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(numericControl9, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+
+        jPanel6Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {labelControl10, labelControl11, labelControl15, labelControl16, labelControl19, labelControl20});
+
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labelControl15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(currencyControl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labelControl16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(numericControl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelControl11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(currencyControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelControl10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(numericControl3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labelControl19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(currencyControl3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labelControl20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(numericControl9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+
+        jPanel6Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {currencyControl2, labelControl15});
+
+        jPanel6Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {labelControl16, numericControl2});
+
+        jPanel6Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {currencyControl1, labelControl11});
+
+        jPanel6Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {labelControl10, numericControl3});
+
+        jPanel6Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {currencyControl3, labelControl19});
+
+        jPanel6Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {labelControl20, numericControl9});
+
+        jPanel2.add(jPanel6);
 
         labelControl7.setLabel("totalRetenido");
 
@@ -295,6 +443,25 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
         numericControl6.setDecimals(2);
         numericControl6.setRequired(true);
 
+        labelControl17.setLabel("gastosClinicos");
+
+        numericControl7.setAttributeName("gastosClinicos");
+        numericControl7.setDecimals(2);
+        numericControl7.setEnabledOnEdit(false);
+        numericControl7.setEnabledOnInsert(false);
+        numericControl7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                numericControl7ActionPerformed(evt);
+            }
+        });
+
+        labelControl18.setLabel("honorariosMedicos");
+
+        numericControl8.setAttributeName("honorariosMedicos");
+        numericControl8.setDecimals(2);
+        numericControl8.setEnabledOnEdit(false);
+        numericControl8.setEnabledOnInsert(false);
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -303,45 +470,45 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(labelControl5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelControl17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dateControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE))
+                        .addComponent(numericControl7, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(labelControl6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelControl18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dateControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE))
+                        .addComponent(numericControl8, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(labelControl7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(numericControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE))
+                        .addComponent(numericControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelControl12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(labelControl13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(numericControl5, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
-                            .addComponent(numericControl4, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)))
+                            .addComponent(numericControl5, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
+                            .addComponent(numericControl4, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(labelControl14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(numericControl6, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)))
+                        .addComponent(numericControl6, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
-        jPanel5Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {labelControl12, labelControl13, labelControl14, labelControl5, labelControl6, labelControl7});
+        jPanel5Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {labelControl12, labelControl13, labelControl14, labelControl17, labelControl18, labelControl7});
 
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(labelControl5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dateControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(labelControl17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(numericControl7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(labelControl6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dateControl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelControl18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(numericControl8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelControl14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -354,16 +521,18 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelControl12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(numericControl4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelControl13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(numericControl5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(29, 29, 29))
         );
 
-        jPanel5Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {dateControl1, dateControl2, labelControl12, labelControl13, labelControl14, labelControl5, labelControl6, labelControl7, numericControl1, numericControl4, numericControl5});
+        jPanel5Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {labelControl12, labelControl13, labelControl14, labelControl17, labelControl18, labelControl7, numericControl1, numericControl4, numericControl5, numericControl6, numericControl7, numericControl8});
 
-        form1.add(jPanel5);
+        jPanel2.add(jPanel5);
+
+        form1.add(jPanel2);
 
         jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -450,14 +619,14 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(gridControl5, javax.swing.GroupLayout.DEFAULT_SIZE, 773, Short.MAX_VALUE))
+                .addComponent(gridControl5, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(160, Short.MAX_VALUE))
-            .addComponent(gridControl5, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                .addContainerGap(191, Short.MAX_VALUE))
+            .addComponent(gridControl5, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Suma Asegurada", jPanel14);
@@ -535,14 +704,14 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(gridControl6, javax.swing.GroupLayout.DEFAULT_SIZE, 773, Short.MAX_VALUE))
+                .addComponent(gridControl6, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE))
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(160, Short.MAX_VALUE))
-            .addComponent(gridControl6, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                .addContainerGap(191, Short.MAX_VALUE))
+            .addComponent(gridControl6, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Desglose Cobertura", jPanel16);
@@ -554,19 +723,20 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 862, Short.MAX_VALUE)
-                    .addComponent(form1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 862, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 827, Short.MAX_VALUE)
+                    .addComponent(form1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 827, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(form1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(form1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -574,6 +744,10 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
     private void dateControl2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateControl2ActionPerformed
 // TODO add your handling code here:
     }//GEN-LAST:event_dateControl2ActionPerformed
+
+    private void numericControl7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numericControl7ActionPerformed
+// TODO add your handling code here:
+    }//GEN-LAST:event_numericControl7ActionPerformed
 
     public GridControl getGridDesgloseSumaAsegurada() {
         return gridControl5;
@@ -680,6 +854,8 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
     private org.openswing.swing.table.columns.client.CodLookupColumn codLookupColumn3;
     private org.openswing.swing.client.CodLookupControl codLookupControl1;
     private org.openswing.swing.client.CurrencyControl currencyControl1;
+    private org.openswing.swing.client.CurrencyControl currencyControl2;
+    private org.openswing.swing.client.CurrencyControl currencyControl3;
     private org.openswing.swing.client.DateControl dateControl1;
     private org.openswing.swing.client.DateControl dateControl2;
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn2;
@@ -708,15 +884,24 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private org.openswing.swing.client.LabelControl labelControl10;
     private org.openswing.swing.client.LabelControl labelControl11;
     private org.openswing.swing.client.LabelControl labelControl12;
     private org.openswing.swing.client.LabelControl labelControl13;
     private org.openswing.swing.client.LabelControl labelControl14;
+    private org.openswing.swing.client.LabelControl labelControl15;
+    private org.openswing.swing.client.LabelControl labelControl16;
+    private org.openswing.swing.client.LabelControl labelControl17;
+    private org.openswing.swing.client.LabelControl labelControl18;
+    private org.openswing.swing.client.LabelControl labelControl19;
     private org.openswing.swing.client.LabelControl labelControl2;
+    private org.openswing.swing.client.LabelControl labelControl20;
     private org.openswing.swing.client.LabelControl labelControl3;
     private org.openswing.swing.client.LabelControl labelControl5;
     private org.openswing.swing.client.LabelControl labelControl6;
@@ -725,9 +910,13 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
     private org.openswing.swing.client.LabelControl labelControl9;
     private org.openswing.swing.client.NumericControl numericControl1;
     private org.openswing.swing.client.NumericControl numericControl2;
+    private org.openswing.swing.client.NumericControl numericControl3;
     private org.openswing.swing.client.NumericControl numericControl4;
     private org.openswing.swing.client.NumericControl numericControl5;
     private org.openswing.swing.client.NumericControl numericControl6;
+    private org.openswing.swing.client.NumericControl numericControl7;
+    private org.openswing.swing.client.NumericControl numericControl8;
+    private org.openswing.swing.client.NumericControl numericControl9;
     private org.openswing.swing.client.ReloadButton reloadButton1;
     private org.openswing.swing.client.ReloadButton reloadButton7;
     private org.openswing.swing.client.ReloadButton reloadButton8;

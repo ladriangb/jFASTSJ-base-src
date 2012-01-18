@@ -343,6 +343,7 @@
                         <Property name="filterButton" type="org.openswing.swing.client.FilterButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
                           <ComponentRef name="filterButton6"/>
                         </Property>
+                        <Property name="functionId" type="java.lang.String" value="asegurados_certificado"/>
                         <Property name="maxNumberOfRowsOnInsert" type="int" value="4"/>
                         <Property name="reloadButton" type="org.openswing.swing.client.ReloadButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
                           <ComponentRef name="reloadButton6"/>

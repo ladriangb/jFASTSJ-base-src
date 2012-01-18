@@ -89,7 +89,7 @@ public class CertificadoNuevoDetrailController extends DefaultDetailFrameControl
             }
 
             Parentesco p = (Parentesco) s.createQuery("FROM " + Parentesco.class.getName() + " WHERE nombre=:nombre").
-                    setString("nombre", "TITULAR").
+                    setString("nombre", "TRABAJADOR").
                     uniqueResult();
 
             certificadoNuevo.getAsegurado().setCertificado(certificadoNuevo.getCertificado());

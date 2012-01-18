@@ -6,7 +6,6 @@ import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.modelo.util.ehts.BusinessKey;
 import com.jswitch.base.modelo.util.ehts.Method;
-import com.jswitch.fas.modelo.Dominios.EstatusPago;
 import com.jswitch.pagos.modelo.dominio.ConceptoSENIAT;
 import com.jswitch.pagos.modelo.transaccional.DesgloseCobertura;
 import com.jswitch.pagos.modelo.transaccional.DesgloseSumaAsegurada;
@@ -19,8 +18,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,7 +28,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 /**
@@ -100,17 +96,17 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private Double sustraendo;
     /**
-     *
+     * porcentaje de retencion Islr
      */
     @Column
     @BusinessKey
-    private Double porcentajeReteniconIsrl;
+    private Double porcentajeRetencionIsrl;
     /**
-     *
+     * monto de retencion ISLR
      */
     @Column
     @BusinessKey
-    private Double montoReteniconIsrl;
+    private Double montoRetencionIsrl;
     /**
      * UT Unidad Tributaria
      */
@@ -219,30 +215,6 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private Double totalACancelar;
     /**
-     * Estatus en el que se encuentra el pago de la factura
-     */
-    @Column
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    @BusinessKey
-    private EstatusPago estatusPago;
-    /**
-     * fecha en q la seleccionan para ser pagada
-     */
-    @Column
-    @Temporal(value = TemporalType.DATE)
-    @Past
-    @BusinessKey
-    private Date fechaSeleccionado;
-    /**
-     * Fecha en que se paga
-     */
-    @Column
-    @Temporal(value = TemporalType.DATE)
-    @Past
-    @BusinessKey
-    private Date fechaPagado;
-    /**
      * Coleccion de gastos por diagnostico
      */
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "factura")
@@ -268,13 +240,12 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     private AuditoriaBasica auditoria;
 
     public Factura() {
-        estatusPago = EstatusPago.PENDIENTE;
         montoDescuentoDesducible = 0d;
         montoDescuentoProntoPago = 0d;
         montoIva = 0d;
         montoNoAmparado = 0d;
         montoRetencionIva = 0d;
-        montoReteniconIsrl = 0d;
+        montoRetencionIsrl = 0d;
         montoSujetoRetencion = 0d;
         montoTM = 0d;
         totalACancelar = 0d;
@@ -288,7 +259,7 @@ public class Factura extends BeanVO implements Serializable, Auditable {
         }
         porcentajeRetencionIva = 0d;
         porcentajeTM = 0d;
-        porcentajeReteniconIsrl = 0d;
+        porcentajeRetencionIsrl = 0d;
     }
 
     /**
@@ -324,14 +295,6 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     * Estatus en el que se encuentra el pago de la factura
-     * @return the estatusPago
-     */
-    public EstatusPago getEstatusPago() {
-        return estatusPago;
-    }
-
-    /**
      * fecha en que fue facturado
      * @return the fechaFactura
      */
@@ -340,27 +303,11 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     * Fecha en que se paga
-     * @return the fechaPagado
-     */
-    public Date getFechaPagado() {
-        return fechaPagado;
-    }
-
-    /**
      * fecha en la que se recibio la factura
      * @return the fechaRecepcion
      */
     public Date getFechaRecepcion() {
         return fechaRecepcion;
-    }
-
-    /**
-     * fecha en q la seleccionan para ser pagada
-     * @return the fechaSeleccionado
-     */
-    public Date getFechaSeleccionado() {
-        return fechaSeleccionado;
     }
 
     /**
@@ -434,8 +381,8 @@ public class Factura extends BeanVO implements Serializable, Auditable {
      *
      * @return the montoReteniconIsrl
      */
-    public Double getMontoReteniconIsrl() {
-        return montoReteniconIsrl;
+    public Double getMontoRetencionIsrl() {
+        return montoRetencionIsrl;
     }
 
     /**
@@ -499,8 +446,8 @@ public class Factura extends BeanVO implements Serializable, Auditable {
      *
      * @return the porcentajeReteniconIsrl
      */
-    public Double getPorcentajeReteniconIsrl() {
-        return porcentajeReteniconIsrl;
+    public Double getPorcentajeRetencionIsrl() {
+        return porcentajeRetencionIsrl;
     }
 
     /**
@@ -602,14 +549,6 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     * Estatus en el que se encuentra el pago de la factura
-     * @param estatusPago the estatusPago to set
-     */
-    public void setEstatusPago(EstatusPago estatusPago) {
-        this.estatusPago = estatusPago;
-    }
-
-    /**
      * fecha en que fue facturado
      * @param fechaFactura the fechaFactura to set
      */
@@ -618,27 +557,11 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     * Fecha en que se paga
-     * @param fechaPagado the fechaPagado to set
-     */
-    public void setFechaPagado(Date fechaPagado) {
-        this.fechaPagado = fechaPagado;
-    }
-
-    /**
      * fecha en la que se recibio la factura
      * @param fechaRecepcion the fechaRecepcion to set
      */
     public void setFechaRecepcion(Date fechaRecepcion) {
         this.fechaRecepcion = fechaRecepcion;
-    }
-
-    /**
-     * fecha en q la seleccionan para ser pagada
-     * @param fechaSeleccionado the fechaSeleccionado to set
-     */
-    public void setFechaSeleccionado(Date fechaSeleccionado) {
-        this.fechaSeleccionado = fechaSeleccionado;
     }
 
     /**
@@ -711,8 +634,8 @@ public class Factura extends BeanVO implements Serializable, Auditable {
      *
      * @param montoReteniconIsrl the montoReteniconIsrl to set
      */
-    public void setMontoReteniconIsrl(Double montoReteniconIsrl) {
-        this.montoReteniconIsrl = montoReteniconIsrl;
+    public void setMontoRetencionIsrl(Double montoReteniconIsrl) {
+        this.montoRetencionIsrl = montoReteniconIsrl;
     }
 
     /**
@@ -776,8 +699,8 @@ public class Factura extends BeanVO implements Serializable, Auditable {
      *
      * @param porcentajeReteniconIsrl the porcentajeReteniconIsrl to set
      */
-    public void setPorcentajeReteniconIsrl(Double porcentajeReteniconIsrl) {
-        this.porcentajeReteniconIsrl = porcentajeReteniconIsrl;
+    public void setPorcentajeRetencionIsrl(Double porcentajeReteniconIsrl) {
+        this.porcentajeRetencionIsrl = porcentajeReteniconIsrl;
     }
 
     /**
@@ -846,5 +769,4 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     public void setValorUT(Double valorUT) {
         this.valorUT = valorUT;
     }
-
 }

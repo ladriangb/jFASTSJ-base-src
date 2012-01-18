@@ -6,9 +6,8 @@ import org.openswing.swing.mdi.client.MDIFrame;
 import org.openswing.swing.table.client.GridController;
 import org.openswing.swing.table.java.GridDataLocator;
 import com.jswitch.base.vista.util.DefaultGridFrame;
-import com.jswitch.configuracion.controlador.CoberturaLookupController;
 import com.jswitch.configuracion.modelo.dominio.Cobertura;
-import com.jswitch.configuracion.modelo.maestra.ConfiguracionCobertura;
+import com.jswitch.configuracion.modelo.dominio.Ramo;
 
 /**
  * 
@@ -33,11 +32,13 @@ public class ConfiguracionCoberturaGridFrame extends DefaultGridFrame {
         jPanel2 = new javax.swing.JPanel();
         gridData = new org.openswing.swing.client.GridControl();
         decimalColumn1 = new org.openswing.swing.table.columns.client.DecimalColumn();
-        textColumn1 = new org.openswing.swing.table.columns.client.TextColumn();
         codLookupColumn1 = new org.openswing.swing.table.columns.client.CodLookupColumn();
+        textColumn4 = new org.openswing.swing.table.columns.client.TextColumn();
         checkBoxColumn2 = new org.openswing.swing.table.columns.client.CheckBoxColumn();
         checkBoxColumn5 = new org.openswing.swing.table.columns.client.CheckBoxColumn();
         checkBoxColumn4 = new org.openswing.swing.table.columns.client.CheckBoxColumn();
+        checkBoxColumn6 = new org.openswing.swing.table.columns.client.CheckBoxColumn();
+        checkBoxColumn7 = new org.openswing.swing.table.columns.client.CheckBoxColumn();
         checkBoxColumn1 = new org.openswing.swing.table.columns.client.CheckBoxColumn();
         dateTimeColumn1 = new org.openswing.swing.table.columns.client.DateTimeColumn();
         textColumn2 = new org.openswing.swing.table.columns.client.TextColumn();
@@ -87,62 +88,103 @@ public class ConfiguracionCoberturaGridFrame extends DefaultGridFrame {
         gridData.setMaxNumberOfRowsOnInsert(20);
         gridData.setReloadButton(reloadButton1);
         gridData.setSaveButton(saveButton1);
-        gridData.setValueObjectClassName(ConfiguracionCobertura.class.getName());
+        gridData.setValueObjectClassName(Cobertura.class.getName());
 
         decimalColumn1.setColumnFilterable(true);
         decimalColumn1.setColumnName("id");
         decimalColumn1.setColumnRequired(false);
+        decimalColumn1.setColumnSortable(true);
         decimalColumn1.setGrouping(false);
         decimalColumn1.setPreferredWidth(50);
         gridData.getColumnContainer().add(decimalColumn1);
 
-        textColumn1.setColumnName("cobertura.ramo.nombre");
-        gridData.getColumnContainer().add(textColumn1);
-
-        codLookupColumn1.setColumnName("cobertura.nombre");
+        codLookupColumn1.setColumnFilterable(true);
+        codLookupColumn1.setColumnName("ramo.nombre");
+        codLookupColumn1.setColumnSortable(true);
         codLookupColumn1.setEditableOnEdit(true);
         codLookupColumn1.setEditableOnInsert(true);
         gridData.getColumnContainer().add(codLookupColumn1);
 
+        textColumn4.setColumnFilterable(true);
+        textColumn4.setColumnName("nombre");
+        textColumn4.setColumnSortable(true);
+        textColumn4.setEditableOnEdit(true);
+        textColumn4.setEditableOnInsert(true);
+        gridData.getColumnContainer().add(textColumn4);
+
+        checkBoxColumn2.setColumnFilterable(true);
         checkBoxColumn2.setColumnName("baseImponible");
+        checkBoxColumn2.setColumnSortable(true);
         checkBoxColumn2.setEditableOnEdit(true);
         checkBoxColumn2.setEditableOnInsert(true);
         checkBoxColumn2.setPreferredWidth(70);
         gridData.getColumnContainer().add(checkBoxColumn2);
 
+        checkBoxColumn5.setColumnFilterable(true);
         checkBoxColumn5.setColumnName("islr");
         checkBoxColumn5.setColumnRequired(false);
+        checkBoxColumn5.setColumnSortable(true);
         checkBoxColumn5.setEditableOnEdit(true);
         checkBoxColumn5.setEditableOnInsert(true);
         checkBoxColumn5.setPreferredWidth(70);
         gridData.getColumnContainer().add(checkBoxColumn5);
 
+        checkBoxColumn4.setColumnFilterable(true);
         checkBoxColumn4.setColumnName("iva");
         checkBoxColumn4.setColumnRequired(false);
+        checkBoxColumn4.setColumnSortable(true);
         checkBoxColumn4.setEditableOnEdit(true);
         checkBoxColumn4.setEditableOnInsert(true);
         checkBoxColumn4.setPreferredWidth(70);
         gridData.getColumnContainer().add(checkBoxColumn4);
 
+        checkBoxColumn6.setColumnFilterable(true);
+        checkBoxColumn6.setColumnName("gastosClinicos");
+        checkBoxColumn6.setColumnRequired(false);
+        checkBoxColumn6.setColumnSortable(true);
+        checkBoxColumn6.setEditableOnEdit(true);
+        checkBoxColumn6.setEditableOnInsert(true);
+        checkBoxColumn6.setPreferredWidth(70);
+        gridData.getColumnContainer().add(checkBoxColumn6);
+
+        checkBoxColumn7.setColumnFilterable(true);
+        checkBoxColumn7.setColumnName("honorariosMedicos");
+        checkBoxColumn7.setColumnRequired(false);
+        checkBoxColumn7.setColumnSortable(true);
+        checkBoxColumn7.setEditableOnEdit(true);
+        checkBoxColumn7.setEditableOnInsert(true);
+        checkBoxColumn7.setPreferredWidth(70);
+        gridData.getColumnContainer().add(checkBoxColumn7);
+
+        checkBoxColumn1.setColumnFilterable(true);
         checkBoxColumn1.setColumnName("auditoria.activo");
+        checkBoxColumn1.setColumnSortable(true);
         checkBoxColumn1.setEditableOnEdit(true);
         checkBoxColumn1.setEditableOnInsert(true);
         gridData.getColumnContainer().add(checkBoxColumn1);
 
+        dateTimeColumn1.setColumnFilterable(true);
         dateTimeColumn1.setColumnName("auditoria.fechaInsert");
         dateTimeColumn1.setColumnRequired(false);
+        dateTimeColumn1.setColumnSortable(true);
         gridData.getColumnContainer().add(dateTimeColumn1);
 
+        textColumn2.setColumnFilterable(true);
         textColumn2.setColumnName("auditoria.usuarioInsert");
         textColumn2.setColumnRequired(false);
+        textColumn2.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn2);
 
+        dateTimeColumn2.setColumnFilterable(true);
         dateTimeColumn2.setColumnName("auditoria.fechaUpdate");
         dateTimeColumn2.setColumnRequired(false);
+        dateTimeColumn2.setColumnSortable(true);
         gridData.getColumnContainer().add(dateTimeColumn2);
 
+        textColumn3.setColumnFilterable(true);
         textColumn3.setColumnName("auditoria.usuarioUpdate");
         textColumn3.setColumnRequired(false);
+        textColumn3.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn3);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -157,7 +199,7 @@ public class ConfiguracionCoberturaGridFrame extends DefaultGridFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(gridData, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                .addComponent(gridData, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
                 .addGap(22, 22, 22))
         );
 
@@ -181,6 +223,8 @@ public class ConfiguracionCoberturaGridFrame extends DefaultGridFrame {
     private org.openswing.swing.table.columns.client.CheckBoxColumn checkBoxColumn2;
     private org.openswing.swing.table.columns.client.CheckBoxColumn checkBoxColumn4;
     private org.openswing.swing.table.columns.client.CheckBoxColumn checkBoxColumn5;
+    private org.openswing.swing.table.columns.client.CheckBoxColumn checkBoxColumn6;
+    private org.openswing.swing.table.columns.client.CheckBoxColumn checkBoxColumn7;
     private org.openswing.swing.table.columns.client.CodLookupColumn codLookupColumn1;
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn1;
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn2;
@@ -194,9 +238,9 @@ public class ConfiguracionCoberturaGridFrame extends DefaultGridFrame {
     private javax.swing.JPanel jPanel2;
     private org.openswing.swing.client.ReloadButton reloadButton1;
     private org.openswing.swing.client.SaveButton saveButton1;
-    private org.openswing.swing.table.columns.client.TextColumn textColumn1;
     private org.openswing.swing.table.columns.client.TextColumn textColumn2;
     private org.openswing.swing.table.columns.client.TextColumn textColumn3;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn4;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -209,8 +253,8 @@ public class ConfiguracionCoberturaGridFrame extends DefaultGridFrame {
         gridData.setValueObjectClassName(valueObjectClassName);
         gridData.setGridDataLocator(gridDataLocator);
         gridData.setController(gridController);
-        CoberturaLookupController l = new CoberturaLookupController();
-        l.addLookup2ParentLink("cobertura");
+        DefaultLookupControllerPorNombre l= new DefaultLookupControllerPorNombre(Ramo.class.getName());
+        l.addLookup2ParentLink("ramo");
         codLookupColumn1.setLookupController(l);
 
         if (addToMDIFrame) {
