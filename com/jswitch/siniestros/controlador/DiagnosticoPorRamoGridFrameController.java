@@ -38,6 +38,7 @@ public class DiagnosticoPorRamoGridFrameController extends DefaultGridFrameContr
                 vista.getGridDiagnosticos(),
                 true, detalleSiniestro,
                 vista, (Diagnostico) persistentObject);
+        gridFrame.setVisible(false);
         gridFrame.dispose();
     }
 

@@ -48,7 +48,6 @@ import javax.validation.constraints.Past;
 /**
  *
  * @author Adrian
- * 
  */
 @Entity
 @Table(name = "SINI_DetalleSiniestro")
@@ -232,6 +231,13 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     @ManyToOne
     private EtapaSiniestro etapaSiniestro;
     /**
+     * fecha en q se paga  el siniestro
+     */
+    @Column
+    @Temporal(value = TemporalType.DATE)
+    @BusinessKey
+    private Date fechaPagado;
+    /**
      * tipo de detalle si es  
      * EMERGENCIA, CARTA_AVAL, REEMBOLSO, FUNERARIO, VIDA ...
      */
@@ -294,27 +300,6 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     }
 
     /**
-     * tipo de detalle si es  
-     * EMERGENCIA, CARTA_AVAL, REEMBOLSO, FUNERARIO, VIDA ... * 
-     * @return tipoDetalle
-     */
-    public String getTipoDetalle() {
-        String s = this.getClass().getName();
-        return s.substring(s.lastIndexOf(".") + 1);
-    }
-
-    /**
-     * si esta siendo seleccionado
-     * @return the selected
-     */
-    public Boolean getSelected() {
-        if (selected == null) {
-            setSelected(Boolean.FALSE);
-        }
-        return selected;
-    }
-
-    /**
      * persona q se encarga de la negociacion
      * @return the analistaNegociador
      */
@@ -363,6 +348,14 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     }
 
     /**
+     * fecha en q se paga  el siniestro
+     * @return the fechaPagado
+     */
+    public Date getFechaPagado() {
+        return fechaPagado;
+    }
+
+    /**
      *
      * @return the fechaVencimiento
      */
@@ -387,6 +380,22 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     }
 
     /**
+     * total base de la base del islr
+     * @return the montoBaseIslr
+     */
+    public Double getMontoBaseIslr() {
+        return montoBaseIslr;
+    }
+
+    /**
+     * total base de la base del iva
+     * @return the montoBaseIva
+     */
+    public Double getMontoBaseIva() {
+        return montoBaseIva;
+    }
+
+    /**
      * total facturado en todas las facturas
      * @return the montoFacturado
      */
@@ -395,11 +404,59 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     }
 
     /**
+     * total gastos clinicos
+     * @return the montoGastosClinicos
+     */
+    public Double getMontoGastosClinicos() {
+        return montoGastosClinicos;
+    }
+
+    /**
+     * total gastos medicos
+     * @return the montoGastosMedicos
+     */
+    public Double getMontoGastosMedicos() {
+        return montoGastosMedicos;
+    }
+
+    /**
+     * total monto del Islr
+     * @return the montoIslr
+     */
+    public Double getMontoIslr() {
+        return montoIslr;
+    }
+
+    /**
+     * total monto del iva
+     * @return the montoIva
+     */
+    public Double getMontoIva() {
+        return montoIva;
+    }
+
+    /**
      * total liquidado todas las facturas
      * @return the montoLiquidado
      */
     public Double getMontoLiquidado() {
         return montoLiquidado;
+    }
+
+    /**
+     * total monto no amparado
+     * @return the montoNoAmparado
+     */
+    public Double getMontoNoAmparado() {
+        return montoNoAmparado;
+    }
+
+    /**
+     * total monto Pronto Pago
+     * @return the montoProntoPago
+     */
+    public Double getMontoProntoPago() {
+        return montoProntoPago;
     }
 
     /**
@@ -451,6 +508,46 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     }
 
     /**
+     * porcentaje del Islr
+     * @return the porcentajeIslr
+     */
+    public Double getPorcentajeIslr() {
+        return porcentajeIslr;
+    }
+
+    /**
+     * porcentaje del iva
+     * @return the porcentajeIva
+     */
+    public Double getPorcentajeIva() {
+        return porcentajeIva;
+    }
+
+    /**
+     * porcentaje pronto pago
+     * @return the porcentajeProntoPago
+     */
+    public Double getPorcentajeProntoPago() {
+        return porcentajeProntoPago;
+    }
+
+    /**
+     * porcentaje retencion Islr
+     * @return the porcentajeRetencionIslr
+     */
+    public Double getPorcentajeRetencionIslr() {
+        return porcentajeRetencionIslr;
+    }
+
+    /**
+     * porcentaje retencion iva
+     * @return the porcentajeRetencionIva
+     */
+    public Double getPorcentajeRetencionIva() {
+        return porcentajeRetencionIva;
+    }
+
+    /**
      * presupuesto despues de ajustar
      * @return the presupuestadoAjustado
      */
@@ -483,11 +580,36 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     }
 
     /**
+     * si esta siendo seleccionado
+     * @return the selected
+     */
+    public Boolean getSelected() {
+        return selected;
+    }
+
+    /**
      * siniestro q contiene el detalle
      * @return the siniestro
      */
     public Siniestro getSiniestro() {
         return siniestro;
+    }
+
+    /**
+     * total monto timbre municipal
+     * @return the timbreMunicipal
+     */
+    public Double getTimbreMunicipal() {
+        return timbreMunicipal;
+    }
+
+    /**
+     * tipo de detalle si es
+     * EMERGENCIA, CARTA_AVAL, REEMBOLSO, FUNERARIO, VIDA ...
+     * @return the tipoDetalle
+     */
+    public String getTipoDetalle() {
+        return tipoDetalle;
     }
 
     /**
@@ -571,6 +693,14 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     }
 
     /**
+     * fecha en q se paga  el siniestro
+     * @param fechaPagado the fechaPagado to set
+     */
+    public void setFechaPagado(Date fechaPagado) {
+        this.fechaPagado = fechaPagado;
+    }
+
+    /**
      *
      * @param fechaVencimiento the fechaVencimiento to set
      */
@@ -595,6 +725,22 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     }
 
     /**
+     * total base de la base del islr
+     * @param montoBaseIslr the montoBaseIslr to set
+     */
+    public void setMontoBaseIslr(Double montoBaseIslr) {
+        this.montoBaseIslr = montoBaseIslr;
+    }
+
+    /**
+     * total base de la base del iva
+     * @param montoBaseIva the montoBaseIva to set
+     */
+    public void setMontoBaseIva(Double montoBaseIva) {
+        this.montoBaseIva = montoBaseIva;
+    }
+
+    /**
      * total facturado en todas las facturas
      * @param montoFacturado the montoFacturado to set
      */
@@ -603,11 +749,59 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     }
 
     /**
+     * total gastos clinicos
+     * @param montoGastosClinicos the montoGastosClinicos to set
+     */
+    public void setMontoGastosClinicos(Double montoGastosClinicos) {
+        this.montoGastosClinicos = montoGastosClinicos;
+    }
+
+    /**
+     * total gastos medicos
+     * @param montoGastosMedicos the montoGastosMedicos to set
+     */
+    public void setMontoGastosMedicos(Double montoGastosMedicos) {
+        this.montoGastosMedicos = montoGastosMedicos;
+    }
+
+    /**
+     * total monto del Islr
+     * @param montoIslr the montoIslr to set
+     */
+    public void setMontoIslr(Double montoIslr) {
+        this.montoIslr = montoIslr;
+    }
+
+    /**
+     * total monto del iva
+     * @param montoIva the montoIva to set
+     */
+    public void setMontoIva(Double montoIva) {
+        this.montoIva = montoIva;
+    }
+
+    /**
      * total liquidado todas las facturas
      * @param montoLiquidado the montoLiquidado to set
      */
     public void setMontoLiquidado(Double montoLiquidado) {
         this.montoLiquidado = montoLiquidado;
+    }
+
+    /**
+     * total monto no amparado
+     * @param montoNoAmparado the montoNoAmparado to set
+     */
+    public void setMontoNoAmparado(Double montoNoAmparado) {
+        this.montoNoAmparado = montoNoAmparado;
+    }
+
+    /**
+     * total monto Pronto Pago
+     * @param montoProntoPago the montoProntoPago to set
+     */
+    public void setMontoProntoPago(Double montoProntoPago) {
+        this.montoProntoPago = montoProntoPago;
     }
 
     /**
@@ -659,6 +853,46 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     }
 
     /**
+     * porcentaje del Islr
+     * @param porcentajeIslr the porcentajeIslr to set
+     */
+    public void setPorcentajeIslr(Double porcentajeIslr) {
+        this.porcentajeIslr = porcentajeIslr;
+    }
+
+    /**
+     * porcentaje del iva
+     * @param porcentajeIva the porcentajeIva to set
+     */
+    public void setPorcentajeIva(Double porcentajeIva) {
+        this.porcentajeIva = porcentajeIva;
+    }
+
+    /**
+     * porcentaje pronto pago
+     * @param porcentajeProntoPago the porcentajeProntoPago to set
+     */
+    public void setPorcentajeProntoPago(Double porcentajeProntoPago) {
+        this.porcentajeProntoPago = porcentajeProntoPago;
+    }
+
+    /**
+     * porcentaje retencion Islr
+     * @param porcentajeRetencionIslr the porcentajeRetencionIslr to set
+     */
+    public void setPorcentajeRetencionIslr(Double porcentajeRetencionIslr) {
+        this.porcentajeRetencionIslr = porcentajeRetencionIslr;
+    }
+
+    /**
+     * porcentaje retencion iva
+     * @param porcentajeRetencionIva the porcentajeRetencionIva to set
+     */
+    public void setPorcentajeRetencionIva(Double porcentajeRetencionIva) {
+        this.porcentajeRetencionIva = porcentajeRetencionIva;
+    }
+
+    /**
      * presupuesto despues de ajustar
      * @param presupuestadoAjustado the presupuestadoAjustado to set
      */
@@ -704,6 +938,14 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      */
     public void setSiniestro(Siniestro siniestro) {
         this.siniestro = siniestro;
+    }
+
+    /**
+     * total monto timbre municipal
+     * @param timbreMunicipal the timbreMunicipal to set
+     */
+    public void setTimbreMunicipal(Double timbreMunicipal) {
+        this.timbreMunicipal = timbreMunicipal;
     }
 
     /**
