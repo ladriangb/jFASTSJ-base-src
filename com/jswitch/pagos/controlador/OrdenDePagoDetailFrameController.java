@@ -9,11 +9,17 @@ import com.jswitch.pagos.modelo.maestra.OrdenDePago;
 import com.jswitch.pagos.vista.OrdenDePagoDetailFrame;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
+import com.jswitch.siniestros.modelo.maestra.Siniestro;
 import java.awt.event.ActionEvent;
+import java.math.BigInteger;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import org.hibernate.Hibernate;
 import org.hibernate.classic.Session;
 import org.openswing.swing.client.GridControl;
+import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
 import org.openswing.swing.message.receive.java.VOResponse;
 import org.openswing.swing.message.receive.java.ValueObject;
@@ -94,7 +100,7 @@ public class OrdenDePagoDetailFrameController
                 s = HibernateUtil.getSessionFactory().openSession();
                 List l = s.createQuery("FROM "
                         + p.getTipoDetalleSiniestro().getClase() + " C WHERE "
-                        + "C.personaPago.id=? AND etapaSiniestro.idPropio=?").
+                        + "C.personaPago.id=? AND C.etapaSiniestro.idPropio=?").
                         setLong(0, p.getPersonaPago().getId()).
                         setString(1, "LIQ").list();
                 for (Object detalleSiniestro : l) {
@@ -150,6 +156,22 @@ public class OrdenDePagoDetailFrameController
 
 
         return new VOResponse(persistentObject);
+    }
+
+    @Override
+    public Response logicaNegocioDespuesSave(ValueObject persistentObject, Session s) {
+        Long seq = null;
+        try {
+            seq = ((BigInteger) s.createSQLQuery("SELECT nextval('seq_ordenpago');").uniqueResult()).longValue();
+        } catch (Exception ex) {
+            return new ErrorResponse(LoggerUtil.isInvalidStateException(this.getClass(), "logicaNegocioDespuesSave", ex));
+        }
+        Calendar c = Calendar.getInstance();
+        DecimalFormat nf = new DecimalFormat("00000");
+        SimpleDateFormat df = new SimpleDateFormat("MM-yyyy");
+        OrdenDePago ordenPago = (OrdenDePago) persistentObject;
+        ordenPago.setNumeroOrden(df.format(c.getTime()) + "-"+nf.format(seq));
+        return new VOResponse(ordenPago);
     }
 
     @Override
