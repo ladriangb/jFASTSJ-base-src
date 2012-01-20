@@ -87,8 +87,8 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private Integer numNeg;
     /**
-     *Numero de referencia de lote 
-     * Valor asignado por el Banco.  Será informado por éste a la implantación del servicio.
+     *Identificacion del lote del pago.
+     * Valor asignado por la Empresa
      * Ej. 00002100
      */
     @Column
@@ -184,7 +184,7 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     /**
      * Coleccion de etapas de siniestro y las fechas de los cambios
      */
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY,mappedBy="remesa")
     @BusinessKey(exclude = Method.ALL)
     private Set<OrdenDePago> ordenDePagos = new HashSet<OrdenDePago>(0);
     /**
@@ -326,8 +326,8 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     * Numero de referencia de lote
-     * Valor asignado por el Banco.  Será informado por éste a la implantación del servicio.
+     *Identificacion del lote del pago.
+     * Valor asignado por la Empresa
      * Ej. 00002100
      * @return the numRefLot
      */
@@ -516,8 +516,8 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     * Numero de referencia de lote
-     * Valor asignado por el Banco.  Será informado por éste a la implantación del servicio.
+     *Identificacion del lote del pago.
+     * Valor asignado por la Empresa
      * Ej. 00002100
      * @param numRefLot the numRefLot to set
      */

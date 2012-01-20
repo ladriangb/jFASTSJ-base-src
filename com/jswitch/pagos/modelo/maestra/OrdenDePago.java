@@ -72,6 +72,11 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     message = "Codigo SIGECOF Invalido")
     private String codigoSIGECOF;
     /**
+     * Remesa a la cual esta vinculado el pago
+     */
+    @ManyToOne()
+    private Remesa remesa;
+    /**
      * persona ala cual se le realizara el pago
      */
     @ManyToOne()
