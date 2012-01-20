@@ -7,7 +7,6 @@ import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.configuracion.modelo.dominio.Ramo;
 import com.jswitch.configuracion.modelo.maestra.Plan;
-import com.jswitch.siniestros.controlador.DiagnosticoSiniestroDetailFrameController;
 import com.jswitch.pagos.controlador.FacturaDetailFrameController;
 import com.jswitch.pagos.modelo.maestra.Factura;
 import com.jswitch.pagos.vista.FacturaDetailFrame;
@@ -25,7 +24,6 @@ import com.jswitch.siniestros.modelo.maestra.detalle.Reembolso;
 import com.jswitch.siniestros.modelo.maestra.detalle.Vida;
 import com.jswitch.siniestros.vista.detalle.DetalleSiniestroDetailFrame;
 import java.awt.event.ActionEvent;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -132,6 +130,10 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
 
     @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
+        String className = newPersistentObject.getClass().getName();
+        className = className.substring(1+className.lastIndexOf("."));
+        ((DetalleSiniestro) newPersistentObject).setTipoDetalle(className);
+        
         Session s = null;
         try {
             vista.saveGridsData();
@@ -141,7 +143,6 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
 
             EtapaSiniestro et = (EtapaSiniestro) q.uniqueResult();
             ((DetalleSiniestro) newPersistentObject).setEtapaSiniestro(et);
-
             String idPropio = (newPersistentObject instanceof Vida) ? "VIDA"
                     : (newPersistentObject instanceof Funerario) ? "FUNE" : "HCM";
             q = s.createQuery("FROM " + Ramo.class.getName() + " C"

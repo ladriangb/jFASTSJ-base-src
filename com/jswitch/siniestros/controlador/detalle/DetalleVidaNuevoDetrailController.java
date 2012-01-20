@@ -57,6 +57,7 @@ public class DetalleVidaNuevoDetrailController extends DefaultDetailFrameControl
             Beneficiario beneficiario = beneficiarios.get(i);
             Vida vida = new Vida();
             vida.setPersonaPago(beneficiario.getPersona());
+            vida.setTipoDetalle("Vida");
             vida.setFechaDefuncion(detalleVida.getFechaDefuncion());
             vida.setTipoSiniestro(detalleVida.getTipoSiniestro());
             vida.setSiniestro(siniestro);

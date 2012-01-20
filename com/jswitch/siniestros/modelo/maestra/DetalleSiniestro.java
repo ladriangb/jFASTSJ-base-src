@@ -241,8 +241,9 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      * tipo de detalle si es  
      * EMERGENCIA, CARTA_AVAL, REEMBOLSO, FUNERARIO, VIDA ...
      */
-    @Transient
-    private transient String tipoDetalle;
+    @Column
+    @BusinessKey
+    private String tipoDetalle;
     /**
      * si esta siendo seleccionado
      */
@@ -633,6 +634,7 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      * @return the tipoSiniestro
      */
     public TipoSiniestro getTipoSiniestro() {
+        
         return tipoSiniestro;
     }
 

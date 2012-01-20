@@ -24,7 +24,7 @@ import javax.validation.constraints.Past;
 public class CartaAval extends DetalleSiniestro {
 
     /**
-     *
+     * Fecha de Emision de Carta Aval
      */
     @Column
     @Temporal(value = TemporalType.DATE)
@@ -32,7 +32,21 @@ public class CartaAval extends DetalleSiniestro {
     @BusinessKey
     private Date fechaEmision;
     /**
-     * 
+     * Fecha de realizacion del Presupuesto
+     */
+    @Column
+    @Temporal(value = TemporalType.DATE)
+    @Past
+    @BusinessKey
+    private Date fechaPresupuesto;
+    /**
+     * Numero del presupuesto
+     */
+    @Column
+    @BusinessKey
+    private String numeroPresupuesto;
+    /**
+     * Reportes
      */
     @Transient
     protected static transient Set<Reporte> reportes = new HashSet<Reporte>(0);
@@ -48,18 +62,59 @@ public class CartaAval extends DetalleSiniestro {
         }
     }
 
+
+    public Set<Reporte> getReportes() {
+        if (reportes.isEmpty()) {
+            reportes.add(new Reporte(Dominios.CategoriaReporte.PERSONAS, 0, "SINI_D_CartaAval_001", "SINI_D_CartaAval_001", "SINI_D_CartaAval_001", null, "Carta 8½ x 11 Vertical", false));
+        }
+        return reportes;
+    }
+
+    /**
+     * Fecha de Emision de Carta Aval
+     * @return the fechaEmision
+     */
     public Date getFechaEmision() {
         return fechaEmision;
     }
 
+    /**
+     * Fecha de realizacion del Presupuesto
+     * @return the fechaPresupuesto
+     */
+    public Date getFechaPresupuesto() {
+        return fechaPresupuesto;
+    }
+
+    /**
+     * Numero del presupuesto
+     * @return the numeroPresupuesto
+     */
+    public String getNumeroPresupuesto() {
+        return numeroPresupuesto;
+    }
+
+    /**
+     * Fecha de Emision de Carta Aval
+     * @param fechaEmision the fechaEmision to set
+     */
     public void setFechaEmision(Date fechaEmision) {
         this.fechaEmision = fechaEmision;
     }
 
-    public Set<Reporte> getReportes() {
-        if (reportes.isEmpty()) {
-            reportes.add(new Reporte(Dominios.CategoriaReporte.PERSONAS, 0, "SINI_D_CartaAval_001", "SINI_D_CartaAval_001", "SINI_D_CartaAval_001", null, "Carta 8½ x 11 Vertical",false));
-        }
-        return reportes;
+    /**
+     * Fecha de realizacion del Presupuesto
+     * @param fechaPresupuesto the fechaPresupuesto to set
+     */
+    public void setFechaPresupuesto(Date fechaPresupuesto) {
+        this.fechaPresupuesto = fechaPresupuesto;
     }
+
+    /**
+     * Numero del presupuesto
+     * @param numeroPresupuesto the numeroPresupuesto to set
+     */
+    public void setNumeroPresupuesto(String numeroPresupuesto) {
+        this.numeroPresupuesto = numeroPresupuesto;
+    }   
 }

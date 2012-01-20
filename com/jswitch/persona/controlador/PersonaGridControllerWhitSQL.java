@@ -10,7 +10,6 @@ import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.pagos.modelo.maestra.OrdenDePago;
 import com.jswitch.persona.modelo.maestra.Persona;
 import com.jswitch.persona.vista.PersonaDetailFrame;
-import java.lang.Object;
 import java.lang.reflect.Method;
 import org.hibernate.type.Type;
 import org.openswing.swing.client.GridControl;
@@ -42,7 +41,7 @@ public class PersonaGridControllerWhitSQL extends DefaultGridControllerWhitSQL {
                 OrdenDePago or=new OrdenDePago();
                 or.setPersonaPago((Persona)persistentObject);
                 
-                method.invoke(object, new Object[]{null, or, false});
+                method.invoke(object, new Object[]{null, or, true});
 
 
             } catch (Exception ex) {
