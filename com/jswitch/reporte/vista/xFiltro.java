@@ -1,15 +1,11 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * xFiltro.java
  *
  * Created on Jan 4, 2012, 12:46:23 PM
  */
 package com.jswitch.reporte.vista;
 
+import com.google.common.collect.Collections2;
 import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.reporte.controlador.ReporteController;
@@ -17,6 +13,7 @@ import com.jswitch.reporte.modelo.ParametroReporte;
 import com.jswitch.reporte.modelo.Reporte;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.JDialog;
 import org.hibernate.classic.Session;
@@ -121,16 +118,14 @@ public class xFiltro extends JDialog {
         try {
             s = HibernateUtil.getSessionFactory().openSession();
             String sql=reporte.getBaseSQL();
-            //sql+= "WHERE ";
-            List dataSource = s.createQuery(sql).list();
-            new ReporteController().mostrarReporte(dataSource, parametrosFiltro, reporte.getFile(), reporte.getTitulo(), "Estilo3.jrtx");
+            //sql+= "WHERE ayo="+(Integer)jSpinner2.getValue();
+            //List dataSource = s.createQuery(sql).list();
+            new ReporteController().mostrarReporte(Collections.EMPTY_LIST,parametrosFiltro,reporte,  "Estilo3.jrtx");
         } catch (Exception ex) {
             LoggerUtil.error(this.getClass(), "showReport", ex);
         } finally {
             s.close();
         }
-
-
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
