@@ -107,7 +107,10 @@ public class Emergencia extends DetalleSiniestro {
 
     public Set<Reporte> getReportes() {
         if (reportes.isEmpty()) {
-            reportes.add(new Reporte(Dominios.CategoriaReporte.PERSONAS, 0, "SINI_D_Emergencia_001", "SINI_D_Emergencia_001", "SINI_D_Emergencia_001", null, "Carta 8½ x 11 Vertical",false));
+            reportes.add(new Reporte(Dominios.CategoriaReporte.PERSONAS, 0,
+                    "SINI_D_Emergencia_001", "SINI_D_Emergencia_001", 
+                    "SINI_D_Emergencia_001", null, "Carta 8½ x 11 Vertical",
+                    false,false,false));
         }
         return reportes;
     }
