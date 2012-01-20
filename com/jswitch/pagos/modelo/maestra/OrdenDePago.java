@@ -118,6 +118,26 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     @Column
     private Double montoPagar;
     /**
+     * Suma de todos los montos a pagar a Titulares
+     */
+    @Column
+    private Double montoTitulares;
+    /**
+     * Suma de todos los montos a pagar a Beneficiarios
+     */
+    @Column
+    private Double montoBeneficiarios;
+    /**
+     * Suma de todos los montos a pagar de I.S.L.R.
+     */
+    @Column
+    private Double montoISLR;
+    /**
+     * Suma de todos los montos a pagar de I.V.A
+     */
+    @Column
+    private Double montoIVA;
+    /**
      * tipo de detalles de siniestro a cancelar
      */
     @Column
@@ -428,4 +448,37 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     public void setTipoDetalleSiniestro(Dominios.TipoDetalleSiniestro tipoDetalleSiniestro) {
         this.tipoDetalleSiniestro = tipoDetalleSiniestro;
     }
+
+    public Double getMontoBeneficiarios() {
+        return montoBeneficiarios;
+    }
+
+    public void setMontoBeneficiarios(Double montoBeneficiarios) {
+        this.montoBeneficiarios = montoBeneficiarios;
+    }
+
+    public Double getMontoISLR() {
+        return montoISLR;
+    }
+
+    public void setMontoISLR(Double montoISLR) {
+        this.montoISLR = montoISLR;
+    }
+
+    public Double getMontoIVA() {
+        return montoIVA;
+    }
+
+    public void setMontoIVA(Double montoIVA) {
+        this.montoIVA = montoIVA;
+    }
+
+    public Double getMontoTitulares() {
+        return montoTitulares;
+    }
+
+    public void setMontoTitulares(Double montoTitulares) {
+        this.montoTitulares = montoTitulares;
+    }
+        
 }
