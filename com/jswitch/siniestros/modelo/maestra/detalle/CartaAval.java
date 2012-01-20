@@ -102,12 +102,14 @@ public class CartaAval extends DetalleSiniestro {
         this.fechaEmision = fechaEmision;
     }
 
-    /**
-     * Fecha de realizacion del Presupuesto
-     * @param fechaPresupuesto the fechaPresupuesto to set
-     */
-    public void setFechaPresupuesto(Date fechaPresupuesto) {
-        this.fechaPresupuesto = fechaPresupuesto;
+    public Set<Reporte> getReportes() {
+        if (reportes.isEmpty()) {
+            reportes.add(new Reporte(Dominios.CategoriaReporte.PERSONAS, 0,
+                    "SINI_D_CartaAval_001", "SINI_D_CartaAval_001",
+                    "SINI_D_CartaAval_001", null, "Carta 8½ x 11 Vertical",
+                    false,false,false));
+        }
+        return reportes;
     }
 
     /**
