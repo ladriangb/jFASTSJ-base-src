@@ -5,7 +5,6 @@
  */
 package com.jswitch.reporte.vista;
 
-import com.google.common.collect.Collections2;
 import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.reporte.controlador.ReporteController;
@@ -14,7 +13,6 @@ import com.jswitch.reporte.modelo.Reporte;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.List;
 import javax.swing.JDialog;
 import org.hibernate.classic.Session;
 import org.openswing.swing.mdi.client.MDIFrame;
