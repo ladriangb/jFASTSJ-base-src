@@ -99,7 +99,7 @@ public class CartaAval extends DetalleSiniestro {
             reportes.add(new Reporte(Dominios.CategoriaReporte.PERSONAS, 0,
                     "SINI_D_CartaAval_001", "SINI_D_CartaAval_001",
                     "SINI_D_CartaAval_001", null, "Carta 8½ x 11 Vertical",
-                    false,false,false));
+                    false,false,false,false));
         }
         return reportes;
     }
