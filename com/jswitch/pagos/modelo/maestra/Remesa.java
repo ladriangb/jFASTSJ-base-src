@@ -156,13 +156,39 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private TipoCuentaBancaria tipoCuenta;
     /**
+     * monto a pagar
+     */
+    @Column
+    private Double montoPagar;
+    /**
+     * Suma de todos los montos a pagar a Titulares
+     */
+    @Column
+    private Double montoTitulares;
+    /**
+     * Suma de todos los montos a pagar a Beneficiarios
+     */
+    @Column
+    private Double montoBeneficiarios;
+    /**
+     * Suma de todos los montos a pagar de I.S.L.R.
+     */
+    @Column
+    private Double montoISLR;
+    /**
+     * Suma de todos los montos a pagar de I.V.A
+     */
+    @Column
+    private Double montoIVA;  
+    
+    /**
      * Busqueda automatica de Ordenes de Pago
      */
     @Transient
     private transient Boolean autoSearch;
     /**
      * Version
-     */
+     */    
     @Version
     @Column
     private Integer optLock;
@@ -606,4 +632,85 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     public void setAutoSearch(Boolean autoSearch) {
         this.autoSearch = autoSearch;
     }
+
+    /**
+     * monto a pagar
+     * @return the montoPagar
+     */
+    public Double getMontoPagar() {
+        return montoPagar;
+    }
+
+    /**
+     * monto a pagar
+     * @param montoPagar the montoPagar to set
+     */
+    public void setMontoPagar(Double montoPagar) {
+        this.montoPagar = montoPagar;
+    }
+
+    /**
+     * Suma de todos los montos a pagar a Titulares
+     * @return the montoTitulares
+     */
+    public Double getMontoTitulares() {
+        return montoTitulares;
+    }
+
+    /**
+     * Suma de todos los montos a pagar a Titulares
+     * @param montoTitulares the montoTitulares to set
+     */
+    public void setMontoTitulares(Double montoTitulares) {
+        this.montoTitulares = montoTitulares;
+    }
+
+    /**
+     * Suma de todos los montos a pagar a Beneficiarios
+     * @return the montoBeneficiarios
+     */
+    public Double getMontoBeneficiarios() {
+        return montoBeneficiarios;
+    }
+
+    /**
+     * Suma de todos los montos a pagar a Beneficiarios
+     * @param montoBeneficiarios the montoBeneficiarios to set
+     */
+    public void setMontoBeneficiarios(Double montoBeneficiarios) {
+        this.montoBeneficiarios = montoBeneficiarios;
+    }
+
+    /**
+     * Suma de todos los montos a pagar de I.S.L.R.
+     * @return the montoISLR
+     */
+    public Double getMontoISLR() {
+        return montoISLR;
+    }
+
+    /**
+     * Suma de todos los montos a pagar de I.S.L.R.
+     * @param montoISLR the montoISLR to set
+     */
+    public void setMontoISLR(Double montoISLR) {
+        this.montoISLR = montoISLR;
+    }
+
+    /**
+     * Suma de todos los montos a pagar de I.V.A
+     * @return the montoIVA
+     */
+    public Double getMontoIVA() {
+        return montoIVA;
+    }
+
+    /**
+     * Suma de todos los montos a pagar de I.V.A
+     * @param montoIVA the montoIVA to set
+     */
+    public void setMontoIVA(Double montoIVA) {
+        this.montoIVA = montoIVA;
+    }
+        
 }
