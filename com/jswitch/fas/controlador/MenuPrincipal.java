@@ -109,6 +109,7 @@ import com.jswitch.pagos.vista.OrdenDePagoDetailFrame;
 import com.jswitch.pagos.vista.OrdenDePagoGridFrame;
 import com.jswitch.pagos.vista.RemesaDetailFrame;
 import com.jswitch.pagos.vista.RemesaGridFrame;
+import com.jswitch.persona.controlador.PersonaGridControllerWhitSQL;
 import com.jswitch.persona.controlador.PersonasDetailController;
 import com.jswitch.persona.modelo.maestra.PersonaNatural;
 import com.jswitch.persona.vista.BuscarPersonaDialog;
@@ -117,6 +118,7 @@ import com.jswitch.siniestros.controlador.SiniestroGridFrameController;
 import com.jswitch.siniestros.controlador.detalle.DetalleSiniestroGridFrameController;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
 import com.jswitch.siniestros.modelo.dominio.TipoSiniestro;
+import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.siniestros.modelo.maestra.detalle.APS;
 import com.jswitch.siniestros.modelo.maestra.detalle.AyudaSocial;
 import com.jswitch.siniestros.modelo.maestra.detalle.CartaAval;
@@ -140,6 +142,8 @@ import javax.swing.tree.DefaultTreeModel;
 import org.hibernate.Query;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
+import org.hibernate.type.StringType;
+import org.hibernate.type.Type;
 import org.openswing.swing.client.OptionPane;
 import org.openswing.swing.form.client.Form;
 import org.openswing.swing.mdi.client.*;
@@ -510,9 +514,22 @@ public class MenuPrincipal implements ClientFacade {
     // </editor-fold>
 
     public void getNewPago() {
-        new BuscarPersonaDialog((java.awt.Component)null,
+        new BuscarPersonaDialog((java.awt.Component) null,
                 OrdenDePagoDetailFrameController.class.getName(),
                 OrdenDePago.class.getName());
+    }
+
+    public void getPersonasAPagarGridFrame() {
+
+        String sql = "SELECT DISTINCT P.personaPago FROM "
+                + DetalleSiniestro.class.getName()
+                + " as P WHERE P.etapaSiniestro.idPropio=?";
+
+        new PersonaGridControllerWhitSQL(
+                Personas2GridFrame.class.getName(),
+                OrdenDePagoDetailFrameController.class.getName(),
+                Persona.class.getName(),
+                null, sql, new Object[]{"LIQ"}, new Type[]{new StringType()});
     }
 
     public void getPagosGrid() {
@@ -520,14 +537,14 @@ public class MenuPrincipal implements ClientFacade {
                 OrdenDePagoDetailFrame.class.getName(), OrdenDePago.class.getName(),
                 "Orden de Pago");
     }
-    
+
     public void getNewRemesa() {
         new RemesaDetailFrameController(RemesaDetailFrame.class.getName(),
                 null, null, true);
     }
-    public void getGridRemesa()
-    {
-        new RemesaGridFrameController(RemesaGridFrame.class.getName(), 
+
+    public void getGridRemesa() {
+        new RemesaGridFrameController(RemesaGridFrame.class.getName(),
                 RemesaDetailFrame.class.getName(), Remesa.class.getName(), null);
     }
 

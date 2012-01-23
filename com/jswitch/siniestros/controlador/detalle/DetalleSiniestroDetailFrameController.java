@@ -130,6 +130,10 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
 
     @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
+        String className = newPersistentObject.getClass().getName();
+        className = className.substring(1+className.lastIndexOf("."));
+        ((DetalleSiniestro) newPersistentObject).setTipoDetalle(className);
+        
         Session s = null;
         try {
             vista.saveGridsData();
@@ -139,7 +143,6 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
 
             EtapaSiniestro et = (EtapaSiniestro) q.uniqueResult();
             ((DetalleSiniestro) newPersistentObject).setEtapaSiniestro(et);
-
             String idPropio = (newPersistentObject instanceof Vida) ? "VIDA"
                     : (newPersistentObject instanceof Funerario) ? "FUNE" : "HCM";
             q = s.createQuery("FROM " + Ramo.class.getName() + " C"
