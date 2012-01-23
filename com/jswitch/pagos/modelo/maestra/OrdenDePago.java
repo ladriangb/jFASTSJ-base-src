@@ -97,6 +97,16 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private Dominios.EstatusPago estatusPago;
     /**
+     * Cantidad de Siniestros de Titulares
+     */
+    @Column
+    private Integer numeroSiniestrosTitular;
+    /**
+     * Cantidad de Siniestros de Famililiares asegurados
+     */
+    @Column
+    private Integer numeroSiniestrosFamiliar;
+    /**
      * version
      */
     @Version
@@ -132,7 +142,7 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
      * Suma de todos los montos a pagar a Beneficiarios
      */
     @Column
-    private Double montoBeneficiarios;
+    private Double montoFamiliar;
     /**
      * Suma de todos los montos a pagar de I.S.L.R.
      */
@@ -455,14 +465,6 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
         this.tipoDetalleSiniestro = tipoDetalleSiniestro;
     }
 
-    public Double getMontoBeneficiarios() {
-        return montoBeneficiarios;
-    }
-
-    public void setMontoBeneficiarios(Double montoBeneficiarios) {
-        this.montoBeneficiarios = montoBeneficiarios;
-    }
-
     public Double getMontoISLR() {
         return montoISLR;
     }
@@ -501,5 +503,53 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
      */
     public void setRemesa(Remesa remesa) {
         this.remesa = remesa;
-    }    
+    }
+
+    /**
+     * Cantidad de Siniestros de Titulares
+     * @return the numeroSiniestrosTitular
+     */
+    public Integer getNumeroSiniestrosTitular() {
+        return numeroSiniestrosTitular;
+    }
+
+    /**
+     * Cantidad de Siniestros de Titulares
+     * @param numeroSiniestrosTitular the numeroSiniestrosTitular to set
+     */
+    public void setNumeroSiniestrosTitular(Integer numeroSiniestrosTitular) {
+        this.numeroSiniestrosTitular = numeroSiniestrosTitular;
+    }
+
+    /**
+     * Cantidad de Siniestros de Famililiares asegurados
+     * @return the numeroSiniestrosFamiliar
+     */
+    public Integer getNumeroSiniestrosFamiliar() {
+        return numeroSiniestrosFamiliar;
+    }
+
+    /**
+     * Cantidad de Siniestros de Famililiares asegurados
+     * @param numeroSiniestrosFamiliar the numeroSiniestrosFamiliar to set
+     */
+    public void setNumeroSiniestrosFamiliar(Integer numeroSiniestrosFamiliar) {
+        this.numeroSiniestrosFamiliar = numeroSiniestrosFamiliar;
+    }
+
+    /**
+     * Suma de todos los montos a pagar a Beneficiarios
+     * @return the montoFamiliar
+     */
+    public Double getMontoFamiliar() {
+        return montoFamiliar;
+    }
+
+    /**
+     * Suma de todos los montos a pagar a Beneficiarios
+     * @param montoFamiliar the montoFamiliar to set
+     */
+    public void setMontoFamiliar(Double montoFamiliar) {
+        this.montoFamiliar = montoFamiliar;
+    }
 }
