@@ -74,14 +74,25 @@ public class DesgloseCoberturaGridInternalController extends DefaultGridInternal
     private String logicaNegocio(DesgloseCobertura cobertura) {
         Factura factura = (Factura) beanVO;
         Double facturado = cobertura.getMontoFacturado();
+        Double baseIva = !cobertura.getCobertura().getIva()
+                ? 0 : (cobertura.getMontoAmparado() * factura.getPorcentajeIva());
+        Double baseIslr = !cobertura.getCobertura().getIslr()
+                ? 0 : (cobertura.getMontoAmparado() * factura.getTipoConceptoSeniat().getPorcentajeRetencionIslr());
         Double amparado = cobertura.getMontoAmparado();
         for (DesgloseCobertura desgloseCobertura : factura.getDesgloseCobertura()) {
             if (cobertura.getId() == null
-                    || (desgloseCobertura.getId().compareTo(cobertura.getId()) != 0 && desgloseCobertura.getAuditoria().getActivo())) {
+                    || 
+                    (desgloseCobertura.getId().compareTo(cobertura.getId()) != 0 
+                    && desgloseCobertura.getAuditoria().getActivo())) {
                 facturado += desgloseCobertura.getMontoFacturado();
                 amparado += desgloseCobertura.getMontoAmparado();
+                baseIva += !desgloseCobertura.getCobertura().getIva()
+                        ? 0 : (desgloseCobertura.getMontoAmparado() * factura.getPorcentajeIva());
+                baseIslr += !desgloseCobertura.getCobertura().getIslr()
+                        ? 0 : (desgloseCobertura.getMontoAmparado() * factura.getTipoConceptoSeniat().getPorcentajeRetencionIslr());
             }
         }
+        Double totalLiquidado = ((baseIva) + (baseIslr) + amparado);
         if (facturado > factura.getTotalFacturado()) {
             return "Valor Supera a La Factura";
         }
@@ -89,7 +100,7 @@ public class DesgloseCoberturaGridInternalController extends DefaultGridInternal
         for (DesgloseSumaAsegurada desgloseSumaAsegurada : factura.getDesgloseSumaAsegurada()) {
             liquidado += desgloseSumaAsegurada.getMonto();
         }
-        if (liquidado < amparado) {
+        if (liquidado < totalLiquidado) {
             return "Cantidad no puede ser amparada";
         }
         return null;
@@ -112,7 +123,7 @@ public class DesgloseCoberturaGridInternalController extends DefaultGridInternal
 
     @Override
     public void afterReloadGrid() {
-        updateFactura((Factura) beanVO);
+        vista.getMainPanel().getReloadButton().doClick();
     }
 
     /**
@@ -123,22 +134,24 @@ public class DesgloseCoberturaGridInternalController extends DefaultGridInternal
         Double islr = factura.getPorcentajeRetencionIsrl();
         Double montoNoAmparado = 0d;
         Double montoAmparado = 0d;
-        Double montoIva = 0d;
-        Double montoIslr = 0d;
+        Double baseIva = 0d;
+        Double baseIslr = 0d;
         Double gastosClinicos = 0d;
         Double honorariosMedicos = 0d;
+        Double iva = factura.getPorcentajeIva();
 
         for (DesgloseCobertura dc : factura.getDesgloseCobertura()) {
             if (dc.getAuditoria().getActivo()) {
                 Cobertura c = dc.getCobertura();
                 if (c.getBaseImponible()) {
-                    double iva = !c.getIva() ? 0
-                            : (factura.getPorcentajeIva());
-                    double isl = !c.getIslr() ? 0 : islr;
                     montoNoAmparado += dc.getMontoNoAmparado();
                     montoAmparado += dc.getMontoAmparado();
-                    montoIva += dc.getMontoAmparado() * iva;
-                    montoIslr += dc.getMontoAmparado() * isl;
+                    if (c.getIva()) {
+                        baseIva += dc.getMontoAmparado();
+                    }
+                    if (c.getIslr()) {
+                        baseIslr += dc.getMontoAmparado();
+                    }
                     if (c.getGastosClinicos()) {
                         gastosClinicos += dc.getMontoAmparado();
                     }
@@ -150,21 +163,29 @@ public class DesgloseCoberturaGridInternalController extends DefaultGridInternal
         }
 
         factura.setMontoNoAmparado(montoNoAmparado);
-        factura.setMontoSujetoRetencion(montoIslr);
-        factura.setMontoIva(montoIva);
+        factura.setMontoAmparado(montoAmparado);
+
+        factura.setBaseIva(baseIva);
+        factura.setMontoIva(baseIva * iva);
+        factura.setMontoRetencionIva(
+                factura.getMontoIva() * factura.getPorcentajeRetencionIva());
+
+        factura.setBaseIslr(baseIslr);
+        factura.setMontoRetencionIsrl(baseIslr * islr);
+        factura.setPorcentajeRetencionIsrl(islr);
+
         factura.setGastosClinicos(gastosClinicos);
         factura.setHonorariosMedicos(honorariosMedicos);
 
-        factura.setMontoRetencionIva(
-                factura.getMontoIva() * factura.getPorcentajeRetencionIva());
-        factura.setMontoRetencionIsrl(montoIslr);
-
         factura.setTotalRetenido(
                 factura.getMontoRetencionIva() + factura.getMontoRetencionIsrl());
+
         factura.setTotalLiquidado(
-                montoIva + montoIslr + montoAmparado);
+                (baseIva * iva) + (baseIslr * islr) + montoAmparado);
+
         factura.setTotalACancelar(
                 factura.getTotalLiquidado() - factura.getTotalRetenido());
+
 
         Session s = null;
         try {
@@ -180,6 +201,4 @@ public class DesgloseCoberturaGridInternalController extends DefaultGridInternal
         }
         vista.getMainPanel().getReloadButton().doClick();
     }
-
-   
 }

@@ -48,7 +48,8 @@ public class DesgloseSumaAseguradaGridInternalController extends DefaultGridInte
         loadDetalleSiniestro(((Factura) beanVO).getDetalleSiniestro());
         DesgloseSumaAsegurada desgloseSumaAsegurada = ((DesgloseSumaAsegurada) persistentObjects.get(0));
         DesgloseSumaAsegurada oldDesgloseSumaAsegurada = ((DesgloseSumaAsegurada) oldPersistentObjects.get(0));
-        if (!logicaNegocio(desgloseSumaAsegurada)) {
+        String x = logicaNegocio(desgloseSumaAsegurada);
+        if (x == null) {
             for (DiagnosticoSiniestro ds : detalleSiniestro.getDiagnosticoSiniestros()) {
                 if (ds.getId().compareTo(desgloseSumaAsegurada.getDiagnosticoSiniestro().getId()) == 0) {
                     Response res = pagarDiagnostico(ds,
@@ -60,7 +61,7 @@ public class DesgloseSumaAseguradaGridInternalController extends DefaultGridInte
                 }
             }
         } else {
-            return new ErrorResponse("Valor Supera a La Factura");
+            return new ErrorResponse(x);
         }
         return super.updateRecords(rowNumbers, oldPersistentObjects, persistentObjects);
     }
@@ -88,7 +89,8 @@ public class DesgloseSumaAseguradaGridInternalController extends DefaultGridInte
         Factura factura = (Factura) beanVO;
         loadDetalleSiniestro(factura.getDetalleSiniestro());
         DesgloseSumaAsegurada desgloseSumaAsegurada = ((DesgloseSumaAsegurada) newValueObjects.get(0));
-        if (!logicaNegocio(desgloseSumaAsegurada)) {
+        String x=logicaNegocio(desgloseSumaAsegurada);
+        if (x==null) {
             desgloseSumaAsegurada.setFactura(factura);
             for (DiagnosticoSiniestro ds : detalleSiniestro.getDiagnosticoSiniestros()) {
                 if (ds.getId().compareTo(desgloseSumaAsegurada.getDiagnosticoSiniestro().getId()) == 0) {
@@ -101,7 +103,7 @@ public class DesgloseSumaAseguradaGridInternalController extends DefaultGridInte
                 }
             }
         } else {
-            return new ErrorResponse("Valor Supera a La Factura");
+            return new ErrorResponse(x);
         }
 
         Session s = null;
@@ -141,7 +143,7 @@ public class DesgloseSumaAseguradaGridInternalController extends DefaultGridInte
         }
     }
 
-    private boolean logicaNegocio(DesgloseSumaAsegurada asegurada) {
+    private String logicaNegocio(DesgloseSumaAsegurada asegurada) {
         Factura liquidacion = (Factura) beanVO;
         Double liquidado = asegurada.getMonto();
         for (DesgloseSumaAsegurada desgloseSumaAsegurada : liquidacion.getDesgloseSumaAsegurada()) {
@@ -151,7 +153,13 @@ public class DesgloseSumaAseguradaGridInternalController extends DefaultGridInte
                 }
             }
         }
-        return liquidado > liquidacion.getTotalFacturado();
+        if (liquidado > liquidacion.getTotalFacturado()) {
+            return "Valor Supera a La Factura";
+        }
+        if (liquidado < liquidacion.getTotalLiquidado()) {
+            return "El total amparado es menor al total liquidado";
+        }
+        return null;
     }
 
     private Response pagarDiagnostico(DiagnosticoSiniestro diagnosticoSiniestro, Double monto) {
