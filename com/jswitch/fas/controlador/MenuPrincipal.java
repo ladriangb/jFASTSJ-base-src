@@ -336,7 +336,7 @@ public class MenuPrincipal implements ClientFacade {
         } else {
             new UsuarioDetailController(UsuarioDetailFrame.class.getName(), null, General.usuario, false);
         }
-    }
+    }       
 
     public void getEmpresa(String name) {
         new DefaultDetailFrameController(EmpresaDetailFrame.class.getName(), null, General.empresa, false);
