@@ -65,7 +65,7 @@ public class DesgloseSumaAseguradaGridInternalController extends DefaultGridInte
         }
         return super.updateRecords(rowNumbers, oldPersistentObjects, persistentObjects);
     }
-
+      
     @Override
     public Response deleteRecords(ArrayList persistentObjects) throws Exception {
         loadDetalleSiniestro(((Factura) beanVO).getDetalleSiniestro());
@@ -243,4 +243,7 @@ public class DesgloseSumaAseguradaGridInternalController extends DefaultGridInte
         return vista.getBeanVO();
 
     }
+    
+    
+    
 }
