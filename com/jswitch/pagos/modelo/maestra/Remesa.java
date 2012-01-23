@@ -131,6 +131,12 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private String numeroCuentaDebitar;
     /**
+     * Detalle de la Remesa
+     */
+    @Column
+    @BusinessKey
+    private String detalle;    
+    /**
      * numero referencia Credito
      * Número asignado por la empresa que identifica el crédito. Es
      * utilizado para identificar la nota de crédito en el estado de
@@ -712,5 +718,21 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     public void setMontoIVA(Double montoIVA) {
         this.montoIVA = montoIVA;
     }
-        
+
+    /**
+     * Detalle de la Remesa
+     * @return the detalle
+     */
+    public String getDetalle() {
+        return detalle;
+    }
+
+    /**
+     * Detalle de la Remesa
+     * @param detalle the detalle to set
+     */
+    public void setDetalle(String detalle) {
+        this.detalle = detalle;
+    }
+    
 }
