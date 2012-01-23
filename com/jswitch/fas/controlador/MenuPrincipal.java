@@ -318,7 +318,7 @@ public class MenuPrincipal implements ClientFacade {
 // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Sistema Base">
-    public void getEncabezado(String name) {
+    public void getEncabezado() {
         new DefaultAllGridFrameController(EncabezadoGridFrame.class.getName(), null, Encabezado.class.getName(), "Encabezados de Reporte");
     }
 
