@@ -69,6 +69,14 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private Date fechaEnvio;
     /**
+     * Fecha en que se Pago la Remesa
+     * Formato: dd/mm/aaaa
+     */
+    @Column
+    @Temporal(value = TemporalType.DATE)
+    @BusinessKey
+    private Date fechaPago;    
+    /**
      * Fecha de Pago Propuesta
      * Para uso interno de la empresa a objeto de identificar la fecha 
      * de generación del archivo de pago.
@@ -734,5 +742,14 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     public void setDetalle(String detalle) {
         this.detalle = detalle;
     }
-    
+
+    /**
+     * Fecha en que se Pago la Remesa
+     * Formato: dd/mm/aaaa
+     * @return the fechaPago
+     */
+    public Date getFechaPago() {
+        return fechaPago;
+    }
+        
 }
