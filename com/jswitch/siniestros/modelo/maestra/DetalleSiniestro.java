@@ -103,7 +103,7 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      * total gastos medicos
      */
     @Column
-    private Double montoGastosMedicos;
+    private Double montoHonorariosMedicos;
     /**
      * total gastos clinicos
      */
@@ -125,15 +125,10 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     @Column
     private Double montoIva;
     /**
-     * porcentaje del iva
+     * monto retenido por iva
      */
     @Column
-    private Double porcentajeIva;
-    /**
-     * porcentaje retencion iva
-     */
-    @Column
-    private Double porcentajeRetencionIva;
+    private Double montoRetenidoIva;
     /**
      * total base de la base del islr
      */
@@ -145,15 +140,10 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     @Column
     private Double montoIslr;
     /**
-     * porcentaje del Islr
+     * monto retenido por Islr
      */
     @Column
-    private Double porcentajeIslr;
-    /**
-     * porcentaje retencion Islr
-     */
-    @Column
-    private Double porcentajeRetencionIslr;
+    private Double montoRetenidoIslr;
     /**
      * total monto Pronto Pago
      */
@@ -212,7 +202,7 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     @Past
     private Date fechaLiquidado;
     /**
-     *
+     * fecha en que vence el Detalle
      */
     @Column
     @Temporal(value = TemporalType.DATE)
@@ -220,7 +210,7 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     @BusinessKey
     private Date fechaVencimiento;
     /**
-     * 
+     * Ramo del detalle
      */
     @ManyToOne
     @BusinessKey(exclude = Method.ALL)
@@ -252,7 +242,7 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     /**
      * lista de facturas de pagos
      */
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "detalleSiniestro")
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "detalleSiniestro")
     @BusinessKey(exclude = Method.ALL)
     private Set<Factura> pagos = new HashSet<Factura>();
     /**
@@ -297,6 +287,9 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     @BusinessKey
     private AuditoriaBasica auditoria;
 
+    /**
+     * crea una nueva instancia de DetalleSiniestro
+     */
     public DetalleSiniestro() {
     }
 
@@ -357,7 +350,7 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     }
 
     /**
-     *
+     * fecha en que vence el Detalle
      * @return the fechaVencimiento
      */
     public Date getFechaVencimiento() {
@@ -414,10 +407,10 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
 
     /**
      * total gastos medicos
-     * @return the montoGastosMedicos
+     * @return the montoHonorariosMedicos
      */
-    public Double getMontoGastosMedicos() {
-        return montoGastosMedicos;
+    public Double getMontoHonorariosMedicos() {
+        return montoHonorariosMedicos;
     }
 
     /**
@@ -458,6 +451,22 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      */
     public Double getMontoProntoPago() {
         return montoProntoPago;
+    }
+
+    /**
+     * monto retenido por Islr
+     * @return the montoRetenidoIslr
+     */
+    public Double getMontoRetenidoIslr() {
+        return montoRetenidoIslr;
+    }
+
+    /**
+     * monto retenido por iva
+     * @return the montoRetencionIva
+     */
+    public Double getMontoRetenidoIva() {
+        return montoRetenidoIva;
     }
 
     /**
@@ -509,43 +518,11 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     }
 
     /**
-     * porcentaje del Islr
-     * @return the porcentajeIslr
-     */
-    public Double getPorcentajeIslr() {
-        return porcentajeIslr;
-    }
-
-    /**
-     * porcentaje del iva
-     * @return the porcentajeIva
-     */
-    public Double getPorcentajeIva() {
-        return porcentajeIva;
-    }
-
-    /**
      * porcentaje pronto pago
      * @return the porcentajeProntoPago
      */
     public Double getPorcentajeProntoPago() {
         return porcentajeProntoPago;
-    }
-
-    /**
-     * porcentaje retencion Islr
-     * @return the porcentajeRetencionIslr
-     */
-    public Double getPorcentajeRetencionIslr() {
-        return porcentajeRetencionIslr;
-    }
-
-    /**
-     * porcentaje retencion iva
-     * @return the porcentajeRetencionIva
-     */
-    public Double getPorcentajeRetencionIva() {
-        return porcentajeRetencionIva;
     }
 
     /**
@@ -565,7 +542,7 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     }
 
     /**
-     *
+     * Ramo del detalle
      * @return the ramo
      */
     public Ramo getRamo() {
@@ -634,7 +611,6 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      * @return the tipoSiniestro
      */
     public TipoSiniestro getTipoSiniestro() {
-        
         return tipoSiniestro;
     }
 
@@ -703,7 +679,7 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     }
 
     /**
-     *
+     * fecha en que vence el Detalle
      * @param fechaVencimiento the fechaVencimiento to set
      */
     public void setFechaVencimiento(Date fechaVencimiento) {
@@ -760,10 +736,10 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
 
     /**
      * total gastos medicos
-     * @param montoGastosMedicos the montoGastosMedicos to set
+     * @param montoHonorariosMedicos the montoHonorariosMedicos to set
      */
-    public void setMontoGastosMedicos(Double montoGastosMedicos) {
-        this.montoGastosMedicos = montoGastosMedicos;
+    public void setMontoHonorariosMedicos(Double montoHonorariosMedicos) {
+        this.montoHonorariosMedicos = montoHonorariosMedicos;
     }
 
     /**
@@ -804,6 +780,22 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      */
     public void setMontoProntoPago(Double montoProntoPago) {
         this.montoProntoPago = montoProntoPago;
+    }
+
+    /**
+     * monto retenido por Islr
+     * @param montoRetenidoIslr the montoRetencidoIslr to set
+     */
+    public void setMontoRetenidoIslr(Double montoRetenidoIslr) {
+        this.montoRetenidoIslr = montoRetenidoIslr;
+    }
+
+    /**
+     * monto retenido por iva
+     * @param montoRetenidoIva the montoRetencionIva to set
+     */
+    public void setMontoRetenidoIva(Double montoRetenidoIva) {
+        this.montoRetenidoIva = montoRetenidoIva;
     }
 
     /**
@@ -855,43 +847,11 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     }
 
     /**
-     * porcentaje del Islr
-     * @param porcentajeIslr the porcentajeIslr to set
-     */
-    public void setPorcentajeIslr(Double porcentajeIslr) {
-        this.porcentajeIslr = porcentajeIslr;
-    }
-
-    /**
-     * porcentaje del iva
-     * @param porcentajeIva the porcentajeIva to set
-     */
-    public void setPorcentajeIva(Double porcentajeIva) {
-        this.porcentajeIva = porcentajeIva;
-    }
-
-    /**
      * porcentaje pronto pago
      * @param porcentajeProntoPago the porcentajeProntoPago to set
      */
     public void setPorcentajeProntoPago(Double porcentajeProntoPago) {
         this.porcentajeProntoPago = porcentajeProntoPago;
-    }
-
-    /**
-     * porcentaje retencion Islr
-     * @param porcentajeRetencionIslr the porcentajeRetencionIslr to set
-     */
-    public void setPorcentajeRetencionIslr(Double porcentajeRetencionIslr) {
-        this.porcentajeRetencionIslr = porcentajeRetencionIslr;
-    }
-
-    /**
-     * porcentaje retencion iva
-     * @param porcentajeRetencionIva the porcentajeRetencionIva to set
-     */
-    public void setPorcentajeRetencionIva(Double porcentajeRetencionIva) {
-        this.porcentajeRetencionIva = porcentajeRetencionIva;
     }
 
     /**
@@ -911,7 +871,7 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     }
 
     /**
-     *
+     * Ramo del detalle
      * @param ramo the ramo to set
      */
     public void setRamo(Ramo ramo) {

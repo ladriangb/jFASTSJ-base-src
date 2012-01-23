@@ -64,7 +64,7 @@ public class BuscaOrdenDePagoGridFrame extends DefaultGridFrame {
                 .addComponent(filterButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(checkBoxControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(424, Short.MAX_VALUE))
+                .addContainerGap(450, Short.MAX_VALUE))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {editButton1, filterButton1});
@@ -90,14 +90,17 @@ public class BuscaOrdenDePagoGridFrame extends DefaultGridFrame {
         gridData.setSearchAdditionalRows(true);
         gridData.setValueObjectClassName(OrdenDePago.class.getName());
 
+        decimalColumn1.setColumnFilterable(true);
         decimalColumn1.setColumnName("id");
         decimalColumn1.setColumnRequired(false);
-        decimalColumn1.setColumnVisible(false);
+        decimalColumn1.setColumnSortable(true);
         decimalColumn1.setPreferredWidth(40);
         gridData.getColumnContainer().add(decimalColumn1);
 
+        checkBoxColumn1.setColumnFilterable(true);
         checkBoxColumn1.setColumnName("selected");
         checkBoxColumn1.setColumnRequired(false);
+        checkBoxColumn1.setColumnSortable(true);
         checkBoxColumn1.setEditableOnEdit(true);
         gridData.getColumnContainer().add(checkBoxColumn1);
 
@@ -146,6 +149,7 @@ public class BuscaOrdenDePagoGridFrame extends DefaultGridFrame {
         dateColumn2.setColumnFilterable(true);
         dateColumn2.setColumnName("auditoria.fechaInsert");
         dateColumn2.setColumnRequired(false);
+        dateColumn2.setColumnSortable(true);
         gridData.getColumnContainer().add(dateColumn2);
 
         textColumn5.setColumnFilterable(true);
@@ -157,6 +161,7 @@ public class BuscaOrdenDePagoGridFrame extends DefaultGridFrame {
         dateColumn3.setColumnFilterable(true);
         dateColumn3.setColumnName("auditoria.fechaUpdate");
         dateColumn3.setColumnRequired(false);
+        dateColumn3.setColumnSortable(true);
         gridData.getColumnContainer().add(dateColumn3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -166,7 +171,7 @@ public class BuscaOrdenDePagoGridFrame extends DefaultGridFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(gridData, javax.swing.GroupLayout.DEFAULT_SIZE, 662, Short.MAX_VALUE)
+                .addComponent(gridData, javax.swing.GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -174,7 +179,7 @@ public class BuscaOrdenDePagoGridFrame extends DefaultGridFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(gridData, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
+                .addComponent(gridData, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents

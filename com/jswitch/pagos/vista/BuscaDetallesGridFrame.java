@@ -92,73 +92,67 @@ public class BuscaDetallesGridFrame extends DefaultGridFrame {
         gridData.setValueObjectClassName(DetalleSiniestro.class.getName());
 
         decimalColumn1.setColumnName("id");
-        decimalColumn1.setColumnRequired(false);
-        decimalColumn1.setColumnVisible(false);
+        decimalColumn1.setColumnSortable(true);
         decimalColumn1.setPreferredWidth(40);
         gridData.getColumnContainer().add(decimalColumn1);
 
         checkBoxColumn1.setColumnName("selected");
-        checkBoxColumn1.setColumnRequired(false);
+        checkBoxColumn1.setColumnSortable(true);
         checkBoxColumn1.setEditableOnEdit(true);
         gridData.getColumnContainer().add(checkBoxColumn1);
 
         textColumn1.setColumnName("siniestro.numero");
+        textColumn1.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn1);
 
         textColumn6.setColumnFilterable(true);
         textColumn6.setColumnName("personaPago.rif.rif");
-        textColumn6.setColumnRequired(false);
         textColumn6.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn6);
 
         textColumn7.setColumnFilterable(true);
         textColumn7.setColumnName("personaPago.nombreLargo");
-        textColumn7.setColumnRequired(false);
         textColumn7.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn7);
 
+        textColumn3.setColumnFilterable(true);
         textColumn3.setColumnName("tipoDetalle");
-        textColumn3.setColumnRequired(false);
+        textColumn3.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn3);
 
         decimalColumn2.setColumnFilterable(true);
         decimalColumn2.setColumnName("montoLiquidado");
-        decimalColumn2.setColumnRequired(false);
         decimalColumn2.setColumnSortable(true);
         gridData.getColumnContainer().add(decimalColumn2);
 
         decimalColumn3.setColumnFilterable(true);
         decimalColumn3.setColumnName("montoFacturado");
-        decimalColumn3.setColumnRequired(false);
         decimalColumn3.setColumnSortable(true);
         gridData.getColumnContainer().add(decimalColumn3);
 
         dateColumn1.setColumnFilterable(true);
         dateColumn1.setColumnName("fechaLiquidado");
-        dateColumn1.setColumnRequired(false);
         dateColumn1.setColumnSortable(true);
         gridData.getColumnContainer().add(dateColumn1);
 
         textColumn4.setColumnFilterable(true);
         textColumn4.setColumnName("auditoria.usuarioInsert");
-        textColumn4.setColumnRequired(false);
         textColumn4.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn4);
 
         dateColumn2.setColumnFilterable(true);
         dateColumn2.setColumnName("auditoria.fechaInsert");
-        dateColumn2.setColumnRequired(false);
+        dateColumn2.setColumnSortable(true);
         gridData.getColumnContainer().add(dateColumn2);
 
         textColumn5.setColumnFilterable(true);
         textColumn5.setColumnName("auditoria.usuarioUpdate");
-        textColumn5.setColumnRequired(false);
         textColumn5.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn5);
 
         dateColumn3.setColumnFilterable(true);
         dateColumn3.setColumnName("auditoria.fechaUpdate");
-        dateColumn3.setColumnRequired(false);
+        dateColumn3.setColumnSortable(true);
         gridData.getColumnContainer().add(dateColumn3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

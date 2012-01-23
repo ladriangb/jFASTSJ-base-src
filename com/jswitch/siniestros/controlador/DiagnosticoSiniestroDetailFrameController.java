@@ -12,14 +12,12 @@ import com.jswitch.base.vista.util.DefaultDetailFrame;
 import com.jswitch.configuracion.controlador.TratamientoLookupController;
 import com.jswitch.configuracion.modelo.dominio.patologias.Diagnostico;
 import com.jswitch.configuracion.modelo.dominio.patologias.Tratamiento;
-import com.jswitch.configuracion.modelo.transaccional.SumaAmparada;
 import com.jswitch.configuracion.modelo.transaccional.SumaAsegurada;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.siniestros.modelo.maestra.DiagnosticoSiniestro;
 import com.jswitch.siniestros.vista.DiagnosticoSiniestroDetailFrame;
 import com.jswitch.vistasbd.Agotamiento;
 import java.awt.event.ActionEvent;
-import java.util.Calendar;
 import java.util.Date;
 import org.hibernate.Hibernate;
 import org.hibernate.Transaction;
@@ -47,6 +45,7 @@ public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFram
         this.detalleSin = ((DiagnosticoSiniestro) beanVO).getDetalleSiniestro();
         this.frame = frame;
         ((DiagnosticoSiniestroDetailFrame) vista).setDetalleSiniestro(detalleSin);
+        checkStatus();
     }
 
     public DiagnosticoSiniestroDetailFrameController(GridControl migrid, boolean b, DetalleSiniestro detalleSin, DefaultDetailFrame frame, Diagnostico diagnostico) {
@@ -83,9 +82,9 @@ public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFram
                     + agotamiento.agotamiento.getMontoPendiente()));
             vista.getMainPanel().pull("totalDisponible");
         }
-  this.frame = frame;
+        this.frame = frame;
         ((DiagnosticoSiniestroDetailFrame) vista).setDetalleSiniestro(detalleSin);
-      
+        checkStatus();
     }
 
     @Override
@@ -148,7 +147,7 @@ public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFram
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
         DiagnosticoSiniestro ds = (DiagnosticoSiniestro) newPersistentObject;
         ds.setDetalleSiniestro(detalleSin);
-        detalleSin.getDiagnosticoSiniestros().add(ds);
+       // detalleSin.getDiagnosticoSiniestros().add(ds);
         Response res = super.insertRecord(ds);
         if (res instanceof VOResponse) {
             ((DiagnosticoSiniestroDetailFrame) vista).getjButton1().setEnabled(true);
@@ -274,5 +273,19 @@ public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFram
         }
 
         return a;
+    }
+
+    private void checkStatus() {
+        DetalleSiniestro ds = detalleSin;
+        if (ds.getEtapaSiniestro().getIdPropio().compareTo("ORD_PAG") == 0
+                || ds.getEtapaSiniestro().getEstatusSiniestro().getNombre().
+                compareTo("PENDIENTE") != 0) {
+            ((DiagnosticoSiniestroDetailFrame) vista).hideAll();
+        }
+
+        if (ds.getEtapaSiniestro().getIdPropio().compareTo("LIQ") == 0
+                && !General.usuario.getSuperusuario()) {
+            ((DiagnosticoSiniestroDetailFrame) vista).hideAll();
+        }
     }
 }

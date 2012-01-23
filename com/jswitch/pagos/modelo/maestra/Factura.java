@@ -96,6 +96,12 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private Double sustraendo;
     /**
+     * base para el ISLR
+     */
+    @Column
+    @BusinessKey
+    private Double baseIslr;
+    /**
      * porcentaje de retencion Islr
      */
     @Column
@@ -134,6 +140,12 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private Double porcentajeIva;
     /**
+     * total de base para el IVA
+     */
+    @Column
+    @BusinessKey
+    private Double baseIva;
+    /**
      * total IVA
      */
     @Column
@@ -164,14 +176,7 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private Double montoDescuentoDesducible;
     /**
-     * base imponible
-     */
-    @Column
-    @BusinessKey
-    private Double montoSujetoRetencion;
-    /**
      * total de gastos clinicos
-     * //TODO VER Q HAGO CON ESTO
      * esto es a lo que se le retenie impuesto
      */
     @Column
@@ -179,7 +184,6 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     private Double gastosClinicos;
     /**
      * Total por honorarios medicos
-     * //TODO VER Q HAGO CON ESTO
      */
     @Column
     @BusinessKey
@@ -190,6 +194,12 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     @Column
     @BusinessKey
     private Double montoNoAmparado;
+    /**
+     * monto que la empresa apara registrados en la factura
+     */
+    @Column
+    @BusinessKey
+    private Double montoAmparado;
     /**
      * total facturado
      */
@@ -240,14 +250,16 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     private AuditoriaBasica auditoria;
 
     public Factura() {
+        baseIslr = 0d;
+        baseIva = 0d;
         montoDescuentoDesducible = 0d;
         montoDescuentoProntoPago = 0d;
         montoIva = 0d;
         montoNoAmparado = 0d;
         montoRetencionIva = 0d;
         montoRetencionIsrl = 0d;
-        montoSujetoRetencion = 0d;
         montoTM = 0d;
+        montoAmparado = 0d;
         totalACancelar = 0d;
         totalFacturado = 0d;
         totalLiquidado = 0d;
@@ -268,6 +280,22 @@ public class Factura extends BeanVO implements Serializable, Auditable {
      */
     public AuditoriaBasica getAuditoria() {
         return auditoria;
+    }
+
+    /**
+     * base para el ISLR
+     * @return the baseIslr
+     */
+    public Double getBaseIslr() {
+        return baseIslr;
+    }
+
+    /**
+     * total de base para el IVA
+     * @return the baseIva
+     */
+    public Double getBaseIva() {
+        return baseIva;
     }
 
     /**
@@ -312,7 +340,6 @@ public class Factura extends BeanVO implements Serializable, Auditable {
 
     /**
      * total de gastos clinicos
-     * //TODO VER Q HAGO CON ESTO
      * esto es a lo que se le retenie impuesto
      * @return the gastosClinicos
      */
@@ -322,7 +349,6 @@ public class Factura extends BeanVO implements Serializable, Auditable {
 
     /**
      * Total por honorarios medicos
-     * //TODO VER Q HAGO CON ESTO
      * @return the honorariosMedicos
      */
     public Double getHonorariosMedicos() {
@@ -335,6 +361,14 @@ public class Factura extends BeanVO implements Serializable, Auditable {
      */
     public Long getId() {
         return id;
+    }
+
+    /**
+     * monto que la empresa apara registrados en la factura
+     * @return the montoAmparado
+     */
+    public Double getMontoAmparado() {
+        return montoAmparado;
     }
 
     /**
@@ -370,27 +404,19 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     * cuanto sera retenido por iva
-     * @return the montoRetencionIva
-     */
-    public Double getMontoRetencionIva() {
-        return montoRetencionIva;
-    }
-
-    /**
-     *
-     * @return the montoReteniconIsrl
+     * monto de retencion ISLR
+     * @return the montoRetencionIsrl
      */
     public Double getMontoRetencionIsrl() {
         return montoRetencionIsrl;
     }
 
     /**
-     * base imponible
-     * @return the montoSujetoRetencion
+     * cuanto sera retenido por iva
+     * @return the montoRetencionIva
      */
-    public Double getMontoSujetoRetencion() {
-        return montoSujetoRetencion;
+    public Double getMontoRetencionIva() {
+        return montoRetencionIva;
     }
 
     /**
@@ -435,6 +461,14 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     }
 
     /**
+     * porcentaje de retencion Islr
+     * @return the porcentajeRetencionIsrl
+     */
+    public Double getPorcentajeRetencionIsrl() {
+        return porcentajeRetencionIsrl;
+    }
+
+    /**
      * porcentaje de iva que sera retenido
      * @return the porcentajeRetencionIva
      */
@@ -443,15 +477,8 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     *
-     * @return the porcentajeReteniconIsrl
-     */
-    public Double getPorcentajeRetencionIsrl() {
-        return porcentajeRetencionIsrl;
-    }
-
-    /**
      * TM Timbre Municipal
+     * //TODO tabla de configuracion dependiendo de cuantas ut pasa y q tasa aplica
      * @return the porcentajeTM
      */
     public Double getPorcentajeTM() {
@@ -525,6 +552,22 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     }
 
     /**
+     * base para el ISLR
+     * @param baseIslr the baseIslr to set
+     */
+    public void setBaseIslr(Double baseIslr) {
+        this.baseIslr = baseIslr;
+    }
+
+    /**
+     * total de base para el IVA
+     * @param baseIva the baseIva to set
+     */
+    public void setBaseIva(Double baseIva) {
+        this.baseIva = baseIva;
+    }
+
+    /**
      * Coleccion de desglose de pagos por cobertura espesifica
      * @param desgloseCobertura the desgloseCobertura to set
      */
@@ -566,7 +609,6 @@ public class Factura extends BeanVO implements Serializable, Auditable {
 
     /**
      * total de gastos clinicos
-     * //TODO VER Q HAGO CON ESTO
      * esto es a lo que se le retenie impuesto
      * @param gastosClinicos the gastosClinicos to set
      */
@@ -588,6 +630,14 @@ public class Factura extends BeanVO implements Serializable, Auditable {
      */
     public void setId(Long id) {
         this.id = id;
+    }
+
+    /**
+     * monto que la empresa apara registrados en la factura
+     * @param montoAmparado the montoAmparado to set
+     */
+    public void setMontoAmparado(Double montoAmparado) {
+        this.montoAmparado = montoAmparado;
     }
 
     /**
@@ -623,27 +673,19 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     }
 
     /**
+     * monto de retencion ISLR
+     * @param montoRetencionIsrl the montoRetencionIsrl to set
+     */
+    public void setMontoRetencionIsrl(Double montoRetencionIsrl) {
+        this.montoRetencionIsrl = montoRetencionIsrl;
+    }
+
+    /**
      * cuanto sera retenido por iva
      * @param montoRetencionIva the montoRetencionIva to set
      */
     public void setMontoRetencionIva(Double montoRetencionIva) {
         this.montoRetencionIva = montoRetencionIva;
-    }
-
-    /**
-     *
-     * @param montoReteniconIsrl the montoReteniconIsrl to set
-     */
-    public void setMontoRetencionIsrl(Double montoReteniconIsrl) {
-        this.montoRetencionIsrl = montoReteniconIsrl;
-    }
-
-    /**
-     * base imponible
-     * @param montoSujetoRetencion the montoSujetoRetencion to set
-     */
-    public void setMontoSujetoRetencion(Double montoSujetoRetencion) {
-        this.montoSujetoRetencion = montoSujetoRetencion;
     }
 
     /**
@@ -688,19 +730,19 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     }
 
     /**
+     * porcentaje de retencion Islr
+     * @param porcentajeRetencionIsrl the porcentajeRetencionIsrl to set
+     */
+    public void setPorcentajeRetencionIsrl(Double porcentajeRetencionIsrl) {
+        this.porcentajeRetencionIsrl = porcentajeRetencionIsrl;
+    }
+
+    /**
      * porcentaje de iva que sera retenido
      * @param porcentajeRetencionIva the porcentajeRetencionIva to set
      */
     public void setPorcentajeRetencionIva(Double porcentajeRetencionIva) {
         this.porcentajeRetencionIva = porcentajeRetencionIva;
-    }
-
-    /**
-     *
-     * @param porcentajeReteniconIsrl the porcentajeReteniconIsrl to set
-     */
-    public void setPorcentajeRetencionIsrl(Double porcentajeReteniconIsrl) {
-        this.porcentajeRetencionIsrl = porcentajeReteniconIsrl;
     }
 
     /**

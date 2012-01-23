@@ -1,6 +1,6 @@
 package com.jswitch.pagos.controlador;
 
-import com.jswitch.base.controlador.logger.LoggerUtil;
+import com.jswitch.base.controlador.General;
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
@@ -27,7 +27,7 @@ import org.openswing.swing.util.client.ClientSettings;
 import org.openswing.swing.util.client.ClientUtils;
 
 /**
- *
+ * Clase controlodora de la vista de faturas
  * @author Adrian
  */
 public class FacturaDetailFrameController extends DefaultDetailFrameController {
@@ -39,7 +39,7 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
         super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
         this.detalleSiniestro = detalleSiniestro;
         ((FacturaDetailFrame) vista).createDiagnostocoCodLookup(this.detalleSiniestro);
-
+        checkStatus();
     }
 
     public FacturaDetailFrameController(String detailFramePath,
@@ -49,6 +49,7 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
         this.detalleSiniestro = beanVO;
         ((FacturaDetailFrame) vista).createDiagnostocoCodLookup(detalleSiniestro);
         this.reload = reload;
+        checkStatus();
     }
 
     public DetalleSiniestro getDetalleSiniestro() {
@@ -166,22 +167,24 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
         Double islr = factura.getPorcentajeRetencionIsrl();
         Double montoNoAmparado = 0d;
         Double montoAmparado = 0d;
-        Double montoIva = 0d;
-        Double montoIslr = 0d;
+        Double baseIva = 0d;
+        Double baseIslr = 0d;
         Double gastosClinicos = 0d;
         Double honorariosMedicos = 0d;
+        Double iva = factura.getPorcentajeIva();
 
         for (DesgloseCobertura dc : factura.getDesgloseCobertura()) {
             if (dc.getAuditoria().getActivo()) {
                 Cobertura c = dc.getCobertura();
                 if (c.getBaseImponible()) {
-                    double iva = !c.getIva() ? 0
-                            : (factura.getPorcentajeIva());
-                    double isl = !c.getIslr() ? 0 : islr;
                     montoNoAmparado += dc.getMontoNoAmparado();
                     montoAmparado += dc.getMontoAmparado();
-                    montoIva += dc.getMontoAmparado() * iva;
-                    montoIslr += dc.getMontoAmparado() * isl;
+                    if (c.getIva()) {
+                        baseIva += dc.getMontoAmparado();
+                    }
+                    if (c.getIslr()) {
+                        baseIslr += dc.getMontoAmparado();
+                    }
                     if (c.getGastosClinicos()) {
                         gastosClinicos += dc.getMontoAmparado();
                     }
@@ -193,19 +196,26 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
         }
 
         factura.setMontoNoAmparado(montoNoAmparado);
-        factura.setMontoSujetoRetencion(montoIslr);
-        factura.setMontoIva(montoIva);
+        factura.setMontoAmparado(montoAmparado);
+
+        factura.setBaseIva(baseIva);
+        factura.setMontoIva(baseIva * iva);
+        factura.setMontoRetencionIva(
+                factura.getMontoIva() * factura.getPorcentajeRetencionIva());
+
+        factura.setBaseIslr(baseIslr);
+        factura.setMontoRetencionIsrl(baseIslr * islr);
+        factura.setPorcentajeRetencionIsrl(islr);
+
         factura.setGastosClinicos(gastosClinicos);
         factura.setHonorariosMedicos(honorariosMedicos);
 
-        factura.setMontoRetencionIva(
-                factura.getMontoIva() * factura.getPorcentajeRetencionIva());
-        factura.setMontoRetencionIsrl(montoIslr);
-
         factura.setTotalRetenido(
                 factura.getMontoRetencionIva() + factura.getMontoRetencionIsrl());
+
         factura.setTotalLiquidado(
-                montoIva + montoIslr + montoAmparado);
+                (baseIva * iva) + (baseIslr * islr) + montoAmparado);
+
         factura.setTotalACancelar(
                 factura.getTotalLiquidado() - factura.getTotalRetenido());
 
@@ -235,5 +245,18 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
 
     public DefaultDetailFrame getVista() {
         return vista;
+    }
+
+    private void checkStatus() {
+        DetalleSiniestro ds = detalleSiniestro;
+        if (ds.getEtapaSiniestro().getIdPropio().compareTo("ORD_PAG") == 0
+                || ds.getEtapaSiniestro().getEstatusSiniestro().getNombre().
+                compareTo("PENDIENTE") != 0) {
+            ((FacturaDetailFrame) vista).hideAll();
+        }
+        if (ds.getEtapaSiniestro().getIdPropio().compareTo("LIQ") == 0
+                && !General.usuario.getSuperusuario()) {
+            ((FacturaDetailFrame) vista).hideAll();
+        }
     }
 }

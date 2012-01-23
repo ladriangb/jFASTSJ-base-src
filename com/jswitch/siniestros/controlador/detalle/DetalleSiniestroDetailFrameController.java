@@ -131,9 +131,9 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
     @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
         String className = newPersistentObject.getClass().getName();
-        className = className.substring(1+className.lastIndexOf("."));
+        className = className.substring(1 + className.lastIndexOf("."));
         ((DetalleSiniestro) newPersistentObject).setTipoDetalle(className);
-        
+
         Session s = null;
         try {
             vista.saveGridsData();
@@ -207,11 +207,33 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
             if (d.getEtapaSiniestro().getId().compareTo(
                     es.getId()) == 0) {
                 Double l = 0d, f = 0d, c = 0d;
+                Double iva = 0d, islr = 0d, rIva = 0d, rIslr = 0d;
+                Double gC = 0d, hM = 0d, nA = 0d;
                 for (Factura factura : d.getPagos()) {
+                    iva += factura.getMontoIva();
+                    islr += factura.getMontoRetencionIsrl();
+
+                    rIva += factura.getMontoRetencionIva();
+                    rIslr += factura.getMontoRetencionIsrl();
+
+                    gC += factura.getGastosClinicos();
+                    hM += factura.getHonorariosMedicos();
+                    nA += factura.getMontoNoAmparado();
                     l += factura.getTotalLiquidado();
                     f += factura.getTotalFacturado();
                     c += factura.getTotalACancelar();
                 }
+
+                d.setMontoIva(iva);
+                d.setMontoIslr(islr);
+                
+                d.setMontoRetenidoIslr(rIslr);
+                d.setMontoRetenidoIva(rIva);
+                
+                d.setMontoGastosClinicos(gC);
+                d.setMontoHonorariosMedicos(hM);
+                
+                d.setMontoNoAmparado(nA);
                 d.setMontoACancelar(c);
                 d.setMontoFacturado(f);
                 d.setMontoLiquidado(l);
@@ -229,16 +251,13 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
     private void checkStatus() {
         DetalleSiniestro ds = ((DetalleSiniestro) beanVO);
         if (ds.getEtapaSiniestro().getIdPropio().compareTo("ORD_PAG") == 0
-                || ds.getEtapaSiniestro().getIdPropio().compareTo("LIQ") == 0
                 || ds.getEtapaSiniestro().getEstatusSiniestro().getNombre().
                 compareTo("PENDIENTE") != 0) {
-            ((DetalleSiniestroDetailFrame) vista).getEditButton1().setVisible(false);
-            ((DetalleSiniestroDetailFrame) vista).getSaveButton1().setVisible(false);
-            ((DetalleSiniestroDetailFrame) vista).getjPanel11().setVisible(false);
-            ((DetalleSiniestroDetailFrame) vista).getjPanel13().setVisible(false);
-            ((DetalleSiniestroDetailFrame) vista).getjPanel15().setVisible(false);
-            ((DetalleSiniestroDetailFrame) vista).getjPanel16().setVisible(false);
-            ((DetalleSiniestroDetailFrame) vista).getjPanel23().setVisible(false);
+            ((DetalleSiniestroDetailFrame) vista).hideAll();
+        }
+        if (ds.getEtapaSiniestro().getIdPropio().compareTo("LIQ") == 0
+                && !General.usuario.getSuperusuario()) {
+            ((DetalleSiniestroDetailFrame) vista).hideAll();
         }
     }
 }
