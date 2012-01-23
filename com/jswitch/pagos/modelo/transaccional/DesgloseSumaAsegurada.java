@@ -8,6 +8,7 @@ import com.jswitch.base.modelo.util.ehts.Method;
 import com.jswitch.pagos.modelo.maestra.Factura;
 import com.jswitch.siniestros.modelo.maestra.DiagnosticoSiniestro;
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;

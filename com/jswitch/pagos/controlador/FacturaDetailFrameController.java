@@ -1,6 +1,6 @@
 package com.jswitch.pagos.controlador;
 
-import com.jswitch.base.controlador.logger.LoggerUtil;
+import com.jswitch.base.controlador.General;
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
@@ -27,7 +27,7 @@ import org.openswing.swing.util.client.ClientSettings;
 import org.openswing.swing.util.client.ClientUtils;
 
 /**
- *
+ * Clase controlodora de la vista de faturas
  * @author Adrian
  */
 public class FacturaDetailFrameController extends DefaultDetailFrameController {
@@ -39,7 +39,7 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
         super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
         this.detalleSiniestro = detalleSiniestro;
         ((FacturaDetailFrame) vista).createDiagnostocoCodLookup(this.detalleSiniestro);
-
+checkStatus();
     }
 
     public FacturaDetailFrameController(String detailFramePath,
@@ -49,6 +49,7 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
         this.detalleSiniestro = beanVO;
         ((FacturaDetailFrame) vista).createDiagnostocoCodLookup(detalleSiniestro);
         this.reload = reload;
+        checkStatus();
     }
 
     public DetalleSiniestro getDetalleSiniestro() {
@@ -235,5 +236,18 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
 
     public DefaultDetailFrame getVista() {
         return vista;
+    }
+
+    private void checkStatus() {
+        DetalleSiniestro ds = detalleSiniestro;
+        if (ds.getEtapaSiniestro().getIdPropio().compareTo("ORD_PAG") == 0
+                || ds.getEtapaSiniestro().getEstatusSiniestro().getNombre().
+                compareTo("PENDIENTE") != 0) {
+            ((FacturaDetailFrame) vista).hideAll();
+        }
+         if (ds.getEtapaSiniestro().getIdPropio().compareTo("LIQ") == 0
+                && !General.usuario.getSuperusuario()) {
+            ((FacturaDetailFrame) vista).hideAll();
+        }
     }
 }
