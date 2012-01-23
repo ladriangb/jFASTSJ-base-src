@@ -74,6 +74,8 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
         labelControl14 = new org.openswing.swing.client.LabelControl();
         comboBoxControl4 = new org.openswing.swing.client.ComboBoxControl();
         checkBoxControl1 = new org.openswing.swing.client.CheckBoxControl();
+        textControl2 = new org.openswing.swing.client.TextControl();
+        labelControl15 = new org.openswing.swing.client.LabelControl();
         jPanel14 = new javax.swing.JPanel();
         gridControl5 = new org.openswing.swing.client.GridControl();
         decimalColumn5 = new org.openswing.swing.table.columns.client.DecimalColumn();
@@ -257,6 +259,12 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
         checkBoxControl1.setAttributeName("autoSearch");
         checkBoxControl1.setEnabledOnEdit(false);
 
+        textControl2.setAttributeName("detalle");
+        textControl2.setMaxCharacters(20);
+        textControl2.setRequired(true);
+
+        labelControl15.setLabel("detalle");
+
         javax.swing.GroupLayout form1Layout = new javax.swing.GroupLayout(form1);
         form1.setLayout(form1Layout);
         form1Layout.setHorizontalGroup(
@@ -265,9 +273,13 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
                 .addContainerGap()
                 .addGroup(form1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(form1Layout.createSequentialGroup()
-                        .addComponent(labelControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(form1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelControl15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(numericControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE))
+                        .addGroup(form1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(textControl2, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(numericControl1, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, form1Layout.createSequentialGroup()
                         .addComponent(labelControl6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -320,7 +332,9 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
                 .addContainerGap())
         );
 
-        form1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {labelControl1, labelControl10, labelControl11, labelControl12, labelControl13, labelControl14, labelControl2, labelControl3, labelControl4, labelControl6, labelControl7, labelControl8, labelControl9});
+        form1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {labelControl1, labelControl10, labelControl11, labelControl12, labelControl13, labelControl14, labelControl15, labelControl2, labelControl3, labelControl4, labelControl6, labelControl7, labelControl8, labelControl9});
+
+        form1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {numericControl1, textControl2});
 
         form1Layout.setVerticalGroup(
             form1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -329,6 +343,10 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
                 .addGroup(form1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(numericControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(form1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labelControl15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textControl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(form1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelControl6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -379,10 +397,10 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
                     .addComponent(labelControl14, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(checkBoxControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(161, 161, 161))
+                .addGap(151, 151, 151))
         );
 
-        form1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {codLookupControl1, comboBoxControl1, comboBoxControl2, comboBoxControl3, comboBoxControl4, dateControl1, dateControl3, dateControl4, labelControl1, labelControl10, labelControl11, labelControl12, labelControl13, labelControl2, labelControl3, labelControl4, labelControl6, labelControl7, labelControl8, labelControl9, numericControl1, numericControl2, numericControl3, numericControl4, textControl1});
+        form1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {codLookupControl1, comboBoxControl1, comboBoxControl2, comboBoxControl3, comboBoxControl4, dateControl1, dateControl3, dateControl4, labelControl1, labelControl10, labelControl11, labelControl12, labelControl13, labelControl15, labelControl2, labelControl3, labelControl4, labelControl6, labelControl7, labelControl8, labelControl9, numericControl1, numericControl2, numericControl3, numericControl4, textControl1, textControl2});
 
         jTabbedPane1.addTab("Detalle", form1);
 
@@ -440,14 +458,14 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
-                .addComponent(gridControl5, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE))
+                .addComponent(gridControl5, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(gridControl5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE))
+                    .addComponent(gridControl5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -523,7 +541,7 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
                     .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelObsLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(gridControlObs, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)))
+                        .addComponent(gridControlObs, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -540,7 +558,7 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
         );
         observacionesLayout.setVerticalGroup(
             observacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 395, Short.MAX_VALUE)
+            .addGap(0, 410, Short.MAX_VALUE)
             .addGroup(observacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, observacionesLayout.createSequentialGroup()
                     .addContainerGap()
@@ -612,8 +630,8 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
             jPanelNotLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelNotLayout.createSequentialGroup()
                 .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(271, Short.MAX_VALUE))
-            .addComponent(gridControlNot, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
+                .addContainerGap(286, Short.MAX_VALUE))
+            .addComponent(gridControlNot, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout notasTecnicasLayout = new javax.swing.GroupLayout(notasTecnicas);
@@ -629,7 +647,7 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
         );
         notasTecnicasLayout.setVerticalGroup(
             notasTecnicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 395, Short.MAX_VALUE)
+            .addGap(0, 410, Short.MAX_VALUE)
             .addGroup(notasTecnicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(notasTecnicasLayout.createSequentialGroup()
                     .addContainerGap()
@@ -706,7 +724,7 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
             .addGroup(jPanelDocLayout.createSequentialGroup()
                 .addGroup(jPanelDocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(gridControlDoc, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE))
+                    .addComponent(gridControlDoc, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -723,7 +741,7 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
         );
         DocAnexosLayout.setVerticalGroup(
             DocAnexosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 395, Short.MAX_VALUE)
+            .addGap(0, 410, Short.MAX_VALUE)
             .addGroup(DocAnexosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(DocAnexosLayout.createSequentialGroup()
                     .addContainerGap()
@@ -749,8 +767,8 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -934,6 +952,7 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
     private org.openswing.swing.client.LabelControl labelControl12;
     private org.openswing.swing.client.LabelControl labelControl13;
     private org.openswing.swing.client.LabelControl labelControl14;
+    private org.openswing.swing.client.LabelControl labelControl15;
     private org.openswing.swing.client.LabelControl labelControl2;
     private org.openswing.swing.client.LabelControl labelControl3;
     private org.openswing.swing.client.LabelControl labelControl4;
@@ -967,5 +986,6 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
     private org.openswing.swing.table.columns.client.TextColumn textColumnObs2;
     private org.openswing.swing.table.columns.client.TextColumn textColumnObs3;
     private org.openswing.swing.client.TextControl textControl1;
+    private org.openswing.swing.client.TextControl textControl2;
     // End of variables declaration//GEN-END:variables
 }
