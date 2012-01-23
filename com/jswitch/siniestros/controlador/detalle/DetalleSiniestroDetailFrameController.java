@@ -4,7 +4,6 @@ import com.jswitch.base.controlador.General;
 import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
-import com.jswitch.base.modelo.entidades.Usuario;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.configuracion.modelo.dominio.Ramo;
 import com.jswitch.configuracion.modelo.maestra.Plan;
@@ -208,11 +207,33 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
             if (d.getEtapaSiniestro().getId().compareTo(
                     es.getId()) == 0) {
                 Double l = 0d, f = 0d, c = 0d;
+                Double iva = 0d, islr = 0d, rIva = 0d, rIslr = 0d;
+                Double gC = 0d, hM = 0d, nA = 0d;
                 for (Factura factura : d.getPagos()) {
+                    iva += factura.getMontoIva();
+                    islr += factura.getMontoRetencionIsrl();
+
+                    rIva += factura.getMontoRetencionIva();
+                    rIslr += factura.getMontoRetencionIsrl();
+
+                    gC += factura.getGastosClinicos();
+                    hM += factura.getHonorariosMedicos();
+                    nA += factura.getMontoNoAmparado();
                     l += factura.getTotalLiquidado();
                     f += factura.getTotalFacturado();
                     c += factura.getTotalACancelar();
                 }
+
+                d.setMontoIva(iva);
+                d.setMontoIslr(islr);
+                
+                d.setMontoRetenidoIslr(rIslr);
+                d.setMontoRetenidoIva(rIva);
+                
+                d.setMontoGastosClinicos(gC);
+                d.setMontoHonorariosMedicos(hM);
+                
+                d.setMontoNoAmparado(nA);
                 d.setMontoACancelar(c);
                 d.setMontoFacturado(f);
                 d.setMontoLiquidado(l);
