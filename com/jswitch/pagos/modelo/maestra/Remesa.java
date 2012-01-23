@@ -792,6 +792,14 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     public void setNumeroSiniestrosFamiliar(Integer numeroSiniestrosFamiliar) {
         this.numeroSiniestrosFamiliar = numeroSiniestrosFamiliar;
     }
-        
-    
+
+    /**
+     * Fecha en que se Pago la Remesa
+     * Formato: dd/mm/aaaa
+     * @param fechaPago the fechaPago to set
+     */
+    public void setFechaPago(Date fechaPago) {
+        this.fechaPago = fechaPago;
+    }
+            
 }
