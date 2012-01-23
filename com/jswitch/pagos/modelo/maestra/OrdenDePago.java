@@ -73,6 +73,11 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     message = "Codigo SIGECOF Invalido")
     private String codigoSIGECOF;
     /**
+     * Remesa a la cual esta vinculado el pago
+     */
+    @ManyToOne()
+    private Remesa remesa;
+    /**
      * persona ala cual se le realizara el pago
      */
     @ManyToOne()
@@ -481,5 +486,20 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     public void setMontoTitulares(Double montoTitulares) {
         this.montoTitulares = montoTitulares;
     }
-        
+
+    /**
+     * Remesa a la cual esta vinculado el pago
+     * @return the remesa
+     */
+    public Remesa getRemesa() {
+        return remesa;
+    }
+
+    /**
+     * Remesa a la cual esta vinculado el pago
+     * @param remesa the remesa to set
+     */
+    public void setRemesa(Remesa remesa) {
+        this.remesa = remesa;
+    }    
 }
