@@ -11,6 +11,7 @@ import com.jswitch.pagos.modelo.transaccional.lote.Transaccion;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.filechooser.FileFilter;
 import java.io.FileOutputStream;
@@ -231,4 +232,6 @@ public class RemesaDetailFrameController
 //        OrdenDePago op = (OrdenDePago) beanVO;
 //        new BuscarDetallesGridFrameController(op.getPersonaPago(), op);
     }
+
+    
 }
