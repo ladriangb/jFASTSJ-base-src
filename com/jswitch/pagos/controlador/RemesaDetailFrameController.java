@@ -11,11 +11,11 @@ import com.jswitch.pagos.modelo.transaccional.lote.Transaccion;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.filechooser.FileFilter;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,7 +40,8 @@ import org.openswing.swing.util.client.ClientSettings;
  */
 public class RemesaDetailFrameController
         extends DefaultDetailFrameController {
-
+    private List<Remesa> list=new ArrayList<Remesa>(0);
+    
     /**
      * crea la instancia del objeto de 
      * <code>OrdenDePagoDetailFrameController</code>
@@ -58,7 +59,7 @@ public class RemesaDetailFrameController
      */
     public RemesaDetailFrameController(String detailFramePath,
             GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio) {
-        super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
+        super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);        
     }
 
     @Override

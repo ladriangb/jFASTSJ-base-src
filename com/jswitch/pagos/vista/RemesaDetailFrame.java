@@ -17,9 +17,12 @@ import com.jswitch.pagos.modelo.maestra.OrdenDePago;
 import com.jswitch.pagos.modelo.maestra.Remesa;
 import com.jswitch.persona.modelo.dominio.TipoCuentaBancaria;
 import com.jswitch.reporte.controlador.ReporteController;
+import com.jswitch.reporte.modelo.ParametroReporte;
 import com.jswitch.reporte.modelo.Reporte;
 import com.jswitch.reporte.vista.EsperaDialog;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import org.openswing.swing.client.GridControl;
@@ -40,7 +43,7 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
     protected DefaultGridInternalController controllerObservaciones;
     protected DefaultGridInternalController controllerNotasTecnicas;
     final JDialog d = new EsperaDialog(null, false);
-    final Reporte reporteDetail=null;
+    private Reporte reporteDetail=new Reporte(CategoriaReporte.REMESA, 0, "REM-D001", "FONDO AUTOADMINISTRADO DE SALUD", "", "FROM "+Remesa.class.getName(), "Carta", false, false, true, false);
     
     public RemesaDetailFrame() {
     }
@@ -839,8 +842,16 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
                 @Override
                 public void run() {
-                    new ReporteController().showReport(reporteDetail, false, "Estilo1.jrtx", General.empresa.getEncabezado());
+                    List<Remesa> list= new ArrayList<Remesa>(0);
+                    Remesa rem= (Remesa)form1.getVOModel().getValueObject();
+                    list.add(rem);
+                    if(rem.getId()!=null)
+                    {
+                    ArrayList<ParametroReporte> param= new ArrayList<ParametroReporte>(0);
+                    param.add(new ParametroReporte("id", "=", ""+rem.getNumRefLot()));
+                    new ReporteController().mostrarReporte(list, param , reporteDetail, "Estilo1.jrtx");
                     d.setVisible(false);
+                    }
                 }
             }.start();          
 }//GEN-LAST:event_jButton1ActionPerformed
@@ -849,6 +860,10 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
         return gridControl5;
     }
+
+    public void setReporteDetail(Reporte reporteDetail) {
+        this.reporteDetail = reporteDetail;
+    }        
     
     public JButton getPrintButoon(){
         return jButton1;
