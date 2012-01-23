@@ -44,6 +44,7 @@ import javax.persistence.Transient;
 import javax.persistence.Version;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Past;
+import org.hibernate.annotations.Cascade;
 
 /**
  *
@@ -252,7 +253,7 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     /**
      * lista de facturas de pagos
      */
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "detalleSiniestro")
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "detalleSiniestro")
     @BusinessKey(exclude = Method.ALL)
     private Set<Factura> pagos = new HashSet<Factura>();
     /**
@@ -276,7 +277,7 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     /**
      * Coleccion de diagnosticos asosiados
      */
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "detalleSiniestro")
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "detalleSiniestro")
     @BusinessKey(exclude = Method.ALL)
     private Set<DiagnosticoSiniestro> diagnosticoSiniestros = new HashSet<DiagnosticoSiniestro>(0);
     /**

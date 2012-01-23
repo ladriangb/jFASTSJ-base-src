@@ -1,13 +1,11 @@
 package com.jswitch.siniestros.vista.detalle;
 
-import com.jswitch.base.controlador.General;
 import com.jswitch.base.controlador.documentosAnexos.TipoDocumentoLookupController;
 import com.jswitch.base.controlador.util.DefaultDocumentosAnexosGridController;
 import com.jswitch.base.controlador.util.DefaultGridInternalController;
 import com.jswitch.base.modelo.entidades.Documento;
 import com.jswitch.base.modelo.entidades.NotaTecnica;
 import com.jswitch.base.modelo.entidades.Observacion;
-import com.jswitch.base.modelo.entidades.defaultData.ConfiguracionesGenerales;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.vista.util.DefaultDetailFrame;
 import com.jswitch.fas.modelo.Dominios;
@@ -33,7 +31,6 @@ import com.jswitch.siniestros.modelo.maestra.detalle.Funerario;
 import com.jswitch.siniestros.modelo.maestra.detalle.Reembolso;
 import com.jswitch.siniestros.modelo.maestra.detalle.Vida;
 import java.awt.event.ActionListener;
-import java.util.Calendar;
 import javax.swing.JPanel;
 import org.openswing.swing.client.CodLookupControl;
 import org.openswing.swing.client.EditButton;
@@ -2320,34 +2317,6 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         return insertButtonPagos;
     }
 
-    public EditButton getEditButton1() {
-        return editButton1;
-    }
-
-    public SaveButton getSaveButton1() {
-        return saveButton1;
-    }
-
-    public JPanel getjPanel11() {
-        return jPanel11;
-    }
-
-    public JPanel getjPanel13() {
-        return jPanel13;
-    }
-
-    public JPanel getjPanel15() {
-        return jPanel15;
-    }
-
-    public JPanel getjPanel16() {
-        return jPanel16;
-    }
-
-    public JPanel getjPanel23() {
-        return jPanel23;
-    }
-
     public void setTipo(Class tipoDetalle, BeanVO beanVO) {
         this.tipoDetalle = tipoDetalle;
         this.beanVO = beanVO;
@@ -2416,6 +2385,39 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         form.setSaveButton(saveButton1);
         form.setReloadButton(reloadButton1);
         this.pack();
+    }
+
+    /**
+     * oculta los botones de edicion eliminacion y guardado 
+     */
+    public void hideAll() {
+        getMainPanel().setEditButton(null);
+        getMainPanel().setSaveButton(null);
+        editButton1.setVisible(false);
+        saveButton1.setVisible(false);
+
+        gridControl5.setDeleteButton(null);
+        gridControl5.setInsertButton(null);
+
+        gridControl6.setEditButton(null);
+        gridControl6.setDeleteButton(null);
+        gridControl6.setInsertButton(null);
+
+        gridControl4.setEditButton(null);
+        gridControl4.setDeleteButton(null);
+        gridControl4.setInsertButton(null);
+
+        gridDiagnosticos.setEditButton(null);
+        gridDiagnosticos.setDeleteButton(null);
+        gridDiagnosticos.setInsertButton(null);
+
+
+        jPanel11.setVisible(false);
+        jPanel13.setVisible(false);
+        jPanel15.setVisible(false);
+        jPanel16.setVisible(false);
+        jPanel23.setVisible(false);
+
     }
 
     public GridControl getGridDiagnosticos() {

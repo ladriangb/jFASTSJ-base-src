@@ -4,6 +4,7 @@ import com.jswitch.base.controlador.General;
 import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
+import com.jswitch.base.modelo.entidades.Usuario;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.configuracion.modelo.dominio.Ramo;
 import com.jswitch.configuracion.modelo.maestra.Plan;
@@ -131,9 +132,9 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
     @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
         String className = newPersistentObject.getClass().getName();
-        className = className.substring(1+className.lastIndexOf("."));
+        className = className.substring(1 + className.lastIndexOf("."));
         ((DetalleSiniestro) newPersistentObject).setTipoDetalle(className);
-        
+
         Session s = null;
         try {
             vista.saveGridsData();
@@ -229,16 +230,13 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
     private void checkStatus() {
         DetalleSiniestro ds = ((DetalleSiniestro) beanVO);
         if (ds.getEtapaSiniestro().getIdPropio().compareTo("ORD_PAG") == 0
-                || ds.getEtapaSiniestro().getIdPropio().compareTo("LIQ") == 0
                 || ds.getEtapaSiniestro().getEstatusSiniestro().getNombre().
                 compareTo("PENDIENTE") != 0) {
-            ((DetalleSiniestroDetailFrame) vista).getEditButton1().setVisible(false);
-            ((DetalleSiniestroDetailFrame) vista).getSaveButton1().setVisible(false);
-            ((DetalleSiniestroDetailFrame) vista).getjPanel11().setVisible(false);
-            ((DetalleSiniestroDetailFrame) vista).getjPanel13().setVisible(false);
-            ((DetalleSiniestroDetailFrame) vista).getjPanel15().setVisible(false);
-            ((DetalleSiniestroDetailFrame) vista).getjPanel16().setVisible(false);
-            ((DetalleSiniestroDetailFrame) vista).getjPanel23().setVisible(false);
+            ((DetalleSiniestroDetailFrame) vista).hideAll();
+        }
+        if (ds.getEtapaSiniestro().getIdPropio().compareTo("LIQ") == 0
+                && !General.usuario.getSuperusuario()) {
+            ((DetalleSiniestroDetailFrame) vista).hideAll();
         }
     }
 }

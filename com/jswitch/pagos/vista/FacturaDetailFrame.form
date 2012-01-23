@@ -41,7 +41,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="form1" min="-2" pref="178" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" pref="332" max="32767" attributes="0"/>
+              <Component id="jTabbedPane1" pref="336" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -703,9 +703,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel15" min="-2" max="-2" attributes="1"/>
-                      <EmptySpace pref="191" max="32767" attributes="0"/>
+                      <EmptySpace pref="195" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="gridControl5" alignment="0" pref="291" max="32767" attributes="2"/>
+                  <Component id="gridControl5" alignment="0" pref="295" max="32767" attributes="2"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -720,9 +720,6 @@
                   <ComponentRef name="editButton7"/>
                 </Property>
                 <Property name="editOnSingleRow" type="boolean" value="true"/>
-                <Property name="filterButton" type="org.openswing.swing.client.FilterButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="filterButton7"/>
-                </Property>
                 <Property name="insertButton" type="org.openswing.swing.client.InsertButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="insertButton7"/>
                 </Property>
@@ -865,8 +862,6 @@
                 </Component>
                 <Component class="org.openswing.swing.client.ReloadButton" name="reloadButton7">
                 </Component>
-                <Component class="org.openswing.swing.client.FilterButton" name="filterButton7">
-                </Component>
               </SubComponents>
             </Container>
           </SubComponents>
@@ -901,9 +896,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel17" min="-2" max="-2" attributes="1"/>
-                      <EmptySpace pref="191" max="32767" attributes="0"/>
+                      <EmptySpace pref="195" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="gridControl6" alignment="0" pref="291" max="32767" attributes="2"/>
+                  <Component id="gridControl6" alignment="0" pref="295" max="32767" attributes="2"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -918,9 +913,6 @@
                   <ComponentRef name="editButton8"/>
                 </Property>
                 <Property name="editOnSingleRow" type="boolean" value="true"/>
-                <Property name="filterButton" type="org.openswing.swing.client.FilterButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="filterButton8"/>
-                </Property>
                 <Property name="insertButton" type="org.openswing.swing.client.InsertButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="insertButton8"/>
                 </Property>
@@ -1039,8 +1031,6 @@
                 <Component class="org.openswing.swing.client.SaveButton" name="saveButton8">
                 </Component>
                 <Component class="org.openswing.swing.client.ReloadButton" name="reloadButton8">
-                </Component>
-                <Component class="org.openswing.swing.client.FilterButton" name="filterButton8">
                 </Component>
               </SubComponents>
             </Container>

@@ -10,7 +10,9 @@ import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.siniestros.modelo.maestra.DiagnosticoSiniestro;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import org.openswing.swing.client.EditButton;
 import org.openswing.swing.client.GridControl;
+import org.openswing.swing.client.SaveButton;
 import org.openswing.swing.form.client.Form;
 import org.openswing.swing.form.client.FormController;
 import org.openswing.swing.mdi.client.MDIFrame;
@@ -472,6 +474,22 @@ public class DiagnosticoSiniestroDetailFrame extends DefaultDetailFrame {
     private void setEnableGridInternalButtons(boolean enabled) {
         jPanel13.setVisible(enabled);
     }
+
+    /**
+     * oculta los botones de edicion eliminacion y guardado 
+     */
+    public void hideAll() {
+        form1.setEditButton(null);
+        form1.setSaveButton(null);
+        editButton1.setVisible(false);
+        saveButton1.setVisible(false);
+        gridControl4.setEditButton(null);
+        gridControl4.setDeleteButton(null);
+        gridControl4.setInsertButton(null);
+        jPanel13.setVisible(false);
+        jButton1.setVisible(false);
+    }
+    
 
     public JButton getjButton1() {
         return jButton1;
