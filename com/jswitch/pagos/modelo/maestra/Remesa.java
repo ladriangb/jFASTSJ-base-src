@@ -180,6 +180,11 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     @Column
     private Double montoTitulares;
     /**
+     * Suma de todos los timbres municipales
+     */
+    @Column
+    private Double montoTimbreMunicipal;    
+    /**
      * Suma de todos los montos a pagar a Familiares asegurados
      */
     @Column
@@ -194,6 +199,11 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
      */
     @Column
     private Double montoIVA;  
+    /**
+     * Cantidad de Ordenes de Pago asociadas a la remesa
+     */
+    @Column
+    private Integer numeroOrdenes;    
     /**
      * Cantidad de Siniestros de Titulares
      */
@@ -801,5 +811,37 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     public void setFechaPago(Date fechaPago) {
         this.fechaPago = fechaPago;
     }
-            
+
+    /**
+     * Suma de todos los timbres municipales
+     * @return the montoTimbreMunicipal
+     */
+    public Double getMontoTimbreMunicipal() {
+        return montoTimbreMunicipal;
+    }
+
+    /**
+     * Suma de todos los timbres municipales
+     * @param montoTimbreMunicipal the montoTimbreMunicipal to set
+     */
+    public void setMontoTimbreMunicipal(Double montoTimbreMunicipal) {
+        this.montoTimbreMunicipal = montoTimbreMunicipal;
+    }
+
+    /**
+     * Cantidad de Ordenes de Pago asociadas a la remesa
+     * @return the numeroOrdenes
+     */
+    public Integer getNumeroOrdenes() {
+        return numeroOrdenes;
+    }
+
+    /**
+     * Cantidad de Ordenes de Pago asociadas a la remesa
+     * @param numeroOrdenes the numeroOrdenes to set
+     */
+    public void setNumeroOrdenes(Integer numeroOrdenes) {
+        this.numeroOrdenes = numeroOrdenes;
+    }
+    
 }
