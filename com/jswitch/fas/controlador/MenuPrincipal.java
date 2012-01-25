@@ -58,7 +58,9 @@ import com.jswitch.auditoria.vista.LogGridFrame;
 import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.modelo.entidades.auditoria.AuditLogRecord;
 import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
+import com.jswitch.base.modelo.entidades.defaultData.ConfiguracionesGenerales;
 import com.jswitch.base.modelo.util.bean.BeanVO;
+import com.jswitch.base.vista.mant.ConfiguracionesGeneralesGridFrame;
 import com.jswitch.base.vista.sistema.CambiarPassDialog;
 import com.jswitch.certificados.controlador.CertificadoNuevoDetrailController;
 import com.jswitch.certificados.modelo.utilitario.CertificadoNuevo;
@@ -334,6 +336,12 @@ public class MenuPrincipal implements ClientFacade {
 
     public void getTipoDocAnex() {
         new DefaultAllGridFrameController(TipoDocumentoGridFrame.class.getName(), null, TipoDocumento.class.getName(), "Tipo Docuemtnos Anexos");
+    }
+
+    public void getConfigGen() {
+        new DefaultAllGridFrameController(
+                ConfiguracionesGeneralesGridFrame.class.getName(),
+                null, ConfiguracionesGenerales.class.getName(), "Configuraciones Generales");
     }
 
     public void getUsuarios(String name) {

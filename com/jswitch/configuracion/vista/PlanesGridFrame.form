@@ -38,7 +38,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" pref="356" max="32767" attributes="0"/>
+              <Component id="jTabbedPane1" pref="360" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -181,9 +181,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel8" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="228" max="32767" attributes="0"/>
+                      <EmptySpace pref="232" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="gridControl1" alignment="1" pref="328" max="32767" attributes="0"/>
+                  <Component id="gridControl1" alignment="1" pref="332" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -312,7 +312,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel9" min="-2" pref="49" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="gridControl2" pref="268" max="32767" attributes="0"/>
+                      <Component id="gridControl2" pref="272" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -499,9 +499,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel10" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="228" max="32767" attributes="0"/>
+                      <EmptySpace pref="232" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="gridControl3" alignment="1" pref="328" max="32767" attributes="0"/>
+                  <Component id="gridControl3" alignment="1" pref="332" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -551,6 +551,7 @@
                     <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="&quot;plan.nombre&quot;" type="code"/>
                     </Property>
+                    <Property name="columnRequired" type="boolean" value="false"/>
                     <Property name="columnSortable" type="boolean" value="true"/>
                   </Properties>
                 </Component>

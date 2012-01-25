@@ -45,6 +45,12 @@ public class TimbreMunicipal extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private String zipCode;
     /**
+     * codigo Postal
+     */
+    @Column
+    @BusinessKey
+    private String nombre;
+    /**
      * Rango de Valores minimo
      */
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "timbreMunicipal")
@@ -77,6 +83,14 @@ public class TimbreMunicipal extends BeanVO implements Serializable, Auditable {
      */
     public Long getId() {
         return id;
+    }
+
+    /**
+     * codigo Postal
+     * @return the nombre
+     */
+    public String getNombre() {
+        return nombre;
     }
 
     /**
@@ -117,6 +131,14 @@ public class TimbreMunicipal extends BeanVO implements Serializable, Auditable {
      */
     public void setId(Long id) {
         this.id = id;
+    }
+
+    /**
+     * codigo Postal
+     * @param nombre the nombre to set
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     /**

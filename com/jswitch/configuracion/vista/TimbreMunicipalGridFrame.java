@@ -6,7 +6,6 @@ import com.jswitch.base.vista.util.DefaultGridFrame;
 import com.jswitch.configuracion.controlador.RangoValorGridInternalController;
 import com.jswitch.configuracion.modelo.maestra.TimbreMunicipal;
 import com.jswitch.configuracion.modelo.transaccional.RangoValor;
-import com.jswitch.siniestros.controlador.PersonaTipoLookupController;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.mdi.client.MDIFrame;
 import org.openswing.swing.table.client.GridController;
@@ -31,6 +30,7 @@ public class TimbreMunicipalGridFrame extends DefaultGridFrame {
         gridData = new org.openswing.swing.client.GridControl();
         decimalColumnNot = new org.openswing.swing.table.columns.client.DecimalColumn();
         textColumn1 = new org.openswing.swing.table.columns.client.TextColumn();
+        textColumn2 = new org.openswing.swing.table.columns.client.TextColumn();
         jPanel7 = new javax.swing.JPanel();
         insertButton3 = new org.openswing.swing.client.InsertButton();
         editButton3 = new org.openswing.swing.client.EditButton();
@@ -44,7 +44,7 @@ public class TimbreMunicipalGridFrame extends DefaultGridFrame {
         decimalColumnNot1 = new org.openswing.swing.table.columns.client.DecimalColumn();
         decimalColumn1 = new org.openswing.swing.table.columns.client.DecimalColumn();
         decimalColumn2 = new org.openswing.swing.table.columns.client.DecimalColumn();
-        decimalColumn3 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        currencyColumn1 = new org.openswing.swing.table.columns.client.CurrencyColumn();
         textColumn3 = new org.openswing.swing.table.columns.client.TextColumn();
         jPanel8 = new javax.swing.JPanel();
         insertButton4 = new org.openswing.swing.client.InsertButton();
@@ -79,6 +79,14 @@ public class TimbreMunicipalGridFrame extends DefaultGridFrame {
         textColumn1.setEditableOnEdit(true);
         textColumn1.setEditableOnInsert(true);
         gridData.getColumnContainer().add(textColumn1);
+
+        textColumn2.setColumnFilterable(true);
+        textColumn2.setColumnName("nombre");
+        textColumn2.setColumnSortable(true);
+        textColumn2.setEditableOnEdit(true);
+        textColumn2.setEditableOnInsert(true);
+        textColumn2.setPreferredWidth(300);
+        gridData.getColumnContainer().add(textColumn2);
 
         jPanel7.setLayout(new java.awt.GridLayout(3, 2, 2, 2));
         jPanel7.add(insertButton3);
@@ -135,13 +143,11 @@ public class TimbreMunicipalGridFrame extends DefaultGridFrame {
         decimalColumn2.setEditableOnInsert(true);
         gridControl1.getColumnContainer().add(decimalColumn2);
 
-        decimalColumn3.setColumnFilterable(true);
-        decimalColumn3.setColumnName("monto");
-        decimalColumn3.setColumnSortable(true);
-        decimalColumn3.setDecimals(2);
-        decimalColumn3.setEditableOnEdit(true);
-        decimalColumn3.setEditableOnInsert(true);
-        gridControl1.getColumnContainer().add(decimalColumn3);
+        currencyColumn1.setColumnFilterable(true);
+        currencyColumn1.setColumnName("monto");
+        currencyColumn1.setColumnSortable(true);
+        currencyColumn1.setCurrencySymbol("%");
+        gridControl1.getColumnContainer().add(currencyColumn1);
 
         textColumn3.setColumnFilterable(true);
         textColumn3.setColumnName("timbreMunicipal.zipCode");
@@ -170,8 +176,8 @@ public class TimbreMunicipalGridFrame extends DefaultGridFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(248, Short.MAX_VALUE))
-            .addComponent(gridControl1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                .addContainerGap(256, Short.MAX_VALUE))
+            .addComponent(gridControl1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Rangos", jPanel2);
@@ -193,7 +199,7 @@ public class TimbreMunicipalGridFrame extends DefaultGridFrame {
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -204,7 +210,6 @@ public class TimbreMunicipalGridFrame extends DefaultGridFrame {
 
         gridData.setGridDataLocator(gridDataLocator);
         gridData.setController(gridController);
-
 
         rangoValorGridController = new RangoValorGridInternalController(
                 TimbreMunicipal.class.getName(), "getRangoValor", gridControl1,
@@ -241,9 +246,9 @@ public class TimbreMunicipalGridFrame extends DefaultGridFrame {
         return gridData;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private org.openswing.swing.table.columns.client.CurrencyColumn currencyColumn1;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn1;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn2;
-    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn3;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumnNot;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumnNot1;
     private org.openswing.swing.client.DeleteButton deleteButton3;
@@ -266,6 +271,7 @@ public class TimbreMunicipalGridFrame extends DefaultGridFrame {
     private org.openswing.swing.client.SaveButton saveButton3;
     private org.openswing.swing.client.SaveButton saveButton4;
     private org.openswing.swing.table.columns.client.TextColumn textColumn1;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn2;
     private org.openswing.swing.table.columns.client.TextColumn textColumn3;
     // End of variables declaration//GEN-END:variables
 }
