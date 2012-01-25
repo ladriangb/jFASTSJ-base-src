@@ -8,6 +8,7 @@ import com.jswitch.base.modelo.entidades.auditoria.Auditable;
 import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
 import com.jswitch.configuracion.modelo.transaccional.SumaAsegurada;
 import com.jswitch.configuracion.modelo.maestra.Plan;
+import com.jswitch.configuracion.modelo.transaccional.ConfiguracionSiniestro;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,9 +30,9 @@ import org.openswing.swing.util.server.HibernateUtils;
  *
  * @author bc
  */
-public class SumaAseguradaPlanGridInternalController extends DefaultGridInternalController {
+public class ConfiguracionSiniestroPlanGridInternalController extends DefaultGridInternalController {
 
-    public SumaAseguradaPlanGridInternalController(String classNameModelFullPath, String getMethodName, GridControl miGrid,DefaultGridInternalController... listSubGrids) {
+    public ConfiguracionSiniestroPlanGridInternalController(String classNameModelFullPath, String getMethodName, GridControl miGrid, DefaultGridInternalController... listSubGrids) {
         super(classNameModelFullPath, getMethodName, miGrid, listSubGrids);//(classNameModelFullPath, getMethodName, miGrid, listSubGrids);
     }
 
@@ -46,7 +47,7 @@ public class SumaAseguradaPlanGridInternalController extends DefaultGridInternal
         if (beanVO != null) {
             Session s = null;
             try {
-                String sql = "FROM " + SumaAsegurada.class.getName() + " C "
+                String sql = "FROM " + ConfiguracionSiniestro.class.getName() + " C "
                         + " WHERE plan.id=?";
 
                 SessionFactory sf = HibernateUtil.getSessionFactory();
@@ -91,7 +92,7 @@ public class SumaAseguradaPlanGridInternalController extends DefaultGridInternal
                     ((Auditable) o).setAuditoria(ab);
                 }
                 //getSet().add(o);
-                ((SumaAsegurada) o).setPlan((Plan) super.beanVO);
+                ((ConfiguracionSiniestro) o).setPlan((Plan) super.beanVO);
                 //s.update(super.beanVO);
                 s.save(o);
                 selectedCell(0, 0, null, o);

@@ -6,8 +6,10 @@ import com.jswitch.base.controlador.util.DefaultGridInternalController;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.entidades.auditoria.Auditable;
 import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
+import com.jswitch.configuracion.modelo.maestra.ConfiguracionProntoPago;
 import com.jswitch.configuracion.modelo.transaccional.SumaAsegurada;
-import com.jswitch.configuracion.modelo.maestra.Plan;
+import com.jswitch.configuracion.modelo.maestra.TimbreMunicipal;
+import com.jswitch.configuracion.modelo.transaccional.RangoValor;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,10 +31,13 @@ import org.openswing.swing.util.server.HibernateUtils;
  *
  * @author bc
  */
-public class SumaAseguradaPlanGridInternalController extends DefaultGridInternalController {
+public class RangoValorGridInternalController extends DefaultGridInternalController {
 
-    public SumaAseguradaPlanGridInternalController(String classNameModelFullPath, String getMethodName, GridControl miGrid,DefaultGridInternalController... listSubGrids) {
+    Class clase;
+
+    public RangoValorGridInternalController(String classNameModelFullPath, String getMethodName, GridControl miGrid, Class clase, DefaultGridInternalController... listSubGrids) {
         super(classNameModelFullPath, getMethodName, miGrid, listSubGrids);//(classNameModelFullPath, getMethodName, miGrid, listSubGrids);
+        this.clase = clase;
     }
 
     public Response loadData(int action,
@@ -45,10 +50,10 @@ public class SumaAseguradaPlanGridInternalController extends DefaultGridInternal
         List al;
         if (beanVO != null) {
             Session s = null;
-            try {
-                String sql = "FROM " + SumaAsegurada.class.getName() + " C "
-                        + " WHERE plan.id=?";
 
+            try {
+                String sql = "FROM " + RangoValor.class.getName() + " C "
+                        + " WHERE prontoPago.id=?";
                 SessionFactory sf = HibernateUtil.getSessionFactory();
                 s = sf.openSession();
                 Response res = HibernateUtils.getBlockFromQuery(
@@ -60,7 +65,7 @@ public class SumaAseguradaPlanGridInternalController extends DefaultGridInternal
                         currentSortedVersusColumns,
                         valueObjectType,
                         sql,
-                        new Object[]{((Plan) beanVO).getId()},
+                        new Object[]{((Auditable) beanVO).getId()},
                         new Type[]{new LongType()},
                         "C",
                         sf,
@@ -91,7 +96,18 @@ public class SumaAseguradaPlanGridInternalController extends DefaultGridInternal
                     ((Auditable) o).setAuditoria(ab);
                 }
                 //getSet().add(o);
-                ((SumaAsegurada) o).setPlan((Plan) super.beanVO);
+                String err = logicaDeNegocios((RangoValor) o);
+                if (err != null) {
+                    return new ErrorResponse(err);
+                }
+                if (clase.equals(TimbreMunicipal.class)) {
+                    ((RangoValor) o).setTimbreMunicipal((TimbreMunicipal) super.beanVO);
+                    ((RangoValor) o).setMontoPorcentual(Boolean.TRUE);
+                }
+                if (clase.equals(ConfiguracionProntoPago.class)) {
+                    ((RangoValor) o).setProntoPago((ConfiguracionProntoPago) super.beanVO);
+                    ((RangoValor) o).setMontoPorcentual(Boolean.FALSE);
+                }
                 //s.update(super.beanVO);
                 s.save(o);
                 selectedCell(0, 0, null, o);
@@ -106,6 +122,15 @@ public class SumaAseguradaPlanGridInternalController extends DefaultGridInternal
         } else {
             return new ErrorResponse("Primero tienes que guardar el Registro Principal");
         }
+    }
+
+    @Override
+    public Response updateRecords(int[] rowNumbers, ArrayList oldPersistentObjects, ArrayList persistentObjects) throws Exception {
+        String err = logicaDeNegocios((RangoValor) persistentObjects.get(0));
+        if (err != null) {
+            return new ErrorResponse(err);
+        }
+        return super.updateRecords(rowNumbers, oldPersistentObjects, persistentObjects);
     }
 
     @Override
@@ -133,5 +158,12 @@ public class SumaAseguradaPlanGridInternalController extends DefaultGridInternal
         } finally {
             s.close();
         }
+    }
+
+    private String logicaDeNegocios(RangoValor ob) {
+        if (ob.getMinValue() > ob.getMaxValue()) {
+            return "Rango Invalido";
+        }
+        return null;
     }
 }

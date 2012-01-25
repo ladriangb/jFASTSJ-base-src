@@ -12,14 +12,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
+import org.hibernate.type.LongType;
+import org.hibernate.type.Type;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
 import org.openswing.swing.message.receive.java.VOListResponse;
 import org.openswing.swing.message.receive.java.VOResponse;
 import org.openswing.swing.message.receive.java.ValueObject;
+import org.openswing.swing.util.server.HibernateUtils;
 
 /**
  *
@@ -38,12 +42,36 @@ public class SumaAmparadaPlanGridInternalController extends DefaultGridInternalC
             ArrayList currentSortedVersusColumns,
             Class valueObjectType,
             Map otherGridParams) {
-        final Session session = HibernateUtil.getSessionFactory().openSession();
         List al;
         if (beanVO != null) {
-            al = session.createQuery("FROM " + SumaAmparada.class.getName()
-                    + " WHERE plan.id=:planId").
-                    setLong("planId", ((Plan) beanVO).getId()).list();
+            Session s = null;
+            try {
+                String sql = "FROM " + SumaAmparada.class.getName() + " C "
+                        + " WHERE plan.id=?";
+
+                SessionFactory sf = HibernateUtil.getSessionFactory();
+                s = sf.openSession();
+                Response res = HibernateUtils.getBlockFromQuery(
+                        action,
+                        startIndex,
+                        General.licencia.getBlockSize(),
+                        filteredColumns,
+                        currentSortedColumns,
+                        currentSortedVersusColumns,
+                        valueObjectType,
+                        sql,
+                        new Object[]{((Plan) beanVO).getId()},
+                        new Type[]{new LongType()},
+                        "C",
+                        sf,
+                        s);
+                return res;
+            } catch (Exception ex) {
+                LoggerUtil.error(this.getClass(), "loadData", ex);
+                return new ErrorResponse(ex.getMessage());
+            } finally {
+                s.close();
+            }
         } else {
             al = new ArrayList<SumaAmparada>(0);
         }

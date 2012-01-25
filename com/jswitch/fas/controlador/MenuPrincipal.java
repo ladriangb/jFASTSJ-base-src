@@ -33,7 +33,6 @@ import com.jswitch.asegurados.controlador.TitularDetailFrameController;
 import com.jswitch.asegurados.controlador.TitularGridController;
 import com.jswitch.configuracion.controlador.RamoCoberturaGridFrameController;
 import com.jswitch.asegurados.modelo.dominio.Parentesco;
-import com.jswitch.configuracion.modelo.maestra.Plan;
 import com.jswitch.configuracion.modelo.dominio.PlazoEspera;
 import com.jswitch.configuracion.modelo.dominio.Ramo;
 import com.jswitch.asegurados.modelo.maestra.Asegurado;
@@ -50,7 +49,6 @@ import com.jswitch.certificados.vista.CertificadosGridFrame;
 import com.jswitch.configuracion.controlador.ConfiguracionPrimaAllGridFrameController;
 import com.jswitch.configuracion.modelo.maestra.ConfiguracionPrima;
 import com.jswitch.configuracion.vista.ConfiguracionPrimaGridFrame;
-import com.jswitch.configuracion.controlador.PlanesGridFrameController;
 import com.jswitch.polizas.vista.PolizaDetailFrame;
 import com.jswitch.polizas.vista.PolizasGridFrame;
 import com.jswitch.asegurados.vista.TitularDetailFrame;
@@ -65,12 +63,20 @@ import com.jswitch.base.vista.sistema.CambiarPassDialog;
 import com.jswitch.certificados.controlador.CertificadoNuevoDetrailController;
 import com.jswitch.certificados.modelo.utilitario.CertificadoNuevo;
 import com.jswitch.certificados.vista.CertificadoNuevoDetailFrame;
+import com.jswitch.configuracion.controlador.ConfiguracionProntoPagoGridFrameController;
+import com.jswitch.configuracion.controlador.PlanesGridFrameController;
+import com.jswitch.configuracion.controlador.TimbreMunicipalFrameController;
 import com.jswitch.configuracion.controlador.patologias.RamoGridFrameController;
 import com.jswitch.configuracion.modelo.dominio.Cobertura;
+import com.jswitch.configuracion.modelo.maestra.ConfiguracionProntoPago;
+import com.jswitch.configuracion.modelo.maestra.Plan;
+import com.jswitch.configuracion.modelo.maestra.TimbreMunicipal;
 import com.jswitch.pagos.vista.CoberturaGridFrame;
 import com.jswitch.configuracion.vista.ConfiguracionCoberturaGridFrame;
 import com.jswitch.configuracion.vista.PlanesGridFrame;
+import com.jswitch.configuracion.vista.ProntoPagoGridFrame;
 import com.jswitch.configuracion.vista.RamosCoberturasGridFrame;
+import com.jswitch.configuracion.vista.TimbreMunicipalGridFrame;
 import com.jswitch.configuracion.vista.patologias.PatologiasGridFrame;
 import com.jswitch.pagos.controlador.OrdenDePagoDetailFrameController;
 import com.jswitch.pagos.controlador.OrdenDePagoGridFrameController;
@@ -336,7 +342,7 @@ public class MenuPrincipal implements ClientFacade {
         } else {
             new UsuarioDetailController(UsuarioDetailFrame.class.getName(), null, General.usuario, false);
         }
-    }       
+    }
 
     public void getEmpresa(String name) {
         new DefaultDetailFrameController(EmpresaDetailFrame.class.getName(), null, General.empresa, false);
@@ -407,6 +413,16 @@ public class MenuPrincipal implements ClientFacade {
     // <editor-fold defaultstate="collapsed" desc="Configuracion">
     public void getConfiguracionPrima() {
         new ConfiguracionPrimaAllGridFrameController(ConfiguracionPrimaGridFrame.class.getName(), null, ConfiguracionPrima.class.getName(), "Configuracion de la Prima");
+    }
+
+    public void getProntoPago() {
+        new ConfiguracionProntoPagoGridFrameController(ProntoPagoGridFrame.class.getName(),
+                null, ConfiguracionProntoPago.class.getName(), "Configuracion Pronto Pago");
+    }
+
+    public void getTimbreMunicipal() {
+        new TimbreMunicipalFrameController(TimbreMunicipalGridFrame.class.getName(),
+                null, TimbreMunicipal.class.getName(), "Timbre Municipal");
     }
     // </editor-fold>
 
@@ -513,6 +529,7 @@ public class MenuPrincipal implements ClientFacade {
     }
     // </editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Pagos">
     public void getNewPago() {
         new BuscarPersonaDialog((java.awt.Component) null,
                 OrdenDePagoDetailFrameController.class.getName(),
@@ -547,6 +564,7 @@ public class MenuPrincipal implements ClientFacade {
         new RemesaGridFrameController(RemesaGridFrame.class.getName(),
                 RemesaDetailFrame.class.getName(), Remesa.class.getName(), null);
     }
+    //</editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Cambiar Pass">
     public void getCambiarPass() {
