@@ -46,10 +46,8 @@ public class SumaAsegurada extends BeanVO implements Serializable, Auditable {
     /**
      * 
      */
-    //@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @ManyToOne
     @NotNull
-    //TODO bussines key
     private Plan plan;
     /**
      */

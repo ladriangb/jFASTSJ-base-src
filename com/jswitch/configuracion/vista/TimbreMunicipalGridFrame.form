@@ -1,0 +1,301 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+
+<Form version="1.2" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
+  <Properties>
+    <Property name="title" type="java.lang.String" value="Timbre Municipal"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="2"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jTabbedPane1" alignment="0" pref="584" max="32767" attributes="0"/>
+                  <Component id="jPanel3" alignment="0" min="0" max="32767" attributes="2"/>
+              </Group>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jTabbedPane1" pref="376" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JPanel" name="jPanel3">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder title="Monto Timbre Municipal en UT"/>
+          </Border>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Component id="jPanel7" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="gridData" pref="500" max="32767" attributes="3"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Component id="jPanel7" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="87" max="32767" attributes="0"/>
+              </Group>
+              <Component id="gridData" alignment="1" pref="187" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Container class="org.openswing.swing.client.GridControl" name="gridData">
+          <Properties>
+            <Property name="deleteButton" type="org.openswing.swing.client.DeleteButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="deleteButton3"/>
+            </Property>
+            <Property name="editButton" type="org.openswing.swing.client.EditButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="editButton3"/>
+            </Property>
+            <Property name="exportButton" type="org.openswing.swing.client.ExportButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="exportButton3"/>
+            </Property>
+            <Property name="insertButton" type="org.openswing.swing.client.InsertButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="insertButton3"/>
+            </Property>
+            <Property name="reloadButton" type="org.openswing.swing.client.ReloadButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="reloadButton3"/>
+            </Property>
+            <Property name="saveButton" type="org.openswing.swing.client.SaveButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="saveButton3"/>
+            </Property>
+            <Property name="valueObjectClassName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="TimbreMunicipal.class.getName()" type="code"/>
+            </Property>
+          </Properties>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+          <SubComponents>
+            <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumnNot">
+              <Properties>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;id&quot;" type="code"/>
+                </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
+                <Property name="columnSortable" type="boolean" value="true"/>
+                <Property name="grouping" type="boolean" value="false"/>
+                <Property name="preferredWidth" type="int" value="40"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn1">
+              <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;zipCode&quot;" type="code"/>
+                </Property>
+                <Property name="columnSortable" type="boolean" value="true"/>
+                <Property name="editableOnEdit" type="boolean" value="true"/>
+                <Property name="editableOnInsert" type="boolean" value="true"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel7">
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+            <Property name="columns" type="int" value="2"/>
+            <Property name="horizontalGap" type="int" value="2"/>
+            <Property name="rows" type="int" value="3"/>
+            <Property name="verticalGap" type="int" value="2"/>
+          </Layout>
+          <SubComponents>
+            <Component class="org.openswing.swing.client.InsertButton" name="insertButton3">
+            </Component>
+            <Component class="org.openswing.swing.client.EditButton" name="editButton3">
+            </Component>
+            <Component class="org.openswing.swing.client.DeleteButton" name="deleteButton3">
+            </Component>
+            <Component class="org.openswing.swing.client.SaveButton" name="saveButton3">
+            </Component>
+            <Component class="org.openswing.swing.client.ReloadButton" name="reloadButton3">
+            </Component>
+            <Component class="org.openswing.swing.client.ExportButton" name="exportButton3">
+            </Component>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
+      <SubComponents>
+        <Container class="javax.swing.JPanel" name="jPanel2">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Rangos">
+                <Property name="tabTitle" type="java.lang.String" value="Rangos"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jPanel8" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="gridControl1" pref="507" max="32767" attributes="3"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jPanel8" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="248" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="gridControl1" alignment="1" pref="348" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Container class="org.openswing.swing.client.GridControl" name="gridControl1">
+              <Properties>
+                <Property name="deleteButton" type="org.openswing.swing.client.DeleteButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="deleteButton4"/>
+                </Property>
+                <Property name="editButton" type="org.openswing.swing.client.EditButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="editButton4"/>
+                </Property>
+                <Property name="exportButton" type="org.openswing.swing.client.ExportButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="exportButton4"/>
+                </Property>
+                <Property name="insertButton" type="org.openswing.swing.client.InsertButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="insertButton4"/>
+                </Property>
+                <Property name="reloadButton" type="org.openswing.swing.client.ReloadButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="reloadButton4"/>
+                </Property>
+                <Property name="saveButton" type="org.openswing.swing.client.SaveButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="saveButton4"/>
+                </Property>
+                <Property name="valueObjectClassName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="RangoValor.class.getName()" type="code"/>
+                </Property>
+              </Properties>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+              <SubComponents>
+                <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumnNot1">
+                  <Properties>
+                    <Property name="columnFilterable" type="boolean" value="true"/>
+                    <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;id&quot;" type="code"/>
+                    </Property>
+                    <Property name="columnRequired" type="boolean" value="false"/>
+                    <Property name="columnSortable" type="boolean" value="true"/>
+                    <Property name="grouping" type="boolean" value="false"/>
+                    <Property name="preferredWidth" type="int" value="40"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn1">
+                  <Properties>
+                    <Property name="columnFilterable" type="boolean" value="true"/>
+                    <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;minValue&quot;" type="code"/>
+                    </Property>
+                    <Property name="columnSortable" type="boolean" value="true"/>
+                    <Property name="editableOnEdit" type="boolean" value="true"/>
+                    <Property name="editableOnInsert" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn2">
+                  <Properties>
+                    <Property name="columnFilterable" type="boolean" value="true"/>
+                    <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;maxValue&quot;" type="code"/>
+                    </Property>
+                    <Property name="columnSortable" type="boolean" value="true"/>
+                    <Property name="editableOnEdit" type="boolean" value="true"/>
+                    <Property name="editableOnInsert" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn3">
+                  <Properties>
+                    <Property name="columnFilterable" type="boolean" value="true"/>
+                    <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;monto&quot;" type="code"/>
+                    </Property>
+                    <Property name="columnSortable" type="boolean" value="true"/>
+                    <Property name="decimals" type="int" value="2"/>
+                    <Property name="editableOnEdit" type="boolean" value="true"/>
+                    <Property name="editableOnInsert" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn3">
+                  <Properties>
+                    <Property name="columnFilterable" type="boolean" value="true"/>
+                    <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;timbreMunicipal.zipCode&quot;" type="code"/>
+                    </Property>
+                    <Property name="columnRequired" type="boolean" value="false"/>
+                    <Property name="columnSortable" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="jPanel8">
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+                <Property name="columns" type="int" value="2"/>
+                <Property name="horizontalGap" type="int" value="2"/>
+                <Property name="rows" type="int" value="3"/>
+                <Property name="verticalGap" type="int" value="2"/>
+              </Layout>
+              <SubComponents>
+                <Component class="org.openswing.swing.client.InsertButton" name="insertButton4">
+                </Component>
+                <Component class="org.openswing.swing.client.EditButton" name="editButton4">
+                </Component>
+                <Component class="org.openswing.swing.client.DeleteButton" name="deleteButton4">
+                </Component>
+                <Component class="org.openswing.swing.client.SaveButton" name="saveButton4">
+                </Component>
+                <Component class="org.openswing.swing.client.ReloadButton" name="reloadButton4">
+                </Component>
+                <Component class="org.openswing.swing.client.ExportButton" name="exportButton4">
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>

@@ -6,6 +6,7 @@ import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.modelo.util.ehts.BusinessKey;
 import com.jswitch.base.modelo.util.ehts.Method;
+import com.jswitch.configuracion.modelo.transaccional.RangoValor;
 import com.jswitch.pagos.modelo.dominio.ConceptoSENIAT;
 import com.jswitch.pagos.modelo.transaccional.DesgloseCobertura;
 import com.jswitch.pagos.modelo.transaccional.DesgloseSumaAsegurada;
@@ -89,30 +90,20 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private ConceptoSENIAT tipoConceptoSeniat;
     /**
+     * tipo de consepto
+     * para saber q porcentaje de ISLR aplica
+     */
+    @ManyToOne()
+    @BusinessKey
+    private RangoValor montoTimbreMunicipal;
+   
+    /**
      * sustraendo aplica al ISLR
      * //TODO FIX JAVADOC
      */
     @Column
     @BusinessKey
     private Double sustraendo;
-    /**
-     * base para el ISLR
-     */
-    @Column
-    @BusinessKey
-    private Double baseIslr;
-    /**
-     * porcentaje de retencion Islr
-     */
-    @Column
-    @BusinessKey
-    private Double porcentajeRetencionIsrl;
-    /**
-     * monto de retencion ISLR
-     */
-    @Column
-    @BusinessKey
-    private Double montoRetencionIsrl;
     /**
      * UT Unidad Tributaria
      */
@@ -133,6 +124,24 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     @Column
     @BusinessKey
     private Double montoTM;
+    /**
+     * base para el ISLR
+     */
+    @Column
+    @BusinessKey
+    private Double baseIslr;
+    /**
+     * porcentaje de retencion Islr
+     */
+    @Column
+    @BusinessKey
+    private Double porcentajeRetencionIsrl;
+    /**
+     * monto de retencion ISLR
+     */
+    @Column
+    @BusinessKey
+    private Double montoRetencionIsrl;
     /**
      * porcentaje de iva para la fecha de facturacion
      */
