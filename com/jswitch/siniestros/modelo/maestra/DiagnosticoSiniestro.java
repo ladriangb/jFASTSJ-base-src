@@ -87,7 +87,7 @@ public class DiagnosticoSiniestro extends BeanVO implements Serializable, Audita
     /**
      * Detalles
      */
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @BusinessKey(exclude = Method.ALL)
     private Set<Tratamiento> tratamientos = new HashSet<Tratamiento>(0);
     /**

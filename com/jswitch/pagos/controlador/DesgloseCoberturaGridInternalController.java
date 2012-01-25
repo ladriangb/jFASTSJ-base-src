@@ -20,7 +20,7 @@ import org.openswing.swing.message.receive.java.Response;
  */
 public class DesgloseCoberturaGridInternalController extends DefaultGridInternalController {
 
-    FacturaDetailFrame vista;
+    private FacturaDetailFrame vista;
 
     public DesgloseCoberturaGridInternalController(String classNameModelFullPath, String getMethodName, GridControl miGrid, FacturaDetailFrame vista, DefaultGridInternalController... listSubGrids) {
         super(classNameModelFullPath, getMethodName, miGrid, listSubGrids);
@@ -50,7 +50,6 @@ public class DesgloseCoberturaGridInternalController extends DefaultGridInternal
     public Response insertRecords(int[] rowNumbers, ArrayList newValueObjects) throws Exception {
         for (Object object : newValueObjects) {
             DesgloseCobertura dc = (DesgloseCobertura) object;
-            dc.setMontoNoAmparado(dc.getMontoFacturado() - dc.getMontoAmparado());
             if (dc.getMontoAmparado() == null) {
                 dc.setMontoAmparado(dc.getMontoFacturado());
             }
@@ -81,8 +80,7 @@ public class DesgloseCoberturaGridInternalController extends DefaultGridInternal
         Double amparado = cobertura.getMontoAmparado();
         for (DesgloseCobertura desgloseCobertura : factura.getDesgloseCobertura()) {
             if (cobertura.getId() == null
-                    || 
-                    (desgloseCobertura.getId().compareTo(cobertura.getId()) != 0 
+                    || (desgloseCobertura.getId().compareTo(cobertura.getId()) != 0
                     && desgloseCobertura.getAuditoria().getActivo())) {
                 facturado += desgloseCobertura.getMontoFacturado();
                 amparado += desgloseCobertura.getMontoAmparado();
@@ -130,63 +128,10 @@ public class DesgloseCoberturaGridInternalController extends DefaultGridInternal
      * actualiza los valores de la factura
      * @param  factura 
      */
-    private void updateFactura(Factura factura) {
-        Double islr = factura.getPorcentajeRetencionIsrl();
-        Double montoNoAmparado = 0d;
-        Double montoAmparado = 0d;
-        Double baseIva = 0d;
-        Double baseIslr = 0d;
-        Double gastosClinicos = 0d;
-        Double honorariosMedicos = 0d;
-        Double iva = factura.getPorcentajeIva();
-
-        for (DesgloseCobertura dc : factura.getDesgloseCobertura()) {
-            if (dc.getAuditoria().getActivo()) {
-                Cobertura c = dc.getCobertura();
-                if (c.getBaseImponible()) {
-                    montoNoAmparado += dc.getMontoNoAmparado();
-                    montoAmparado += dc.getMontoAmparado();
-                    if (c.getIva()) {
-                        baseIva += dc.getMontoAmparado();
-                    }
-                    if (c.getIslr()) {
-                        baseIslr += dc.getMontoAmparado();
-                    }
-                    if (c.getGastosClinicos()) {
-                        gastosClinicos += dc.getMontoAmparado();
-                    }
-                    if (c.getHonorariosMedicos()) {
-                        honorariosMedicos += dc.getMontoAmparado();
-                    }
-                }
-            }
-        }
-
-        factura.setMontoNoAmparado(montoNoAmparado);
-        factura.setMontoAmparado(montoAmparado);
-
-        factura.setBaseIva(baseIva);
-        factura.setMontoIva(baseIva * iva);
-        factura.setMontoRetencionIva(
-                factura.getMontoIva() * factura.getPorcentajeRetencionIva());
-
-        factura.setBaseIslr(baseIslr);
-        factura.setMontoRetencionIsrl(baseIslr * islr);
-        factura.setPorcentajeRetencionIsrl(islr);
-
-        factura.setGastosClinicos(gastosClinicos);
-        factura.setHonorariosMedicos(honorariosMedicos);
-
-        factura.setTotalRetenido(
-                factura.getMontoRetencionIva() + factura.getMontoRetencionIsrl());
-
-        factura.setTotalLiquidado(
-                (baseIva * iva) + (baseIslr * islr) + montoAmparado);
-
-        factura.setTotalACancelar(
-                factura.getTotalLiquidado() - factura.getTotalRetenido());
-
-
+    private void updateFactura(Factura fact) {
+        Factura factura = fact;
+        factura = ((FacturaDetailFrameController) vista.getMainPanel().
+                getFormController()).updateFactura(factura);
         Session s = null;
         try {
             s = HibernateUtil.getSessionFactory().openSession();

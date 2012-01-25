@@ -1,11 +1,14 @@
 package com.jswitch.pagos.controlador;
 
 import com.jswitch.base.controlador.General;
+import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.vista.util.DefaultDetailFrame;
 import com.jswitch.configuracion.modelo.dominio.Cobertura;
+import com.jswitch.configuracion.modelo.maestra.TimbreMunicipal;
+import com.jswitch.configuracion.modelo.transaccional.ConfiguracionSiniestro;
 import com.jswitch.pagos.modelo.maestra.Factura;
 import com.jswitch.pagos.modelo.transaccional.DesgloseCobertura;
 import com.jswitch.pagos.modelo.transaccional.DesgloseSumaAsegurada;
@@ -87,6 +90,7 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
         Factura liquidacion = (Factura) newPersistentObject;
         liquidacion.setDetalleSiniestro(detalleSiniestro);
+        liquidacion.setMontoDeducible(getDeducible(detalleSiniestro));
         Response res = super.insertRecord(newPersistentObject);
         if (res instanceof VOResponse) {
             detalleSiniestro.getPagos().add(liquidacion);
@@ -164,6 +168,77 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
         if (x.doubleValue() > factura.getTotalFacturado().doubleValue()) {
             return new ErrorResponse("monto menor al reflejado");
         }
+        updateFactura(factura);
+        return new VOResponse(factura);
+    }
+
+    public void updateDetalleSiniestro() {
+        Session s = null;
+
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+            Collection<Factura> fac = detalleSiniestro.getPagos();
+            Double facturado = 0d;
+            for (Factura factura : fac) {
+                facturado += factura.getTotalFacturado();
+            }
+            detalleSiniestro.setMontoFacturado(facturado);
+            s.beginTransaction();
+            s.update(detalleSiniestro);
+            s.getTransaction().commit();
+        } catch (Exception ex) {
+            System.out.println(ex);
+        } finally {
+            s.close();
+        }
+    }
+
+    public DefaultDetailFrame getVista() {
+        return vista;
+    }
+
+    private void checkStatus() {
+        DetalleSiniestro ds = detalleSiniestro;
+        if (ds.getEtapaSiniestro().getIdPropio().compareTo("ORD_PAG") == 0
+                || ds.getEtapaSiniestro().getEstatusSiniestro().getNombre().
+                compareTo("PENDIENTE") != 0) {
+            ((FacturaDetailFrame) vista).hideAll();
+        }
+        if (ds.getEtapaSiniestro().getIdPropio().compareTo("LIQ") == 0
+                && !General.usuario.getSuperusuario()) {
+            ((FacturaDetailFrame) vista).hideAll();
+        }
+    }
+
+    private Double getDeducible(DetalleSiniestro detalleSiniestro) {
+        Session s = null;
+        Double deducible = 0d;
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+            ConfiguracionSiniestro d = (ConfiguracionSiniestro) s.createQuery(
+                    "FROM " + ConfiguracionSiniestro.class.getName()
+                    + " D WHERE D.tipoDetalle=:detalle AND plan.id=:plan").
+                    setString("detalle", detalleSiniestro.getTipoDetalle()).
+                    setLong("plan", detalleSiniestro.getSiniestro().getAsegurado().getPlan().getId()).
+                    uniqueResult();
+            if (d != null) {
+                deducible = d.getMontoDeducible();
+            }
+        } catch (Exception ex) {
+            LoggerUtil.error(this.getClass(), "getDeducible", ex);
+        } finally {
+            s.close();
+        }
+        return deducible;
+    }
+
+    private Factura calcularTimbreMunicipal(Factura factura) {
+        return factura;
+        //TODO CALCULAR TIMBRE MUNICIPAL
+    }
+
+    public Factura updateFactura(Factura fac) {
+        Factura factura = fac;
         Double islr = factura.getPorcentajeRetencionIsrl();
         Double montoNoAmparado = 0d;
         Double montoAmparado = 0d;
@@ -172,7 +247,7 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
         Double gastosClinicos = 0d;
         Double honorariosMedicos = 0d;
         Double iva = factura.getPorcentajeIva();
-
+        factura = calcularTimbreMunicipal(factura);
         for (DesgloseCobertura dc : factura.getDesgloseCobertura()) {
             if (dc.getAuditoria().getActivo()) {
                 Cobertura c = dc.getCobertura();
@@ -214,49 +289,10 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
                 factura.getMontoRetencionIva() + factura.getMontoRetencionIsrl());
 
         factura.setTotalLiquidado(
-                (baseIva * iva) + (baseIslr * islr) + montoAmparado);
+                (baseIva * iva) + (baseIslr * islr) + montoAmparado - factura.getMontoDeducible());
 
         factura.setTotalACancelar(
                 factura.getTotalLiquidado() - factura.getTotalRetenido());
-
-        return new VOResponse(factura);
-    }
-
-    public void updateDetalleSiniestro() {
-        Session s = null;
-
-        try {
-            s = HibernateUtil.getSessionFactory().openSession();
-            Collection<Factura> fac = detalleSiniestro.getPagos();
-            Double facturado = 0d;
-            for (Factura factura : fac) {
-                facturado += factura.getTotalFacturado();
-            }
-            detalleSiniestro.setMontoFacturado(facturado);
-            s.beginTransaction();
-            s.update(detalleSiniestro);
-            s.getTransaction().commit();
-        } catch (Exception ex) {
-            System.out.println(ex);
-        } finally {
-            s.close();
-        }
-    }
-
-    public DefaultDetailFrame getVista() {
-        return vista;
-    }
-
-    private void checkStatus() {
-        DetalleSiniestro ds = detalleSiniestro;
-        if (ds.getEtapaSiniestro().getIdPropio().compareTo("ORD_PAG") == 0
-                || ds.getEtapaSiniestro().getEstatusSiniestro().getNombre().
-                compareTo("PENDIENTE") != 0) {
-            ((FacturaDetailFrame) vista).hideAll();
-        }
-        if (ds.getEtapaSiniestro().getIdPropio().compareTo("LIQ") == 0
-                && !General.usuario.getSuperusuario()) {
-            ((FacturaDetailFrame) vista).hideAll();
-        }
+        return factura;
     }
 }

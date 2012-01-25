@@ -6,7 +6,7 @@ import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.modelo.util.ehts.BusinessKey;
 import com.jswitch.base.modelo.util.ehts.Method;
-import com.jswitch.configuracion.modelo.transaccional.RangoValor;
+import com.jswitch.configuracion.modelo.maestra.TimbreMunicipal;
 import com.jswitch.pagos.modelo.dominio.ConceptoSENIAT;
 import com.jswitch.pagos.modelo.transaccional.DesgloseCobertura;
 import com.jswitch.pagos.modelo.transaccional.DesgloseSumaAsegurada;
@@ -90,16 +90,7 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private ConceptoSENIAT tipoConceptoSeniat;
     /**
-     * tipo de consepto
-     * para saber q porcentaje de ISLR aplica
-     */
-    @ManyToOne()
-    @BusinessKey
-    private RangoValor montoTimbreMunicipal;
-   
-    /**
      * sustraendo aplica al ISLR
-     * //TODO FIX JAVADOC
      */
     @Column
     @BusinessKey
@@ -111,8 +102,14 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private Double valorUT;
     /**
+     * tipo de consepto
+     * para saber q porcentaje de ISLR aplica
+     */
+    @ManyToOne()
+    @BusinessKey
+    private TimbreMunicipal timbreMunicipal;
+    /**
      * TM Timbre Municipal
-     * //TODO tabla de configuracion dependiendo de cuantas ut pasa y q tasa aplica
      */
     @Column
     @BusinessKey
@@ -183,7 +180,7 @@ public class Factura extends BeanVO implements Serializable, Auditable {
      */
     @Column
     @BusinessKey
-    private Double montoDescuentoDesducible;
+    private Double montoDeducible;
     /**
      * total de gastos clinicos
      * esto es a lo que se le retenie impuesto
@@ -261,7 +258,7 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     public Factura() {
         baseIslr = 0d;
         baseIva = 0d;
-        montoDescuentoDesducible = 0d;
+        montoDeducible = 0d;
         montoDescuentoProntoPago = 0d;
         montoIva = 0d;
         montoNoAmparado = 0d;
@@ -269,6 +266,8 @@ public class Factura extends BeanVO implements Serializable, Auditable {
         montoRetencionIsrl = 0d;
         montoTM = 0d;
         montoAmparado = 0d;
+        gastosClinicos = 0d;
+        honorariosMedicos = 0d;
         totalACancelar = 0d;
         totalFacturado = 0d;
         totalLiquidado = 0d;
@@ -278,6 +277,12 @@ public class Factura extends BeanVO implements Serializable, Auditable {
         } else {
             porcentajeIva = 0d;
         }
+        if (General.parametros != null && General.parametros.get("ut") != null) {
+            valorUT = General.parametros.get("ut").getValorDouble();
+        } else {
+            valorUT = 0d;
+        }
+
         porcentajeRetencionIva = 0d;
         porcentajeTM = 0d;
         porcentajeRetencionIsrl = 0d;
@@ -382,10 +387,10 @@ public class Factura extends BeanVO implements Serializable, Auditable {
 
     /**
      * descuento deducible
-     * @return the montoDescuentoDesducible
+     * @return the montoDeducible
      */
-    public Double getMontoDescuentoDesducible() {
-        return montoDescuentoDesducible;
+    public Double getMontoDeducible() {
+        return montoDeducible;
     }
 
     /**
@@ -487,7 +492,6 @@ public class Factura extends BeanVO implements Serializable, Auditable {
 
     /**
      * TM Timbre Municipal
-     * //TODO tabla de configuracion dependiendo de cuantas ut pasa y q tasa aplica
      * @return the porcentajeTM
      */
     public Double getPorcentajeTM() {
@@ -496,11 +500,19 @@ public class Factura extends BeanVO implements Serializable, Auditable {
 
     /**
      * sustraendo aplica al ISLR
-     * //TODO FIX JAVADOC
      * @return the sustraendo
      */
     public Double getSustraendo() {
         return sustraendo;
+    }
+
+    /**
+     * tipo de consepto
+     * para saber q porcentaje de ISLR aplica
+     * @return the timbreMunicipal
+     */
+    public TimbreMunicipal getTimbreMunicipal() {
+        return timbreMunicipal;
     }
 
     /**
@@ -651,10 +663,10 @@ public class Factura extends BeanVO implements Serializable, Auditable {
 
     /**
      * descuento deducible
-     * @param montoDescuentoDesducible the montoDescuentoDesducible to set
+     * @param montoDeducible the montoDeducible to set
      */
-    public void setMontoDescuentoDesducible(Double montoDescuentoDesducible) {
-        this.montoDescuentoDesducible = montoDescuentoDesducible;
+    public void setMontoDeducible(Double montoDeducible) {
+        this.montoDeducible = montoDeducible;
     }
 
     /**
@@ -756,7 +768,6 @@ public class Factura extends BeanVO implements Serializable, Auditable {
 
     /**
      * TM Timbre Municipal
-     * //TODO tabla de configuracion dependiendo de cuantas ut pasa y q tasa aplica
      * @param porcentajeTM the porcentajeTM to set
      */
     public void setPorcentajeTM(Double porcentajeTM) {
@@ -765,11 +776,19 @@ public class Factura extends BeanVO implements Serializable, Auditable {
 
     /**
      * sustraendo aplica al ISLR
-     * //TODO FIX JAVADOC
      * @param sustraendo the sustraendo to set
      */
     public void setSustraendo(Double sustraendo) {
         this.sustraendo = sustraendo;
+    }
+
+    /**
+     * tipo de consepto
+     * para saber q porcentaje de ISLR aplica
+     * @param timbreMunicipal the timbreMunicipal to set
+     */
+    public void setTimbreMunicipal(TimbreMunicipal timbreMunicipal) {
+        this.timbreMunicipal = timbreMunicipal;
     }
 
     /**

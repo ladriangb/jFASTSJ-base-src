@@ -12,6 +12,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,7 +35,7 @@ public class DesgloseSumaAsegurada extends BeanVO implements Serializable, Audit
     /**
      * Diagnostico al cual se esta cubriendo
      */
-    @ManyToOne
+    @ManyToOne()
     @BusinessKey(exclude= Method.ALL)
     private DiagnosticoSiniestro diagnosticoSiniestro;
     /**
