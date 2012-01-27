@@ -36,15 +36,17 @@ public class BuscarOrdenDePagoGridFrameController extends DefaultGridFrameContro
      * remesa para guardar 
      */
     private Remesa remesa;
+    private final RemesaDetailFrameController controller;
 
     /**
      * crea una instancia de BuscarOrdenDePagoGridFrameController
      * @param remesa 
      */
-    public BuscarOrdenDePagoGridFrameController(Remesa remesa) {
+    public BuscarOrdenDePagoGridFrameController(Remesa remesa, RemesaDetailFrameController controller) {
         super(BuscaOrdenDePagoGridFrame.class.getName(),
                 OrdenDePagoDetailFrame.class.getName(), OrdenDePago.class.getName(), null);
         this.remesa = remesa;
+        this.controller=controller;
     }
 
     @Override
@@ -133,6 +135,8 @@ public class BuscarOrdenDePagoGridFrameController extends DefaultGridFrameContro
                         "actionPerformed", ex);
             } finally {
                 s.close();
+                controller.calcularMontos(remesa);
+                controller.getVista().getMainPanel().getReloadButton().doClick();
             }
         }
     }

@@ -13,6 +13,7 @@ import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.vista.util.DefaultDetailFrame;
 import com.jswitch.fas.modelo.Dominios;
 import com.jswitch.pagos.controlador.OrdenesDePagoGridInternalController;
+import com.jswitch.pagos.controlador.RemesaDetailFrameController;
 import com.jswitch.pagos.modelo.maestra.OrdenDePago;
 import com.jswitch.pagos.modelo.maestra.Remesa;
 import com.jswitch.persona.modelo.dominio.TipoCuentaBancaria;
@@ -905,7 +906,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
         ordenDePagos =
                 new OrdenesDePagoGridInternalController(Remesa.class.getName(),
-                "getOrdenDePagos", gridControl5);
+                "getOrdenDePagos", gridControl5,(RemesaDetailFrameController)formController);
         gridControl5.setGridDataLocator(ordenDePagos);
         gridControl5.setController(ordenDePagos);
 

@@ -10,6 +10,7 @@ import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.vista.util.DefaultDetailFrame;
 import com.jswitch.fas.modelo.Dominios;
 import com.jswitch.pagos.controlador.DetalleSiniestroLiquidadosGridInternalController;
+import com.jswitch.pagos.controlador.OrdenDePagoDetailFrameController;
 import com.jswitch.pagos.modelo.maestra.OrdenDePago;
 import com.jswitch.persona.controlador.PersonaLookupControllerPorNombre;
 import com.jswitch.persona.controlador.PersonasDetailController;
@@ -655,7 +656,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public GridControl getGridDesgloseSumaAsegurada() {
-        
+
         return gridControl5;
     }
 
@@ -695,7 +696,8 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
 
         detalleSiniestros =
                 new DetalleSiniestroLiquidadosGridInternalController(OrdenDePago.class.getName(),
-                "getDetalleSiniestros", gridControl5);
+                "getDetalleSiniestros", gridControl5,
+                (OrdenDePagoDetailFrameController) formController);
         gridControl5.setGridDataLocator(detalleSiniestros);
         gridControl5.setController(detalleSiniestros);
 
@@ -724,7 +726,10 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
 
     @Override
     public void reloadGridsData() {
-//        gridControl5.getReloadButton().doClick();
+        gridControl5.getReloadButton().doClick();
+        gridControlDoc.getReloadButton().doClick();
+        gridControlNot.getReloadButton().doClick();
+        gridControlObs.getReloadButton().doClick();
     }
 
     @Override

@@ -202,12 +202,10 @@ public class DetalleVidaNuevoDetailFrame extends DefaultDetailFrame {
 
     @Override
     public void setOwnerVO(BeanVO beanVO) {
-        //controllerObservaciones.setBeanVO(beanVO);
         Long id = null;
         if (beanVO != null) {
             //id = ((Vehiculo) beanVO).getId();
         }
-        //controllerDocumentos.setBeanVO(beanVO, id);
         reloadGridsData();
     }
 
