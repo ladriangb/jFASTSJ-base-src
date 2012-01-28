@@ -10,6 +10,7 @@ import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.modelo.util.ehts.BusinessKey;
 import com.jswitch.base.modelo.util.ehts.Method;
 import com.jswitch.certificados.modelo.maestra.Certificado;
+import com.jswitch.fas.modelo.Dominios.EstatusSiniestro;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -19,6 +20,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -67,6 +70,13 @@ public class Siniestro extends BeanVO implements Serializable, Auditable {
      */
     @Column
     private String numero;
+    /**
+     * Estatus en el que se encuentra el siniestro ABIERTO, CERRADO
+     */
+    @Column
+    @Enumerated(EnumType.STRING)
+    @BusinessKey
+    private EstatusSiniestro estatus;    
     /**
      *
      */
@@ -233,4 +243,21 @@ public class Siniestro extends BeanVO implements Serializable, Auditable {
     public void setObservaciones(List<Observacion> observaciones) {
         this.observaciones = observaciones;
     }
+
+    /**
+     * Estatus en el que se encuentra el siniestro ABIERTO, CERRADO
+     * @return the estatus
+     */
+    public EstatusSiniestro getEstatus() {
+        return estatus;
+    }
+
+    /**
+     * Estatus en el que se encuentra el siniestro ABIERTO, CERRADO
+     * @param estatus the estatus to set
+     */
+    public void setEstatus(EstatusSiniestro estatus) {
+        this.estatus = estatus;
+    }
+        
 }
