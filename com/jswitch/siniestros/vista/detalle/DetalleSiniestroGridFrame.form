@@ -107,6 +107,7 @@
             <Property name="filterButton" type="org.openswing.swing.client.FilterButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="filterButton1"/>
             </Property>
+            <Property name="functionId" type="java.lang.String" value="detalleSinGrid"/>
             <Property name="insertRowsOnTop" type="boolean" value="false"/>
             <Property name="navBar" type="org.openswing.swing.client.NavigatorBar" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="navigatorBar1"/>
@@ -133,6 +134,26 @@
                 <Property name="columnRequired" type="boolean" value="false"/>
                 <Property name="columnSortable" type="boolean" value="true"/>
                 <Property name="preferredWidth" type="int" value="40"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn9">
+              <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;etapaSiniestro.estatusSiniestro.nombre&quot;" type="code"/>
+                </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
+                <Property name="columnSortable" type="boolean" value="true"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn10">
+              <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;etapaSiniestro.nombre&quot;" type="code"/>
+                </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
+                <Property name="columnSortable" type="boolean" value="true"/>
               </Properties>
             </Component>
             <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn8">
