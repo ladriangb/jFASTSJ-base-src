@@ -50,6 +50,9 @@ public class Dominios {
         domains.put(
                 Dominios.TipoDetalleSiniestro().getDomainId(),
                 Dominios.TipoDetalleSiniestro());
+        domains.put(
+                Dominios.EstatusSiniestro().getDomainId(),
+                Dominios.EstatusSiniestro());        
         return domains;
     }
 
@@ -190,6 +193,21 @@ public class Dominios {
         return dominio;
     }
 
+    public static enum EstatusSiniestro {
+
+        ABIERTO, CERRADO
+    }
+
+    public static Domain EstatusSiniestro() {
+        Domain dominio = new Domain("EstatusSiniestro");
+        EstatusSiniestro o[] = EstatusSiniestro.values();
+        for (int i = 0; i
+                < o.length; i++) {
+            dominio.addDomainPair(o[i], o[i].toString());
+        }
+        return dominio;
+    }    
+    
     public static enum TipoDetalleSiniestro {
 
         Todos(DetalleSiniestro.class.getName()),
