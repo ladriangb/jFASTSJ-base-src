@@ -2,7 +2,9 @@ package com.jswitch.siniestros.vista.detalle;
 
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.vista.util.DefaultGridFrame;
+import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
 import com.jswitch.siniestros.modelo.maestra.detalle.Emergencia;
+import java.awt.Color;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.mdi.client.MDIFrame;
 import org.openswing.swing.table.client.GridController;
@@ -30,6 +32,8 @@ public class DetalleSiniestroGridFrame extends DefaultGridFrame {
         saveButton1 = new org.openswing.swing.client.SaveButton();
         gridData = new org.openswing.swing.client.GridControl();
         decimalColumn1 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        textColumn9 = new org.openswing.swing.table.columns.client.TextColumn();
+        textColumn10 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn8 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn1 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn2 = new org.openswing.swing.table.columns.client.TextColumn();
@@ -50,6 +54,7 @@ public class DetalleSiniestroGridFrame extends DefaultGridFrame {
         gridData.setEditButton(editButton1);
         gridData.setExportButton(exportButton1);
         gridData.setFilterButton(filterButton1);
+        gridData.setFunctionId("detalleSinGrid");
         gridData.setInsertRowsOnTop(false);
         gridData.setNavBar(navigatorBar1);
         gridData.setReloadButton(reloadButton1);
@@ -63,6 +68,18 @@ public class DetalleSiniestroGridFrame extends DefaultGridFrame {
         decimalColumn1.setGrouping(false);
         decimalColumn1.setPreferredWidth(40);
         gridData.getColumnContainer().add(decimalColumn1);
+
+        textColumn9.setColumnFilterable(true);
+        textColumn9.setColumnName("etapaSiniestro.estatusSiniestro.nombre");
+        textColumn9.setColumnRequired(false);
+        textColumn9.setColumnSortable(true);
+        gridData.getColumnContainer().add(textColumn9);
+
+        textColumn10.setColumnFilterable(true);
+        textColumn10.setColumnName("etapaSiniestro.nombre");
+        textColumn10.setColumnRequired(false);
+        textColumn10.setColumnSortable(true);
+        gridData.getColumnContainer().add(textColumn10);
 
         textColumn8.setColumnFilterable(true);
         textColumn8.setColumnName("siniestro.numero");
@@ -240,6 +257,7 @@ public class DetalleSiniestroGridFrame extends DefaultGridFrame {
     private org.openswing.swing.client.ReloadButton reloadButton1;
     private org.openswing.swing.client.SaveButton saveButton1;
     private org.openswing.swing.table.columns.client.TextColumn textColumn1;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn10;
     private org.openswing.swing.table.columns.client.TextColumn textColumn2;
     private org.openswing.swing.table.columns.client.TextColumn textColumn3;
     private org.openswing.swing.table.columns.client.TextColumn textColumn4;
@@ -247,5 +265,6 @@ public class DetalleSiniestroGridFrame extends DefaultGridFrame {
     private org.openswing.swing.table.columns.client.TextColumn textColumn6;
     private org.openswing.swing.table.columns.client.TextColumn textColumn7;
     private org.openswing.swing.table.columns.client.TextColumn textColumn8;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn9;
     // End of variables declaration//GEN-END:variables
 }

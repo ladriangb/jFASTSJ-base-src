@@ -7,6 +7,7 @@ package com.jswitch.siniestros.controlador.detalle;
 import com.jswitch.base.controlador.util.DefaultGridFrameController;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.siniestros.vista.detalle.DetalleSiniestroDetailFrame;
+import java.awt.Color;
 import org.openswing.swing.message.receive.java.ValueObject;
 
 /**
@@ -19,6 +20,24 @@ public class DetalleSiniestroGridFrameController extends DefaultGridFrameControl
         super(gridFramePath, detailFramePath, claseModeloFullPath, titulo);
     }
   
+    @Override
+    public Color getBackgroundColor(int row, String attributeName, Object value) {
+        if (attributeName.equalsIgnoreCase("etapaSiniestro.estatusSiniestro.nombre")) {
+            if (value != null) {
+                if (value.toString().equalsIgnoreCase("PENDIENTE")) {
+                    return Color.YELLOW;
+                }
+                if (value.toString().equalsIgnoreCase("ANULADO")) {
+                    return Color.RED;
+                }
+                if (value.toString().equalsIgnoreCase("PAGADO")) {
+                    return Color.GREEN;
+                }                
+            }
+        }
+        return super.getBackgroundColor(row, attributeName, value);
+    }    
+    
     @Override
     public void doubleClick(int rowNumber, ValueObject persistentObject) {
         if (persistentObject != null && persistentObject.getClass() != null) {

@@ -18,11 +18,13 @@ import com.jswitch.persona.modelo.maestra.Rif;
 import com.jswitch.reporte.modelo.Reporte;
 import com.jswitch.siniestros.controlador.SiniestroLookupController;
 import com.jswitch.siniestros.controlador.PersonaTipoLookupController;
+import com.jswitch.siniestros.controlador.SiniestroDetailFrameController;
 import com.jswitch.siniestros.controlador.detalle.reportes.ReporteGridInternalController;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
 import com.jswitch.siniestros.modelo.dominio.TipoSiniestro;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.siniestros.modelo.maestra.DiagnosticoSiniestro;
+import com.jswitch.siniestros.modelo.maestra.Siniestro;
 import com.jswitch.siniestros.modelo.maestra.detalle.APS;
 import com.jswitch.siniestros.modelo.maestra.detalle.AyudaSocial;
 import com.jswitch.siniestros.modelo.maestra.detalle.CartaAval;
@@ -30,13 +32,11 @@ import com.jswitch.siniestros.modelo.maestra.detalle.Emergencia;
 import com.jswitch.siniestros.modelo.maestra.detalle.Funerario;
 import com.jswitch.siniestros.modelo.maestra.detalle.Reembolso;
 import com.jswitch.siniestros.modelo.maestra.detalle.Vida;
+import com.jswitch.siniestros.vista.SiniestroDetailFrame;
 import java.awt.event.ActionListener;
-import javax.swing.JPanel;
 import org.openswing.swing.client.CodLookupControl;
-import org.openswing.swing.client.EditButton;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.client.InsertButton;
-import org.openswing.swing.client.SaveButton;
 import org.openswing.swing.form.client.Form;
 import org.openswing.swing.form.client.FormController;
 import org.openswing.swing.mdi.client.MDIFrame;
@@ -88,8 +88,8 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         labelControl17 = new org.openswing.swing.client.LabelControl();
         codLookupControl7 = new org.openswing.swing.client.CodLookupControl();
         labelControl18 = new org.openswing.swing.client.LabelControl();
-        textControl4 = new org.openswing.swing.client.TextControl();
         checkBoxControl2 = new org.openswing.swing.client.CheckBoxControl();
+        codLookupControl26 = new org.openswing.swing.client.CodLookupControl();
         formAyudaSocial = new org.openswing.swing.form.client.Form();
         jPanel24 = new javax.swing.JPanel();
         labelControl57 = new org.openswing.swing.client.LabelControl();
@@ -106,7 +106,6 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         comboBoxControl6 = new org.openswing.swing.client.ComboBoxControl();
         codLookupControl24 = new org.openswing.swing.client.CodLookupControl();
         labelControl63 = new org.openswing.swing.client.LabelControl();
-        textControl17 = new org.openswing.swing.client.TextControl();
         labelControl64 = new org.openswing.swing.client.LabelControl();
         labelControl65 = new org.openswing.swing.client.LabelControl();
         labelControl66 = new org.openswing.swing.client.LabelControl();
@@ -115,6 +114,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         numericControl5 = new org.openswing.swing.client.NumericControl();
         numericControl6 = new org.openswing.swing.client.NumericControl();
         checkBoxControl7 = new org.openswing.swing.client.CheckBoxControl();
+        codLookupControl27 = new org.openswing.swing.client.CodLookupControl();
         formCartaAval = new org.openswing.swing.form.client.Form();
         jPanel20 = new javax.swing.JPanel();
         labelControl43 = new org.openswing.swing.client.LabelControl();
@@ -131,7 +131,6 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         comboBoxControl5 = new org.openswing.swing.client.ComboBoxControl();
         codLookupControl19 = new org.openswing.swing.client.CodLookupControl();
         labelControl49 = new org.openswing.swing.client.LabelControl();
-        textControl15 = new org.openswing.swing.client.TextControl();
         labelControl50 = new org.openswing.swing.client.LabelControl();
         labelControl51 = new org.openswing.swing.client.LabelControl();
         labelControl52 = new org.openswing.swing.client.LabelControl();
@@ -140,6 +139,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         numericControl1 = new org.openswing.swing.client.NumericControl();
         numericControl2 = new org.openswing.swing.client.NumericControl();
         checkBoxControl6 = new org.openswing.swing.client.CheckBoxControl();
+        codLookupControl28 = new org.openswing.swing.client.CodLookupControl();
         formEmergencia = new org.openswing.swing.form.client.Form();
         jPanel19 = new javax.swing.JPanel();
         labelControl32 = new org.openswing.swing.client.LabelControl();
@@ -164,13 +164,13 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         labelControl41 = new org.openswing.swing.client.LabelControl();
         checkBoxControl5 = new org.openswing.swing.client.CheckBoxControl();
         labelControl42 = new org.openswing.swing.client.LabelControl();
-        textControl13 = new org.openswing.swing.client.TextControl();
         labelControl54 = new org.openswing.swing.client.LabelControl();
         labelControl55 = new org.openswing.swing.client.LabelControl();
         labelControl56 = new org.openswing.swing.client.LabelControl();
         codLookupControl21 = new org.openswing.swing.client.CodLookupControl();
         numericControl3 = new org.openswing.swing.client.NumericControl();
         numericControl4 = new org.openswing.swing.client.NumericControl();
+        codLookupControl29 = new org.openswing.swing.client.CodLookupControl();
         formFunenario = new org.openswing.swing.form.client.Form();
         jPanel17 = new javax.swing.JPanel();
         labelControl19 = new org.openswing.swing.client.LabelControl();
@@ -184,8 +184,8 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         codLookupControl10 = new org.openswing.swing.client.CodLookupControl();
         labelControl23 = new org.openswing.swing.client.LabelControl();
         checkBoxControl3 = new org.openswing.swing.client.CheckBoxControl();
-        textControl6 = new org.openswing.swing.client.TextControl();
         labelControl24 = new org.openswing.swing.client.LabelControl();
+        codLookupControl30 = new org.openswing.swing.client.CodLookupControl();
         formRembolso = new org.openswing.swing.form.client.Form();
         jPanel2 = new javax.swing.JPanel();
         labelControl3 = new org.openswing.swing.client.LabelControl();
@@ -204,13 +204,13 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         labelControl10 = new org.openswing.swing.client.LabelControl();
         dateControl3 = new org.openswing.swing.client.DateControl();
         labelControl12 = new org.openswing.swing.client.LabelControl();
-        textControl2 = new org.openswing.swing.client.TextControl();
         codLookupControl2 = new org.openswing.swing.client.CodLookupControl();
         labelControl11 = new org.openswing.swing.client.LabelControl();
         labelControl5 = new org.openswing.swing.client.LabelControl();
         checkBoxControl1 = new org.openswing.swing.client.CheckBoxControl();
         labelControl68 = new org.openswing.swing.client.LabelControl();
         dateControl14 = new org.openswing.swing.client.DateControl();
+        codLookupControl31 = new org.openswing.swing.client.CodLookupControl();
         formVida = new org.openswing.swing.form.client.Form();
         jPanel18 = new javax.swing.JPanel();
         labelControl25 = new org.openswing.swing.client.LabelControl();
@@ -226,8 +226,8 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         codLookupControl13 = new org.openswing.swing.client.CodLookupControl();
         labelControl30 = new org.openswing.swing.client.LabelControl();
         labelControl31 = new org.openswing.swing.client.LabelControl();
-        textControl8 = new org.openswing.swing.client.TextControl();
         checkBoxControl4 = new org.openswing.swing.client.CheckBoxControl();
+        codLookupControl32 = new org.openswing.swing.client.CodLookupControl();
         Diagnosticos = new javax.swing.JPanel();
         jPanel22 = new javax.swing.JPanel();
         gridDiagnosticos = new org.openswing.swing.client.GridControl();
@@ -388,13 +388,15 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
 
         labelControl18.setLabel("siniestro.numero");
 
-        textControl4.setAttributeName("siniestro.numero");
-        textControl4.setEnabled(false);
-        textControl4.setEnabledOnEdit(false);
-        textControl4.setEnabledOnInsert(false);
-
         checkBoxControl2.setText("auditoria.activo");
         checkBoxControl2.setAttributeName("auditoria.activo");
+
+        codLookupControl26.setAttributeName("siniestro.numero");
+        codLookupControl26.setEnableCodBox(false);
+        codLookupControl26.setEnabledOnEdit(false);
+        codLookupControl26.setEnabledOnInsert(false);
+        codLookupControl26.setLookupButtonVisible(false);
+        codLookupControl26.setMaxCharacters(25);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -406,7 +408,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(labelControl18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textControl4, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE))
+                        .addComponent(codLookupControl26, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(labelControl6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -447,7 +449,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelControl18, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textControl4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(codLookupControl26, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelControl6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -478,10 +480,10 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
                     .addComponent(codLookupControl7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(checkBoxControl2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(204, Short.MAX_VALUE))
+                .addContainerGap(207, Short.MAX_VALUE))
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {checkBoxControl2, labelControl13, labelControl14, labelControl15, labelControl16, labelControl17, labelControl18, labelControl6, labelControl7, textControl4});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {checkBoxControl2, labelControl13, labelControl14, labelControl15, labelControl16, labelControl17, labelControl18, labelControl6, labelControl7});
 
         formAPS.add(jPanel3);
 
@@ -533,11 +535,6 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
 
         labelControl63.setLabel("detalleSiniestro.etapaSiniestro");
 
-        textControl17.setAttributeName("siniestro.numero");
-        textControl17.setEnabled(false);
-        textControl17.setEnabledOnEdit(false);
-        textControl17.setEnabledOnInsert(false);
-
         labelControl64.setLabel("siniestro.numero");
 
         labelControl65.setLabel("presupuestadoInicial");
@@ -558,6 +555,13 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
 
         checkBoxControl7.setText("auditoria.activo");
         checkBoxControl7.setAttributeName("auditoria.activo");
+
+        codLookupControl27.setAttributeName("siniestro.numero");
+        codLookupControl27.setEnableCodBox(false);
+        codLookupControl27.setEnabledOnEdit(false);
+        codLookupControl27.setEnabledOnInsert(false);
+        codLookupControl27.setLookupButtonVisible(false);
+        codLookupControl27.setMaxCharacters(25);
 
         javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
         jPanel24.setLayout(jPanel24Layout);
@@ -609,7 +613,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
                     .addGroup(jPanel24Layout.createSequentialGroup()
                         .addComponent(labelControl64, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textControl17, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE))
+                        .addComponent(codLookupControl27, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE))
                     .addComponent(checkBoxControl7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -660,15 +664,16 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
                     .addComponent(labelControl66, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(numericControl6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(labelControl64, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textControl17, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(checkBoxControl7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel24Layout.createSequentialGroup()
+                        .addComponent(labelControl64, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(checkBoxControl7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(codLookupControl27, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
 
-        jPanel24Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {checkBoxControl7, codLookupControl22, codLookupControl23, codLookupControl24, codLookupControl25, comboBoxControl6, dateControl12, dateControl13, labelControl57, labelControl58, labelControl59, labelControl60, labelControl61, labelControl62, labelControl63, labelControl64, labelControl65, labelControl66, labelControl67, numericControl5, numericControl6, textControl16, textControl17});
+        jPanel24Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {checkBoxControl7, codLookupControl22, codLookupControl23, codLookupControl24, codLookupControl25, codLookupControl27, comboBoxControl6, dateControl12, dateControl13, labelControl57, labelControl58, labelControl59, labelControl60, labelControl61, labelControl62, labelControl63, labelControl64, labelControl65, labelControl66, labelControl67, numericControl5, numericControl6, textControl16});
 
         formAyudaSocial.add(jPanel24, java.awt.BorderLayout.CENTER);
 
@@ -720,11 +725,6 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
 
         labelControl49.setLabel("detalleSiniestro.etapaSiniestro");
 
-        textControl15.setAttributeName("siniestro.numero");
-        textControl15.setEnabled(false);
-        textControl15.setEnabledOnEdit(false);
-        textControl15.setEnabledOnInsert(false);
-
         labelControl50.setLabel("siniestro.numero");
 
         labelControl51.setLabel("presupuestadoInicial");
@@ -745,6 +745,13 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
 
         checkBoxControl6.setText("auditoria.activo");
         checkBoxControl6.setAttributeName("auditoria.activo");
+
+        codLookupControl28.setAttributeName("siniestro.numero");
+        codLookupControl28.setEnableCodBox(false);
+        codLookupControl28.setEnabledOnEdit(false);
+        codLookupControl28.setEnabledOnInsert(false);
+        codLookupControl28.setLookupButtonVisible(false);
+        codLookupControl28.setMaxCharacters(25);
 
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);
@@ -796,7 +803,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
                     .addGroup(jPanel20Layout.createSequentialGroup()
                         .addComponent(labelControl50, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textControl15, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE))
+                        .addComponent(codLookupControl28, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE))
                     .addComponent(checkBoxControl6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -849,13 +856,13 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelControl50, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textControl15, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(codLookupControl28, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(checkBoxControl6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
 
-        jPanel20Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {checkBoxControl6, codLookupControl17, codLookupControl18, codLookupControl19, codLookupControl20, comboBoxControl5, dateControl10, dateControl11, labelControl43, labelControl44, labelControl45, labelControl46, labelControl47, labelControl48, labelControl49, labelControl50, labelControl51, labelControl52, labelControl53, numericControl1, numericControl2, textControl14, textControl15});
+        jPanel20Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {checkBoxControl6, codLookupControl17, codLookupControl18, codLookupControl19, codLookupControl20, comboBoxControl5, dateControl10, dateControl11, labelControl43, labelControl44, labelControl45, labelControl46, labelControl47, labelControl48, labelControl49, labelControl50, labelControl51, labelControl52, labelControl53, numericControl1, numericControl2, textControl14});
 
         formCartaAval.add(jPanel20, java.awt.BorderLayout.CENTER);
 
@@ -895,6 +902,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         labelControl38.setLabel("detalleSiniestro.telefonoContacto");
 
         textControl10.setAttributeName("clave");
+        textControl10.setEnabledOnInsert(false);
 
         textControl11.setAttributeName("nombreContacto");
 
@@ -924,11 +932,6 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
 
         labelControl42.setLabel("siniestro.numero");
 
-        textControl13.setAttributeName("siniestro.numero");
-        textControl13.setEnabled(false);
-        textControl13.setEnabledOnEdit(false);
-        textControl13.setEnabledOnInsert(false);
-
         labelControl54.setLabel("presupuestadoAjustado");
 
         labelControl55.setLabel("presupuestadoInicial");
@@ -944,6 +947,13 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
 
         numericControl4.setAttributeName("presupuestadoAjustado");
         numericControl4.setRequired(true);
+
+        codLookupControl29.setAttributeName("siniestro.numero");
+        codLookupControl29.setEnableCodBox(false);
+        codLookupControl29.setEnabledOnEdit(false);
+        codLookupControl29.setEnabledOnInsert(false);
+        codLookupControl29.setLookupButtonVisible(false);
+        codLookupControl29.setMaxCharacters(25);
 
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
@@ -995,7 +1005,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
                     .addGroup(jPanel19Layout.createSequentialGroup()
                         .addComponent(labelControl42, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textControl13, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE))
+                        .addComponent(codLookupControl29, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE))
                     .addGroup(jPanel19Layout.createSequentialGroup()
                         .addComponent(labelControl56, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1060,7 +1070,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelControl42, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textControl13, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(codLookupControl29, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelControl56, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1075,10 +1085,10 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
                     .addComponent(numericControl4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(checkBoxControl5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
-        jPanel19Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {checkBoxControl5, codLookupControl14, codLookupControl15, codLookupControl16, codLookupControl21, comboBoxControl4, dateControl8, dateControl9, labelControl32, labelControl33, labelControl34, labelControl35, labelControl36, labelControl37, labelControl38, labelControl39, labelControl40, labelControl41, labelControl42, labelControl54, labelControl55, labelControl56, numericControl3, numericControl4, textControl10, textControl11, textControl12, textControl13, textControl9});
+        jPanel19Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {checkBoxControl5, codLookupControl14, codLookupControl15, codLookupControl16, codLookupControl21, comboBoxControl4, dateControl8, dateControl9, labelControl32, labelControl33, labelControl34, labelControl35, labelControl36, labelControl37, labelControl38, labelControl39, labelControl40, labelControl41, labelControl42, labelControl54, labelControl55, labelControl56, numericControl3, numericControl4, textControl10, textControl11, textControl12, textControl9});
 
         formEmergencia.add(jPanel19);
 
@@ -1123,12 +1133,14 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         checkBoxControl3.setText("auditoria.activo");
         checkBoxControl3.setAttributeName("auditoria.activo");
 
-        textControl6.setAttributeName("siniestro.numero");
-        textControl6.setEnabled(false);
-        textControl6.setEnabledOnEdit(false);
-        textControl6.setEnabledOnInsert(false);
-
         labelControl24.setLabel("siniestro.numero");
+
+        codLookupControl30.setAttributeName("siniestro.numero");
+        codLookupControl30.setEnableCodBox(false);
+        codLookupControl30.setEnabledOnEdit(false);
+        codLookupControl30.setEnabledOnInsert(false);
+        codLookupControl30.setLookupButtonVisible(false);
+        codLookupControl30.setMaxCharacters(25);
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
@@ -1160,7 +1172,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
                     .addGroup(jPanel17Layout.createSequentialGroup()
                         .addComponent(labelControl24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textControl6, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE))
+                        .addComponent(codLookupControl30, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE))
                     .addComponent(checkBoxControl3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -1193,13 +1205,13 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelControl24, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textControl6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(codLookupControl30, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(checkBoxControl3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
         );
 
-        jPanel17Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {checkBoxControl3, codLookupControl10, codLookupControl8, codLookupControl9, dateControl6, labelControl19, labelControl20, labelControl21, labelControl22, labelControl23, labelControl24, textControl5, textControl6});
+        jPanel17Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {checkBoxControl3, codLookupControl10, codLookupControl8, codLookupControl9, dateControl6, labelControl19, labelControl20, labelControl21, labelControl22, labelControl23, labelControl24, textControl5});
 
         javax.swing.GroupLayout formFunenarioLayout = new javax.swing.GroupLayout(formFunenario);
         formFunenario.setLayout(formFunenarioLayout);
@@ -1269,11 +1281,6 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
 
         labelControl12.setLabel("detalleSiniestro.fechaConstitucion");
 
-        textControl2.setAttributeName("siniestro.numero");
-        textControl2.setEnabled(false);
-        textControl2.setEnabledOnEdit(false);
-        textControl2.setEnabledOnInsert(false);
-
         codLookupControl2.setAttributeName("analistaNegociador.nombreLargo");
         codLookupControl2.setMaxCharacters(25);
         codLookupControl2.setRequired(true);
@@ -1289,6 +1296,13 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
 
         dateControl14.setAttributeName("fechaVencimiento");
         dateControl14.setRequired(true);
+
+        codLookupControl31.setAttributeName("siniestro.numero");
+        codLookupControl31.setEnableCodBox(false);
+        codLookupControl31.setEnabledOnEdit(false);
+        codLookupControl31.setEnabledOnInsert(false);
+        codLookupControl31.setLookupButtonVisible(false);
+        codLookupControl31.setMaxCharacters(25);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -1340,7 +1354,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(labelControl11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE))
+                        .addComponent(codLookupControl31, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE))
                     .addComponent(checkBoxControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -1393,13 +1407,13 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelControl11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textControl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(codLookupControl31, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(checkBoxControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(142, Short.MAX_VALUE))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {checkBoxControl1, codLookupControl1, codLookupControl2, codLookupControl3, codLookupControl4, comboBoxControl1, dateControl1, dateControl2, dateControl3, labelControl1, labelControl10, labelControl11, labelControl12, labelControl2, labelControl3, labelControl4, labelControl5, labelControl8, labelControl9, textControl1, textControl2});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {checkBoxControl1, codLookupControl1, codLookupControl2, codLookupControl3, codLookupControl4, comboBoxControl1, dateControl1, dateControl2, dateControl3, labelControl1, labelControl10, labelControl11, labelControl12, labelControl2, labelControl3, labelControl4, labelControl5, labelControl8, labelControl9, textControl1});
 
         formRembolso.add(jPanel2);
 
@@ -1453,13 +1467,15 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
 
         labelControl31.setLabel("siniestro.numero");
 
-        textControl8.setAttributeName("siniestro.numero");
-        textControl8.setEnabled(false);
-        textControl8.setEnabledOnEdit(false);
-        textControl8.setEnabledOnInsert(false);
-
         checkBoxControl4.setText("auditoria.activo");
         checkBoxControl4.setAttributeName("auditoria.activo");
+
+        codLookupControl32.setAttributeName("siniestro.numero");
+        codLookupControl32.setEnableCodBox(false);
+        codLookupControl32.setEnabledOnEdit(false);
+        codLookupControl32.setEnabledOnInsert(false);
+        codLookupControl32.setLookupButtonVisible(false);
+        codLookupControl32.setMaxCharacters(25);
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
@@ -1495,7 +1511,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
                     .addGroup(jPanel18Layout.createSequentialGroup()
                         .addComponent(labelControl31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textControl8, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE))
+                        .addComponent(codLookupControl32, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE))
                     .addComponent(checkBoxControl4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -1532,13 +1548,13 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelControl31, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textControl8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(codLookupControl32, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(checkBoxControl4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(414, 414, 414))
         );
 
-        jPanel18Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {checkBoxControl4, codLookupControl11, codLookupControl12, codLookupControl13, comboBoxControl3, dateControl7, labelControl25, labelControl26, labelControl27, labelControl28, labelControl29, labelControl30, labelControl31, textControl7, textControl8});
+        jPanel18Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {checkBoxControl4, codLookupControl11, codLookupControl12, codLookupControl13, comboBoxControl3, dateControl7, labelControl25, labelControl26, labelControl27, labelControl28, labelControl29, labelControl30, labelControl31, textControl7});
 
         formVida.add(jPanel18);
 
@@ -1622,8 +1638,8 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel22Layout.createSequentialGroup()
                 .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(365, Short.MAX_VALUE))
-            .addComponent(gridDiagnosticos, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
+                .addContainerGap(368, Short.MAX_VALUE))
+            .addComponent(gridDiagnosticos, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout DiagnosticosLayout = new javax.swing.GroupLayout(Diagnosticos);
@@ -1639,7 +1655,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         );
         DiagnosticosLayout.setVerticalGroup(
             DiagnosticosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 489, Short.MAX_VALUE)
+            .addGap(0, 492, Short.MAX_VALUE)
             .addGroup(DiagnosticosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(DiagnosticosLayout.createSequentialGroup()
                     .addContainerGap()
@@ -1724,8 +1740,8 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(367, Short.MAX_VALUE))
-            .addComponent(gridControl6, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
+                .addContainerGap(370, Short.MAX_VALUE))
+            .addComponent(gridControl6, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout pagosLayout = new javax.swing.GroupLayout(pagos);
@@ -1813,8 +1829,8 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(365, Short.MAX_VALUE))
-            .addComponent(gridControl4, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
+                .addContainerGap(368, Short.MAX_VALUE))
+            .addComponent(gridControl4, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout observacionesLayout = new javax.swing.GroupLayout(observaciones);
@@ -1830,7 +1846,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         );
         observacionesLayout.setVerticalGroup(
             observacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 489, Short.MAX_VALUE)
+            .addGap(0, 492, Short.MAX_VALUE)
             .addGroup(observacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(observacionesLayout.createSequentialGroup()
                     .addContainerGap()
@@ -1902,8 +1918,8 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(365, Short.MAX_VALUE))
-            .addComponent(gridControl5, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
+                .addContainerGap(368, Short.MAX_VALUE))
+            .addComponent(gridControl5, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout notasTecnicasLayout = new javax.swing.GroupLayout(notasTecnicas);
@@ -1919,7 +1935,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         );
         notasTecnicasLayout.setVerticalGroup(
             notasTecnicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 489, Short.MAX_VALUE)
+            .addGap(0, 492, Short.MAX_VALUE)
             .addGroup(notasTecnicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(notasTecnicasLayout.createSequentialGroup()
                     .addContainerGap()
@@ -1997,7 +2013,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
                 .addContainerGap())
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addComponent(gridControl3, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE))
+                .addComponent(gridControl3, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout DocAnexosLayout = new javax.swing.GroupLayout(DocAnexos);
@@ -2013,7 +2029,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         );
         DocAnexosLayout.setVerticalGroup(
             DocAnexosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 489, Short.MAX_VALUE)
+            .addGap(0, 492, Short.MAX_VALUE)
             .addGroup(DocAnexosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(DocAnexosLayout.createSequentialGroup()
                     .addContainerGap()
@@ -2046,11 +2062,11 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         );
         ReportesLayout.setVerticalGroup(
             ReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 489, Short.MAX_VALUE)
+            .addGap(0, 492, Short.MAX_VALUE)
             .addGroup(ReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(ReportesLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(gridReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
+                    .addComponent(gridReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
                     .addContainerGap()))
         );
 
@@ -2074,7 +2090,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -2143,41 +2159,49 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         p.addLookup2ParentLink("analistaNegociador");
         SiniestroLookupController tipoController = new SiniestroLookupController(TipoSiniestro.class.getName(), tipoDetalle.getName());
         tipoController.addLookup2ParentLink("tipoSiniestro");
+        SiniestroLookupController siniLockUpControler =new SiniestroLookupController(Siniestro.class.getName(), tipoDetalle.getName());;
         SiniestroLookupController estadoController = new SiniestroLookupController(EtapaSiniestro.class.getName(), tipoDetalle.getName());
         estadoController.addLookup2ParentLink("etapaSiniestro");
-        CodLookupControl persona = null, negociador = null, tipoSiniestro = null, etapaSiniestro = null;
+        CodLookupControl persona = null, negociador = null, tipoSiniestro = null, etapaSiniestro = null, siniestro = null;
         if (tipoDetalle.equals(APS.class)) {
             persona = codLookupControl5;
             tipoSiniestro = codLookupControl6;
             etapaSiniestro = codLookupControl7;
+            siniestro = codLookupControl26;
         } else if (tipoDetalle.equals(AyudaSocial.class)) {
             persona = codLookupControl22;
             negociador = codLookupControl25;
             tipoSiniestro = codLookupControl23;
             etapaSiniestro = codLookupControl24;
+            siniestro = codLookupControl27;
         } else if (tipoDetalle.equals(CartaAval.class)) {
             persona = codLookupControl17;
             negociador = codLookupControl20;
             tipoSiniestro = codLookupControl18;
             etapaSiniestro = codLookupControl9;
+            siniestro = codLookupControl28;
         } else if (tipoDetalle.equals(Emergencia.class)) {
             persona = codLookupControl14;
             negociador = codLookupControl21;
             tipoSiniestro = codLookupControl16;
             etapaSiniestro = codLookupControl15;
+            siniestro = codLookupControl29;
         } else if (tipoDetalle.equals(Funerario.class)) {
             persona = codLookupControl8;
             tipoSiniestro = codLookupControl10;
             etapaSiniestro = codLookupControl9;
+            siniestro = codLookupControl30;
         } else if (tipoDetalle.equals(Reembolso.class)) {
             persona = codLookupControl1;
             negociador = codLookupControl2;
             tipoSiniestro = codLookupControl3;
             etapaSiniestro = codLookupControl4;
+            siniestro = codLookupControl31;
         } else if (tipoDetalle.equals(Vida.class)) {
             persona = codLookupControl11;
             tipoSiniestro = codLookupControl13;
             etapaSiniestro = codLookupControl12;
+            siniestro = codLookupControl32;
         }
         if (persona != null) {
             persona.setLookupController(lookupPersonaPago);
@@ -2198,6 +2222,14 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         if (etapaSiniestro != null) {
             etapaSiniestro.setLookupController(estadoController);
             etapaSiniestro.setControllerMethodName("getEtapaSiniestro");
+        }
+        if (siniestro != null) {
+            
+            siniLockUpControler.addLookup2ParentLink("siniestro");
+            siniestro.setLookupController(siniLockUpControler);
+            siniestro.setOpenDetail("siniestro", SiniestroDetailFrameController.class.getName(),
+                    new Class[]{String.class, GridControl.class, BeanVO.class, Boolean.class},
+                    new Object[]{SiniestroDetailFrame.class.getName(), null, null, Boolean.FALSE}, 2);
         }
 //----------------------------------------------
 
@@ -2478,7 +2510,14 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
     private org.openswing.swing.client.CodLookupControl codLookupControl23;
     private org.openswing.swing.client.CodLookupControl codLookupControl24;
     private org.openswing.swing.client.CodLookupControl codLookupControl25;
+    private org.openswing.swing.client.CodLookupControl codLookupControl26;
+    private org.openswing.swing.client.CodLookupControl codLookupControl27;
+    private org.openswing.swing.client.CodLookupControl codLookupControl28;
+    private org.openswing.swing.client.CodLookupControl codLookupControl29;
     private org.openswing.swing.client.CodLookupControl codLookupControl3;
+    private org.openswing.swing.client.CodLookupControl codLookupControl30;
+    private org.openswing.swing.client.CodLookupControl codLookupControl31;
+    private org.openswing.swing.client.CodLookupControl codLookupControl32;
     private org.openswing.swing.client.CodLookupControl codLookupControl4;
     private org.openswing.swing.client.CodLookupControl codLookupControl5;
     private org.openswing.swing.client.CodLookupControl codLookupControl6;
@@ -2681,18 +2720,11 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
     private org.openswing.swing.client.TextControl textControl10;
     private org.openswing.swing.client.TextControl textControl11;
     private org.openswing.swing.client.TextControl textControl12;
-    private org.openswing.swing.client.TextControl textControl13;
     private org.openswing.swing.client.TextControl textControl14;
-    private org.openswing.swing.client.TextControl textControl15;
     private org.openswing.swing.client.TextControl textControl16;
-    private org.openswing.swing.client.TextControl textControl17;
-    private org.openswing.swing.client.TextControl textControl2;
     private org.openswing.swing.client.TextControl textControl3;
-    private org.openswing.swing.client.TextControl textControl4;
     private org.openswing.swing.client.TextControl textControl5;
-    private org.openswing.swing.client.TextControl textControl6;
     private org.openswing.swing.client.TextControl textControl7;
-    private org.openswing.swing.client.TextControl textControl8;
     private org.openswing.swing.client.TextControl textControl9;
     // End of variables declaration//GEN-END:variables
 }

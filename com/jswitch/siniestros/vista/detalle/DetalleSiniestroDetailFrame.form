@@ -40,7 +40,7 @@
           <Group type="102" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" pref="533" max="32767" attributes="0"/>
+              <Component id="jTabbedPane1" pref="536" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -119,7 +119,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="labelControl18" linkSize="8" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="textControl4" pref="460" max="32767" attributes="0"/>
+                                  <Component id="codLookupControl26" pref="460" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="labelControl6" linkSize="8" min="-2" max="-2" attributes="0"/>
@@ -168,7 +168,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="labelControl18" linkSize="7" min="-2" pref="25" max="-2" attributes="0"/>
-                              <Component id="textControl4" linkSize="7" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="codLookupControl26" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
@@ -207,7 +207,7 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="checkBoxControl2" linkSize="7" min="-2" pref="25" max="-2" attributes="0"/>
-                          <EmptySpace pref="204" max="32767" attributes="0"/>
+                          <EmptySpace pref="207" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -319,22 +319,24 @@
                     <Property name="label" type="java.lang.String" value="siniestro.numero"/>
                   </Properties>
                 </Component>
-                <Component class="org.openswing.swing.client.TextControl" name="textControl4">
-                  <Properties>
-                    <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="&quot;siniestro.numero&quot;" type="code"/>
-                    </Property>
-                    <Property name="enabled" type="boolean" value="false"/>
-                    <Property name="enabledOnEdit" type="boolean" value="false"/>
-                    <Property name="enabledOnInsert" type="boolean" value="false"/>
-                  </Properties>
-                </Component>
                 <Component class="org.openswing.swing.client.CheckBoxControl" name="checkBoxControl2">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="auditoria.activo"/>
                     <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="&quot;auditoria.activo&quot;" type="code"/>
                     </Property>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.client.CodLookupControl" name="codLookupControl26">
+                  <Properties>
+                    <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;siniestro.numero&quot;" type="code"/>
+                    </Property>
+                    <Property name="enableCodBox" type="boolean" value="false"/>
+                    <Property name="enabledOnEdit" type="boolean" value="false"/>
+                    <Property name="enabledOnInsert" type="boolean" value="false"/>
+                    <Property name="lookupButtonVisible" type="boolean" value="false"/>
+                    <Property name="maxCharacters" type="int" value="25"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -423,7 +425,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="labelControl64" linkSize="19" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="textControl17" pref="460" max="32767" attributes="0"/>
+                                  <Component id="codLookupControl27" pref="460" max="32767" attributes="0"/>
                               </Group>
                               <Component id="checkBoxControl7" linkSize="19" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -485,13 +487,15 @@
                               <Component id="numericControl6" linkSize="18" alignment="1" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelControl64" linkSize="18" alignment="1" min="-2" pref="25" max="-2" attributes="0"/>
-                              <Component id="textControl17" linkSize="18" alignment="1" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="labelControl64" linkSize="18" min="-2" pref="25" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="checkBoxControl7" linkSize="18" min="-2" pref="25" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="codLookupControl27" linkSize="18" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="checkBoxControl7" linkSize="18" min="-2" pref="25" max="-2" attributes="0"/>
-                          <EmptySpace pref="116" max="32767" attributes="0"/>
+                          <EmptySpace pref="119" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -598,16 +602,6 @@
                     <Property name="label" type="java.lang.String" value="detalleSiniestro.etapaSiniestro"/>
                   </Properties>
                 </Component>
-                <Component class="org.openswing.swing.client.TextControl" name="textControl17">
-                  <Properties>
-                    <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="&quot;siniestro.numero&quot;" type="code"/>
-                    </Property>
-                    <Property name="enabled" type="boolean" value="false"/>
-                    <Property name="enabledOnEdit" type="boolean" value="false"/>
-                    <Property name="enabledOnInsert" type="boolean" value="false"/>
-                  </Properties>
-                </Component>
                 <Component class="org.openswing.swing.client.LabelControl" name="labelControl64">
                   <Properties>
                     <Property name="label" type="java.lang.String" value="siniestro.numero"/>
@@ -659,6 +653,18 @@
                     <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="&quot;auditoria.activo&quot;" type="code"/>
                     </Property>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.client.CodLookupControl" name="codLookupControl27">
+                  <Properties>
+                    <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;siniestro.numero&quot;" type="code"/>
+                    </Property>
+                    <Property name="enableCodBox" type="boolean" value="false"/>
+                    <Property name="enabledOnEdit" type="boolean" value="false"/>
+                    <Property name="enabledOnInsert" type="boolean" value="false"/>
+                    <Property name="lookupButtonVisible" type="boolean" value="false"/>
+                    <Property name="maxCharacters" type="int" value="25"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -747,7 +753,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="labelControl50" linkSize="17" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="textControl15" pref="460" max="32767" attributes="0"/>
+                                  <Component id="codLookupControl28" pref="460" max="32767" attributes="0"/>
                               </Group>
                               <Component id="checkBoxControl6" linkSize="17" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -811,11 +817,11 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="labelControl50" linkSize="15" min="-2" pref="25" max="-2" attributes="0"/>
-                              <Component id="textControl15" linkSize="15" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="codLookupControl28" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="checkBoxControl6" linkSize="15" min="-2" pref="25" max="-2" attributes="0"/>
-                          <EmptySpace pref="116" max="32767" attributes="0"/>
+                          <EmptySpace pref="119" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -922,16 +928,6 @@
                     <Property name="label" type="java.lang.String" value="detalleSiniestro.etapaSiniestro"/>
                   </Properties>
                 </Component>
-                <Component class="org.openswing.swing.client.TextControl" name="textControl15">
-                  <Properties>
-                    <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="&quot;siniestro.numero&quot;" type="code"/>
-                    </Property>
-                    <Property name="enabled" type="boolean" value="false"/>
-                    <Property name="enabledOnEdit" type="boolean" value="false"/>
-                    <Property name="enabledOnInsert" type="boolean" value="false"/>
-                  </Properties>
-                </Component>
                 <Component class="org.openswing.swing.client.LabelControl" name="labelControl50">
                   <Properties>
                     <Property name="label" type="java.lang.String" value="siniestro.numero"/>
@@ -983,6 +979,18 @@
                     <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="&quot;auditoria.activo&quot;" type="code"/>
                     </Property>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.client.CodLookupControl" name="codLookupControl28">
+                  <Properties>
+                    <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;siniestro.numero&quot;" type="code"/>
+                    </Property>
+                    <Property name="enableCodBox" type="boolean" value="false"/>
+                    <Property name="enabledOnEdit" type="boolean" value="false"/>
+                    <Property name="enabledOnInsert" type="boolean" value="false"/>
+                    <Property name="lookupButtonVisible" type="boolean" value="false"/>
+                    <Property name="maxCharacters" type="int" value="25"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -1069,7 +1077,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="labelControl42" linkSize="14" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="textControl13" pref="460" max="32767" attributes="0"/>
+                                  <Component id="codLookupControl29" pref="460" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="labelControl56" linkSize="14" min="-2" max="-2" attributes="0"/>
@@ -1148,7 +1156,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="labelControl42" linkSize="13" min="-2" pref="25" max="-2" attributes="0"/>
-                              <Component id="textControl13" linkSize="13" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="codLookupControl29" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
@@ -1167,7 +1175,7 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="checkBoxControl5" linkSize="13" min="-2" pref="25" max="-2" attributes="0"/>
-                          <EmptySpace pref="23" max="32767" attributes="0"/>
+                          <EmptySpace pref="26" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1249,6 +1257,7 @@
                     <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="&quot;clave&quot;" type="code"/>
                     </Property>
+                    <Property name="enabledOnInsert" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Component class="org.openswing.swing.client.TextControl" name="textControl11">
@@ -1323,16 +1332,6 @@
                     <Property name="label" type="java.lang.String" value="siniestro.numero"/>
                   </Properties>
                 </Component>
-                <Component class="org.openswing.swing.client.TextControl" name="textControl13">
-                  <Properties>
-                    <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="&quot;siniestro.numero&quot;" type="code"/>
-                    </Property>
-                    <Property name="enabled" type="boolean" value="false"/>
-                    <Property name="enabledOnEdit" type="boolean" value="false"/>
-                    <Property name="enabledOnInsert" type="boolean" value="false"/>
-                  </Properties>
-                </Component>
                 <Component class="org.openswing.swing.client.LabelControl" name="labelControl54">
                   <Properties>
                     <Property name="label" type="java.lang.String" value="presupuestadoAjustado"/>
@@ -1371,6 +1370,18 @@
                       <Connection code="&quot;presupuestadoAjustado&quot;" type="code"/>
                     </Property>
                     <Property name="required" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.client.CodLookupControl" name="codLookupControl29">
+                  <Properties>
+                    <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;siniestro.numero&quot;" type="code"/>
+                    </Property>
+                    <Property name="enableCodBox" type="boolean" value="false"/>
+                    <Property name="enabledOnEdit" type="boolean" value="false"/>
+                    <Property name="enabledOnInsert" type="boolean" value="false"/>
+                    <Property name="lookupButtonVisible" type="boolean" value="false"/>
+                    <Property name="maxCharacters" type="int" value="25"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -1454,7 +1465,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="labelControl24" linkSize="10" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="textControl6" pref="480" max="32767" attributes="0"/>
+                                  <Component id="codLookupControl30" pref="490" max="32767" attributes="0"/>
                               </Group>
                               <Component id="checkBoxControl3" linkSize="10" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -1493,7 +1504,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="labelControl24" linkSize="9" min="-2" pref="25" max="-2" attributes="0"/>
-                              <Component id="textControl6" linkSize="9" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="codLookupControl30" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="checkBoxControl3" linkSize="9" min="-2" pref="25" max="-2" attributes="0"/>
@@ -1582,19 +1593,21 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="org.openswing.swing.client.TextControl" name="textControl6">
+                <Component class="org.openswing.swing.client.LabelControl" name="labelControl24">
+                  <Properties>
+                    <Property name="label" type="java.lang.String" value="siniestro.numero"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.client.CodLookupControl" name="codLookupControl30">
                   <Properties>
                     <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="&quot;siniestro.numero&quot;" type="code"/>
                     </Property>
-                    <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="enableCodBox" type="boolean" value="false"/>
                     <Property name="enabledOnEdit" type="boolean" value="false"/>
                     <Property name="enabledOnInsert" type="boolean" value="false"/>
-                  </Properties>
-                </Component>
-                <Component class="org.openswing.swing.client.LabelControl" name="labelControl24">
-                  <Properties>
-                    <Property name="label" type="java.lang.String" value="siniestro.numero"/>
+                    <Property name="lookupButtonVisible" type="boolean" value="false"/>
+                    <Property name="maxCharacters" type="int" value="25"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -1682,7 +1695,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="labelControl11" linkSize="6" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="textControl2" pref="460" max="32767" attributes="0"/>
+                                  <Component id="codLookupControl31" pref="460" max="32767" attributes="0"/>
                               </Group>
                               <Component id="checkBoxControl1" linkSize="6" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -1746,11 +1759,11 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="labelControl11" linkSize="5" min="-2" max="-2" attributes="0"/>
-                              <Component id="textControl2" linkSize="5" min="-2" max="-2" attributes="0"/>
+                              <Component id="codLookupControl31" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="checkBoxControl1" linkSize="5" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="142" max="32767" attributes="0"/>
+                          <EmptySpace pref="143" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1870,16 +1883,6 @@
                     <Property name="label" type="java.lang.String" value="detalleSiniestro.fechaConstitucion"/>
                   </Properties>
                 </Component>
-                <Component class="org.openswing.swing.client.TextControl" name="textControl2">
-                  <Properties>
-                    <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="&quot;siniestro.numero&quot;" type="code"/>
-                    </Property>
-                    <Property name="enabled" type="boolean" value="false"/>
-                    <Property name="enabledOnEdit" type="boolean" value="false"/>
-                    <Property name="enabledOnInsert" type="boolean" value="false"/>
-                  </Properties>
-                </Component>
                 <Component class="org.openswing.swing.client.CodLookupControl" name="codLookupControl2">
                   <Properties>
                     <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -1918,6 +1921,18 @@
                       <Connection code="&quot;fechaVencimiento&quot;" type="code"/>
                     </Property>
                     <Property name="required" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.client.CodLookupControl" name="codLookupControl31">
+                  <Properties>
+                    <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;siniestro.numero&quot;" type="code"/>
+                    </Property>
+                    <Property name="enableCodBox" type="boolean" value="false"/>
+                    <Property name="enabledOnEdit" type="boolean" value="false"/>
+                    <Property name="enabledOnInsert" type="boolean" value="false"/>
+                    <Property name="lookupButtonVisible" type="boolean" value="false"/>
+                    <Property name="maxCharacters" type="int" value="25"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -1987,7 +2002,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="labelControl31" linkSize="12" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="textControl8" pref="460" max="32767" attributes="0"/>
+                                  <Component id="codLookupControl32" pref="460" max="32767" attributes="0"/>
                               </Group>
                               <Component id="checkBoxControl4" linkSize="12" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -2031,7 +2046,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="labelControl31" linkSize="11" min="-2" pref="25" max="-2" attributes="0"/>
-                              <Component id="textControl8" linkSize="11" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="codLookupControl32" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="checkBoxControl4" linkSize="11" min="-2" pref="25" max="-2" attributes="0"/>
@@ -2138,22 +2153,24 @@
                     <Property name="label" type="java.lang.String" value="siniestro.numero"/>
                   </Properties>
                 </Component>
-                <Component class="org.openswing.swing.client.TextControl" name="textControl8">
-                  <Properties>
-                    <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="&quot;siniestro.numero&quot;" type="code"/>
-                    </Property>
-                    <Property name="enabled" type="boolean" value="false"/>
-                    <Property name="enabledOnEdit" type="boolean" value="false"/>
-                    <Property name="enabledOnInsert" type="boolean" value="false"/>
-                  </Properties>
-                </Component>
                 <Component class="org.openswing.swing.client.CheckBoxControl" name="checkBoxControl4">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="auditoria.activo"/>
                     <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="&quot;auditoria.activo&quot;" type="code"/>
                     </Property>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.client.CodLookupControl" name="codLookupControl32">
+                  <Properties>
+                    <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;siniestro.numero&quot;" type="code"/>
+                    </Property>
+                    <Property name="enableCodBox" type="boolean" value="false"/>
+                    <Property name="enabledOnEdit" type="boolean" value="false"/>
+                    <Property name="enabledOnInsert" type="boolean" value="false"/>
+                    <Property name="lookupButtonVisible" type="boolean" value="false"/>
+                    <Property name="maxCharacters" type="int" value="25"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -2184,7 +2201,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="489" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="492" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -2219,9 +2236,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanel23" min="-2" max="-2" attributes="1"/>
-                          <EmptySpace pref="365" max="32767" attributes="0"/>
+                          <EmptySpace pref="368" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="gridDiagnosticos" alignment="0" pref="465" max="32767" attributes="2"/>
+                      <Component id="gridDiagnosticos" alignment="0" pref="468" max="32767" attributes="2"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -2347,8 +2364,8 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                     <Property name="columns" type="int" value="2"/>
-                    <Property name="horizontalGap" type="int" value="2"/>
                     <Property name="rows" type="int" value="3"/>
+                    <Property name="horizontalGap" type="int" value="2"/>
                     <Property name="verticalGap" type="int" value="2"/>
                   </Layout>
                   <SubComponents>
@@ -2414,9 +2431,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="jPanel16" min="-2" max="-2" attributes="1"/>
-                          <EmptySpace pref="367" max="32767" attributes="0"/>
+                          <EmptySpace pref="370" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="gridControl6" alignment="0" pref="467" max="32767" attributes="2"/>
+                      <Component id="gridControl6" alignment="0" pref="470" max="32767" attributes="2"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -2425,8 +2442,8 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                     <Property name="columns" type="int" value="2"/>
-                    <Property name="horizontalGap" type="int" value="2"/>
                     <Property name="rows" type="int" value="3"/>
+                    <Property name="horizontalGap" type="int" value="2"/>
                     <Property name="verticalGap" type="int" value="2"/>
                   </Layout>
                   <SubComponents>
@@ -2588,7 +2605,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="489" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="492" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -2623,9 +2640,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanel13" min="-2" max="-2" attributes="1"/>
-                          <EmptySpace pref="365" max="32767" attributes="0"/>
+                          <EmptySpace pref="368" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="gridControl4" alignment="0" pref="465" max="32767" attributes="2"/>
+                      <Component id="gridControl4" alignment="0" pref="468" max="32767" attributes="2"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -2721,8 +2738,8 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                     <Property name="columns" type="int" value="2"/>
-                    <Property name="horizontalGap" type="int" value="2"/>
                     <Property name="rows" type="int" value="3"/>
+                    <Property name="horizontalGap" type="int" value="2"/>
                     <Property name="verticalGap" type="int" value="2"/>
                   </Layout>
                   <SubComponents>
@@ -2766,7 +2783,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="489" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="492" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -2801,9 +2818,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanel15" min="-2" max="-2" attributes="1"/>
-                          <EmptySpace pref="365" max="32767" attributes="0"/>
+                          <EmptySpace pref="368" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="gridControl5" alignment="0" pref="465" max="32767" attributes="2"/>
+                      <Component id="gridControl5" alignment="0" pref="468" max="32767" attributes="2"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -2893,8 +2910,8 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                     <Property name="columns" type="int" value="2"/>
-                    <Property name="horizontalGap" type="int" value="2"/>
                     <Property name="rows" type="int" value="3"/>
+                    <Property name="horizontalGap" type="int" value="2"/>
                     <Property name="verticalGap" type="int" value="2"/>
                   </Layout>
                   <SubComponents>
@@ -2934,7 +2951,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="489" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="492" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -2974,7 +2991,7 @@
                       </Group>
                       <Group type="102" attributes="0">
                           <EmptySpace min="12" pref="12" max="12" attributes="0"/>
-                          <Component id="gridControl3" pref="453" max="32767" attributes="1"/>
+                          <Component id="gridControl3" pref="456" max="32767" attributes="1"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -3070,8 +3087,8 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                     <Property name="columns" type="int" value="2"/>
-                    <Property name="horizontalGap" type="int" value="2"/>
                     <Property name="rows" type="int" value="3"/>
+                    <Property name="horizontalGap" type="int" value="2"/>
                     <Property name="verticalGap" type="int" value="2"/>
                   </Layout>
                   <SubComponents>
@@ -3117,11 +3134,11 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="489" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="492" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="gridReportes" pref="467" max="32767" attributes="2"/>
+                          <Component id="gridReportes" pref="470" max="32767" attributes="2"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>

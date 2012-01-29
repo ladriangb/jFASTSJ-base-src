@@ -30,6 +30,7 @@ public class OrdenDePagoGridFrame extends DefaultGridFrame {
         saveButton1 = new org.openswing.swing.client.SaveButton();
         gridData = new org.openswing.swing.client.GridControl();
         decimalColumn1 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        textColumn8 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn6 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn7 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn3 = new org.openswing.swing.table.columns.client.TextColumn();
@@ -91,6 +92,11 @@ public class OrdenDePagoGridFrame extends DefaultGridFrame {
         decimalColumn1.setGrouping(false);
         decimalColumn1.setPreferredWidth(40);
         gridData.getColumnContainer().add(decimalColumn1);
+
+        textColumn8.setColumnFilterable(true);
+        textColumn8.setColumnName("estatusPago");
+        textColumn8.setColumnSortable(true);
+        gridData.getColumnContainer().add(textColumn8);
 
         textColumn6.setColumnFilterable(true);
         textColumn6.setColumnName("personaPago.rif.rif");
@@ -207,5 +213,6 @@ public class OrdenDePagoGridFrame extends DefaultGridFrame {
     private org.openswing.swing.table.columns.client.TextColumn textColumn5;
     private org.openswing.swing.table.columns.client.TextColumn textColumn6;
     private org.openswing.swing.table.columns.client.TextColumn textColumn7;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn8;
     // End of variables declaration//GEN-END:variables
 }
