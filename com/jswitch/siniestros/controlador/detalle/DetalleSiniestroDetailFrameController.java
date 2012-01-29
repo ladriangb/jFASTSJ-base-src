@@ -57,7 +57,9 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
             JOptionPane.showMessageDialog(gridControl, ClientSettings.getInstance().getResources().getResource("noRamo.vida"), General.edition, JOptionPane.INFORMATION_MESSAGE);
             return;
         } else if (tipoDetalle.equals(Funerario.class) && !checkRamo("FUNE")) {
-            JOptionPane.showMessageDialog(gridControl, ClientSettings.getInstance().getResources().getResource("noRamo.funerario"), General.edition, JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(gridControl, 
+                    ClientSettings.getInstance().getResources().getResource("noRamo.funerario"),
+                    General.edition, JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         this.gridControl = gridControl;
@@ -81,7 +83,7 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
         etapaInicial.put(Emergencia.class, "CARTA");
         etapaInicial.put(Funerario.class, "CARTA");
         etapaInicial.put(Reembolso.class, "CARTA");
-        etapaInicial.put(Vida.class, "CARTA");
+        etapaInicial.put(Vida.class, "VIDA");
 
     }
 
@@ -105,7 +107,6 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
         if (((DetalleSiniestroDetailFrame) vista).getInsertButtonPagos().equals(e.getSource())) {
             new FacturaDetailFrameController(FacturaDetailFrame.class.getName(), ((DetalleSiniestroDetailFrame) vista).getGridPagos(),
                     (DetalleSiniestro) beanVO, true, vista.getMainPanel().getReloadButton());
@@ -211,38 +212,7 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
 
             if (d.getEtapaSiniestro().getId().compareTo(
                     es.getId()) == 0) {
-                Double l = 0d, f = 0d, c = 0d;
-                Double iva = 0d, islr = 0d, rIva = 0d, rIslr = 0d;
-                Double gC = 0d, hM = 0d, nA = 0d;
-                for (Factura factura : d.getPagos()) {
-                    iva += factura.getMontoIva();
-                    islr += factura.getMontoRetencionIsrl();
-
-                    rIva += factura.getMontoRetencionIva();
-                    rIslr += factura.getMontoRetencionIsrl();
-
-                    gC += factura.getGastosClinicos();
-                    hM += factura.getHonorariosMedicos();
-                    nA += factura.getMontoNoAmparado();
-                    l += factura.getTotalLiquidado();
-                    f += factura.getTotalFacturado();
-                    c += factura.getTotalACancelar();
-                }
-
-                d.setMontoIva(iva);
-                d.setMontoIslr(islr);
-                
-                d.setMontoRetenidoIslr(rIslr);
-                d.setMontoRetenidoIva(rIva);
-                
-                d.setMontoGastosClinicos(gC);
-                d.setMontoHonorariosMedicos(hM);
-                
-                d.setMontoNoAmparado(nA);
-                d.setMontoACancelar(c);
-                d.setMontoFacturado(f);
-                d.setMontoLiquidado(l);
-                d.setFechaLiquidado(new Date());
+                d = liquidar(d);
             }
         } catch (Exception e) {
             LoggerUtil.error(this.getClass(), "logicade negocios", e);
@@ -251,6 +221,54 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
             s.close();
         }
         return new VOResponse(d);
+    }
+
+    private DetalleSiniestro liquidar(DetalleSiniestro d) {
+        Double l = 0d, r = 0d, f = 0d, c = 0d;
+        Double baseIva = 0d, iva = 0d, rIva = 0d, baseIslr = 0d, rIslr = 0d;
+        Double gC = 0d, hM = 0d, nA = 0d, am = 0d, de = 0d, tm = 0d, dPP = 0d;
+        Integer i = 0;
+        for (Factura factura : d.getPagos()) {
+            if (factura.getAuditoria().getActivo().booleanValue()) {
+                i++;
+                baseIva += factura.getBaseIva();
+                iva += factura.getMontoIva();
+                rIva += factura.getMontoRetencionIva();
+                baseIslr += factura.getBaseIslr();
+                rIslr += factura.getMontoRetencionIsrl();
+                gC += factura.getGastosClinicos();
+                hM += factura.getHonorariosMedicos();
+                am += factura.getMontoAmparado();
+                de += factura.getMontoDeducible();
+                dPP += factura.getMontoDescuentoProntoPago();
+                nA += factura.getMontoNoAmparado();
+                tm += factura.getMontoTM();
+                r += factura.getTotalRetenido();
+                l += factura.getTotalLiquidado();
+                f += factura.getTotalFacturado();
+                c += factura.getTotalACancelar();
+            }
+        }
+        d.setCantidadFacturas(i);
+        d.setMontoIva(iva);
+        d.setMontoBaseIva(baseIva);
+        d.setMontoRetenidoIva(rIva);
+        d.setMontoBaseIslr(baseIslr);
+        d.setMontoRetenidoIslr(rIslr);
+        d.setMontoGastosClinicos(gC);
+        d.setMontoHonorariosMedicos(hM);
+        d.setMontoAmparado(am);
+        d.setMontoDeducible(de);
+        d.setMontoProntoPago(dPP);
+        d.setMontoNoAmparado(nA);
+        d.setMontoTM(tm);
+        d.setMontoRetenido(r);
+        d.setMontoACancelar(c);
+        d.setMontoFacturado(f);
+        d.setMontoLiquidado(l);
+        d.setFechaLiquidado(new Date());
+
+        return d;
     }
 
     private void checkStatus() {

@@ -55,6 +55,28 @@ public class SumaAmparadaPorPlanLookupController extends DefaultLookupController
         }
 
         @Override
+        public Response validateCode(String code) {
+            Session s = null;
+            try {
+                String sql = "FROM " + SumaAmparada.class.getName()
+                        + " C WHERE C.auditoria.activo=? AND plan.id=? AND nombre like ?";
+                SessionFactory sf = HibernateUtil.getSessionFactory();
+                s = sf.openSession();
+                s.createQuery(sql).
+                        setBoolean(0, Boolean.TRUE).
+                        setLong(1, plan.getId()).
+                        setString(2, "%" + code + "%");
+                return super.validateCode(code);
+            } catch (Exception ex) {
+                LoggerUtil.error(this.getClass(), "loadData", ex);
+                return new ErrorResponse(ex.getMessage());
+            } finally {
+                s.close();
+            }
+
+        }
+
+        @Override
         public Response loadData(int action,
                 int startIndex,
                 Map filteredColumns,

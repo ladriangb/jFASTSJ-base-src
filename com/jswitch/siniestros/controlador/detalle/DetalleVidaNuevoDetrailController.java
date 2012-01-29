@@ -1,12 +1,15 @@
 package com.jswitch.siniestros.controlador.detalle;
 
 import com.jswitch.asegurados.modelo.maestra.Beneficiario;
+import com.jswitch.base.controlador.General;
+import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.certificados.modelo.maestra.Certificado;
 import com.jswitch.configuracion.modelo.dominio.Ramo;
 import com.jswitch.configuracion.modelo.dominio.patologias.Diagnostico;
+import com.jswitch.configuracion.modelo.maestra.Plan;
 import com.jswitch.configuracion.modelo.transaccional.SumaAsegurada;
 import com.jswitch.fas.controlador.Principal;
 import com.jswitch.fas.modelo.Dominios.TratamientoEfectuado;
@@ -19,6 +22,7 @@ import com.jswitch.siniestros.modelo.utilitario.DetalleVida;
 import com.jswitch.siniestros.vista.detalle.DetalleVidaNuevoDetailFrame;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.classic.Session;
@@ -26,6 +30,7 @@ import org.openswing.swing.client.GridControl;
 import org.openswing.swing.message.receive.java.Response;
 import org.openswing.swing.message.receive.java.VOResponse;
 import org.openswing.swing.message.receive.java.ValueObject;
+import org.openswing.swing.util.client.ClientSettings;
 
 /**
  *
@@ -39,12 +44,18 @@ public class DetalleVidaNuevoDetrailController extends DefaultDetailFrameControl
         super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
         this.siniestro = siniestro;
         ((DetalleVidaNuevoDetailFrame) vista).setPlanToLookup(siniestro.getAsegurado().getPlan());
+        if (!checkRamo("VIDA")) {
+            JOptionPane.showMessageDialog(gridControl,
+                    ClientSettings.getInstance().getResources().getResource("noRamo.vida"),
+                    General.edition, JOptionPane.INFORMATION_MESSAGE);
+            vista.setVisible(false);
+            vista.dispose();
+            return;
+        }
     }
 
     @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
-
-
         Session s = HibernateUtil.getSessionFactory().openSession();
         Certificado sin = (Certificado) s.get(Certificado.class, (siniestro.getCertificado()).getId());
         Hibernate.initialize(sin.getBeneficiarios());
@@ -88,6 +99,25 @@ public class DetalleVidaNuevoDetrailController extends DefaultDetailFrameControl
         }
         vista.dispose();
         return new VOResponse(newPersistentObject);
+    }
+
+    private boolean checkRamo(String nombreRamo) {
+        Session s = null;
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+            Query q = s.createQuery("SELECT 1 AS SW FROM " + Plan.class.getName() + " P "
+                    + " JOIN P.sumasAseguradas S "
+                    + " WHERE S.diagnostico.especialidad.ramo.idPropio='" + nombreRamo + "'"
+                    + " AND P.id=?");
+            List l = q.setLong(0, siniestro.getAsegurado().getPlan().getId()).list();
+            return (l != null && l.size() > 0)
+                    ? true : false;
+        } catch (Exception ex) {
+            LoggerUtil.error(this.getClass(), "checkRamo", ex);
+            return false;
+        } finally {
+            s.close();
+        }
     }
 
     private Double getIndemValue(Diagnostico diagnostico) {

@@ -96,6 +96,16 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private Dominios.EstatusPago estatusPago;
     /**
+     * suma de facturas dentro de todos los detalles de la orden
+     */
+    @Column
+    private Integer cantidadFacturas;
+    /**
+     * Cantidad de Detalles Siniestros en la orden de pago
+     */
+    @Column
+    private Integer cantidadDetalles;
+    /**
      * Cantidad de Siniestros de Titulares
      */
     @Column
@@ -105,6 +115,121 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
      */
     @Column
     private Integer numeroSiniestrosFamiliar;
+    /**
+     * Busqueda automatica de Detalles de Siniestro
+     */
+    @Column
+    private Boolean autoSearch;
+    /**
+     * Si es seleccionado por una orden de pago
+     */
+    @Transient
+    private transient Boolean selected;
+    /**
+     * Suma de todos los montos a pagar a Titulares
+     */
+    @Column
+    private Double montoTitulares;
+    /**
+     * Suma de todos los montos a pagar a Beneficiarios
+     */
+    @Column
+    private Double montoFamiliar;
+    /**
+     * monto a pagar
+     */
+    /**
+     * total facturado en todas las facturas
+     */
+    @Column
+    private Double montoRetenido;
+    /**
+     * total facturado en todas las facturas
+     */
+    @Column
+    private Double montoFacturado;
+    /**
+     * total liquidado todas las facturas
+     */
+    @Column
+    private Double montoLiquidado;
+    /**
+     * total a cancelar
+     */
+    @Column
+    private Double montoACancelar;
+    /**
+     * total gastos medicos
+     */
+    @Column
+    private Double montoHonorariosMedicos;
+    /**
+     * total gastos clinicos
+     */
+    @Column
+    private Double montoGastosClinicos;
+    /**
+     * total Amparado
+     */
+    @Column
+    private Double montoAmparado;
+    /**
+     * total monto no amparado
+     */
+    @Column
+    private Double montoNoAmparado;
+    /**
+     * total base de la base del iva
+     */
+    @Column
+    private Double montoBaseIva;
+    /**
+     * total monto del iva
+     */
+    @Column
+    private Double montoIva;
+    /**
+     * monto retenido por iva
+     */
+    @Column
+    private Double montoRetenidoIva;
+    /**
+     * total base de la base del islr
+     */
+    @Column
+    private Double montoBaseIslr;
+    /**
+     * monto retenido por Islr
+     */
+    @Column
+    private Double montoRetenidoIslr;
+    /**
+     * monto deducible
+     */
+    @Column
+    private Double montoDeducible;
+    /**
+     * total monto Pronto Pago
+     */
+    @Column
+    private Double montoProntoPago;
+    /**
+     * porcentaje pronto pago
+     */
+    @Column
+    private Double porcentajeProntoPago;
+    /**
+     * total monto timbre municipal
+     */
+    @Column
+    private Double montoTM;
+    /**
+     * tipo de detalles de siniestro a cancelar
+     */
+    @Column
+    @Enumerated(EnumType.STRING)
+    @BusinessKey
+    private Dominios.TipoDetalleSiniestro tipoDetalleSiniestro;
     /**
      * version
      */
@@ -117,48 +242,6 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     @Embedded
     @BusinessKey
     private AuditoriaBasica auditoria;
-    /**
-     * Busqueda automatica de Detalles de Siniestro
-     */
-    @Column
-    private Boolean autoSearch;
-    /**
-     * Si es seleccionado por una orden de pago
-     */
-    @Transient
-    private transient Boolean selected;
-    /**
-     * monto a pagar
-     */
-    @Column
-    private Double montoPagar;
-    /**
-     * Suma de todos los montos a pagar a Titulares
-     */
-    @Column
-    private Double montoTitulares;
-    /**
-     * Suma de todos los montos a pagar a Beneficiarios
-     */
-    @Column
-    private Double montoFamiliar;
-    /**
-     * Suma de todos los montos a pagar de I.S.L.R.
-     */
-    @Column
-    private Double montoISLR;
-    /**
-     * Suma de todos los montos a pagar de I.V.A
-     */
-    @Column
-    private Double montoIVA;
-    /**
-     * tipo de detalles de siniestro a cancelar
-     */
-    @Column
-    @Enumerated(EnumType.STRING)
-    @BusinessKey
-    private Dominios.TipoDetalleSiniestro tipoDetalleSiniestro;
     /**
      * Coleccion de etapas de siniestro y las fechas de los cambios
      */
@@ -185,7 +268,6 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     private Set<Documento> documentos = new HashSet<Documento>(0);
 
     public OrdenDePago() {
-        montoPagar = 0d;
         tipoDetalleSiniestro = TipoDetalleSiniestro.Todos;
     }
 
@@ -254,11 +336,147 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     * monto a pagar
-     * @return the montoPagar
+     * total a cancelar
+     * @return the montoACancelar
      */
-    public Double getMontoPagar() {
-        return montoPagar;
+    public Double getMontoACancelar() {
+        return montoACancelar;
+    }
+
+    /**
+     * total Amparado
+     * @return the montoAmparado
+     */
+    public Double getMontoAmparado() {
+        return montoAmparado;
+    }
+
+    /**
+     * total base de la base del islr
+     * @return the montoBaseIslr
+     */
+    public Double getMontoBaseIslr() {
+        return montoBaseIslr;
+    }
+
+    /**
+     * total base de la base del iva
+     * @return the montoBaseIva
+     */
+    public Double getMontoBaseIva() {
+        return montoBaseIva;
+    }
+
+    /**
+     * monto deducible
+     * @return the montoDeducible
+     */
+    public Double getMontoDeducible() {
+        return montoDeducible;
+    }
+
+    /**
+     * total facturado en todas las facturas
+     * @return the montoFacturado
+     */
+    public Double getMontoFacturado() {
+        return montoFacturado;
+    }
+
+    /**
+     * Suma de todos los montos a pagar a Beneficiarios
+     * @return the montoFamiliar
+     */
+    public Double getMontoFamiliar() {
+        return montoFamiliar;
+    }
+
+    /**
+     * total gastos clinicos
+     * @return the montoGastosClinicos
+     */
+    public Double getMontoGastosClinicos() {
+        return montoGastosClinicos;
+    }
+
+    /**
+     * total gastos medicos
+     * @return the montoHonorariosMedicos
+     */
+    public Double getMontoHonorariosMedicos() {
+        return montoHonorariosMedicos;
+    }
+
+    /**
+     * total monto del iva
+     * @return the montoIva
+     */
+    public Double getMontoIva() {
+        return montoIva;
+    }
+
+    /**
+     * total liquidado todas las facturas
+     * @return the montoLiquidado
+     */
+    public Double getMontoLiquidado() {
+        return montoLiquidado;
+    }
+
+    /**
+     * total monto no amparado
+     * @return the montoNoAmparado
+     */
+    public Double getMontoNoAmparado() {
+        return montoNoAmparado;
+    }
+
+    /**
+     * total monto Pronto Pago
+     * @return the montoProntoPago
+     */
+    public Double getMontoProntoPago() {
+        return montoProntoPago;
+    }
+
+    /**
+     * total facturado en todas las facturas
+     * @return the montoRetenido
+     */
+    public Double getMontoRetenido() {
+        return montoRetenido;
+    }
+
+    /**
+     * monto retenido por Islr
+     * @return the montoRetenidoIslr
+     */
+    public Double getMontoRetenidoIslr() {
+        return montoRetenidoIslr;
+    }
+
+    /**
+     * monto retenido por iva
+     * @return the montoRetenidoIva
+     */
+    public Double getMontoRetenidoIva() {
+        return montoRetenidoIva;
+    }
+
+    /**
+     * total monto timbre municipal
+     * @return the montoTM
+     */
+    public Double getMontoTM() {
+        return montoTM;
+    }
+
+    /**
+     * Suma de todos los montos a pagar a Titulares
+     * @return the montoTitulares
+     */
+    public Double getMontoTitulares() {
+        return montoTitulares;
     }
 
     /**
@@ -275,6 +493,22 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
      */
     public String getNumeroOrden() {
         return numeroOrden;
+    }
+
+    /**
+     * Cantidad de Siniestros de Famililiares asegurados
+     * @return the numeroSiniestrosFamiliar
+     */
+    public Integer getNumeroSiniestrosFamiliar() {
+        return numeroSiniestrosFamiliar;
+    }
+
+    /**
+     * Cantidad de Siniestros de Titulares
+     * @return the numeroSiniestrosTitular
+     */
+    public Integer getNumeroSiniestrosTitular() {
+        return numeroSiniestrosTitular;
     }
 
     /**
@@ -302,6 +536,14 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     }
 
     /**
+     * porcentaje pronto pago
+     * @return the porcentajeProntoPago
+     */
+    public Double getPorcentajeProntoPago() {
+        return porcentajeProntoPago;
+    }
+
+    /**
      * referencia del pago
      * @return the referencia
      */
@@ -310,13 +552,18 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     }
 
     /**
+     * Remesa a la cual esta vinculado el pago
+     * @return the remesa
+     */
+    public Remesa getRemesa() {
+        return remesa;
+    }
+
+    /**
      * Si es seleccionado por una orden de pago
      * @return the selected
      */
     public Boolean getSelected() {
-        if (selected == null) {
-            selected = Boolean.FALSE;
-        }
         return selected;
     }
 
@@ -393,11 +640,147 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     * monto a pagar
-     * @param montoPagar the montoPagar to set
+     * total a cancelar
+     * @param montoACancelar the montoACancelar to set
      */
-    public void setMontoPagar(Double montoPagar) {
-        this.montoPagar = montoPagar;
+    public void setMontoACancelar(Double montoACancelar) {
+        this.montoACancelar = montoACancelar;
+    }
+
+    /**
+     * total Amparado
+     * @param montoAmparado the montoAmparado to set
+     */
+    public void setMontoAmparado(Double montoAmparado) {
+        this.montoAmparado = montoAmparado;
+    }
+
+    /**
+     * total base de la base del islr
+     * @param montoBaseIslr the montoBaseIslr to set
+     */
+    public void setMontoBaseIslr(Double montoBaseIslr) {
+        this.montoBaseIslr = montoBaseIslr;
+    }
+
+    /**
+     * total base de la base del iva
+     * @param montoBaseIva the montoBaseIva to set
+     */
+    public void setMontoBaseIva(Double montoBaseIva) {
+        this.montoBaseIva = montoBaseIva;
+    }
+
+    /**
+     * monto deducible
+     * @param montoDeducible the montoDeducible to set
+     */
+    public void setMontoDeducible(Double montoDeducible) {
+        this.montoDeducible = montoDeducible;
+    }
+
+    /**
+     * total facturado en todas las facturas
+     * @param montoFacturado the montoFacturado to set
+     */
+    public void setMontoFacturado(Double montoFacturado) {
+        this.montoFacturado = montoFacturado;
+    }
+
+    /**
+     * Suma de todos los montos a pagar a Beneficiarios
+     * @param montoFamiliar the montoFamiliar to set
+     */
+    public void setMontoFamiliar(Double montoFamiliar) {
+        this.montoFamiliar = montoFamiliar;
+    }
+
+    /**
+     * total gastos clinicos
+     * @param montoGastosClinicos the montoGastosClinicos to set
+     */
+    public void setMontoGastosClinicos(Double montoGastosClinicos) {
+        this.montoGastosClinicos = montoGastosClinicos;
+    }
+
+    /**
+     * total gastos medicos
+     * @param montoHonorariosMedicos the montoHonorariosMedicos to set
+     */
+    public void setMontoHonorariosMedicos(Double montoHonorariosMedicos) {
+        this.montoHonorariosMedicos = montoHonorariosMedicos;
+    }
+
+    /**
+     * total monto del iva
+     * @param montoIva the montoIva to set
+     */
+    public void setMontoIva(Double montoIva) {
+        this.montoIva = montoIva;
+    }
+
+    /**
+     * total liquidado todas las facturas
+     * @param montoLiquidado the montoLiquidado to set
+     */
+    public void setMontoLiquidado(Double montoLiquidado) {
+        this.montoLiquidado = montoLiquidado;
+    }
+
+    /**
+     * total monto no amparado
+     * @param montoNoAmparado the montoNoAmparado to set
+     */
+    public void setMontoNoAmparado(Double montoNoAmparado) {
+        this.montoNoAmparado = montoNoAmparado;
+    }
+
+    /**
+     * total monto Pronto Pago
+     * @param montoProntoPago the montoProntoPago to set
+     */
+    public void setMontoProntoPago(Double montoProntoPago) {
+        this.montoProntoPago = montoProntoPago;
+    }
+
+    /**
+     * total facturado en todas las facturas
+     * @param montoRetenido the montoRetenido to set
+     */
+    public void setMontoRetenido(Double montoRetenido) {
+        this.montoRetenido = montoRetenido;
+    }
+
+    /**
+     * monto retenido por Islr
+     * @param montoRetenidoIslr the montoRetenidoIslr to set
+     */
+    public void setMontoRetenidoIslr(Double montoRetenidoIslr) {
+        this.montoRetenidoIslr = montoRetenidoIslr;
+    }
+
+    /**
+     * monto retenido por iva
+     * @param montoRetenidoIva the montoRetenidoIva to set
+     */
+    public void setMontoRetenidoIva(Double montoRetenidoIva) {
+        this.montoRetenidoIva = montoRetenidoIva;
+    }
+
+    /**
+     * total monto timbre municipal
+     * @param montoTM the montoTM to set
+     */
+    public void setMontoTM(Double montoTM) {
+        this.montoTM = montoTM;
+    }
+
+    /**
+     * Suma de todos los montos a pagar a Titulares
+     * @param montoTitulares the montoTitulares to set
+     */
+    public void setMontoTitulares(Double montoTitulares) {
+        this.montoTitulares = montoTitulares;
     }
 
     /**
@@ -414,6 +797,22 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
      */
     public void setNumeroOrden(String numeroOrden) {
         this.numeroOrden = numeroOrden;
+    }
+
+    /**
+     * Cantidad de Siniestros de Famililiares asegurados
+     * @param numeroSiniestrosFamiliar the numeroSiniestrosFamiliar to set
+     */
+    public void setNumeroSiniestrosFamiliar(Integer numeroSiniestrosFamiliar) {
+        this.numeroSiniestrosFamiliar = numeroSiniestrosFamiliar;
+    }
+
+    /**
+     * Cantidad de Siniestros de Titulares
+     * @param numeroSiniestrosTitular the numeroSiniestrosTitular to set
+     */
+    public void setNumeroSiniestrosTitular(Integer numeroSiniestrosTitular) {
+        this.numeroSiniestrosTitular = numeroSiniestrosTitular;
     }
 
     /**
@@ -441,11 +840,27 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     }
 
     /**
+     * porcentaje pronto pago
+     * @param porcentajeProntoPago the porcentajeProntoPago to set
+     */
+    public void setPorcentajeProntoPago(Double porcentajeProntoPago) {
+        this.porcentajeProntoPago = porcentajeProntoPago;
+    }
+
+    /**
      * referencia del pago
      * @param referencia the referencia to set
      */
     public void setReferencia(String referencia) {
         this.referencia = referencia;
+    }
+
+    /**
+     * Remesa a la cual esta vinculado el pago
+     * @param remesa the remesa to set
+     */
+    public void setRemesa(Remesa remesa) {
+        this.remesa = remesa;
     }
 
     /**
@@ -464,91 +879,35 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
         this.tipoDetalleSiniestro = tipoDetalleSiniestro;
     }
 
-    public Double getMontoISLR() {
-        return montoISLR;
-    }
-
-    public void setMontoISLR(Double montoISLR) {
-        this.montoISLR = montoISLR;
-    }
-
-    public Double getMontoIVA() {
-        return montoIVA;
-    }
-
-    public void setMontoIVA(Double montoIVA) {
-        this.montoIVA = montoIVA;
-    }
-
-    public Double getMontoTitulares() {
-        return montoTitulares;
-    }
-
-    public void setMontoTitulares(Double montoTitulares) {
-        this.montoTitulares = montoTitulares;
+    /**
+     * Cantidad de Detalles Siniestros en la orden de pago
+     * @return the cantidadDetalles
+     */
+    public Integer getCantidadDetalles() {
+        return cantidadDetalles;
     }
 
     /**
-     * Remesa a la cual esta vinculado el pago
-     * @return the remesa
+     * suma de facturas dentro de todos los detalles de la orden
+     * @return the cantidadFacturas
      */
-    public Remesa getRemesa() {
-        return remesa;
+    public Integer getCantidadFacturas() {
+        return cantidadFacturas;
     }
 
     /**
-     * Remesa a la cual esta vinculado el pago
-     * @param remesa the remesa to set
+     * Cantidad de Detalles Siniestros en la orden de pago
+     * @param cantidadDetalles the cantidadDetalles to set
      */
-    public void setRemesa(Remesa remesa) {
-        this.remesa = remesa;
+    public void setCantidadDetalles(Integer cantidadDetalles) {
+        this.cantidadDetalles = cantidadDetalles;
     }
 
     /**
-     * Cantidad de Siniestros de Titulares
-     * @return the numeroSiniestrosTitular
+     * suma de facturas dentro de todos los detalles de la orden
+     * @param cantidadFacturas the cantidadFacturas to set
      */
-    public Integer getNumeroSiniestrosTitular() {
-        return numeroSiniestrosTitular;
-    }
-
-    /**
-     * Cantidad de Siniestros de Titulares
-     * @param numeroSiniestrosTitular the numeroSiniestrosTitular to set
-     */
-    public void setNumeroSiniestrosTitular(Integer numeroSiniestrosTitular) {
-        this.numeroSiniestrosTitular = numeroSiniestrosTitular;
-    }
-
-    /**
-     * Cantidad de Siniestros de Famililiares asegurados
-     * @return the numeroSiniestrosFamiliar
-     */
-    public Integer getNumeroSiniestrosFamiliar() {
-        return numeroSiniestrosFamiliar;
-    }
-
-    /**
-     * Cantidad de Siniestros de Famililiares asegurados
-     * @param numeroSiniestrosFamiliar the numeroSiniestrosFamiliar to set
-     */
-    public void setNumeroSiniestrosFamiliar(Integer numeroSiniestrosFamiliar) {
-        this.numeroSiniestrosFamiliar = numeroSiniestrosFamiliar;
-    }
-
-    /**
-     * Suma de todos los montos a pagar a Beneficiarios
-     * @return the montoFamiliar
-     */
-    public Double getMontoFamiliar() {
-        return montoFamiliar;
-    }
-
-    /**
-     * Suma de todos los montos a pagar a Beneficiarios
-     * @param montoFamiliar the montoFamiliar to set
-     */
-    public void setMontoFamiliar(Double montoFamiliar) {
-        this.montoFamiliar = montoFamiliar;
+    public void setCantidadFacturas(Integer cantidadFacturas) {
+        this.cantidadFacturas = cantidadFacturas;
     }
 }

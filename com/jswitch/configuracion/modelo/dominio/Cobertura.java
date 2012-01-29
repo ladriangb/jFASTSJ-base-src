@@ -86,6 +86,11 @@ public class Cobertura extends BeanVO implements Serializable, Auditable {
     private transient String nombreCompleto;
 
     public Cobertura() {
+        baseImponible=Boolean.FALSE;
+        islr=Boolean.FALSE;
+        iva=Boolean.FALSE;
+        gastosClinicos=Boolean.FALSE;
+        honorariosMedicos=Boolean.FALSE;
     }
 
     public Cobertura(String nombre, Ramo marca, AuditoriaBasica auditoria) {

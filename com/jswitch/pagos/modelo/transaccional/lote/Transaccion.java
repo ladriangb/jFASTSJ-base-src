@@ -173,18 +173,18 @@ public class Transaccion {
                 }
 
                 body.getCredito().setNumRefCre(remesa.getNumRefCre());
-                body.getCredito().setMonto(ordenDePago.getMontoPagar());
+                body.getCredito().setMonto(ordenDePago.getMontoACancelar());
                 body.getCredito().setDuracionCheq(Integer.parseInt(
                         remesa.getDuracionCheque().toString().substring(1)));
                 //</editor-fold>
                 body.getDebito().setFechaValor(remesa.getFechaValor());
-                body.getDebito().setMonto(ordenDePago.getMontoPagar());
+                body.getDebito().setMonto(ordenDePago.getMontoACancelar());
                 body.getDebito().setNombre(General.empresa.getNombre());
                 body.getDebito().setNumCuent(remesa.getNumeroCuentaDebitar());
                 body.getDebito().setNumRefDeb(remesa.getNumRefDeb());
                 body.getDebito().setRif(header.getRif());
                 body.getDebito().setTipoCuenta(remesa.getTipoCuenta().getNumero());
-                totalMontoLote += ordenDePago.getMontoPagar();
+                totalMontoLote += ordenDePago.getMontoACancelar();
                 list.add(body);
                 //</editor-fold>
             } else {

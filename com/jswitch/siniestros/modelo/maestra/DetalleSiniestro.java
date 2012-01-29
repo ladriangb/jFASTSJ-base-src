@@ -88,6 +88,11 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      * total facturado en todas las facturas
      */
     @Column
+    private Double montoRetenido;
+    /**
+     * total facturado en todas las facturas
+     */
+    @Column
     private Double montoFacturado;
     /**
      * total liquidado todas las facturas
@@ -109,6 +114,11 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      */
     @Column
     private Double montoGastosClinicos;
+    /**
+     * total Amparado
+     */
+    @Column
+    private Double montoAmparado;
     /**
      * total monto no amparado
      */
@@ -135,15 +145,15 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     @Column
     private Double montoBaseIslr;
     /**
-     * total monto del Islr
-     */
-    @Column
-    private Double montoIslr;
-    /**
      * monto retenido por Islr
      */
     @Column
     private Double montoRetenidoIslr;
+    /**
+     * monto deducible
+     */
+    @Column
+    private Double montoDeducible;
     /**
      * total monto Pronto Pago
      */
@@ -158,7 +168,12 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      * total monto timbre municipal
      */
     @Column
-    private Double timbreMunicipal;
+    private Double montoTM;
+    /**
+     * Cantidad de facturas activas en el Detalle
+     */
+    @Column
+    private Integer cantidadFacturas;
     /**
      * tipo de enfermedad
      */
@@ -374,6 +389,14 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     }
 
     /**
+     * total Amparado
+     * @return the montoAmparado
+     */
+    public Double getMontoAmparado() {
+        return montoAmparado;
+    }
+
+    /**
      * total base de la base del islr
      * @return the montoBaseIslr
      */
@@ -387,6 +410,14 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      */
     public Double getMontoBaseIva() {
         return montoBaseIva;
+    }
+
+    /**
+     * monto deducible
+     * @return the montoDeducible
+     */
+    public Double getMontoDeducible() {
+        return montoDeducible;
     }
 
     /**
@@ -411,14 +442,6 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      */
     public Double getMontoHonorariosMedicos() {
         return montoHonorariosMedicos;
-    }
-
-    /**
-     * total monto del Islr
-     * @return the montoIslr
-     */
-    public Double getMontoIslr() {
-        return montoIslr;
     }
 
     /**
@@ -454,6 +477,14 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     }
 
     /**
+     * total facturado en todas las facturas
+     * @return the montoRetenido
+     */
+    public Double getMontoRetenido() {
+        return montoRetenido;
+    }
+
+    /**
      * monto retenido por Islr
      * @return the montoRetenidoIslr
      */
@@ -463,10 +494,18 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
 
     /**
      * monto retenido por iva
-     * @return the montoRetencionIva
+     * @return the montoRetenidoIva
      */
     public Double getMontoRetenidoIva() {
         return montoRetenidoIva;
+    }
+
+    /**
+     * total monto timbre municipal
+     * @return the montoTM
+     */
+    public Double getMontoTM() {
+        return montoTM;
     }
 
     /**
@@ -562,6 +601,9 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      * @return the selected
      */
     public Boolean getSelected() {
+        if (selected == null) {
+            selected = Boolean.FALSE;
+        }
         return selected;
     }
 
@@ -571,14 +613,6 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      */
     public Siniestro getSiniestro() {
         return siniestro;
-    }
-
-    /**
-     * total monto timbre municipal
-     * @return the timbreMunicipal
-     */
-    public Double getTimbreMunicipal() {
-        return timbreMunicipal;
     }
 
     /**
@@ -703,6 +737,14 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     }
 
     /**
+     * total Amparado
+     * @param montoAmparado the montoAmparado to set
+     */
+    public void setMontoAmparado(Double montoAmparado) {
+        this.montoAmparado = montoAmparado;
+    }
+
+    /**
      * total base de la base del islr
      * @param montoBaseIslr the montoBaseIslr to set
      */
@@ -716,6 +758,14 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      */
     public void setMontoBaseIva(Double montoBaseIva) {
         this.montoBaseIva = montoBaseIva;
+    }
+
+    /**
+     * monto deducible
+     * @param montoDeducible the montoDeducible to set
+     */
+    public void setMontoDeducible(Double montoDeducible) {
+        this.montoDeducible = montoDeducible;
     }
 
     /**
@@ -740,14 +790,6 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      */
     public void setMontoHonorariosMedicos(Double montoHonorariosMedicos) {
         this.montoHonorariosMedicos = montoHonorariosMedicos;
-    }
-
-    /**
-     * total monto del Islr
-     * @param montoIslr the montoIslr to set
-     */
-    public void setMontoIslr(Double montoIslr) {
-        this.montoIslr = montoIslr;
     }
 
     /**
@@ -783,8 +825,16 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     }
 
     /**
+     * total facturado en todas las facturas
+     * @param montoRetenido the montoRetenido to set
+     */
+    public void setMontoRetenido(Double montoRetenido) {
+        this.montoRetenido = montoRetenido;
+    }
+
+    /**
      * monto retenido por Islr
-     * @param montoRetenidoIslr the montoRetencidoIslr to set
+     * @param montoRetenidoIslr the montoRetenidoIslr to set
      */
     public void setMontoRetenidoIslr(Double montoRetenidoIslr) {
         this.montoRetenidoIslr = montoRetenidoIslr;
@@ -792,10 +842,18 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
 
     /**
      * monto retenido por iva
-     * @param montoRetenidoIva the montoRetencionIva to set
+     * @param montoRetenidoIva the montoRetenidoIva to set
      */
     public void setMontoRetenidoIva(Double montoRetenidoIva) {
         this.montoRetenidoIva = montoRetenidoIva;
+    }
+
+    /**
+     * total monto timbre municipal
+     * @param montoTM the montoTM to set
+     */
+    public void setMontoTM(Double montoTM) {
+        this.montoTM = montoTM;
     }
 
     /**
@@ -903,14 +961,6 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     }
 
     /**
-     * total monto timbre municipal
-     * @param timbreMunicipal the timbreMunicipal to set
-     */
-    public void setTimbreMunicipal(Double timbreMunicipal) {
-        this.timbreMunicipal = timbreMunicipal;
-    }
-
-    /**
      * tipo de detalle si es
      * EMERGENCIA, CARTA_AVAL, REEMBOLSO, FUNERARIO, VIDA ...
      * @param tipoDetalle the tipoDetalle to set
@@ -949,5 +999,21 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      */
     public void setTratamientoEfectuado(TratamientoEfectuado tratamientoEfectuado) {
         this.tratamientoEfectuado = tratamientoEfectuado;
+    }
+
+    /**
+     * Cantidad de facturas activas en el Detalle
+     * @return the cantidadFacturas
+     */
+    public Integer getCantidadFacturas() {
+        return cantidadFacturas;
+    }
+
+    /**
+     * Cantidad de facturas activas en el Detalle
+     * @param cantidadFacturas the cantidadFacturas to set
+     */
+    public void setCantidadFacturas(Integer cantidadFacturas) {
+        this.cantidadFacturas = cantidadFacturas;
     }
 }

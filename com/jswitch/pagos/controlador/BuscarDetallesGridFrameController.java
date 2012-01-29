@@ -33,15 +33,16 @@ import org.openswing.swing.util.server.HibernateUtils;
 public class BuscarDetallesGridFrameController extends DefaultGridFrameController
         implements ActionListener {
 
-    private Persona persona;
+    private Persona personaPago;
     private OrdenDePago ordenDePago;
+    private OrdenDePagoDetailFrameController controller;
 
-    public BuscarDetallesGridFrameController(Persona persona, OrdenDePago ordenDePago) {
+    public BuscarDetallesGridFrameController(OrdenDePagoDetailFrameController controller, OrdenDePago ordenDePago) {
         super(BuscaDetallesGridFrame.class.getName(), DetalleSiniestroDetailFrame.class.getName(),
                 ordenDePago.getTipoDetalleSiniestro().getClase(), null);
-        this.persona = persona;
+        this.personaPago = ordenDePago.getPersonaPago();
         this.ordenDePago = ordenDePago;
-//        gridFrame.getGridControl().setMode(Consts.EDIT);
+        this.controller = controller;
     }
 
     @Override
@@ -54,7 +55,7 @@ public class BuscarDetallesGridFrameController extends DefaultGridFrameControlle
         try {
             String sql = "FROM " + claseModeloFullPath
                     + " C WHERE C.personaPago.id=? "
-                    + "AND C.etapaSiniestro.idPropio=?";//+ persona.getId();
+                    + "AND C.etapaSiniestro.idPropio=?";
             SessionFactory sf = HibernateUtil.getSessionFactory();
             s = sf.openSession();
             Response res = HibernateUtils.getAllFromQuery(filteredColumns,
@@ -62,7 +63,7 @@ public class BuscarDetallesGridFrameController extends DefaultGridFrameControlle
                     currentSortedVersusColumns,
                     valueObjectType,
                     sql,
-                    new Object[]{persona.getId(), "LIQ"},
+                    new Object[]{personaPago.getId(), "LIQ"},
                     new Type[]{new LongType(), new StringType()},
                     "C", sf, s);
             return res;
@@ -95,26 +96,31 @@ public class BuscarDetallesGridFrameController extends DefaultGridFrameControlle
                         + EtapaSiniestro.class.getName() + " C WHERE "
                         + "idPropio=?").setString(0, "ORD_PAG").uniqueResult();
                 for (int i = 0; i < model.getRowCount(); i++) {
-                    DetalleSiniestro ds = (DetalleSiniestro) s.get(
+                    DetalleSiniestro detalleSin = (DetalleSiniestro) s.get(
                             DetalleSiniestro.class,
                             ((DetalleSiniestro) model.getObjectForRow(i)).getId());
+
                     if (((DetalleSiniestro) model.getObjectForRow(i)).getSelected()) {
-                        Hibernate.initialize(ds.getNotasTecnicas());
-                        Hibernate.initialize(ds.getObservaciones());
-                        Hibernate.initialize(ds.getPagos());
-                        Hibernate.initialize(ds.getDiagnosticoSiniestros());
-                        Hibernate.initialize(ds.getDocumentos());
-                        ds.setEtapaSiniestro(es);
-                        s.update(ds);
-                        ordenDePago.getDetalleSiniestros().add(ds);
+                        Hibernate.initialize(detalleSin.getNotasTecnicas());
+                        Hibernate.initialize(detalleSin.getObservaciones());
+                        Hibernate.initialize(detalleSin.getPagos());
+                        Hibernate.initialize(detalleSin.getDiagnosticoSiniestros());
+                        Hibernate.initialize(detalleSin.getDocumentos());
+                        detalleSin.setEtapaSiniestro(es);
+                        s.update(detalleSin);
+                        ordenDePago.getDetalleSiniestros().add(detalleSin);
                     }
                 }
                 s.update(ordenDePago);
                 s.getTransaction().commit();
                 gridFrame.dispose();
+
             } catch (Exception ex) {
+                LoggerUtil.error(this.getClass(), "actionPerformed", ex);
             } finally {
                 s.close();
+                controller.calcularMontos(ordenDePago);
+                controller.getVista().getMainPanel().getReloadButton().doClick();
             }
         }
     }
