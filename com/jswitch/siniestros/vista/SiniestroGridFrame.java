@@ -94,7 +94,7 @@ public class SiniestroGridFrame extends DefaultGridFrame {
         gridData.getColumnContainer().add(decimalColumn1);
 
         textColumn6.setColumnFilterable(true);
-        textColumn6.setColumnName("estatus");
+        textColumn6.setColumnName("estatusSiniestro");
         textColumn6.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn6);
 

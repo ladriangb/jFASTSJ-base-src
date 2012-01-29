@@ -7,7 +7,7 @@ package com.jswitch.siniestros.controlador;
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.controlador.util.DefaultGridFrameController;
 import com.jswitch.base.modelo.util.bean.BeanVO;
-import com.jswitch.fas.modelo.Dominios.EstatusSiniestro;
+import com.jswitch.fas.modelo.Dominios.EstadoSiniestro;
 import com.jswitch.siniestros.modelo.maestra.Siniestro;
 import com.jswitch.siniestros.vista.SiniestroDetailFrame;
 import com.jswitch.siniestros.vista.SiniestroGridFrame;
@@ -47,7 +47,7 @@ public class SiniestroGridFrameController extends DefaultGridFrameController {
     public Color getBackgroundColor(int row, String attributeName, Object value) {
         if (attributeName.equalsIgnoreCase("estatus")) {
             if (value != null) {
-                switch ((EstatusSiniestro) value) {
+                switch ((EstadoSiniestro) value) {
                     case ABIERTO:
                         return Color.GREEN;
                     case CERRADO:
