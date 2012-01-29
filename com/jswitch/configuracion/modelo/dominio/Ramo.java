@@ -76,6 +76,12 @@ public class Ramo extends BeanVO implements Serializable, Auditable {
     public Ramo() {
     }
 
+    public Ramo(String nombre, String idPropio, AuditoriaBasica auditoria) {
+        this.nombre = nombre;
+        this.idPropio = idPropio;
+        this.auditoria = auditoria;
+    }
+
     /**
      * auditoria bitacora
      * @return the auditoria

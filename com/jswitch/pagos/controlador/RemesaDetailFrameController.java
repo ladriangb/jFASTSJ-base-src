@@ -156,6 +156,7 @@ public class RemesaDetailFrameController
                     s.update(detalleSiniestro);
                 }
                 ordenDePago.setEstatusPago(etS);
+                ordenDePago.setRemesa(remesa);
                 s.update(ordenDePago);
             }
             s.getTransaction().commit();
@@ -248,7 +249,7 @@ public class RemesaDetailFrameController
             Double l = 0d, r = 0d, f = 0d, c = 0d;
             Double baseIva = 0d, iva = 0d, rIva = 0d, baseIslr = 0d, rIslr = 0d;
             Double gC = 0d, hM = 0d, nA = 0d, am = 0d, de = 0d, tm = 0d, dPP = 0d;
-            Double mTi = 0d, mFa = 0d;
+            Double mTi = 0d, mFa = 0d; 
             Integer tit = 0, fam = 0, det = 0, fac = 0, pag = 0;
             for (OrdenDePago ordenDePago : remesa.getOrdenDePagos()) {
                 if (ordenDePago.getAuditoria().getActivo().booleanValue()) {

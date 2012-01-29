@@ -38,14 +38,12 @@ public class EtapaSiniestro extends BeanVO implements Serializable, Auditable {
     @Column
     @BusinessKey
     private String nombre;
-    
     /**
      *
      */
     @Column
     @BusinessKey
     private String idPropio;
-    
     /**
      *
      */
@@ -100,8 +98,9 @@ public class EtapaSiniestro extends BeanVO implements Serializable, Auditable {
     public EtapaSiniestro() {
     }
 
-    public EtapaSiniestro(String nombre, Boolean aps, Boolean cartaAval, Boolean emergencia, Boolean reembolso, Boolean ayudaSocial, Boolean funerarios, Boolean vida, EstatusSiniestro estatusSiniestro, AuditoriaBasica auditoria) {
+    public EtapaSiniestro(String nombre, String idPropio, Boolean aps, Boolean cartaAval, Boolean emergencia, Boolean reembolso, Boolean ayudaSocial, Boolean funerarios, Boolean vida, EstatusSiniestro estatusSiniestro, AuditoriaBasica auditoria) {
         this.nombre = nombre;
+        this.idPropio = idPropio;
         this.aps = aps;
         this.cartaAval = cartaAval;
         this.emergencia = emergencia;
@@ -216,5 +215,4 @@ public class EtapaSiniestro extends BeanVO implements Serializable, Auditable {
     public void setIdPropio(String idPropio) {
         this.idPropio = idPropio;
     }
-    
 }

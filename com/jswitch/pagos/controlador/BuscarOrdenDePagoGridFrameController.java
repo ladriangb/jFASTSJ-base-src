@@ -123,6 +123,7 @@ public class BuscarOrdenDePagoGridFrameController extends DefaultGridFrameContro
                         Hibernate.initialize(orden.getDocumentos());
                         Hibernate.initialize(orden.getDetalleSiniestros());
                         orden.setEstatusPago(EstatusPago.SELECCIONADO);
+                        orden.setRemesa(remesa);
                         s.update(orden);
                         remesa.getOrdenDePagos().add(orden);
                     }
