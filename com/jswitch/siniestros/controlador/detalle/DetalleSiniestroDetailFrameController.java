@@ -150,6 +150,11 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
             Ramo ramo = (Ramo) q.uniqueResult();
             ((DetalleSiniestro) newPersistentObject).setRamo(ramo);
 
+            if (newPersistentObject instanceof Emergencia){
+               ((Emergencia) newPersistentObject).setClave(siniestro.getNumero());
+               
+            }
+            
             if (newPersistentObject instanceof Reembolso) {
                 q = s.createQuery("FROM " + TipoPersona.class.getName() + " C"
                         + " WHERE C.idPropio='TIT'");

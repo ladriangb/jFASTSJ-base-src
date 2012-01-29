@@ -30,6 +30,7 @@ public class SiniestroGridFrame extends DefaultGridFrame {
         saveButton1 = new org.openswing.swing.client.SaveButton();
         gridData = new org.openswing.swing.client.GridControl();
         decimalColumn1 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        textColumn6 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn3 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn1 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn2 = new org.openswing.swing.table.columns.client.TextColumn();
@@ -91,6 +92,11 @@ public class SiniestroGridFrame extends DefaultGridFrame {
         decimalColumn1.setGrouping(false);
         decimalColumn1.setPreferredWidth(40);
         gridData.getColumnContainer().add(decimalColumn1);
+
+        textColumn6.setColumnFilterable(true);
+        textColumn6.setColumnName("estatusSiniestro");
+        textColumn6.setColumnSortable(true);
+        gridData.getColumnContainer().add(textColumn6);
 
         textColumn3.setColumnFilterable(true);
         textColumn3.setColumnName("numero");
@@ -194,5 +200,6 @@ public class SiniestroGridFrame extends DefaultGridFrame {
     private org.openswing.swing.table.columns.client.TextColumn textColumn3;
     private org.openswing.swing.table.columns.client.TextColumn textColumn4;
     private org.openswing.swing.table.columns.client.TextColumn textColumn5;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn6;
     // End of variables declaration//GEN-END:variables
 }

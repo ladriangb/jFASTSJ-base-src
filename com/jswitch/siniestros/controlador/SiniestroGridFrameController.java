@@ -7,9 +7,11 @@ package com.jswitch.siniestros.controlador;
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.controlador.util.DefaultGridFrameController;
 import com.jswitch.base.modelo.util.bean.BeanVO;
+import com.jswitch.fas.modelo.Dominios.EstadoSiniestro;
 import com.jswitch.siniestros.modelo.maestra.Siniestro;
 import com.jswitch.siniestros.vista.SiniestroDetailFrame;
 import com.jswitch.siniestros.vista.SiniestroGridFrame;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Map;
 import org.openswing.swing.message.receive.java.Response;
@@ -39,6 +41,21 @@ public class SiniestroGridFrameController extends DefaultGridFrameController {
     @Override
     public void doubleClick(int rowNumber, ValueObject persistentObject) {
         new SiniestroDetailFrameController(SiniestroDetailFrame.class.getName(), gridFrame.getGridControl(), (BeanVO) persistentObject, false);
+    }
+
+    @Override
+    public Color getBackgroundColor(int row, String attributeName, Object value) {
+        if (attributeName.equalsIgnoreCase("estatus")) {
+            if (value != null) {
+                switch ((EstadoSiniestro) value) {
+                    case ABIERTO:
+                        return Color.GREEN;
+                    case CERRADO:
+                        return Color.RED;
+                }
+            }
+        }
+        return super.getBackgroundColor(row, attributeName, value);
     }
 
     @Override
