@@ -17,6 +17,7 @@ import java.io.File;
 import javax.swing.filechooser.FileFilter;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -101,7 +102,6 @@ public class RemesaDetailFrameController
                     ordenes = q.setString(0, EstatusPago.PENDIENTE.toString()).
                             setString(1, p.getTipoDetalleSiniestro().toString()).list();
                 }
-
                 for (Object objeto : ordenes) {
                     p.getOrdenDePagos().add(
                             (OrdenDePago) objeto);
@@ -147,13 +147,20 @@ public class RemesaDetailFrameController
                 es = (EtapaSiniestro) s.createQuery("FROM "
                         + EtapaSiniestro.class.getName() + " C WHERE "
                         + "idPropio=?").setString(0, "PAG").uniqueResult();
+                remesa.setFechaPago(new Date());
             }
             for (OrdenDePago ordenDePago : remesa.getOrdenDePagos()) {
                 ordenDePago = (OrdenDePago) s.get(OrdenDePago.class, ordenDePago.getId());
                 Hibernate.initialize(ordenDePago.getDetalleSiniestros());
                 for (DetalleSiniestro detalleSiniestro : ordenDePago.getDetalleSiniestros()) {
                     detalleSiniestro.setEtapaSiniestro(es);
+                    if (etS == EstatusPago.PAGADO) {
+                        detalleSiniestro.setFechaPagado(new Date());
+                    }
                     s.update(detalleSiniestro);
+                }
+                if (etS == EstatusPago.PAGADO) {
+                    ordenDePago.setFechaPago(new Date());
                 }
                 ordenDePago.setEstatusPago(etS);
                 ordenDePago.setRemesa(remesa);
@@ -249,7 +256,7 @@ public class RemesaDetailFrameController
             Double l = 0d, r = 0d, f = 0d, c = 0d;
             Double baseIva = 0d, iva = 0d, rIva = 0d, baseIslr = 0d, rIslr = 0d;
             Double gC = 0d, hM = 0d, nA = 0d, am = 0d, de = 0d, tm = 0d, dPP = 0d;
-            Double mTi = 0d, mFa = 0d; 
+            Double mTi = 0d, mFa = 0d;
             Integer tit = 0, fam = 0, det = 0, fac = 0, pag = 0;
             for (OrdenDePago ordenDePago : remesa.getOrdenDePagos()) {
                 if (ordenDePago.getAuditoria().getActivo().booleanValue()) {

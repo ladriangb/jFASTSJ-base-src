@@ -96,10 +96,10 @@ public class AseguradoDetailFrameController extends DefaultDetailFrameController
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
 
         if (canInsert((Asegurado) newPersistentObject)) {
-            ((Asegurado) beanVO).setCertificado(familia);
+            ((Asegurado) newPersistentObject).setCertificado(familia);
             Response res = super.insertRecord(newPersistentObject);
             if (res instanceof VOResponse && familia != null) {
-                familia.getAsegurados().add((Asegurado) beanVO);
+                familia.getAsegurados().add((Asegurado) newPersistentObject);
                 if (familia instanceof Auditable) {
                     AuditoriaBasica ab = ((Auditable) familia).getAuditoria();
                     ab.setFechaUpdate(new Date());

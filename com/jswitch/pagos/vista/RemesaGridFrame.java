@@ -34,6 +34,7 @@ public class RemesaGridFrame extends DefaultGridFrame {
         textColumn3 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn1 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn2 = new org.openswing.swing.table.columns.client.TextColumn();
+        currencyColumn1 = new org.openswing.swing.table.columns.client.CurrencyColumn();
         textColumn4 = new org.openswing.swing.table.columns.client.TextColumn();
         dateTimeColumn1 = new org.openswing.swing.table.columns.client.DateTimeColumn();
         textColumn5 = new org.openswing.swing.table.columns.client.TextColumn();
@@ -106,6 +107,9 @@ public class RemesaGridFrame extends DefaultGridFrame {
         textColumn2.setColumnName("tipoCuenta.nombre");
         textColumn2.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn2);
+
+        currencyColumn1.setColumnName("montoACancelar");
+        gridData.getColumnContainer().add(currencyColumn1);
 
         textColumn4.setColumnFilterable(true);
         textColumn4.setColumnName("auditoria.usuarioInsert");
@@ -185,6 +189,7 @@ public class RemesaGridFrame extends DefaultGridFrame {
         return gridData;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private org.openswing.swing.table.columns.client.CurrencyColumn currencyColumn1;
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn1;
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn2;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn1;
