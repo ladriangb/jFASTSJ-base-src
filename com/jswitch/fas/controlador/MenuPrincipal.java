@@ -122,6 +122,7 @@ import com.jswitch.persona.controlador.PersonasDetailController;
 import com.jswitch.persona.modelo.maestra.PersonaNatural;
 import com.jswitch.persona.vista.BuscarPersonaDialog;
 import com.jswitch.persona.vista.RifBusquedaDialog;
+import com.jswitch.siniestros.controlador.BuscarSiniestroDetrailController;
 import com.jswitch.siniestros.controlador.SiniestroGridFrameController;
 import com.jswitch.siniestros.controlador.detalle.DetalleSiniestroGridFrameController;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
@@ -134,6 +135,7 @@ import com.jswitch.siniestros.modelo.maestra.detalle.Emergencia;
 import com.jswitch.siniestros.modelo.maestra.detalle.Funerario;
 import com.jswitch.siniestros.modelo.maestra.detalle.Reembolso;
 import com.jswitch.siniestros.modelo.maestra.detalle.Vida;
+import com.jswitch.siniestros.vista.BuscarSiniestroDetailFrame;
 import com.jswitch.siniestros.vista.EtapaSiniestroGridFrame;
 import com.jswitch.siniestros.vista.TipoSiniestroGridFrame;
 import com.jswitch.siniestros.vista.detalle.DetalleSiniestroGridFrame;
@@ -469,7 +471,7 @@ public class MenuPrincipal implements ClientFacade {
     }
 
     public void getPolizaNueva() {
-        new PolizaDetailFrameController(PolizaDetailFrame.class.getName(), null, null, false);
+        new PolizaDetailFrameController(PolizaDetailFrame.class.getName(), null, null, true);
     }
 
     public void getPolizas() {
@@ -535,11 +537,15 @@ public class MenuPrincipal implements ClientFacade {
         new DefaultAllGridFrameController(EtapaSiniestroGridFrame.class.getName(), null, EtapaSiniestro.class.getName(), "Etapas del Sinistros");
 
     }
+
+    public void getBuscarSin() {
+        new BuscarSiniestroDetrailController(BuscarSiniestroDetailFrame.class.getName(), null, null, true);
+    }
     // </editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Pagos">
     public void getNewPago() {
-        new BuscarPersonaDialog((java.awt.Component) null, 
+        new BuscarPersonaDialog((java.awt.Component) null,
                 OrdenDePagoDetailFrameController.class.getName(),
                 OrdenDePago.class.getName());
     }
@@ -713,6 +719,6 @@ public class MenuPrincipal implements ClientFacade {
 //        "17930"
         //AUN_NO_FUN();
         new RemesaDetailFrameController(RemesaDetailFrame.class.getName(),
-                null, null, true);
+                null,null, true);
     }
 }

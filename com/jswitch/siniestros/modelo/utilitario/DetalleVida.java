@@ -11,44 +11,67 @@ import java.util.Date;
  */
 public class DetalleVida extends BeanVO {
 
+    /**
+     * Diagnostico de la defuncion
+     */
     private Diagnostico diagnostico;
-    private Double montoPendiente;
+    /**
+     * Fecha en que muere el titular
+     */
     private Date fechaDefuncion;
+    /**
+     * Tipo De siniestro 
+     */
     private TipoSiniestro tipoSiniestro;
 
     public DetalleVida() {
     }
 
+    /**
+     * Diagnostico de la defuncion
+     * @return the diagnostico
+     */
     public Diagnostico getDiagnostico() {
         return diagnostico;
     }
 
-    public void setDiagnostico(Diagnostico diagnostico) {
-        this.diagnostico = diagnostico;
-    }
-
+    /**
+     * Fecha en que muere el titular
+     * @return the fechaDefuncion
+     */
     public Date getFechaDefuncion() {
         return fechaDefuncion;
     }
 
-    public void setFechaDefuncion(Date fechaDefuncion) {
-        this.fechaDefuncion = fechaDefuncion;
-    }
-
-    public Double getMontoPendiente() {
-        return montoPendiente;
-    }
-
-    public void setMontoPendiente(Double montoPendiente) {
-        this.montoPendiente = montoPendiente;
-    }
-
+    /**
+     * Tipo De siniestro
+     * @return the tipoSiniestro
+     */
     public TipoSiniestro getTipoSiniestro() {
         return tipoSiniestro;
     }
 
+    /**
+     * Diagnostico de la defuncion
+     * @param diagnostico the diagnostico to set
+     */
+    public void setDiagnostico(Diagnostico diagnostico) {
+        this.diagnostico = diagnostico;
+    }
+
+    /**
+     * Fecha en que muere el titular
+     * @param fechaDefuncion the fechaDefuncion to set
+     */
+    public void setFechaDefuncion(Date fechaDefuncion) {
+        this.fechaDefuncion = fechaDefuncion;
+    }
+
+    /**
+     * Tipo De siniestro
+     * @param tipoSiniestro the tipoSiniestro to set
+     */
     public void setTipoSiniestro(TipoSiniestro tipoSiniestro) {
         this.tipoSiniestro = tipoSiniestro;
     }
-  
 }

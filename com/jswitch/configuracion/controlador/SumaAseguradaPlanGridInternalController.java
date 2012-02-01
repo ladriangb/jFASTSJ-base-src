@@ -47,7 +47,7 @@ public class SumaAseguradaPlanGridInternalController extends DefaultGridInternal
             Session s = null;
             try {
                 String sql = "FROM " + SumaAsegurada.class.getName() + " C "
-                        + " WHERE plan.id=?";
+                        + " WHERE C.plan.id=?";
 
                 SessionFactory sf = HibernateUtil.getSessionFactory();
                 s = sf.openSession();
