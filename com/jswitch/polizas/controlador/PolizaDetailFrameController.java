@@ -21,6 +21,8 @@ import com.jswitch.persona.vista.RifBusquedaDialog;
 import com.jswitch.polizas.modelo.maestra.Poliza;
 import com.jswitch.polizas.vista.PolizaDetailFrame;
 import java.awt.event.ActionEvent;
+import java.math.BigInteger;
+import java.text.DecimalFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import org.hibernate.Hibernate;
@@ -51,7 +53,7 @@ public class PolizaDetailFrameController extends DefaultDetailFrameController {
     @Override
     public Response loadData(Class valueObjectClass) {
         Session s = HibernateUtil.getSessionFactory().openSession();
-        
+
         Poliza p =
                 (Poliza) s.get(Poliza.class, ((Poliza) beanVO).getId());
         Hibernate.initialize(p.getCertificados());
@@ -73,10 +75,27 @@ public class PolizaDetailFrameController extends DefaultDetailFrameController {
     }
 
     @Override
+    public Response logicaNegocio(ValueObject persistentObject) {
+        return new VOResponse(persistentObject);
+    }
+
+    @Override
+    public Response logicaNegocioDespuesSave(ValueObject persistentObject, Session s) {
+        Poliza p = (Poliza) persistentObject;
+        Long seq = null;
+        try {
+            seq = ((BigInteger) s.createSQLQuery("SELECT nextval('seq_poliza');").uniqueResult()).longValue();
+        } catch (Exception ex) {
+            return new ErrorResponse(LoggerUtil.isInvalidStateException(this.getClass(), "logicaNegocioDespuesSave", ex));
+        }
+        DecimalFormat nf = new DecimalFormat("00000");
+        p.setNumero(nf.format(seq));
+        return new VOResponse(p);
+    }
+
+    @Override
     public void actionPerformed(ActionEvent e) {
         super.actionPerformed(e);
-
-
         if (e.getSource().equals(((PolizaDetailFrame) vista).getNuevoCertificicadoButton())) {
             RifBusquedaDialog busquedaDialog = new RifBusquedaDialog(
                     new String[]{

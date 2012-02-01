@@ -1095,8 +1095,9 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         jTabbedPane1.addTab("Emergencia", formEmergencia);
 
         formFunenario.setVOClassName(com.jswitch.siniestros.modelo.maestra.detalle.Funerario.class.getName());
-        formFunenario.setPreferredSize(new java.awt.Dimension(662, 474));
-        formFunenario.setLayout(new java.awt.GridLayout(1, 2));
+        formFunenario.setPreferredSize(new java.awt.Dimension(666, 493));
+
+        jPanel17.setPreferredSize(new java.awt.Dimension(666, 493));
 
         labelControl19.setLabel("detalleSiniestro.personaPago");
 
@@ -1151,23 +1152,23 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
                     .addGroup(jPanel17Layout.createSequentialGroup()
                         .addComponent(labelControl19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(codLookupControl8, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE))
+                        .addComponent(codLookupControl8, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE))
                     .addGroup(jPanel17Layout.createSequentialGroup()
                         .addComponent(labelControl20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textControl5, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE))
+                        .addComponent(textControl5, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE))
                     .addGroup(jPanel17Layout.createSequentialGroup()
                         .addComponent(labelControl21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dateControl6, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE))
+                        .addComponent(dateControl6, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE))
                     .addGroup(jPanel17Layout.createSequentialGroup()
                         .addComponent(labelControl23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(codLookupControl10, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE))
+                        .addComponent(codLookupControl10, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE))
                     .addGroup(jPanel17Layout.createSequentialGroup()
                         .addComponent(labelControl22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(codLookupControl9, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE))
+                        .addComponent(codLookupControl9, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE))
                     .addGroup(jPanel17Layout.createSequentialGroup()
                         .addComponent(labelControl24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1207,12 +1208,25 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
                     .addComponent(codLookupControl30, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(checkBoxControl3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(448, 448, 448))
+                .addGap(16, 16, 16))
         );
 
         jPanel17Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {checkBoxControl3, codLookupControl10, codLookupControl8, codLookupControl9, dateControl6, labelControl19, labelControl20, labelControl21, labelControl22, labelControl23, labelControl24, textControl5});
 
-        formFunenario.add(jPanel17);
+        javax.swing.GroupLayout formFunenarioLayout = new javax.swing.GroupLayout(formFunenario);
+        formFunenario.setLayout(formFunenarioLayout);
+        formFunenarioLayout.setHorizontalGroup(
+            formFunenarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(formFunenarioLayout.createSequentialGroup()
+                .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, 656, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        formFunenarioLayout.setVerticalGroup(
+            formFunenarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(formFunenarioLayout.createSequentialGroup()
+                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(255, Short.MAX_VALUE))
+        );
 
         jTabbedPane1.addTab("Funenarios", formFunenario);
 
@@ -1406,7 +1420,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         jTabbedPane1.addTab("Rembolso", formRembolso);
 
         formVida.setVOClassName(Vida.class.getName());
-        formVida.setPreferredSize(new java.awt.Dimension(662, 474));
+        formVida.setPreferredSize(new java.awt.Dimension(666, 493));
         formVida.setLayout(new java.awt.GridLayout(1, 2));
 
         labelControl25.setLabel("detalleSiniestro.personaPago");

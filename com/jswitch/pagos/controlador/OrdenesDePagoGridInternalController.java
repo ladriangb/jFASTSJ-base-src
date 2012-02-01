@@ -6,6 +6,7 @@ import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.fas.modelo.Dominios.EstatusPago;
 import com.jswitch.pagos.modelo.maestra.OrdenDePago;
+import com.jswitch.pagos.modelo.maestra.Remesa;
 import com.jswitch.pagos.vista.OrdenDePagoDetailFrame;
 import java.util.ArrayList;
 import org.hibernate.Hibernate;
@@ -22,8 +23,11 @@ import org.openswing.swing.message.receive.java.ValueObject;
  */
 public class OrdenesDePagoGridInternalController extends DefaultGridInternalController {
 
-    public OrdenesDePagoGridInternalController(String classNameModelFullPath, String getMethodName, GridControl miGrid, DefaultGridInternalController... listSubGrids) {
+    private final RemesaDetailFrameController controller;
+
+    public OrdenesDePagoGridInternalController(String classNameModelFullPath, String getMethodName, GridControl miGrid, RemesaDetailFrameController controller, DefaultGridInternalController... listSubGrids) {
         super(classNameModelFullPath, getMethodName, miGrid, listSubGrids);
+        this.controller = controller;
     }
 
     @Override
@@ -64,6 +68,9 @@ public class OrdenesDePagoGridInternalController extends DefaultGridInternalCont
             return new ErrorResponse(ex.getMessage());
         } finally {
             s.close();
+            controller.calcularMontos((Remesa) beanVO);
+            controller.getVista().getMainPanel().getReloadButton().doClick();
         }
+
     }
 }

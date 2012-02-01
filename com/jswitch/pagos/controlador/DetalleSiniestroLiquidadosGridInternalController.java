@@ -5,6 +5,7 @@ import com.jswitch.siniestros.controlador.detalle.DetalleSiniestroDetailFrameCon
 import com.jswitch.base.controlador.util.DefaultGridInternalController;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
+import com.jswitch.pagos.modelo.maestra.OrdenDePago;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.siniestros.vista.detalle.DetalleSiniestroDetailFrame;
@@ -22,18 +23,21 @@ import org.openswing.swing.message.receive.java.ValueObject;
  * @author Luis Adrian Gonzalez Benavides
  */
 public class DetalleSiniestroLiquidadosGridInternalController extends DefaultGridInternalController {
+    
+    OrdenDePagoDetailFrameController controller;
 
-    public DetalleSiniestroLiquidadosGridInternalController(String classNameModelFullPath, String getMethodName, GridControl miGrid, DefaultGridInternalController... listSubGrids) {
+    public DetalleSiniestroLiquidadosGridInternalController(String classNameModelFullPath, String getMethodName, GridControl miGrid, OrdenDePagoDetailFrameController controller, DefaultGridInternalController... listSubGrids) {
         super(classNameModelFullPath, getMethodName, miGrid, listSubGrids);
+        this.controller = controller;
     }
-
+    
     @Override
     public void doubleClick(int rowNumber, ValueObject persistentObject) {
         new DetalleSiniestroDetailFrameController(
                 DetalleSiniestroDetailFrame.class.getName(), miGrid,
                 (BeanVO) persistentObject, true, persistentObject.getClass());
     }
-
+    
     @Override
     public Response deleteRecords(ArrayList persistentObjects) throws Exception {
         Session s = null;
@@ -62,12 +66,15 @@ public class DetalleSiniestroLiquidadosGridInternalController extends DefaultGri
                 s.update(sin);
             }
             s.getTransaction().commit();
+            
             return new VOResponse(true);
         } catch (Exception ex) {
             LoggerUtil.error(this.getClass(), "deleteRecords", ex);
             return new ErrorResponse(ex.getMessage());
         } finally {
             s.close();
+            controller.calcularMontos((OrdenDePago) beanVO);
+            controller.getVista().getMainPanel().getReloadButton().doClick();
         }
     }
 }

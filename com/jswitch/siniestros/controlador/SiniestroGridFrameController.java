@@ -4,7 +4,6 @@
  */
 package com.jswitch.siniestros.controlador;
 
-import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.controlador.util.DefaultGridFrameController;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.fas.modelo.Dominios.EstadoSiniestro;

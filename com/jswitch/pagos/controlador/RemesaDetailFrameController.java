@@ -1,5 +1,6 @@
 package com.jswitch.pagos.controlador;
 
+import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
@@ -8,6 +9,7 @@ import com.jswitch.fas.modelo.Dominios.TipoDetalleSiniestro;
 import com.jswitch.pagos.modelo.maestra.OrdenDePago;
 import com.jswitch.pagos.modelo.maestra.Remesa;
 import com.jswitch.pagos.modelo.transaccional.lote.Transaccion;
+import com.jswitch.pagos.vista.RemesaDetailFrame;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import java.awt.event.ActionEvent;
@@ -15,7 +17,7 @@ import java.io.File;
 import javax.swing.filechooser.FileFilter;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,8 +42,7 @@ import org.openswing.swing.util.client.ClientSettings;
  */
 public class RemesaDetailFrameController
         extends DefaultDetailFrameController {
-    private List<Remesa> list=new ArrayList<Remesa>(0);
-    
+
     /**
      * crea la instancia del objeto de 
      * <code>OrdenDePagoDetailFrameController</code>
@@ -59,7 +60,7 @@ public class RemesaDetailFrameController
      */
     public RemesaDetailFrameController(String detailFramePath,
             GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio) {
-        super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);        
+        super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
     }
 
     @Override
@@ -101,7 +102,6 @@ public class RemesaDetailFrameController
                     ordenes = q.setString(0, EstatusPago.PENDIENTE.toString()).
                             setString(1, p.getTipoDetalleSiniestro().toString()).list();
                 }
-
                 for (Object objeto : ordenes) {
                     p.getOrdenDePagos().add(
                             (OrdenDePago) objeto);
@@ -110,7 +110,10 @@ public class RemesaDetailFrameController
                 s.close();
             }
         }
-        return super.insertRecord(newPersistentObject);
+        Response response = super.insertRecord(newPersistentObject);
+        calcularMontos(p);
+        return response;
+
     }
 
     @Override
@@ -144,15 +147,23 @@ public class RemesaDetailFrameController
                 es = (EtapaSiniestro) s.createQuery("FROM "
                         + EtapaSiniestro.class.getName() + " C WHERE "
                         + "idPropio=?").setString(0, "PAG").uniqueResult();
+                remesa.setFechaPago(new Date());
             }
             for (OrdenDePago ordenDePago : remesa.getOrdenDePagos()) {
                 ordenDePago = (OrdenDePago) s.get(OrdenDePago.class, ordenDePago.getId());
                 Hibernate.initialize(ordenDePago.getDetalleSiniestros());
                 for (DetalleSiniestro detalleSiniestro : ordenDePago.getDetalleSiniestros()) {
                     detalleSiniestro.setEtapaSiniestro(es);
+                    if (etS == EstatusPago.PAGADO) {
+                        detalleSiniestro.setFechaPagado(new Date());
+                    }
                     s.update(detalleSiniestro);
                 }
+                if (etS == EstatusPago.PAGADO) {
+                    ordenDePago.setFechaPago(new Date());
+                }
                 ordenDePago.setEstatusPago(etS);
+                ordenDePago.setRemesa(remesa);
                 s.update(ordenDePago);
             }
             s.getTransaction().commit();
@@ -228,11 +239,89 @@ public class RemesaDetailFrameController
                 Logger.getLogger(Transaccion.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (e.getSource() instanceof InsertButton) {
-            new BuscarOrdenDePagoGridFrameController((Remesa) beanVO);
+            new BuscarOrdenDePagoGridFrameController((Remesa) beanVO, this);
         }
 //        OrdenDePago op = (OrdenDePago) beanVO;
 //        new BuscarDetallesGridFrameController(op.getPersonaPago(), op);
     }
 
-    
+    /**
+     * Calcula los montos de todas las Ordenes de pago Internos
+     */
+    public void calcularMontos(Remesa remesa) {
+        Session s = null;
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+            s.beginTransaction();
+            Double l = 0d, r = 0d, f = 0d, c = 0d;
+            Double baseIva = 0d, iva = 0d, rIva = 0d, baseIslr = 0d, rIslr = 0d;
+            Double gC = 0d, hM = 0d, nA = 0d, am = 0d, de = 0d, tm = 0d, dPP = 0d;
+            Double mTi = 0d, mFa = 0d;
+            Integer tit = 0, fam = 0, det = 0, fac = 0, pag = 0;
+            for (OrdenDePago ordenDePago : remesa.getOrdenDePagos()) {
+                if (ordenDePago.getAuditoria().getActivo().booleanValue()) {
+                    pag++;
+                    det += ordenDePago.getCantidadDetalles();
+                    tit += ordenDePago.getNumeroSiniestrosTitular();
+                    mTi += ordenDePago.getMontoTitulares();
+                    fam += ordenDePago.getNumeroSiniestrosFamiliar();
+                    mFa += ordenDePago.getMontoFamiliar();
+                    fac += ordenDePago.getCantidadFacturas();
+                    baseIva += ordenDePago.getMontoBaseIva();
+                    iva += ordenDePago.getMontoIva();
+                    rIva += ordenDePago.getMontoRetenidoIva();
+                    baseIslr += ordenDePago.getMontoBaseIslr();
+                    rIslr += ordenDePago.getMontoRetenidoIslr();
+                    gC += ordenDePago.getMontoGastosClinicos();
+                    hM += ordenDePago.getMontoHonorariosMedicos();
+                    am += ordenDePago.getMontoAmparado();
+                    de += ordenDePago.getMontoDeducible();
+                    dPP += ordenDePago.getMontoProntoPago();
+                    nA += ordenDePago.getMontoNoAmparado();
+                    tm += ordenDePago.getMontoTM();
+                    r += ordenDePago.getMontoRetenido();
+                    l += ordenDePago.getMontoLiquidado();
+                    f += ordenDePago.getMontoFacturado();
+                    c += ordenDePago.getMontoACancelar();
+                }
+            }
+            remesa.setCantidadOrdenes(pag);
+            remesa.setCantidadDetalles(det);
+            remesa.setCantidadFacturas(fac);
+            remesa.setNumeroSiniestrosTitular(tit);
+            remesa.setNumeroSiniestrosFamiliar(fam);
+            remesa.setMontoTitulares(mTi);
+            remesa.setMontoFamiliares(mFa);
+            remesa.setMontoIva(iva);
+            remesa.setMontoBaseIva(baseIva);
+            remesa.setMontoRetenidoIva(rIva);
+            remesa.setMontoBaseIslr(baseIslr);
+            remesa.setMontoRetenidoIslr(rIslr);
+            remesa.setMontoGastosClinicos(gC);
+            remesa.setMontoHonorariosMedicos(hM);
+            remesa.setMontoAmparado(am);
+            remesa.setMontoDeducible(de);
+            remesa.setMontoProntoPago(dPP);
+            remesa.setMontoNoAmparado(nA);
+            remesa.setMontoTM(tm);
+            remesa.setMontoRetenido(r);
+            remesa.setMontoACancelar(c);
+            remesa.setMontoFacturado(f);
+            remesa.setMontoLiquidado(l);
+            s.update(remesa);
+            s.getTransaction().commit();
+        } catch (Exception e) {
+            LoggerUtil.error(this.getClass(), "calcularMontos", e);
+        } finally {
+            s.close();
+        }
+    }
+
+    /**
+     * La vista de detalle de remesa
+     * @return the vista
+     */
+    public RemesaDetailFrame getVista() {
+        return (RemesaDetailFrame) vista;
+    }
 }

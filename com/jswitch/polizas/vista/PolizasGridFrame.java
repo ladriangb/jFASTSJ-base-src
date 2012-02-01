@@ -186,7 +186,7 @@ public class PolizasGridFrame extends DefaultGridFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void insertButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButton1ActionPerformed
-         new PolizaDetailFrameController(PolizaDetailFrame.class.getName(), null, null, false);
+         new PolizaDetailFrameController(PolizaDetailFrame.class.getName(), null, null, true);
     }//GEN-LAST:event_insertButton1ActionPerformed
 
     @Override

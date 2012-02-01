@@ -1,6 +1,5 @@
 package com.jswitch.siniestros.controlador.detalle;
 
-import com.jswitch.siniestros.controlador.detalle.DetalleSiniestroDetailFrameController;
 import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.controlador.util.DefaultGridInternalController;
 import com.jswitch.base.modelo.HibernateUtil;
@@ -35,7 +34,6 @@ public class DetalleSiniestroGridInternalController extends DefaultGridInternalC
 
     @Override
     public Response loadData(int action, int startIndex, Map filteredColumns, ArrayList currentSortedColumns, ArrayList currentSortedVersusColumns, Class valueObjectType, Map otherGridParams) {
-
         ArrayList<DetalleSiniestro> al = null;
         int max = 0;
 
@@ -54,6 +52,5 @@ public class DetalleSiniestroGridInternalController extends DefaultGridInternalC
             max = al.size();
         }
         return new VOListResponse(al, false, max);
-
     }
 }
