@@ -121,8 +121,8 @@
             <Property name="columnRequired" type="boolean" value="false"/>
             <Property name="columnSortable" type="boolean" value="true"/>
             <Property name="editableOnEdit" type="boolean" value="true"/>
-            <Property name="grouping" type="boolean" value="false"/>
             <Property name="preferredWidth" type="int" value="40"/>
+            <Property name="sortVersus" type="java.lang.String" value="DESC"/>
           </Properties>
         </Component>
         <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn1">

@@ -80,8 +80,8 @@ public class BeneficiarioGridFrame extends DefaultGridFrame {
         decimalColumn5.setColumnName("id");
         decimalColumn5.setColumnRequired(false);
         decimalColumn5.setColumnSortable(true);
-        decimalColumn5.setGrouping(false);
         decimalColumn5.setPreferredWidth(40);
+        decimalColumn5.setSortVersus(org.openswing.swing.util.java.Consts.DESC_SORTED);
         gridData.getColumnContainer().add(decimalColumn5);
 
         textColumn2.setColumnFilterable(true);

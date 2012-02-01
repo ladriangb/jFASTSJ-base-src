@@ -45,7 +45,7 @@ public class SiniestroGridFrameController extends DefaultGridFrameController {
 
     @Override
     public Color getBackgroundColor(int row, String attributeName, Object value) {
-        if (attributeName.equalsIgnoreCase("estatus")) {
+        if (attributeName.equalsIgnoreCase("estatusSiniestro")) {
             if (value != null) {
                 switch ((EstadoSiniestro) value) {
                     case ABIERTO:

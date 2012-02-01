@@ -35,7 +35,7 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="gridData" pref="466" max="32767" attributes="0"/>
+              <Component id="gridData" pref="470" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -148,8 +148,8 @@
               <Connection code="&quot;id&quot;" type="code"/>
             </Property>
             <Property name="columnRequired" type="boolean" value="false"/>
-            <Property name="grouping" type="boolean" value="false"/>
             <Property name="preferredWidth" type="int" value="40"/>
+            <Property name="sortVersus" type="java.lang.String" value="DESC"/>
           </Properties>
         </Component>
         <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn2">
