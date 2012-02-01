@@ -92,7 +92,7 @@ public class SiniestroDetailFrameController extends DefaultDetailFrameController
 
         siniestro.setNumero(df.format(c.getTime()) + nf.format(seq));
         siniestro.setAyo(c.get(Calendar.YEAR));
-        siniestro.setMes(c.get(Calendar.MONTH + 1));
+        siniestro.setMes(c.get(Calendar.MONTH)+1);
         siniestro.setSeq(seq);
         return new VOResponse(siniestro);
     }

@@ -27,7 +27,7 @@ import org.openswing.swing.util.server.HibernateUtils;
 
 /**
  *
- * @author bc
+ * @author Luis Adrian Gonzalez
  */
 public class SumaAmparadaPlanGridInternalController extends DefaultGridInternalController {
 
@@ -47,7 +47,7 @@ public class SumaAmparadaPlanGridInternalController extends DefaultGridInternalC
             Session s = null;
             try {
                 String sql = "FROM " + SumaAmparada.class.getName() + " C "
-                        + " WHERE plan.id=?";
+                        + " WHERE C.plan.id=?";
 
                 SessionFactory sf = HibernateUtil.getSessionFactory();
                 s = sf.openSession();

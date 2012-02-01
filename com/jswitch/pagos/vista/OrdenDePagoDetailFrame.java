@@ -224,17 +224,17 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
                         .addGap(14, 14, 14))
                     .addGroup(form1Layout.createSequentialGroup()
                         .addComponent(labelControl8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(486, Short.MAX_VALUE))
+                        .addContainerGap(483, Short.MAX_VALUE))
                     .addGroup(form1Layout.createSequentialGroup()
                         .addGroup(form1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(form1Layout.createSequentialGroup()
                                 .addComponent(labelControl5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(textControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE))
+                                .addComponent(textControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE))
                             .addGroup(form1Layout.createSequentialGroup()
                                 .addComponent(labelControl6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(textControl3, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE))
+                                .addComponent(textControl3, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE))
                             .addGroup(form1Layout.createSequentialGroup()
                                 .addGroup(form1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(labelControl3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -242,24 +242,24 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(form1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(codLookupControl1, 0, 0, Short.MAX_VALUE)
-                                    .addComponent(dateControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)))
+                                    .addComponent(dateControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)))
                             .addGroup(form1Layout.createSequentialGroup()
                                 .addComponent(labelControl4, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(comboBoxControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE))
+                                .addComponent(comboBoxControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE))
                             .addGroup(form1Layout.createSequentialGroup()
                                 .addComponent(labelControl7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(comboBoxControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE))
+                                .addComponent(comboBoxControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE))
                             .addComponent(checkBoxControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(form1Layout.createSequentialGroup()
                                 .addComponent(labelControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(textControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)))
+                                .addComponent(textControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)))
                         .addGap(18, 18, 18))))
         );
 
-        form1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {labelControl1, labelControl2, labelControl3, labelControl4, labelControl5, labelControl6, labelControl7});
+        form1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {labelControl1, labelControl2, labelControl3, labelControl4, labelControl5, labelControl6, labelControl7, labelControl8});
 
         form1Layout.setVerticalGroup(
             form1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,7 +298,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
                     .addComponent(labelControl7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(checkBoxControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         form1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {codLookupControl1, comboBoxControl1, comboBoxControl2, dateControl1, labelControl1, labelControl2, labelControl3, labelControl4, labelControl5, labelControl6, labelControl7, textControl1, textControl2, textControl3});
@@ -373,7 +373,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(gridControl5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE))
+                    .addComponent(gridControl5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -445,8 +445,8 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
             jPanelObsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelObsLayout.createSequentialGroup()
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(168, Short.MAX_VALUE))
-            .addComponent(gridControlObs, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+                .addContainerGap(172, Short.MAX_VALUE))
+            .addComponent(gridControlObs, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout observacionesLayout = new javax.swing.GroupLayout(observaciones);
@@ -462,7 +462,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
         );
         observacionesLayout.setVerticalGroup(
             observacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 292, Short.MAX_VALUE)
+            .addGap(0, 296, Short.MAX_VALUE)
             .addGroup(observacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(observacionesLayout.createSequentialGroup()
                     .addContainerGap()
@@ -534,8 +534,8 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
             jPanelNotLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelNotLayout.createSequentialGroup()
                 .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(168, Short.MAX_VALUE))
-            .addComponent(gridControlNot, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+                .addContainerGap(172, Short.MAX_VALUE))
+            .addComponent(gridControlNot, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout notasTecnicasLayout = new javax.swing.GroupLayout(notasTecnicas);
@@ -551,7 +551,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
         );
         notasTecnicasLayout.setVerticalGroup(
             notasTecnicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 292, Short.MAX_VALUE)
+            .addGap(0, 296, Short.MAX_VALUE)
             .addGroup(notasTecnicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(notasTecnicasLayout.createSequentialGroup()
                     .addContainerGap()
@@ -628,7 +628,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
             .addGroup(jPanelDocLayout.createSequentialGroup()
                 .addGroup(jPanelDocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(gridControlDoc, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE))
+                    .addComponent(gridControlDoc, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -645,7 +645,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
         );
         DocAnexosLayout.setVerticalGroup(
             DocAnexosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 292, Short.MAX_VALUE)
+            .addGap(0, 296, Short.MAX_VALUE)
             .addGroup(DocAnexosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(DocAnexosLayout.createSequentialGroup()
                     .addContainerGap()
@@ -673,11 +673,11 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(333, Short.MAX_VALUE))
+                .addContainerGap(337, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(56, 56, 56)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
                     .addContainerGap()))
         );
     }// </editor-fold>//GEN-END:initComponents
