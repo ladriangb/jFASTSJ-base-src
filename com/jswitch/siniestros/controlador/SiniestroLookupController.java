@@ -63,7 +63,6 @@ public class SiniestroLookupController extends DefaultLookupController {
             if (idPropio.equals(Funerario.class.getName())) {
                 att = "funerario";
             }
-
         }
 
         @Override

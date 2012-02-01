@@ -95,6 +95,7 @@ public class BuscaOrdenDePagoGridFrame extends DefaultGridFrame {
         decimalColumn1.setColumnRequired(false);
         decimalColumn1.setColumnSortable(true);
         decimalColumn1.setPreferredWidth(40);
+        decimalColumn1.setSortVersus(org.openswing.swing.util.java.Consts.DESC_SORTED);
         gridData.getColumnContainer().add(decimalColumn1);
 
         checkBoxColumn1.setColumnFilterable(true);

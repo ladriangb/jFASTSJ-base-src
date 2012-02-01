@@ -71,8 +71,8 @@ public class ProntoPagoGridFrame extends DefaultGridFrame {
         decimalColumnNot.setColumnName("id");
         decimalColumnNot.setColumnRequired(false);
         decimalColumnNot.setColumnSortable(true);
-        decimalColumnNot.setGrouping(false);
         decimalColumnNot.setPreferredWidth(40);
+        decimalColumnNot.setSortVersus(org.openswing.swing.util.java.Consts.DESC_SORTED);
         gridData.getColumnContainer().add(decimalColumnNot);
 
         textColumn1.setColumnFilterable(true);
@@ -126,8 +126,8 @@ public class ProntoPagoGridFrame extends DefaultGridFrame {
         decimalColumnNot1.setColumnName("id");
         decimalColumnNot1.setColumnRequired(false);
         decimalColumnNot1.setColumnSortable(true);
-        decimalColumnNot1.setGrouping(false);
         decimalColumnNot1.setPreferredWidth(40);
+        decimalColumnNot1.setSortVersus(org.openswing.swing.util.java.Consts.DESC_SORTED);
         gridControl1.getColumnContainer().add(decimalColumnNot1);
 
         decimalColumn1.setColumnFilterable(true);
@@ -179,8 +179,8 @@ public class ProntoPagoGridFrame extends DefaultGridFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(240, Short.MAX_VALUE))
-            .addComponent(gridControl1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
+                .addContainerGap(244, Short.MAX_VALUE))
+            .addComponent(gridControl1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Rangos", jPanel2);
@@ -202,7 +202,7 @@ public class ProntoPagoGridFrame extends DefaultGridFrame {
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
