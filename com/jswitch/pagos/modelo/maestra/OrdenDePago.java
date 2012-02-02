@@ -12,6 +12,7 @@ import com.jswitch.fas.modelo.Dominios;
 import com.jswitch.fas.modelo.Dominios.TipoDetalleSiniestro;
 import com.jswitch.persona.modelo.maestra.Persona;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
+import com.jswitch.vistasbd.SumaOrden;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,6 +31,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -71,6 +73,11 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     @Pattern(regexp = "[0-9][0-9]?-[0-9][0-9][0-9][0-9]-[0-9]+",
     message = "Codigo SIGECOF Invalido")
     private String codigoSIGECOF;
+    /**
+     * suma de valores detalles
+     */
+    @OneToOne(mappedBy="ordenDePago")
+    private SumaOrden sumaOrden;
     /**
      * Remesa a la cual esta vinculado el pago
      */
@@ -245,13 +252,13 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     /**
      * Coleccion de etapas de siniestro y las fechas de los cambios
      */
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY,mappedBy="ordenDePago")
     @BusinessKey(exclude = Method.ALL)
     private Set<DetalleSiniestro> detalleSiniestros = new HashSet<DetalleSiniestro>(0);
     /**
      * observaciones generales
      */
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
     @BusinessKey(exclude = Method.ALL)
     private List<Observacion> observaciones = new ArrayList<Observacion>(0);
     /**
@@ -909,5 +916,21 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
      */
     public void setCantidadFacturas(Integer cantidadFacturas) {
         this.cantidadFacturas = cantidadFacturas;
+    }
+
+    /**
+     * suma de valores detalles
+     * @return the sumaOrden
+     */
+    public SumaOrden getSumaOrden() {
+        return sumaOrden;
+    }
+
+    /**
+     * suma de valores detalles
+     * @param sumaOrden the sumaOrden to set
+     */
+    public void setSumaOrden(SumaOrden sumaOrden) {
+        this.sumaOrden = sumaOrden;
     }
 }

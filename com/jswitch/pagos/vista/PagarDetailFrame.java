@@ -3,8 +3,8 @@ package com.jswitch.pagos.vista;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.vista.util.DefaultDetailFrame;
 import com.jswitch.pagos.controlador.EtapasPagadasLookupController;
+import com.jswitch.pagos.modelo.utilitario.Pagar;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
-import com.jswitch.siniestros.modelo.utilitario.DetalleVida;
 import org.openswing.swing.form.client.Form;
 import org.openswing.swing.form.client.FormController;
 import org.openswing.swing.mdi.client.MDIFrame;
@@ -71,7 +71,7 @@ public class PagarDetailFrame extends DefaultDetailFrame {
             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        form1.setVOClassName(DetalleVida.class.getName());
+        form1.setVOClassName(Pagar.class.getName());
         form1.setSaveButton(saveButton1);
         form1.setLayout(new java.awt.GridLayout(1, 2));
 
@@ -152,7 +152,7 @@ public class PagarDetailFrame extends DefaultDetailFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(form1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(form1, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())

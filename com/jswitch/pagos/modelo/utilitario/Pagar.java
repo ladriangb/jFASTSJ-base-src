@@ -22,6 +22,9 @@ public class Pagar extends BeanVO {
      * estatus en que quedan los siniestros pagados
      */
     private EstatusSiniestro estatusSiniestro;
+    /**
+     * Fecha en que se paga
+     */
     private Date fechaDePago;
 
     public Pagar() {

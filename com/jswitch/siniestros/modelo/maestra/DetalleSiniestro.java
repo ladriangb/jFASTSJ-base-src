@@ -12,11 +12,13 @@ import com.jswitch.base.modelo.util.ehts.Method;
 import com.jswitch.configuracion.modelo.dominio.Ramo;
 import com.jswitch.fas.modelo.Dominios.TipoEnfermedad;
 import com.jswitch.fas.modelo.Dominios.TratamientoEfectuado;
+import com.jswitch.pagos.modelo.maestra.OrdenDePago;
 import com.jswitch.persona.modelo.maestra.Persona;
 import com.jswitch.siniestros.modelo.dominio.TipoSiniestro;
 import com.jswitch.persona.modelo.dominio.TipoPersona;
 import com.jswitch.reporte.modelo.Reporte;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
+import com.jswitch.vistasbd.SumaDetalle;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,8 +37,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -79,6 +83,17 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     @ManyToOne
     @BusinessKey
     private Persona personaPago;
+    /**
+     * Orden de pago a la que esta
+     */
+    @ManyToOne
+    @BusinessKey
+    private OrdenDePago ordenDePago;
+    /**
+     * suma de valores por factura
+     */
+    @OneToOne(mappedBy="detalleSiniestro")
+    private SumaDetalle sumaDetalle;
     /**
      * siniestro q contiene el detalle
      */
@@ -1015,5 +1030,37 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      */
     public void setCantidadFacturas(Integer cantidadFacturas) {
         this.cantidadFacturas = cantidadFacturas;
+    }
+
+    /**
+     * suma de valores por factura
+     * @return the sumaDetalle
+     */
+    public SumaDetalle getSumaDetalle() {
+        return sumaDetalle;
+    }
+
+    /**
+     * suma de valores por factura
+     * @param sumaDetalle the sumaDetalle to set
+     */
+    public void setSumaDetalle(SumaDetalle sumaDetalle) {
+        this.sumaDetalle = sumaDetalle;
+    }
+
+    /**
+     * Orden de pago a la que esta
+     * @return the ordenDePago
+     */
+    public OrdenDePago getOrdenDePago() {
+        return ordenDePago;
+    }
+
+    /**
+     * Orden de pago a la que esta
+     * @param ordenDePago the ordenDePago to set
+     */
+    public void setOrdenDePago(OrdenDePago ordenDePago) {
+        this.ordenDePago = ordenDePago;
     }
 }

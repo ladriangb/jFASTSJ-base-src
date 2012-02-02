@@ -11,6 +11,7 @@ import com.jswitch.base.modelo.util.ehts.Method;
 import com.jswitch.fas.modelo.Dominios;
 import com.jswitch.fas.modelo.Dominios.EstatusPago;
 import com.jswitch.persona.modelo.dominio.TipoCuentaBancaria;
+import com.jswitch.persona.modelo.transac.CuentaBancariaPersona;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -37,7 +38,7 @@ import javax.persistence.Version;
 import javax.validation.constraints.Pattern;
 
 /**
- * @author Personal
+ * @author Luis Adrian Gonzalez
  */
 @Entity
 @Table(name = "PAGO_Remesa")
@@ -75,7 +76,7 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     @Column
     @Temporal(value = TemporalType.DATE)
     @BusinessKey
-    private Date fechaPago;    
+    private Date fechaPago;
     /**
      * Fecha de Pago Propuesta
      * Para uso interno de la empresa a objeto de identificar la fecha 
@@ -143,7 +144,7 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
      */
     @Column
     @BusinessKey
-    private String detalle;    
+    private String detalle;
     /**
      * numero referencia Credito
      * Número asignado por la empresa que identifica el crédito. Es
@@ -159,6 +160,13 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
      * Ej. 00000015
      */
     private Integer numRefDeb;
+    /**
+     * Cuenta bancaria de la empresa de la cual se debitara
+     * 
+     */
+    @ManyToOne
+    @BusinessKey
+    private CuentaBancariaPersona cuentaBancaria;
     /**
      * tipo de cuenta
      * corriente 00
@@ -183,7 +191,7 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
      * Suma de todos los timbres municipales
      */
     @Column
-    private Double montoTimbreMunicipal;    
+    private Double montoTimbreMunicipal;
     /**
      * Suma de todos los montos a pagar a Familiares asegurados
      */
@@ -193,8 +201,8 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
      * Cantidad de Ordenes de Pago asociadas a la remesa
      */
     @Column
-    private Integer numeroOrdenes;    
-     /**
+    private Integer numeroOrdenes;
+    /**
      * suma de facturas dentro de todos los detalles de la orden
      */
     @Column
@@ -218,7 +226,7 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
      * Cantidad de Siniestros de Famililiares asegurados
      */
     @Column
-    private Integer numeroSiniestrosFamiliar;    
+    private Integer numeroSiniestrosFamiliar;
     /**
      * monto a pagar
      */
@@ -317,7 +325,7 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     private transient Boolean autoSearch;
     /**
      * Version
-     */    
+     */
     @Version
     @Column
     private Integer optLock;
@@ -339,7 +347,7 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     /**
      * Coleccion de etapas de siniestro y las fechas de los cambios
      */
-    @OneToMany(fetch = FetchType.LAZY,mappedBy="remesa")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "remesa")
     @BusinessKey(exclude = Method.ALL)
     private Set<OrdenDePago> ordenDePagos = new HashSet<OrdenDePago>(0);
     /**
@@ -396,6 +404,22 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
      */
     public Integer getCantidadFacturas() {
         return cantidadFacturas;
+    }
+
+    /**
+     * Cantidad de Detalles Siniestros en la orden de pago
+     * @return the cantidadOrdenes
+     */
+    public Integer getCantidadOrdenes() {
+        return cantidadOrdenes;
+    }
+
+    /**
+     * Cuenta bancaria de la empresa de la cual se debitara
+     * @return the cuentaBancaria
+     */
+    public CuentaBancariaPersona getCuentaBancaria() {
+        return cuentaBancaria;
     }
 
     /**
@@ -822,6 +846,22 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     }
 
     /**
+     * Cantidad de Detalles Siniestros en la orden de pago
+     * @param cantidadOrdenes the cantidadOrdenes to set
+     */
+    public void setCantidadOrdenes(Integer cantidadOrdenes) {
+        this.cantidadOrdenes = cantidadOrdenes;
+    }
+
+    /**
+     * Cuenta bancaria de la empresa de la cual se debitara
+     * @param cuentaBancaria the cuentaBancaria to set
+     */
+    public void setCuentaBancaria(CuentaBancariaPersona cuentaBancaria) {
+        this.cuentaBancaria = cuentaBancaria;
+    }
+
+    /**
      * Detalle de la Remesa
      * @param detalle the detalle to set
      */
@@ -834,7 +874,7 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
      * @param documentos the documentos to set
      */
     public void setDocumentos(Set<Documento> documentos) {
-        this.setDocumentos(documentos);
+        this.documentos = documentos;
     }
 
     /**
@@ -1068,7 +1108,7 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
      * @param notasTecnicas the notasTecnicas to set
      */
     public void setNotasTecnicas(List<NotaTecnica> notasTecnicas) {
-        this.setNotasTecnicas(notasTecnicas);
+        this.notasTecnicas = notasTecnicas;
     }
 
     /**
@@ -1151,7 +1191,7 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
      * @param observaciones the observaciones to set
      */
     public void setObservaciones(List<Observacion> observaciones) {
-        this.setObservaciones(observaciones);
+        this.observaciones = observaciones;
     }
 
     /**
@@ -1167,7 +1207,7 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
      * @param ordenDePagos the ordenDePagos to set
      */
     public void setOrdenDePagos(Set<OrdenDePago> ordenDePagos) {
-        this.setOrdenDePagos(ordenDePagos);
+        this.ordenDePagos = ordenDePagos;
     }
 
     /**
@@ -1211,21 +1251,5 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     public void setTipoPago(Dominios.TipoPago tipoPago) {
         this.tipoPago = tipoPago;
     }
-
-    /**
-     * Cantidad de Detalles Siniestros en la orden de pago
-     * @return the cantidadOrdenes
-     */
-    public Integer getCantidadOrdenes() {
-        return cantidadOrdenes;
-    }
-
-    /**
-     * Cantidad de Detalles Siniestros en la orden de pago
-     * @param cantidadOrdenes the cantidadOrdenes to set
-     */
-    public void setCantidadOrdenes(Integer cantidadOrdenes) {
-        this.cantidadOrdenes = cantidadOrdenes;
-    }
-
+    
 }

@@ -233,13 +233,13 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     /**
      * Coleccion de gastos por diagnostico
      */
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "factura")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "factura")
     @BusinessKey(exclude = Method.ALL)
     private Set<DesgloseSumaAsegurada> desgloseSumaAsegurada = new HashSet<DesgloseSumaAsegurada>();
     /**
      * Coleccion de desglose de pagos por cobertura espesifica
      */
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY)
     @BusinessKey(exclude = Method.ALL)
     private Set<DesgloseCobertura> desgloseCobertura = new HashSet<DesgloseCobertura>();
     /**
