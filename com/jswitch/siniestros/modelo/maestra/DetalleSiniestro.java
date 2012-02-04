@@ -12,11 +12,13 @@ import com.jswitch.base.modelo.util.ehts.Method;
 import com.jswitch.configuracion.modelo.dominio.Ramo;
 import com.jswitch.fas.modelo.Dominios.TipoEnfermedad;
 import com.jswitch.fas.modelo.Dominios.TratamientoEfectuado;
+import com.jswitch.pagos.modelo.maestra.OrdenDePago;
 import com.jswitch.persona.modelo.maestra.Persona;
 import com.jswitch.siniestros.modelo.dominio.TipoSiniestro;
 import com.jswitch.persona.modelo.dominio.TipoPersona;
 import com.jswitch.reporte.modelo.Reporte;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
+import com.jswitch.vistasbd.SumaDetalle;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,8 +37,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -80,100 +84,22 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     @BusinessKey
     private Persona personaPago;
     /**
+     * Orden de pago a la que esta
+     */
+    @ManyToOne
+    @BusinessKey
+    private OrdenDePago ordenDePago;
+    /**
+     * suma de valores por factura
+     */
+    @OneToOne(mappedBy="detalleSiniestro")
+    private SumaDetalle sumaDetalle;
+    /**
      * siniestro q contiene el detalle
      */
     @ManyToOne
     private Siniestro siniestro;
-    /**
-     * total facturado en todas las facturas
-     */
-    @Column
-    private Double montoRetenido;
-    /**
-     * total facturado en todas las facturas
-     */
-    @Column
-    private Double montoFacturado;
-    /**
-     * total liquidado todas las facturas
-     */
-    @Column
-    private Double montoLiquidado;
-    /**
-     * total a cancelar
-     */
-    @Column
-    private Double montoACancelar;
-    /**
-     * total gastos medicos
-     */
-    @Column
-    private Double montoHonorariosMedicos;
-    /**
-     * total gastos clinicos
-     */
-    @Column
-    private Double montoGastosClinicos;
-    /**
-     * total Amparado
-     */
-    @Column
-    private Double montoAmparado;
-    /**
-     * total monto no amparado
-     */
-    @Column
-    private Double montoNoAmparado;
-    /**
-     * total base de la base del iva
-     */
-    @Column
-    private Double montoBaseIva;
-    /**
-     * total monto del iva
-     */
-    @Column
-    private Double montoIva;
-    /**
-     * monto retenido por iva
-     */
-    @Column
-    private Double montoRetenidoIva;
-    /**
-     * total base de la base del islr
-     */
-    @Column
-    private Double montoBaseIslr;
-    /**
-     * monto retenido por Islr
-     */
-    @Column
-    private Double montoRetenidoIslr;
-    /**
-     * monto deducible
-     */
-    @Column
-    private Double montoDeducible;
-    /**
-     * total monto Pronto Pago
-     */
-    @Column
-    private Double montoProntoPago;
-    /**
-     * porcentaje pronto pago
-     */
-    @Column
-    private Double porcentajeProntoPago;
-    /**
-     * total monto timbre municipal
-     */
-    @Column
-    private Double montoTM;
-    /**
-     * Cantidad de facturas activas en el Detalle
-     */
-    @Column
-    private Integer cantidadFacturas;
+
     /**
      * tipo de enfermedad
      */
@@ -381,134 +307,6 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     }
 
     /**
-     * total a cancelar
-     * @return the montoACancelar
-     */
-    public Double getMontoACancelar() {
-        return montoACancelar;
-    }
-
-    /**
-     * total Amparado
-     * @return the montoAmparado
-     */
-    public Double getMontoAmparado() {
-        return montoAmparado;
-    }
-
-    /**
-     * total base de la base del islr
-     * @return the montoBaseIslr
-     */
-    public Double getMontoBaseIslr() {
-        return montoBaseIslr;
-    }
-
-    /**
-     * total base de la base del iva
-     * @return the montoBaseIva
-     */
-    public Double getMontoBaseIva() {
-        return montoBaseIva;
-    }
-
-    /**
-     * monto deducible
-     * @return the montoDeducible
-     */
-    public Double getMontoDeducible() {
-        return montoDeducible;
-    }
-
-    /**
-     * total facturado en todas las facturas
-     * @return the montoFacturado
-     */
-    public Double getMontoFacturado() {
-        return montoFacturado;
-    }
-
-    /**
-     * total gastos clinicos
-     * @return the montoGastosClinicos
-     */
-    public Double getMontoGastosClinicos() {
-        return montoGastosClinicos;
-    }
-
-    /**
-     * total gastos medicos
-     * @return the montoHonorariosMedicos
-     */
-    public Double getMontoHonorariosMedicos() {
-        return montoHonorariosMedicos;
-    }
-
-    /**
-     * total monto del iva
-     * @return the montoIva
-     */
-    public Double getMontoIva() {
-        return montoIva;
-    }
-
-    /**
-     * total liquidado todas las facturas
-     * @return the montoLiquidado
-     */
-    public Double getMontoLiquidado() {
-        return montoLiquidado;
-    }
-
-    /**
-     * total monto no amparado
-     * @return the montoNoAmparado
-     */
-    public Double getMontoNoAmparado() {
-        return montoNoAmparado;
-    }
-
-    /**
-     * total monto Pronto Pago
-     * @return the montoProntoPago
-     */
-    public Double getMontoProntoPago() {
-        return montoProntoPago;
-    }
-
-    /**
-     * total facturado en todas las facturas
-     * @return the montoRetenido
-     */
-    public Double getMontoRetenido() {
-        return montoRetenido;
-    }
-
-    /**
-     * monto retenido por Islr
-     * @return the montoRetenidoIslr
-     */
-    public Double getMontoRetenidoIslr() {
-        return montoRetenidoIslr;
-    }
-
-    /**
-     * monto retenido por iva
-     * @return the montoRetenidoIva
-     */
-    public Double getMontoRetenidoIva() {
-        return montoRetenidoIva;
-    }
-
-    /**
-     * total monto timbre municipal
-     * @return the montoTM
-     */
-    public Double getMontoTM() {
-        return montoTM;
-    }
-
-    /**
      * notas tecnicas asociadas
      * @return the notasTecnicas
      */
@@ -554,14 +352,6 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      */
     public Persona getPersonaPago() {
         return personaPago;
-    }
-
-    /**
-     * porcentaje pronto pago
-     * @return the porcentajeProntoPago
-     */
-    public Double getPorcentajeProntoPago() {
-        return porcentajeProntoPago;
     }
 
     /**
@@ -729,134 +519,6 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     }
 
     /**
-     * total a cancelar
-     * @param montoACancelar the montoACancelar to set
-     */
-    public void setMontoACancelar(Double montoACancelar) {
-        this.montoACancelar = montoACancelar;
-    }
-
-    /**
-     * total Amparado
-     * @param montoAmparado the montoAmparado to set
-     */
-    public void setMontoAmparado(Double montoAmparado) {
-        this.montoAmparado = montoAmparado;
-    }
-
-    /**
-     * total base de la base del islr
-     * @param montoBaseIslr the montoBaseIslr to set
-     */
-    public void setMontoBaseIslr(Double montoBaseIslr) {
-        this.montoBaseIslr = montoBaseIslr;
-    }
-
-    /**
-     * total base de la base del iva
-     * @param montoBaseIva the montoBaseIva to set
-     */
-    public void setMontoBaseIva(Double montoBaseIva) {
-        this.montoBaseIva = montoBaseIva;
-    }
-
-    /**
-     * monto deducible
-     * @param montoDeducible the montoDeducible to set
-     */
-    public void setMontoDeducible(Double montoDeducible) {
-        this.montoDeducible = montoDeducible;
-    }
-
-    /**
-     * total facturado en todas las facturas
-     * @param montoFacturado the montoFacturado to set
-     */
-    public void setMontoFacturado(Double montoFacturado) {
-        this.montoFacturado = montoFacturado;
-    }
-
-    /**
-     * total gastos clinicos
-     * @param montoGastosClinicos the montoGastosClinicos to set
-     */
-    public void setMontoGastosClinicos(Double montoGastosClinicos) {
-        this.montoGastosClinicos = montoGastosClinicos;
-    }
-
-    /**
-     * total gastos medicos
-     * @param montoHonorariosMedicos the montoHonorariosMedicos to set
-     */
-    public void setMontoHonorariosMedicos(Double montoHonorariosMedicos) {
-        this.montoHonorariosMedicos = montoHonorariosMedicos;
-    }
-
-    /**
-     * total monto del iva
-     * @param montoIva the montoIva to set
-     */
-    public void setMontoIva(Double montoIva) {
-        this.montoIva = montoIva;
-    }
-
-    /**
-     * total liquidado todas las facturas
-     * @param montoLiquidado the montoLiquidado to set
-     */
-    public void setMontoLiquidado(Double montoLiquidado) {
-        this.montoLiquidado = montoLiquidado;
-    }
-
-    /**
-     * total monto no amparado
-     * @param montoNoAmparado the montoNoAmparado to set
-     */
-    public void setMontoNoAmparado(Double montoNoAmparado) {
-        this.montoNoAmparado = montoNoAmparado;
-    }
-
-    /**
-     * total monto Pronto Pago
-     * @param montoProntoPago the montoProntoPago to set
-     */
-    public void setMontoProntoPago(Double montoProntoPago) {
-        this.montoProntoPago = montoProntoPago;
-    }
-
-    /**
-     * total facturado en todas las facturas
-     * @param montoRetenido the montoRetenido to set
-     */
-    public void setMontoRetenido(Double montoRetenido) {
-        this.montoRetenido = montoRetenido;
-    }
-
-    /**
-     * monto retenido por Islr
-     * @param montoRetenidoIslr the montoRetenidoIslr to set
-     */
-    public void setMontoRetenidoIslr(Double montoRetenidoIslr) {
-        this.montoRetenidoIslr = montoRetenidoIslr;
-    }
-
-    /**
-     * monto retenido por iva
-     * @param montoRetenidoIva the montoRetenidoIva to set
-     */
-    public void setMontoRetenidoIva(Double montoRetenidoIva) {
-        this.montoRetenidoIva = montoRetenidoIva;
-    }
-
-    /**
-     * total monto timbre municipal
-     * @param montoTM the montoTM to set
-     */
-    public void setMontoTM(Double montoTM) {
-        this.montoTM = montoTM;
-    }
-
-    /**
      * notas tecnicas asociadas
      * @param notasTecnicas the notasTecnicas to set
      */
@@ -902,14 +564,6 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      */
     public void setPersonaPago(Persona personaPago) {
         this.personaPago = personaPago;
-    }
-
-    /**
-     * porcentaje pronto pago
-     * @param porcentajeProntoPago the porcentajeProntoPago to set
-     */
-    public void setPorcentajeProntoPago(Double porcentajeProntoPago) {
-        this.porcentajeProntoPago = porcentajeProntoPago;
     }
 
     /**
@@ -1001,19 +655,35 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
         this.tratamientoEfectuado = tratamientoEfectuado;
     }
 
-    /**
-     * Cantidad de facturas activas en el Detalle
-     * @return the cantidadFacturas
+     /**
+     * suma de valores por factura
+     * @return the sumaDetalle
      */
-    public Integer getCantidadFacturas() {
-        return cantidadFacturas;
+    public SumaDetalle getSumaDetalle() {
+        return sumaDetalle;
     }
 
     /**
-     * Cantidad de facturas activas en el Detalle
-     * @param cantidadFacturas the cantidadFacturas to set
+     * suma de valores por factura
+     * @param sumaDetalle the sumaDetalle to set
      */
-    public void setCantidadFacturas(Integer cantidadFacturas) {
-        this.cantidadFacturas = cantidadFacturas;
+    public void setSumaDetalle(SumaDetalle sumaDetalle) {
+        this.sumaDetalle = sumaDetalle;
+    }
+
+    /**
+     * Orden de pago a la que esta
+     * @return the ordenDePago
+     */
+    public OrdenDePago getOrdenDePago() {
+        return ordenDePago;
+    }
+
+    /**
+     * Orden de pago a la que esta
+     * @param ordenDePago the ordenDePago to set
+     */
+    public void setOrdenDePago(OrdenDePago ordenDePago) {
+        this.ordenDePago = ordenDePago;
     }
 }

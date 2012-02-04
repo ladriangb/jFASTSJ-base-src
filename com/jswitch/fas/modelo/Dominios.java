@@ -52,7 +52,10 @@ public class Dominios {
                 Dominios.TipoDetalleSiniestro());
         domains.put(
                 Dominios.EstadoSiniestro().getDomainId(),
-                Dominios.EstadoSiniestro());        
+                Dominios.EstadoSiniestro());
+        domains.put(
+                Dominios.TipoDescuentoProntoPago().getDomainId(),
+                Dominios.TipoDescuentoProntoPago());
         return domains;
     }
 
@@ -206,8 +209,8 @@ public class Dominios {
             dominio.addDomainPair(o[i], o[i].toString());
         }
         return dominio;
-    }    
-    
+    }
+
     public static enum TipoDetalleSiniestro {
 
         Todos(DetalleSiniestro.class.getName()),
@@ -232,6 +235,20 @@ public class Dominios {
     public static Domain TipoDetalleSiniestro() {
         Domain dominio = new Domain("TipoDetalleSiniestro");
         TipoDetalleSiniestro o[] = TipoDetalleSiniestro.values();
+        for (int i = 0; i
+                < o.length; i++) {
+            dominio.addDomainPair(o[i], o[i].toString());
+        }
+        return dominio;
+    }
+
+    public static enum TipoDescuentoProntoPago {
+        POR_CONVENIO, POR_PORCENTAJE_DESCUENTO, POR_MONTO_DESCUENTO
+    }
+
+    public static Domain TipoDescuentoProntoPago() {
+        Domain dominio = new Domain("TipoDescuentoProntoPago");
+        TipoDescuentoProntoPago o[] = TipoDescuentoProntoPago.values();
         for (int i = 0; i
                 < o.length; i++) {
             dominio.addDomainPair(o[i], o[i].toString());

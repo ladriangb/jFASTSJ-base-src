@@ -2,6 +2,7 @@ package com.jswitch.siniestros.controlador;
 
 import com.jswitch.siniestros.controlador.detalle.DetalleSiniestroDetailFrameController;
 import com.jswitch.asegurados.modelo.maestra.Asegurado;
+import com.jswitch.base.controlador.General;
 import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
@@ -30,6 +31,7 @@ import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
 import org.openswing.swing.message.receive.java.VOResponse;
 import org.openswing.swing.message.receive.java.ValueObject;
+import org.openswing.swing.util.client.ClientSettings;
 import org.openswing.swing.util.java.Consts;
 
 /**
@@ -98,22 +100,21 @@ public class SiniestroDetailFrameController extends DefaultDetailFrameController
 
         siniestro.setNumero(df.format(c.getTime()) + nf.format(seq));
         siniestro.setAyo(c.get(Calendar.YEAR));
-        siniestro.setMes(c.get(Calendar.MONTH)+1);
+        siniestro.setMes(c.get(Calendar.MONTH) + 1);
         siniestro.setSeq(seq);
         return new VOResponse(siniestro);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == ((SiniestroDetailFrame) vista).getNuevoDetalleSiniestro()) {
-            if (beanVO != null) {
-                Class c = DetalleSiniestroChousser.showDialog();
-                if (c != null && c.getClass() != null) {
-                    if (c.equals(Vida.class)) {
-                        new DetalleVidaNuevoDetrailController(DetalleVidaNuevoDetailFrame.class.getName(), ((SiniestroDetailFrame) vista).getGridData(), null, (Siniestro) beanVO, false);
-                    } else {
-                        new DetalleSiniestroDetailFrameController(DetalleSiniestroDetailFrame.class.getName(), ((SiniestroDetailFrame) vista).getGridData(), null, true, (Siniestro) beanVO, c);
-                    }
+        if (beanVO != null || !((Siniestro)beanVO).getCertificado().getTitular().getAuditoria().getActivo()
+                || !((Siniestro)beanVO).getAsegurado().getAuditoria().getActivo()) {
+            Class c = DetalleSiniestroChousser.showDialog();
+            if (c != null && c.getClass() != null) {
+                if (c.equals(Vida.class)) {
+                    new DetalleVidaNuevoDetrailController(DetalleVidaNuevoDetailFrame.class.getName(), ((SiniestroDetailFrame) vista).getGridData(), null, (Siniestro) beanVO, false);
+                } else {
+                    new DetalleSiniestroDetailFrameController(DetalleSiniestroDetailFrame.class.getName(), ((SiniestroDetailFrame) vista).getGridData(), null, true, (Siniestro) beanVO, c);
                 }
             }
         } else if (e.getSource() == ((SiniestroDetailFrame) vista).getEstadoButton()) {
@@ -157,5 +158,9 @@ public class SiniestroDetailFrameController extends DefaultDetailFrameController
                 JOptionPane.showMessageDialog(null, "Debes guardar primero el Registro");
             }
         }
+        else
+            JOptionPane.showMessageDialog(gridControl,
+                    ClientSettings.getInstance().getResources().getResource("No se Permite Realizar el Siniestro a Este Asegurado"),
+                    General.edition, JOptionPane.INFORMATION_MESSAGE);
     }
 }

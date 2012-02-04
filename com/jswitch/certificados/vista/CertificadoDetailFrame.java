@@ -182,6 +182,7 @@ public class CertificadoDetailFrame extends DefaultDetailFrame {
 
         codLookupControl1.setAttributeName("titular.persona.rif.rif");
         codLookupControl1.setControllerMethodName("getNuevoTitular");
+        codLookupControl1.setLookupButtonVisible(false);
         codLookupControl1.setMaxCharacters(12);
         codLookupControl1.setRequired(true);
 

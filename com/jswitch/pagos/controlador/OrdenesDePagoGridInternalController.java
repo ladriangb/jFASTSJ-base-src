@@ -44,13 +44,7 @@ public class OrdenesDePagoGridInternalController extends DefaultGridInternalCont
         try {
             s = HibernateUtil.getSessionFactory().openSession();
             s.beginTransaction();
-            for (Object o : persistentObjects) {
-                if (getSet() != null) {
-                    getSet().remove(o);
-                }
-            }
-            s.update(beanVO);
-
+           
             for (Object object : persistentObjects) {
                 Long l = ((OrdenDePago) object).getId();
                 OrdenDePago ordenDePago = (OrdenDePago) s.get(OrdenDePago.class, l);
@@ -59,6 +53,7 @@ public class OrdenesDePagoGridInternalController extends DefaultGridInternalCont
                 Hibernate.initialize(ordenDePago.getDocumentos());
                 Hibernate.initialize(ordenDePago.getDetalleSiniestros());
                 ordenDePago.setEstatusPago(EstatusPago.PENDIENTE);
+                ordenDePago.setRemesa(null);
                 s.save(ordenDePago);
             }
             s.getTransaction().commit();
@@ -68,7 +63,6 @@ public class OrdenesDePagoGridInternalController extends DefaultGridInternalCont
             return new ErrorResponse(ex.getMessage());
         } finally {
             s.close();
-            controller.calcularMontos((Remesa) beanVO);
             controller.getVista().getMainPanel().getReloadButton().doClick();
         }
 

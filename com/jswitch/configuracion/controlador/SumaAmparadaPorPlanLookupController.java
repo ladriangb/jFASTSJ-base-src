@@ -59,7 +59,7 @@ public class SumaAmparadaPorPlanLookupController extends DefaultLookupController
             Session s = null;
             try {
                 String sql = "FROM " + SumaAmparada.class.getName()
-                        + " C WHERE C.auditoria.activo=? AND plan.id=? AND nombre like ?";
+                        + " C WHERE C.auditoria.activo=? AND C.plan.id=? AND C.nombre like ?";
                 SessionFactory sf = HibernateUtil.getSessionFactory();
                 s = sf.openSession();
                 s.createQuery(sql).
@@ -86,7 +86,7 @@ public class SumaAmparadaPorPlanLookupController extends DefaultLookupController
             Session s = null;
             try {
                 String sql = "FROM " + SumaAmparada.class.getName()
-                        + " C WHERE C.auditoria.activo=? AND plan.id=?";
+                        + " C WHERE C.auditoria.activo=? AND C.plan.id=?";
                 SessionFactory sf = HibernateUtil.getSessionFactory();
                 s = sf.openSession();
                 Response res = HibernateUtils.getAllFromQuery(

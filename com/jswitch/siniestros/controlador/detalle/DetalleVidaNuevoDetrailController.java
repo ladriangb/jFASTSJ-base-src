@@ -43,10 +43,12 @@ public class DetalleVidaNuevoDetrailController extends DefaultDetailFrameControl
     public DetalleVidaNuevoDetrailController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Siniestro siniestro, Boolean aplicarLogicaNegocio) {
         super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
         this.siniestro = siniestro;
+
         ((DetalleVidaNuevoDetailFrame) vista).setPlanToLookup(siniestro.getAsegurado().getPlan());
-        if (!checkRamo("VIDA")) {
+        if (!siniestro.getCertificado().getTitular().getAuditoria().getActivo() 
+                || !siniestro.getAsegurado().getAuditoria().getActivo() || !checkRamo("VIDA")) {
             JOptionPane.showMessageDialog(gridControl,
-                    ClientSettings.getInstance().getResources().getResource("noRamo.vida"),
+                    ClientSettings.getInstance().getResources().getResource("No se Permite Realizar el Siniestro a Este Asegurado"),
                     General.edition, JOptionPane.INFORMATION_MESSAGE);
             vista.setVisible(false);
             vista.dispose();

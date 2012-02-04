@@ -13,6 +13,7 @@ import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.siniestros.modelo.maestra.DiagnosticoSiniestro;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
 import org.hibernate.classic.Session;
 import org.openswing.swing.client.GridControl;
@@ -21,7 +22,6 @@ import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
 import org.openswing.swing.message.receive.java.VOListResponse;
 import org.openswing.swing.message.receive.java.VOResponse;
-import org.openswing.swing.message.receive.java.ValueObject;
 import org.openswing.swing.util.client.ClientSettings;
 
 /**
@@ -65,7 +65,7 @@ public class DesgloseSumaAseguradaGridInternalController extends DefaultGridInte
         }
         return super.updateRecords(rowNumbers, oldPersistentObjects, persistentObjects);
     }
-      
+
     @Override
     public Response deleteRecords(ArrayList persistentObjects) throws Exception {
         loadDetalleSiniestro(((Factura) beanVO).getDetalleSiniestro());
@@ -81,7 +81,20 @@ public class DesgloseSumaAseguradaGridInternalController extends DefaultGridInte
                 break;
             }
         }
-        return super.deleteRecords(persistentObjects);
+        desgloseSumaAsegurada.setFactura(null);
+        Session s = null;
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+            s.beginTransaction();
+            s.delete(desgloseSumaAsegurada);
+            s.getTransaction().commit();
+            return new VOResponse(true);
+        } catch (Exception ex) {
+            return new ErrorResponse(LoggerUtil.isInvalidStateException(this.getClass(), "insertRecords", ex));
+        } finally {
+            s.close();
+        }
+
     }
 
     @Override
@@ -89,8 +102,8 @@ public class DesgloseSumaAseguradaGridInternalController extends DefaultGridInte
         Factura factura = (Factura) beanVO;
         loadDetalleSiniestro(factura.getDetalleSiniestro());
         DesgloseSumaAsegurada desgloseSumaAsegurada = ((DesgloseSumaAsegurada) newValueObjects.get(0));
-        String x=logicaNegocio(desgloseSumaAsegurada);
-        if (x==null) {
+        String x = logicaNegocio(desgloseSumaAsegurada);
+        if (x == null) {
             desgloseSumaAsegurada.setFactura(factura);
             for (DiagnosticoSiniestro ds : detalleSiniestro.getDiagnosticoSiniestros()) {
                 if (ds.getId().compareTo(desgloseSumaAsegurada.getDiagnosticoSiniestro().getId()) == 0) {
@@ -102,44 +115,28 @@ public class DesgloseSumaAseguradaGridInternalController extends DefaultGridInte
                     break;
                 }
             }
+            AuditoriaBasica ab = new AuditoriaBasica(new Date(), General.usuario.getUserName(), true);
+            if (desgloseSumaAsegurada instanceof Auditable) {
+                desgloseSumaAsegurada.setAuditoria(ab);
+            }
+
         } else {
             return new ErrorResponse(x);
         }
 
         Session s = null;
-        if (getSet() != null) {
-            for (Object object : newValueObjects) {
-                ValueObject o = (ValueObject) object;
-                AuditoriaBasica ab = new AuditoriaBasica(new Date(), General.usuario.getUserName(), true);
-                if (o instanceof Auditable) {
-                    ((Auditable) o).setAuditoria(ab);
-                }
-                Object aux = o.clone();
-                //n2.add(aux);
-                newValueObjects.remove(o);
-                newValueObjects.add(aux);
-                getSet().add(aux);
-            }
-            try {
-                s = HibernateUtil.getSessionFactory().openSession();
-                s.beginTransaction();
-                s.update(getFactura((factura)));
-                selectedCell(0, 0, null, (ValueObject) newValueObjects.get(0));
-                s.getTransaction().commit();
-                return new VOListResponse(newValueObjects, false, newValueObjects.size());
-            } catch (Exception ex) {
-                for (Object o : newValueObjects) {
-                    getSet().remove(o);
-                }
-                return new ErrorResponse(LoggerUtil.isInvalidStateException(this.getClass(), "insertRecords", ex));
-            } finally {
-//                miGrid.reloadData();
-//                if(miGrid.getReloadButton()!=null)
-//                    miGrid.getReloadButton().doClick();
-                s.close();
-            }
-        } else {
-            return new ErrorResponse("Primero tienes que guardar el Registro Principal");
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+            s.beginTransaction();
+            s.save(desgloseSumaAsegurada);
+            s.getTransaction().commit();
+            List l = new ArrayList(0);
+            l.add(desgloseSumaAsegurada);
+            return new VOListResponse(l, false, l.size());
+        } catch (Exception ex) {
+            return new ErrorResponse(LoggerUtil.isInvalidStateException(this.getClass(), "insertRecords", ex));
+        } finally {
+            s.close();
         }
     }
 
@@ -165,15 +162,6 @@ public class DesgloseSumaAseguradaGridInternalController extends DefaultGridInte
     private Response pagarDiagnostico(DiagnosticoSiniestro diagnosticoSiniestro, Double monto) {
 
         Session s = null;
-//        try {
-//            s = HibernateUtil.getSessionFactory().openSession();
-//            diagnosticoSiniestro = (DiagnosticoSiniestro) s.get(DiagnosticoSiniestro.class, diagnosticoSiniestro.getId());
-//            Hibernate.initialize(diagnosticoSiniestro.getTratamientos());
-//        } catch (Exception ex) {
-//            System.out.println(ex);
-//        } finally {
-//            s.close();
-//        }
 
         Double montoPendiente = diagnosticoSiniestro.getMontoPendiente(), montoPagado = diagnosticoSiniestro.getMontoPagado();
         montoPendiente -= monto;
@@ -238,12 +226,4 @@ public class DesgloseSumaAseguradaGridInternalController extends DefaultGridInte
     public void afterReloadGrid() {
         reloadButton.doClick();
     }
-
-    private Object getFactura(Factura beanVO) {
-        return vista.getBeanVO();
-
-    }
-    
-    
-    
 }

@@ -88,7 +88,7 @@ public class TimbreMunicipalLookupController extends DefaultLookupController {
             Session s = null;
             try {
                 String sql = "FROM " + TimbreMunicipal.class.getName()
-                        + " C WHERE  C.auditoria.activo=:ac AND zipCode like :code";
+                        + " C WHERE  C.auditoria.activo=:ac AND C.zipCode like :code";
                 SessionFactory sf = HibernateUtil.getSessionFactory();
                 s = sf.openSession();
                 List l = s.createQuery(sql).

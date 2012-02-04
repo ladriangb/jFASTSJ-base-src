@@ -136,7 +136,6 @@ public class BuscarOrdenDePagoGridFrameController extends DefaultGridFrameContro
                         "actionPerformed", ex);
             } finally {
                 s.close();
-                controller.calcularMontos(remesa);
                 controller.getVista().getMainPanel().getReloadButton().doClick();
             }
         }

@@ -62,8 +62,8 @@ public class DetalleSiniestroGridFrame extends DefaultGridFrame {
         gridData.setSearchAdditionalRows(true);
         gridData.setValueObjectClassName(Emergencia.class.getName());
 
-        decimalColumn1.setColumnFilterable(true);
         decimalColumn1.setColumnName("id");
+        decimalColumn1.setColumnRequired(false);
         decimalColumn1.setColumnSortable(true);
         decimalColumn1.setGrouping(false);
         decimalColumn1.setPreferredWidth(40);
@@ -97,22 +97,13 @@ public class DetalleSiniestroGridFrame extends DefaultGridFrame {
         textColumn2.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn2);
 
-        decimalColumn2.setColumnFilterable(true);
-        decimalColumn2.setColumnName("montoFacturado");
-        decimalColumn2.setColumnSortable(true);
-        decimalColumn2.setDecimals(2);
+        decimalColumn2.setColumnName("sumaDetalle.totalFacturado");
         gridData.getColumnContainer().add(decimalColumn2);
 
-        decimalColumn3.setColumnFilterable(true);
-        decimalColumn3.setColumnName("montoLiquidado");
-        decimalColumn3.setColumnSortable(true);
-        decimalColumn3.setDecimals(2);
+        decimalColumn3.setColumnName("sumaDetalle.totalLiquidado");
         gridData.getColumnContainer().add(decimalColumn3);
 
-        decimalColumn4.setColumnFilterable(true);
-        decimalColumn4.setColumnName("montoACancelar");
-        decimalColumn4.setColumnSortable(true);
-        decimalColumn4.setDecimals(2);
+        decimalColumn4.setColumnName("sumaDetalle.totalACancelar");
         gridData.getColumnContainer().add(decimalColumn4);
 
         textColumn3.setColumnFilterable(true);
@@ -132,11 +123,13 @@ public class DetalleSiniestroGridFrame extends DefaultGridFrame {
 
         checkBoxColumn1.setColumnFilterable(true);
         checkBoxColumn1.setColumnName("auditoria.activo");
+        checkBoxColumn1.setColumnRequired(false);
         checkBoxColumn1.setColumnSortable(true);
         gridData.getColumnContainer().add(checkBoxColumn1);
 
         textColumn4.setColumnFilterable(true);
         textColumn4.setColumnName("auditoria.usuarioInsert");
+        textColumn4.setColumnRequired(false);
         textColumn4.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn4);
 
@@ -147,6 +140,7 @@ public class DetalleSiniestroGridFrame extends DefaultGridFrame {
 
         textColumn5.setColumnFilterable(true);
         textColumn5.setColumnName("auditoria.usuarioUpdate");
+        textColumn5.setColumnRequired(false);
         textColumn5.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn5);
 

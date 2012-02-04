@@ -11,11 +11,11 @@ import com.jswitch.pagos.modelo.dominio.ConceptoSENIAT;
 import com.jswitch.pagos.modelo.transaccional.DesgloseCobertura;
 import com.jswitch.pagos.modelo.transaccional.DesgloseSumaAsegurada;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
+import com.jswitch.vistasbd.SumaFactura;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -25,6 +25,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -54,6 +55,11 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private DetalleSiniestro detalleSiniestro;
     /**
+     * Calcula y totaliza
+     */
+    @OneToOne(mappedBy="factura")
+    private SumaFactura sumaFactura;
+    /**
      * identificador de la factura
      */
     @Column
@@ -82,6 +88,13 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     @Past
     @BusinessKey
     private Date fechaRecepcion;
+     /**
+     * fecha en la que se recibio la factura
+     */
+    @Column
+    @Temporal(value = TemporalType.DATE)
+    @BusinessKey
+    private Date fechaPagado;
     /**
      * tipo de consepto
      * para saber q porcentaje de ISLR aplica
@@ -89,12 +102,6 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     @ManyToOne()
     @BusinessKey
     private ConceptoSENIAT tipoConceptoSeniat;
-    /**
-     * sustraendo aplica al ISLR
-     */
-    @Column
-    @BusinessKey
-    private Double sustraendo;
     /**
      * UT Unidad Tributaria
      */
@@ -109,18 +116,18 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private TimbreMunicipal timbreMunicipal;
     /**
-     * TM Timbre Municipal
+     * RetencionTM Timbre Municipal
      */
     @Column
     @BusinessKey
-    private Double porcentajeTM;
+    private Double porcentajeRetencionTM;
     /**
-     * TM Timbre Municipal
+     * RetencionTM Timbre Municipal
      * 
      */
     @Column
     @BusinessKey
-    private Double montoTM;
+    private Double montoRetencionTM;
     /**
      * base para el ISLR
      */
@@ -170,17 +177,17 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private Double montoRetencionIva;
     /**
-     * decuento pronto pago
+     * Porcentaje retencion Pronto Pago
      */
     @Column
     @BusinessKey
-    private Double montoDescuentoProntoPago;
+    private Double porcentajeRetencionProntoPago;
     /**
      * descuento deducible
      */
     @Column
     @BusinessKey
-    private Double montoDeducible;
+    private Double montoRetencionDeducible;
     /**
      * total de gastos clinicos
      * esto es a lo que se le retenie impuesto
@@ -219,27 +226,15 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private Double totalLiquidado;
     /**
-     * total retenido entre IVA e ISLR
-     */
-    @Column
-    @BusinessKey
-    private Double totalRetenido;
-    /**
-     * totalLiquidado - totalRetenido
-     */
-    @Column
-    @BusinessKey
-    private Double totalACancelar;
-    /**
      * Coleccion de gastos por diagnostico
      */
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "factura")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "factura")
     @BusinessKey(exclude = Method.ALL)
     private Set<DesgloseSumaAsegurada> desgloseSumaAsegurada = new HashSet<DesgloseSumaAsegurada>();
     /**
      * Coleccion de desglose de pagos por cobertura espesifica
      */
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY,mappedBy="factura")
     @BusinessKey(exclude = Method.ALL)
     private Set<DesgloseCobertura> desgloseCobertura = new HashSet<DesgloseCobertura>();
     /**
@@ -258,20 +253,17 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     public Factura() {
         baseIslr = 0d;
         baseIva = 0d;
-        montoDeducible = 0d;
-        montoDescuentoProntoPago = 0d;
         montoIva = 0d;
         montoNoAmparado = 0d;
+        montoRetencionDeducible = 0d;
         montoRetencionIva = 0d;
         montoRetencionIsrl = 0d;
-        montoTM = 0d;
+        montoRetencionTM = 0d;
         montoAmparado = 0d;
         gastosClinicos = 0d;
         honorariosMedicos = 0d;
-        totalACancelar = 0d;
         totalFacturado = 0d;
         totalLiquidado = 0d;
-        totalRetenido = 0d;
         if (General.parametros != null && General.parametros.get("iva") != null) {
             porcentajeIva = General.parametros.get("iva").getValorDouble();
         } else {
@@ -284,8 +276,9 @@ public class Factura extends BeanVO implements Serializable, Auditable {
         }
 
         porcentajeRetencionIva = 0d;
-        porcentajeTM = 0d;
+        porcentajeRetencionTM = 0d;
         porcentajeRetencionIsrl = 0d;
+        porcentajeRetencionProntoPago = 0d;
     }
 
     /**
@@ -346,6 +339,14 @@ public class Factura extends BeanVO implements Serializable, Auditable {
 
     /**
      * fecha en la que se recibio la factura
+     * @return the fechaPagado
+     */
+    public Date getFechaPagado() {
+        return fechaPagado;
+    }
+
+    /**
+     * fecha en la que se recibio la factura
      * @return the fechaRecepcion
      */
     public Date getFechaRecepcion() {
@@ -386,22 +387,6 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     * descuento deducible
-     * @return the montoDeducible
-     */
-    public Double getMontoDeducible() {
-        return montoDeducible;
-    }
-
-    /**
-     * decuento pronto pago
-     * @return the montoDescuentoProntoPago
-     */
-    public Double getMontoDescuentoProntoPago() {
-        return montoDescuentoProntoPago;
-    }
-
-    /**
      * total IVA
      * @return the montoIva
      */
@@ -415,6 +400,14 @@ public class Factura extends BeanVO implements Serializable, Auditable {
      */
     public Double getMontoNoAmparado() {
         return montoNoAmparado;
+    }
+
+    /**
+     * descuento deducible
+     * @return the montoRetencionDeducible
+     */
+    public Double getMontoRetencionDeducible() {
+        return montoRetencionDeducible;
     }
 
     /**
@@ -434,11 +427,11 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     * TM Timbre Municipal
-     * @return the montoTM
+     * RetencionTM Timbre Municipal
+     * @return the montoRetencionTM
      */
-    public Double getMontoTM() {
-        return montoTM;
+    public Double getMontoRetencionTM() {
+        return montoRetencionTM;
     }
 
     /**
@@ -491,19 +484,27 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     * TM Timbre Municipal
-     * @return the porcentajeTM
+     * Porcentaje retencion Pronto Pago
+     * @return the porcentajeRetencionProntoPago
      */
-    public Double getPorcentajeTM() {
-        return porcentajeTM;
+    public Double getPorcentajeRetencionProntoPago() {
+        return porcentajeRetencionProntoPago;
     }
 
     /**
-     * sustraendo aplica al ISLR
-     * @return the sustraendo
+     * RetencionTM Timbre Municipal
+     * @return the porcentajeRetencionTM
      */
-    public Double getSustraendo() {
-        return sustraendo;
+    public Double getPorcentajeRetencionTM() {
+        return porcentajeRetencionTM;
+    }
+
+    /**
+     * Calcula y totaliza
+     * @return the sumaFactura
+     */
+    public SumaFactura getSumaFactura() {
+        return sumaFactura;
     }
 
     /**
@@ -525,14 +526,6 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     * totalLiquidado - totalRetenido
-     * @return the totalACancelar
-     */
-    public Double getTotalACancelar() {
-        return totalACancelar;
-    }
-
-    /**
      * total facturado
      * @return the totalFacturado
      */
@@ -546,14 +539,6 @@ public class Factura extends BeanVO implements Serializable, Auditable {
      */
     public Double getTotalLiquidado() {
         return totalLiquidado;
-    }
-
-    /**
-     * total retenido entre IVA e ISLR
-     * @return the totalRetenido
-     */
-    public Double getTotalRetenido() {
-        return totalRetenido;
     }
 
     /**
@@ -622,6 +607,14 @@ public class Factura extends BeanVO implements Serializable, Auditable {
 
     /**
      * fecha en la que se recibio la factura
+     * @param fechaPagado the fechaPagado to set
+     */
+    public void setFechaPagado(Date fechaPagado) {
+        this.fechaPagado = fechaPagado;
+    }
+
+    /**
+     * fecha en la que se recibio la factura
      * @param fechaRecepcion the fechaRecepcion to set
      */
     public void setFechaRecepcion(Date fechaRecepcion) {
@@ -662,22 +655,6 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     * descuento deducible
-     * @param montoDeducible the montoDeducible to set
-     */
-    public void setMontoDeducible(Double montoDeducible) {
-        this.montoDeducible = montoDeducible;
-    }
-
-    /**
-     * decuento pronto pago
-     * @param montoDescuentoProntoPago the montoDescuentoProntoPago to set
-     */
-    public void setMontoDescuentoProntoPago(Double montoDescuentoProntoPago) {
-        this.montoDescuentoProntoPago = montoDescuentoProntoPago;
-    }
-
-    /**
      * total IVA
      * @param montoIva the montoIva to set
      */
@@ -691,6 +668,14 @@ public class Factura extends BeanVO implements Serializable, Auditable {
      */
     public void setMontoNoAmparado(Double montoNoAmparado) {
         this.montoNoAmparado = montoNoAmparado;
+    }
+
+    /**
+     * descuento deducible
+     * @param montoRetencionDeducible the montoRetencionDeducible to set
+     */
+    public void setMontoRetencionDeducible(Double montoRetencionDeducible) {
+        this.montoRetencionDeducible = montoRetencionDeducible;
     }
 
     /**
@@ -710,11 +695,11 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     * TM Timbre Municipal
-     * @param montoTM the montoTM to set
+     * RetencionTM Timbre Municipal
+     * @param montoRetencionTM the montoRetencionTM to set
      */
-    public void setMontoTM(Double montoTM) {
-        this.montoTM = montoTM;
+    public void setMontoRetencionTM(Double montoRetencionTM) {
+        this.montoRetencionTM = montoRetencionTM;
     }
 
     /**
@@ -767,19 +752,27 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     * TM Timbre Municipal
-     * @param porcentajeTM the porcentajeTM to set
+     * Porcentaje retencion Pronto Pago
+     * @param porcentajeRetencionProntoPago the porcentajeRetencionProntoPago to set
      */
-    public void setPorcentajeTM(Double porcentajeTM) {
-        this.porcentajeTM = porcentajeTM;
+    public void setPorcentajeRetencionProntoPago(Double porcentajeRetencionProntoPago) {
+        this.porcentajeRetencionProntoPago = porcentajeRetencionProntoPago;
     }
 
     /**
-     * sustraendo aplica al ISLR
-     * @param sustraendo the sustraendo to set
+     * RetencionTM Timbre Municipal
+     * @param porcentajeRetencionTM the porcentajeRetencionTM to set
      */
-    public void setSustraendo(Double sustraendo) {
-        this.sustraendo = sustraendo;
+    public void setPorcentajeRetencionTM(Double porcentajeRetencionTM) {
+        this.porcentajeRetencionTM = porcentajeRetencionTM;
+    }
+
+    /**
+     * Calcula y totaliza
+     * @param sumaFactura the sumaFactura to set
+     */
+    public void setSumaFactura(SumaFactura sumaFactura) {
+        this.sumaFactura = sumaFactura;
     }
 
     /**
@@ -801,14 +794,6 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     * totalLiquidado - totalRetenido
-     * @param totalACancelar the totalACancelar to set
-     */
-    public void setTotalACancelar(Double totalACancelar) {
-        this.totalACancelar = totalACancelar;
-    }
-
-    /**
      * total facturado
      * @param totalFacturado the totalFacturado to set
      */
@@ -825,18 +810,12 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     * total retenido entre IVA e ISLR
-     * @param totalRetenido the totalRetenido to set
-     */
-    public void setTotalRetenido(Double totalRetenido) {
-        this.totalRetenido = totalRetenido;
-    }
-
-    /**
      * UT Unidad Tributaria
      * @param valorUT the valorUT to set
      */
     public void setValorUT(Double valorUT) {
         this.valorUT = valorUT;
     }
+
+   
 }

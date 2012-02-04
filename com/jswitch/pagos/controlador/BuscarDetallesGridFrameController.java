@@ -107,11 +107,10 @@ public class BuscarDetallesGridFrameController extends DefaultGridFrameControlle
                         Hibernate.initialize(detalleSin.getDiagnosticoSiniestros());
                         Hibernate.initialize(detalleSin.getDocumentos());
                         detalleSin.setEtapaSiniestro(es);
+                        detalleSin.setOrdenDePago(ordenDePago);
                         s.update(detalleSin);
-                        ordenDePago.getDetalleSiniestros().add(detalleSin);
                     }
                 }
-                s.update(ordenDePago);
                 s.getTransaction().commit();
                 gridFrame.dispose();
 
@@ -119,7 +118,6 @@ public class BuscarDetallesGridFrameController extends DefaultGridFrameControlle
                 LoggerUtil.error(this.getClass(), "actionPerformed", ex);
             } finally {
                 s.close();
-                controller.calcularMontos(ordenDePago);
                 controller.getVista().getMainPanel().getReloadButton().doClick();
             }
         }

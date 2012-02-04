@@ -212,7 +212,7 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
 
             if (d.getEtapaSiniestro().getId().compareTo(
                     es.getId()) == 0) {
-                d = liquidar(d);
+                d.setFechaLiquidado(new Date());
             }
         } catch (Exception e) {
             LoggerUtil.error(this.getClass(), "logicade negocios", e);
@@ -223,53 +223,7 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
         return new VOResponse(d);
     }
 
-    private DetalleSiniestro liquidar(DetalleSiniestro d) {
-        Double l = 0d, r = 0d, f = 0d, c = 0d;
-        Double baseIva = 0d, iva = 0d, rIva = 0d, baseIslr = 0d, rIslr = 0d;
-        Double gC = 0d, hM = 0d, nA = 0d, am = 0d, de = 0d, tm = 0d, dPP = 0d;
-        Integer i = 0;
-        for (Factura factura : d.getPagos()) {
-            if (factura.getAuditoria().getActivo().booleanValue()) {
-                i++;
-                baseIva += factura.getBaseIva();
-                iva += factura.getMontoIva();
-                rIva += factura.getMontoRetencionIva();
-                baseIslr += factura.getBaseIslr();
-                rIslr += factura.getMontoRetencionIsrl();
-                gC += factura.getGastosClinicos();
-                hM += factura.getHonorariosMedicos();
-                am += factura.getMontoAmparado();
-                de += factura.getMontoDeducible();
-                dPP += factura.getMontoDescuentoProntoPago();
-                nA += factura.getMontoNoAmparado();
-                tm += factura.getMontoTM();
-                r += factura.getTotalRetenido();
-                l += factura.getTotalLiquidado();
-                f += factura.getTotalFacturado();
-                c += factura.getTotalACancelar();
-            }
-        }
-        d.setCantidadFacturas(i);
-        d.setMontoIva(iva);
-        d.setMontoBaseIva(baseIva);
-        d.setMontoRetenidoIva(rIva);
-        d.setMontoBaseIslr(baseIslr);
-        d.setMontoRetenidoIslr(rIslr);
-        d.setMontoGastosClinicos(gC);
-        d.setMontoHonorariosMedicos(hM);
-        d.setMontoAmparado(am);
-        d.setMontoDeducible(de);
-        d.setMontoProntoPago(dPP);
-        d.setMontoNoAmparado(nA);
-        d.setMontoTM(tm);
-        d.setMontoRetenido(r);
-        d.setMontoACancelar(c);
-        d.setMontoFacturado(f);
-        d.setMontoLiquidado(l);
-        d.setFechaLiquidado(new Date());
 
-        return d;
-    }
 
     private void checkStatus() {
         DetalleSiniestro ds = ((DetalleSiniestro) beanVO);
