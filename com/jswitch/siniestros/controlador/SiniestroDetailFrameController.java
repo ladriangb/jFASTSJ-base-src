@@ -32,6 +32,7 @@ import org.openswing.swing.message.receive.java.Response;
 import org.openswing.swing.message.receive.java.VOResponse;
 import org.openswing.swing.message.receive.java.ValueObject;
 import org.openswing.swing.util.client.ClientSettings;
+import org.openswing.swing.util.java.Consts;
 
 /**
  *
