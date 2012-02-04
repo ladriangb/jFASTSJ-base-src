@@ -88,6 +88,13 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     @Past
     @BusinessKey
     private Date fechaRecepcion;
+     /**
+     * fecha en la que se recibio la factura
+     */
+    @Column
+    @Temporal(value = TemporalType.DATE)
+    @BusinessKey
+    private Date fechaPagado;
     /**
      * tipo de consepto
      * para saber q porcentaje de ISLR aplica
@@ -328,6 +335,14 @@ public class Factura extends BeanVO implements Serializable, Auditable {
      */
     public Date getFechaFactura() {
         return fechaFactura;
+    }
+
+    /**
+     * fecha en la que se recibio la factura
+     * @return the fechaPagado
+     */
+    public Date getFechaPagado() {
+        return fechaPagado;
     }
 
     /**
@@ -592,6 +607,14 @@ public class Factura extends BeanVO implements Serializable, Auditable {
 
     /**
      * fecha en la que se recibio la factura
+     * @param fechaPagado the fechaPagado to set
+     */
+    public void setFechaPagado(Date fechaPagado) {
+        this.fechaPagado = fechaPagado;
+    }
+
+    /**
+     * fecha en la que se recibio la factura
      * @param fechaRecepcion the fechaRecepcion to set
      */
     public void setFechaRecepcion(Date fechaRecepcion) {
@@ -794,5 +817,5 @@ public class Factura extends BeanVO implements Serializable, Auditable {
         this.valorUT = valorUT;
     }
 
- 
+   
 }

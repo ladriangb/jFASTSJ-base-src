@@ -18,7 +18,7 @@ import javax.persistence.Table;
  * @author Luis Adrian Gonzalez
  */
 @Entity
-@Table(name = "view_sumaremesa")
+@Table(name = "view_sumaRemesa")
 public class SumaRemesa extends BeanVO implements Serializable {
 
     /**
@@ -36,7 +36,7 @@ public class SumaRemesa extends BeanVO implements Serializable {
     @PrimaryKeyJoinColumn
     private Remesa remesa;
     /**
-     * Cantidad de Detalles Siniestros en la orden de pago
+     * Cantidad de Ordenes dePago
      */
     @Column
     private Integer cantidadOrdenes;
@@ -205,7 +205,7 @@ public class SumaRemesa extends BeanVO implements Serializable {
     }
 
     /**
-     * Cantidad de Detalles Siniestros en la orden de pago
+     * Cantidad de  ordenes de pago
      * @return the cantidadOrdenes
      */
     public Integer getCantidadOrdenes() {
@@ -406,7 +406,7 @@ public class SumaRemesa extends BeanVO implements Serializable {
     }
 
     /**
-     * Cantidad de Detalles Siniestros en la orden de pago
+     * Cantidad de  ordenes de pago
      * @param cantidadOrdenes the cantidadOrdenes to set
      */
     public void setCantidadOrdenes(Integer cantidadOrdenes) {

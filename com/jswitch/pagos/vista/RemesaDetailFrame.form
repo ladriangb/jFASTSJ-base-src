@@ -42,7 +42,7 @@
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jTabbedPane1" min="-2" pref="464" max="-2" attributes="0"/>
-              <EmptySpace pref="30" max="32767" attributes="0"/>
+              <EmptySpace pref="34" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -369,7 +369,6 @@
                 <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="&quot;fechaPropuestaPago&quot;" type="code"/>
                 </Property>
-                <Property name="required" type="boolean" value="true"/>
                 <Property name="toolTipText" type="java.lang.String" value="Para uso interno de la empresa a objeto de identificar la fecha de generaci&#xf3;n del archivo de pago. Formato: dd/mm/aaaa"/>
               </Properties>
             </Component>
@@ -453,7 +452,6 @@
                 <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="&quot;fechaValor&quot;" type="code"/>
                 </Property>
-                <Property name="required" type="boolean" value="true"/>
                 <Property name="toolTipText" type="java.lang.String" value="Fecha efectiva del D&#xe9;bito. dd/mm/aaaa"/>
               </Properties>
             </Component>
@@ -540,7 +538,8 @@
                 <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="&quot;fechaPago&quot;" type="code"/>
                 </Property>
-                <Property name="required" type="boolean" value="true"/>
+                <Property name="enabled" type="boolean" value="false"/>
+                <Property name="enabledOnEdit" type="boolean" value="false"/>
                 <Property name="toolTipText" type="java.lang.String" value="Para uso interno de la empresa, con el objeto de identificar la fecha de env&#xed;o del archivo de pago.  Formato: dd/mm/aaaa"/>
               </Properties>
             </Component>

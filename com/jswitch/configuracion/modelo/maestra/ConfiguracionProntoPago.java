@@ -16,6 +16,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
@@ -38,14 +39,13 @@ public class ConfiguracionProntoPago extends BeanVO implements Auditable {
     /**
      * Persona a la que se le realizara el pago
      */
-    @Column
+    @ManyToOne
     @BusinessKey
     private Persona persona;
     /**
      * monto a pagar de timbre municipal
      */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "prontoPago")
-    @BusinessKey(exclude = Method.ALL)
     private Set<RangoValor> rangoValor= new HashSet<RangoValor>();
     /**
      * version
@@ -57,7 +57,7 @@ public class ConfiguracionProntoPago extends BeanVO implements Auditable {
      * auditoria Bitacora
      */
     @Embedded
-    @BusinessKey
+    @BusinessKey(exclude={Method.EQUALS, Method.HASH_CODE})
     private AuditoriaBasica auditoria;
 
     /**

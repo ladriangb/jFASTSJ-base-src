@@ -146,7 +146,7 @@ public class RemesaDetailFrameController
                 es = (EtapaSiniestro) s.createQuery("FROM "
                         + EtapaSiniestro.class.getName() + " C WHERE "
                         + "idPropio=?").setString(0, "PAG").uniqueResult();
-                remesa.setFechaPago(new Date());
+                remesa.setFechaPagado(new Date());
             }
             for (OrdenDePago ordenDePago : remesa.getOrdenDePagos()) {
                 ordenDePago = (OrdenDePago) s.get(OrdenDePago.class, ordenDePago.getId());
@@ -159,7 +159,7 @@ public class RemesaDetailFrameController
                     s.update(detalleSiniestro);
                 }
                 if (etS == EstatusPago.PAGADO) {
-                    ordenDePago.setFechaPago(new Date());
+                    ordenDePago.setFechaPagado(new Date());
                 }
                 ordenDePago.setEstatusPago(etS);
                 ordenDePago.setRemesa(remesa);

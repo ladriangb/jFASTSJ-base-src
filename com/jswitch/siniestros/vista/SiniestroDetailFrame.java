@@ -3,7 +3,6 @@ package com.jswitch.siniestros.vista;
 import com.jswitch.asegurados.controlador.AseguradoDetailFrameController;
 import com.jswitch.asegurados.controlador.TitularDetailFrameController;
 import com.jswitch.asegurados.vista.AseguradoDetailFrame;
-import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.vista.util.DefaultDetailFrame;
 import com.jswitch.asegurados.vista.TitularDetailFrame;

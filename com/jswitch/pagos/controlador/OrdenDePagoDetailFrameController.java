@@ -1,5 +1,6 @@
 package com.jswitch.pagos.controlador;
 
+import com.jswitch.base.controlador.General;
 import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
@@ -15,9 +16,12 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import org.hibernate.Hibernate;
 import org.hibernate.classic.Session;
 import org.openswing.swing.client.GridControl;
+import org.openswing.swing.client.InsertButton;
 import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
 import org.openswing.swing.message.receive.java.VOResponse;
@@ -85,6 +89,7 @@ public class OrdenDePagoDetailFrameController
         Hibernate.initialize(sin.getDocumentos());
         Hibernate.initialize(sin.getNotasTecnicas());
         s.close();
+        getVista().hideAll(sin.getEstatusPago());
         beanVO = sin;
         return new VOResponse(beanVO);
     }
@@ -115,38 +120,6 @@ public class OrdenDePagoDetailFrameController
 
     @Override
     public Response logicaNegocio(ValueObject persistentObject) {
-        Session s = null;
-        OrdenDePago pago = (OrdenDePago) persistentObject;
-        if (pago.getCodigoSIGECOF() != null && pago.getCodigoSIGECOF().trim().isEmpty()) {
-            pago.setCodigoSIGECOF(null);
-        }
-        try {
-            s = HibernateUtil.getSessionFactory().openSession();
-            s.beginTransaction();
-            EtapaSiniestro etS = null;
-            if (pago.getEstatusPago() == EstatusPago.ANULADO) {
-                etS = (EtapaSiniestro) s.createQuery("FROM "
-                        + EtapaSiniestro.class.getName() + " C WHERE "
-                        + "idPropio=?").setString(0, "LIQ").uniqueResult();
-            } else if (pago.getEstatusPago() == EstatusPago.PENDIENTE
-                    || pago.getEstatusPago() == EstatusPago.SELECCIONADO) {
-                etS = (EtapaSiniestro) s.createQuery("FROM "
-                        + EtapaSiniestro.class.getName() + " C WHERE "
-                        + "idPropio=?").setString(0, "ORD_PAG").uniqueResult();
-            } else if (pago.getEstatusPago() == EstatusPago.PAGADO) {
-                etS = (EtapaSiniestro) s.createQuery("FROM "
-                        + EtapaSiniestro.class.getName() + " C WHERE "
-                        + "idPropio=?").setString(0, "PAG").uniqueResult();
-            }
-            for (DetalleSiniestro detalleSiniestro : pago.getDetalleSiniestros()) {
-                detalleSiniestro.setEtapaSiniestro(etS);
-                detalleSiniestro.setOrdenDePago(pago);
-                s.update(detalleSiniestro);
-            }
-            s.getTransaction().commit();
-        } finally {
-            s.close();
-        }
         return new VOResponse(persistentObject);
     }
 
@@ -161,18 +134,70 @@ public class OrdenDePagoDetailFrameController
         Calendar c = Calendar.getInstance();
         DecimalFormat nf = new DecimalFormat("00000");
         SimpleDateFormat df = new SimpleDateFormat("MM-yyyy");
-        OrdenDePago ordenPago = (OrdenDePago) persistentObject;
-        ordenPago.setNumeroOrden(df.format(c.getTime()) + "-" + nf.format(seq));
-        return new VOResponse(ordenPago);
+        OrdenDePago ordenDePago = (OrdenDePago) persistentObject;
+
+        ordenDePago.setNumeroOrden(df.format(c.getTime()) + "-" + nf.format(seq));
+        if (ordenDePago.getCodigoSIGECOF() != null && ordenDePago.getCodigoSIGECOF().trim().isEmpty()) {
+            ordenDePago.setCodigoSIGECOF(null);
+        }
+
+        EtapaSiniestro etS = null;
+        etS = (EtapaSiniestro) s.createQuery("FROM "
+                + EtapaSiniestro.class.getName() + " C WHERE "
+                + "idPropio=?").setString(0, "ORD_PAG").uniqueResult();
+
+        for (DetalleSiniestro detalleSiniestro : ordenDePago.getDetalleSiniestros()) {
+            detalleSiniestro.setEtapaSiniestro(etS);
+            detalleSiniestro.setOrdenDePago(ordenDePago);
+            s.update(detalleSiniestro);
+        }
+        return new VOResponse(ordenDePago);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        OrdenDePago ordenDePago = (OrdenDePago) beanVO;
-        new BuscarDetallesGridFrameController(this, ordenDePago);
+        if (e.getSource() instanceof InsertButton) {
+            OrdenDePago ordenDePago = (OrdenDePago) beanVO;
+            new BuscarDetallesGridFrameController(this, ordenDePago);
+        } else if (((JButton) e.getSource()).getText().equalsIgnoreCase("PAGAR")) {
+            new PagarDetailFrameController(vista.getMainPanel());
+        } else {
+            int res = JOptionPane.showConfirmDialog(vista, "Esta a punto de Anular la \"Orden de Pago\"\nEsta acción no se puede revertir\n¿Desea Continuar? ",
+                    General.empresa.getNombre(), JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            if (res == JOptionPane.YES_OPTION) {
+                anular();
+            }
+        }
     }
 
-   
+    /**
+     * Establese la Orden de Pago como Nula
+     */
+    private void anular() {
+        Session s = null;
+        OrdenDePago pago = (OrdenDePago) vista.getMainPanel().getVOModel().getValueObject();
+        pago.setEstatusPago(EstatusPago.ANULADO);
+        pago.getAuditoria().setActivo(false);
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+            s.beginTransaction();
+            EtapaSiniestro etS = null;
+            if (pago.getEstatusPago() == EstatusPago.ANULADO) {
+                etS = (EtapaSiniestro) s.createQuery("FROM "
+                        + EtapaSiniestro.class.getName() + " C WHERE "
+                        + "idPropio=?").setString(0, "LIQ").uniqueResult();
+            }
+            for (DetalleSiniestro detalleSiniestro : pago.getDetalleSiniestros()) {
+                detalleSiniestro.setEtapaSiniestro(etS);
+                detalleSiniestro.setOrdenDePago(null);
+                s.update(detalleSiniestro);
+            }
+            s.update(pago);
+            s.getTransaction().commit();
+        } finally {
+            s.close();
+        }
+    }
 
     /**
      * la vista controlada

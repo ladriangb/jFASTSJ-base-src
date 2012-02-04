@@ -1,6 +1,5 @@
 package com.jswitch.pagos.vista;
 
-import com.jswitch.base.controlador.General;
 import com.jswitch.base.controlador.documentosAnexos.TipoDocumentoLookupController;
 import com.jswitch.base.controlador.util.DefaultDocumentosAnexosGridController;
 import com.jswitch.base.controlador.util.DefaultGridInternalController;
@@ -221,7 +220,6 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
         numericControl1.setToolTipText("Identificacion del Lote de Pago. Valor asignado por la empresa. Ej. 00001500");
 
         dateControl3.setAttributeName("fechaPropuestaPago");
-        dateControl3.setRequired(true);
         dateControl3.setToolTipText("Para uso interno de la empresa a objeto de identificar la fecha de generación del archivo de pago. Formato: dd/mm/aaaa");
 
         labelControl3.setLabel("fechaPropuestaPago");
@@ -259,7 +257,6 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
         comboBoxControl3.setRequired(true);
 
         dateControl4.setAttributeName("fechaValor");
-        dateControl4.setRequired(true);
         dateControl4.setToolTipText("Fecha efectiva del Débito. dd/mm/aaaa");
 
         textControl1.setAttributeName("numeroCuentaDebitar");
@@ -296,7 +293,8 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
         labelControl15.setLabel("detalle");
 
         dateControl2.setAttributeName("fechaPago");
-        dateControl2.setRequired(true);
+        dateControl2.setEnabled(false);
+        dateControl2.setEnabledOnEdit(false);
         dateControl2.setToolTipText("Para uso interno de la empresa, con el objeto de identificar la fecha de envío del archivo de pago.  Formato: dd/mm/aaaa");
 
         labelControl5.setLabel("fechaPago");
@@ -827,7 +825,7 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

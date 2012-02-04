@@ -76,7 +76,7 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     /**
      * suma de valores detalles
      */
-    @OneToOne(mappedBy="ordenDePago")
+    @OneToOne(mappedBy = "ordenDePago")
     private SumaOrden sumaOrden;
     /**
      * Remesa a la cual esta vinculado el pago
@@ -94,7 +94,7 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     @Column
     @Temporal(value = TemporalType.DATE)
     @BusinessKey
-    private Date fechaPago;
+    private Date fechaPagado;
     /**
      * Estado en el que se encuentra el pago
      */
@@ -134,13 +134,13 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     /**
      * Coleccion de etapas de siniestro y las fechas de los cambios
      */
-    @OneToMany(fetch = FetchType.LAZY,mappedBy="ordenDePago")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "ordenDePago")
     @BusinessKey(exclude = Method.ALL)
     private Set<DetalleSiniestro> detalleSiniestros = new HashSet<DetalleSiniestro>(0);
     /**
      * observaciones generales
      */
-    @OneToMany(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @BusinessKey(exclude = Method.ALL)
     private List<Observacion> observaciones = new ArrayList<Observacion>(0);
     /**
@@ -210,10 +210,10 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
 
     /**
      * Fecha en que se hace el pago
-     * @return the fechaPago
+     * @return the fechaPagado
      */
-    public Date getFechaPago() {
-        return fechaPago;
+    public Date getFechaPagado() {
+        return fechaPagado;
     }
 
     /**
@@ -354,10 +354,10 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
 
     /**
      * Fecha en que se hace el pago
-     * @param fechaPago the fechaPago to set
+     * @param fechaPagado the fechaPago to set
      */
-    public void setFechaPago(Date fechaPago) {
-        this.fechaPago = fechaPago;
+    public void setFechaPagado(Date fechaPagado) {
+        this.fechaPagado = fechaPagado;
     }
 
     /**
@@ -447,5 +447,4 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     public void setTipoDetalleSiniestro(Dominios.TipoDetalleSiniestro tipoDetalleSiniestro) {
         this.tipoDetalleSiniestro = tipoDetalleSiniestro;
     }
-
 }

@@ -2,6 +2,7 @@ package com.jswitch.siniestros.controlador;
 
 import com.jswitch.siniestros.controlador.detalle.DetalleSiniestroDetailFrameController;
 import com.jswitch.asegurados.modelo.maestra.Asegurado;
+import com.jswitch.base.controlador.General;
 import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
@@ -18,6 +19,7 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import javax.swing.JOptionPane;
 import org.hibernate.Hibernate;
 import org.hibernate.classic.Session;
 import org.openswing.swing.client.GridControl;
@@ -25,6 +27,7 @@ import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
 import org.openswing.swing.message.receive.java.VOResponse;
 import org.openswing.swing.message.receive.java.ValueObject;
+import org.openswing.swing.util.client.ClientSettings;
 
 /**
  *
@@ -92,14 +95,15 @@ public class SiniestroDetailFrameController extends DefaultDetailFrameController
 
         siniestro.setNumero(df.format(c.getTime()) + nf.format(seq));
         siniestro.setAyo(c.get(Calendar.YEAR));
-        siniestro.setMes(c.get(Calendar.MONTH)+1);
+        siniestro.setMes(c.get(Calendar.MONTH) + 1);
         siniestro.setSeq(seq);
         return new VOResponse(siniestro);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (beanVO != null) {
+        if (beanVO != null || !((Siniestro)beanVO).getCertificado().getTitular().getAuditoria().getActivo()
+                || !((Siniestro)beanVO).getAsegurado().getAuditoria().getActivo()) {
             Class c = DetalleSiniestroChousser.showDialog();
             if (c != null && c.getClass() != null) {
                 if (c.equals(Vida.class)) {
@@ -109,5 +113,9 @@ public class SiniestroDetailFrameController extends DefaultDetailFrameController
                 }
             }
         }
+        else
+            JOptionPane.showMessageDialog(gridControl,
+                    ClientSettings.getInstance().getResources().getResource("No se Permite Realizar el Siniestro a Este Asegurado"),
+                    General.edition, JOptionPane.INFORMATION_MESSAGE);
     }
 }

@@ -29,6 +29,11 @@ public class BuscarSiniestroDetrailController extends DefaultDetailFrameControll
     }
 
     @Override
+    public Response updateRecord(ValueObject oldPersistentObject, ValueObject persistentObject) throws Exception {
+        return insertRecord(persistentObject);
+    }
+
+    @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
         BuscarSiniestro bs = (BuscarSiniestro) newPersistentObject;
         Session s = HibernateUtil.getSessionFactory().openSession();
@@ -171,6 +176,4 @@ public class BuscarSiniestroDetrailController extends DefaultDetailFrameControll
     public Response logicaNegocioDespuesSave(ValueObject persistentObject, Session s) {
         return super.logicaNegocioDespuesSave(persistentObject, s);
     }
-
-
 }

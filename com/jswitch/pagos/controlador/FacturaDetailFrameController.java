@@ -15,7 +15,6 @@ import com.jswitch.pagos.modelo.transaccional.DesgloseCobertura;
 import com.jswitch.pagos.modelo.transaccional.DesgloseSumaAsegurada;
 import com.jswitch.pagos.vista.FacturaDetailFrame;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
-import java.util.Collection;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import org.hibernate.Hibernate;
@@ -221,13 +220,15 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
         }
         if (tm != null) {
             for (RangoValor rangoValor : tm.getRangoValor()) {
-                if (cant >= rangoValor.getMinValue() && cant <= rangoValor.getMinValue()) {
+                if (cant >= rangoValor.getMinValue() && cant <= rangoValor.getMaxValue()) {
                     factura.setPorcentajeRetencionTM(rangoValor.getMonto());
                     factura.setMontoRetencionTM(factura.getTotalLiquidado() * rangoValor.getMonto());
-                    break;
+                    return factura;
                 }
             }
         }
+        factura.setPorcentajeRetencionTM(0d);
+        factura.setMontoRetencionTM(0d);
         return factura;
     }
 
@@ -278,15 +279,8 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
 
         factura.setGastosClinicos(gastosClinicos);
         factura.setHonorariosMedicos(honorariosMedicos);
-
-//        factura.setTotalRetenido(factura.getMontoRetencionIva() + 
-//                factura.getMontoRetencionIsrl()+factura.getMontoDeducible()
-//                +
-//                factura.getMontoDescuentoProntoPago());
-
+        
         factura.setTotalLiquidado((baseIva * iva) + montoAmparado);
-
-//        factura.setTotalACancelar(factura.getTotalLiquidado() - factura.getTotalRetenido());
         return factura;
     }
 }
