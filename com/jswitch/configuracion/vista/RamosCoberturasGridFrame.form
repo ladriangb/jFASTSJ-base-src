@@ -68,9 +68,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jPanel8" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="156" max="32767" attributes="0"/>
+                  <EmptySpace pref="158" max="32767" attributes="0"/>
               </Group>
-              <Component id="gridControl1" alignment="1" pref="256" max="32767" attributes="0"/>
+              <Component id="gridControl1" alignment="1" pref="258" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -108,8 +108,8 @@
                   <Connection code="&quot;id&quot;" type="code"/>
                 </Property>
                 <Property name="columnRequired" type="boolean" value="false"/>
-                <Property name="grouping" type="boolean" value="false"/>
                 <Property name="preferredWidth" type="int" value="40"/>
+                <Property name="sortVersus" type="java.lang.String" value="DESC"/>
               </Properties>
             </Component>
             <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn2">
@@ -141,8 +141,8 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
             <Property name="columns" type="int" value="2"/>
-            <Property name="horizontalGap" type="int" value="2"/>
             <Property name="rows" type="int" value="3"/>
+            <Property name="horizontalGap" type="int" value="2"/>
             <Property name="verticalGap" type="int" value="2"/>
           </Layout>
           <SubComponents>
@@ -185,9 +185,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jPanel7" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="153" max="32767" attributes="0"/>
+                  <EmptySpace pref="155" max="32767" attributes="0"/>
               </Group>
-              <Component id="gridData" alignment="1" pref="253" max="32767" attributes="0"/>
+              <Component id="gridData" alignment="1" pref="255" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -225,8 +225,8 @@
                   <Connection code="&quot;id&quot;" type="code"/>
                 </Property>
                 <Property name="columnRequired" type="boolean" value="false"/>
-                <Property name="grouping" type="boolean" value="false"/>
                 <Property name="preferredWidth" type="int" value="40"/>
+                <Property name="sortVersus" type="java.lang.String" value="DESC"/>
               </Properties>
             </Component>
             <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn1">
@@ -250,8 +250,8 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
             <Property name="columns" type="int" value="2"/>
-            <Property name="horizontalGap" type="int" value="2"/>
             <Property name="rows" type="int" value="3"/>
+            <Property name="horizontalGap" type="int" value="2"/>
             <Property name="verticalGap" type="int" value="2"/>
           </Layout>
           <SubComponents>

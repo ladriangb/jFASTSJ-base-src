@@ -545,4 +545,11 @@ public class Principal implements MDIController, LoginController {
         BigDecimal b = new BigDecimal(d).setScale(2, RoundingMode.DOWN).round(MathContext.UNLIMITED);
         return b.doubleValue();
     }
+    
+    public static void main(String[] args) {
+        if (args == null || args.length == 0) {
+            new Principal();
+            Principal.splah.dispose();
+        }
+    }
 }

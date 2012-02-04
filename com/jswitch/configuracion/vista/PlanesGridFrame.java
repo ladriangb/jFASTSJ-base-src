@@ -106,8 +106,8 @@ public class PlanesGridFrame extends DefaultGridFrame {
 
         decimalColumnNot.setColumnName("id");
         decimalColumnNot.setColumnRequired(false);
-        decimalColumnNot.setGrouping(false);
         decimalColumnNot.setPreferredWidth(40);
+        decimalColumnNot.setSortVersus(org.openswing.swing.util.java.Consts.DESC_SORTED);
         gridData.getColumnContainer().add(decimalColumnNot);
 
         textColumn1.setColumnFilterable(true);
@@ -158,8 +158,8 @@ public class PlanesGridFrame extends DefaultGridFrame {
         decimalColumnNot1.setColumnName("id");
         decimalColumnNot1.setColumnRequired(false);
         decimalColumnNot1.setColumnSortable(true);
-        decimalColumnNot1.setGrouping(false);
         decimalColumnNot1.setPreferredWidth(40);
+        decimalColumnNot1.setSortVersus(org.openswing.swing.util.java.Consts.DESC_SORTED);
         gridControl1.getColumnContainer().add(decimalColumnNot1);
 
         textColumn4.setColumnFilterable(true);
@@ -204,8 +204,8 @@ public class PlanesGridFrame extends DefaultGridFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(232, Short.MAX_VALUE))
-            .addComponent(gridControl1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
+                .addContainerGap(236, Short.MAX_VALUE))
+            .addComponent(gridControl1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Cobertura Amparada", jPanel2);
@@ -223,7 +223,6 @@ public class PlanesGridFrame extends DefaultGridFrame {
         decimalColumnNot2.setColumnName("id");
         decimalColumnNot2.setColumnRequired(false);
         decimalColumnNot2.setColumnSortable(true);
-        decimalColumnNot2.setGrouping(false);
         decimalColumnNot2.setPreferredWidth(40);
         gridControl2.getColumnContainer().add(decimalColumnNot2);
 
@@ -309,7 +308,7 @@ public class PlanesGridFrame extends DefaultGridFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(gridControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
+                .addComponent(gridControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Suma Asegurada", jPanel4);
@@ -326,7 +325,6 @@ public class PlanesGridFrame extends DefaultGridFrame {
         decimalColumnNot3.setColumnName("id");
         decimalColumnNot3.setColumnRequired(false);
         decimalColumnNot3.setColumnSortable(true);
-        decimalColumnNot3.setGrouping(false);
         decimalColumnNot3.setPreferredWidth(40);
         gridControl3.getColumnContainer().add(decimalColumnNot3);
 
@@ -381,8 +379,8 @@ public class PlanesGridFrame extends DefaultGridFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(232, Short.MAX_VALUE))
-            .addComponent(gridControl3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
+                .addContainerGap(236, Short.MAX_VALUE))
+            .addComponent(gridControl3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Configuracion Tipo Detalle de Siniestro", jPanel5);
@@ -404,7 +402,7 @@ public class PlanesGridFrame extends DefaultGridFrame {
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents

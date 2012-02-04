@@ -83,8 +83,8 @@ public class CertificadosGridFrame extends DefaultGridFrame {
         decimalColumn1.setColumnFilterable(true);
         decimalColumn1.setColumnName("id");
         decimalColumn1.setColumnSortable(true);
-        decimalColumn1.setGrouping(false);
         decimalColumn1.setPreferredWidth(40);
+        decimalColumn1.setSortVersus(org.openswing.swing.util.java.Consts.DESC_SORTED);
         gridData.getColumnContainer().add(decimalColumn1);
 
         textColumn1.setColumnFilterable(true);

@@ -80,8 +80,8 @@ public class AseguradoGridFrame extends DefaultGridFrame {
         decimalColumn1.setColumnRequired(false);
         decimalColumn1.setColumnSortable(true);
         decimalColumn1.setEditableOnEdit(true);
-        decimalColumn1.setGrouping(false);
         decimalColumn1.setPreferredWidth(40);
+        decimalColumn1.setSortVersus(org.openswing.swing.util.java.Consts.DESC_SORTED);
         gridData.getColumnContainer().add(decimalColumn1);
 
         textColumn1.setColumnFilterable(true);
