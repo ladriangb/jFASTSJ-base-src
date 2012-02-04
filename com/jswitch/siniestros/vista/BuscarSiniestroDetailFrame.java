@@ -1,6 +1,5 @@
 package com.jswitch.siniestros.vista;
 
-
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.vista.util.DefaultDetailFrame;
 import com.jswitch.fas.modelo.Dominios;
@@ -16,7 +15,6 @@ import org.openswing.swing.util.java.Consts;
  */
 public class BuscarSiniestroDetailFrame extends DefaultDetailFrame {
 
-   
     public BuscarSiniestroDetailFrame() {
     }
 
@@ -237,7 +235,7 @@ public class BuscarSiniestroDetailFrame extends DefaultDetailFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(textControl6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelControl7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {comboBoxControl4, labelControl1, labelControl10, labelControl2, labelControl3, labelControl4, labelControl5, labelControl6, labelControl7, labelControl8, labelControl9, numericControl1, numericControl2, textControl1, textControl2, textControl3, textControl4, textControl5, textControl6});
@@ -260,7 +258,7 @@ public class BuscarSiniestroDetailFrame extends DefaultDetailFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(form1, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                .addComponent(form1, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -270,9 +268,11 @@ public class BuscarSiniestroDetailFrame extends DefaultDetailFrame {
         this.dispose();     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        saveButton1.doClick();// TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
 
+        saveButton1.doClick();
+        getMainPanel().setMode(Consts.EDIT);
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     @Override
     public void inicializar(FormController formController, boolean addToMDIFrame) {

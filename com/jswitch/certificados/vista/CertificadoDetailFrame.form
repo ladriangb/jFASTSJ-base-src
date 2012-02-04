@@ -255,6 +255,7 @@
                         <Property name="controllerMethodName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                           <Connection code="&quot;getNuevoTitular&quot;" type="code"/>
                         </Property>
+                        <Property name="lookupButtonVisible" type="boolean" value="false"/>
                         <Property name="maxCharacters" type="int" value="12"/>
                         <Property name="required" type="boolean" value="true"/>
                       </Properties>

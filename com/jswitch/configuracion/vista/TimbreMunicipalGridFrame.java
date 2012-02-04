@@ -147,6 +147,9 @@ public class TimbreMunicipalGridFrame extends DefaultGridFrame {
         currencyColumn1.setColumnName("monto");
         currencyColumn1.setColumnSortable(true);
         currencyColumn1.setCurrencySymbol("%");
+        currencyColumn1.setDecimals(2);
+        currencyColumn1.setEditableOnEdit(true);
+        currencyColumn1.setEditableOnInsert(true);
         gridControl1.getColumnContainer().add(currencyColumn1);
 
         textColumn3.setColumnFilterable(true);
@@ -176,8 +179,8 @@ public class TimbreMunicipalGridFrame extends DefaultGridFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(256, Short.MAX_VALUE))
-            .addComponent(gridControl1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
+                .addContainerGap(260, Short.MAX_VALUE))
+            .addComponent(gridControl1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Rangos", jPanel2);
@@ -199,7 +202,7 @@ public class TimbreMunicipalGridFrame extends DefaultGridFrame {
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents

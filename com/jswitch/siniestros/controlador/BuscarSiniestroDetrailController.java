@@ -15,6 +15,7 @@ import org.hibernate.Query;
 import org.hibernate.classic.Session;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.message.receive.java.Response;
+import org.openswing.swing.message.receive.java.VOResponse;
 import org.openswing.swing.message.receive.java.ValueObject;
 
 /**
@@ -157,7 +158,19 @@ public class BuscarSiniestroDetrailController extends DefaultDetailFrameControll
             s.close();
         }
 
-        return null;
+        return new VOResponse(newPersistentObject);
 
     }
+
+    @Override
+    public Response logicaNegocio(ValueObject persistentObject) {
+        return super.logicaNegocio(persistentObject);
+    }
+
+    @Override
+    public Response logicaNegocioDespuesSave(ValueObject persistentObject, Session s) {
+        return super.logicaNegocioDespuesSave(persistentObject, s);
+    }
+
+
 }

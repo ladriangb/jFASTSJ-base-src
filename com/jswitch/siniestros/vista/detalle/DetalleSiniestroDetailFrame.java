@@ -16,9 +16,10 @@ import com.jswitch.persona.controlador.PersonasDetailController;
 import com.jswitch.persona.modelo.dominio.TipoPersona;
 import com.jswitch.persona.modelo.maestra.Rif;
 import com.jswitch.reporte.modelo.Reporte;
-import com.jswitch.siniestros.controlador.SiniestroLookupController;
+import com.jswitch.siniestros.controlador.ConfSiniestroLookupController;
 import com.jswitch.siniestros.controlador.PersonaTipoLookupController;
 import com.jswitch.siniestros.controlador.SiniestroDetailFrameController;
+import com.jswitch.siniestros.controlador.detalle.SiniestroLookupController;
 import com.jswitch.siniestros.controlador.detalle.reportes.ReporteGridInternalController;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
 import com.jswitch.siniestros.modelo.dominio.TipoSiniestro;
@@ -2157,10 +2158,11 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         lookupPersonaPago = new PersonaTipoLookupController(tipoPersonaPago);
         PersonaLookupControllerPorNombre p = new PersonaLookupControllerPorNombre("NEG");
         p.addLookup2ParentLink("analistaNegociador");
-        SiniestroLookupController tipoController = new SiniestroLookupController(TipoSiniestro.class.getName(), tipoDetalle.getName());
+        ConfSiniestroLookupController tipoController = new ConfSiniestroLookupController(TipoSiniestro.class.getName(), tipoDetalle.getName());
         tipoController.addLookup2ParentLink("tipoSiniestro");
-        SiniestroLookupController siniLockUpControler =new SiniestroLookupController(Siniestro.class.getName(), tipoDetalle.getName());;
-        SiniestroLookupController estadoController = new SiniestroLookupController(EtapaSiniestro.class.getName(), tipoDetalle.getName());
+        SiniestroLookupController siniLockUpControler = new SiniestroLookupController();
+        siniLockUpControler.addLookup2ParentLink("siniestro");
+        ConfSiniestroLookupController estadoController = new ConfSiniestroLookupController(EtapaSiniestro.class.getName(), tipoDetalle.getName());
         estadoController.addLookup2ParentLink("etapaSiniestro");
         CodLookupControl persona = null, negociador = null, tipoSiniestro = null, etapaSiniestro = null, siniestro = null;
         if (tipoDetalle.equals(APS.class)) {
@@ -2224,8 +2226,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
             etapaSiniestro.setControllerMethodName("getEtapaSiniestro");
         }
         if (siniestro != null) {
-            
-            siniLockUpControler.addLookup2ParentLink("siniestro");
+
             siniestro.setLookupController(siniLockUpControler);
             siniestro.setOpenDetail("siniestro", SiniestroDetailFrameController.class.getName(),
                     new Class[]{String.class, GridControl.class, BeanVO.class, Boolean.class},

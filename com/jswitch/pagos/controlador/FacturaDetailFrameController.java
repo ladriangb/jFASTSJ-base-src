@@ -9,6 +9,7 @@ import com.jswitch.base.vista.util.DefaultDetailFrame;
 import com.jswitch.configuracion.modelo.dominio.Cobertura;
 import com.jswitch.configuracion.modelo.maestra.TimbreMunicipal;
 import com.jswitch.configuracion.modelo.transaccional.ConfiguracionSiniestro;
+import com.jswitch.configuracion.modelo.transaccional.RangoValor;
 import com.jswitch.pagos.modelo.maestra.Factura;
 import com.jswitch.pagos.modelo.transaccional.DesgloseCobertura;
 import com.jswitch.pagos.modelo.transaccional.DesgloseSumaAsegurada;
@@ -80,9 +81,6 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
     @Override
     public Response updateRecord(ValueObject oldPersistentObject, ValueObject persistentObject) throws Exception {
         Response res = super.updateRecord(oldPersistentObject, persistentObject);
-        if (res instanceof VOResponse) {
-            updateDetalleSiniestro();
-        }
         return res;
     }
 
@@ -90,12 +88,8 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
         Factura liquidacion = (Factura) newPersistentObject;
         liquidacion.setDetalleSiniestro(detalleSiniestro);
-        liquidacion.setMontoDeducible(getDeducible(detalleSiniestro));
+        liquidacion.setMontoRetencionDeducible(getDeducible(detalleSiniestro));
         Response res = super.insertRecord(newPersistentObject);
-        if (res instanceof VOResponse) {
-            detalleSiniestro.getPagos().add(liquidacion);
-            updateDetalleSiniestro();
-        }
         return res;
     }
 
@@ -172,27 +166,6 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
         return new VOResponse(factura);
     }
 
-    public void updateDetalleSiniestro() {
-        Session s = null;
-
-        try {
-            s = HibernateUtil.getSessionFactory().openSession();
-            Collection<Factura> fac = detalleSiniestro.getPagos();
-            Double facturado = 0d;
-            for (Factura factura : fac) {
-                facturado += factura.getTotalFacturado();
-            }
-            detalleSiniestro.setMontoFacturado(facturado);
-            s.beginTransaction();
-            s.update(detalleSiniestro);
-            s.getTransaction().commit();
-        } catch (Exception ex) {
-            System.out.println(ex);
-        } finally {
-            s.close();
-        }
-    }
-
     public DefaultDetailFrame getVista() {
         return vista;
     }
@@ -233,8 +206,29 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
     }
 
     private Factura calcularTimbreMunicipal(Factura factura) {
+        int cant = (int) (factura.getTotalLiquidado() / factura.getValorUT());
+        TimbreMunicipal tm = null;
+        Session s = null;
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+            tm = (TimbreMunicipal) s.get(TimbreMunicipal.class, factura.getTimbreMunicipal().getId());
+            Hibernate.initialize(tm.getRangoValor());
+
+        } catch (Exception ex) {
+            LoggerUtil.error(this.getClass(), "getDeducible", ex);
+        } finally {
+            s.close();
+        }
+        if (tm != null) {
+            for (RangoValor rangoValor : tm.getRangoValor()) {
+                if (cant >= rangoValor.getMinValue() && cant <= rangoValor.getMinValue()) {
+                    factura.setPorcentajeRetencionTM(rangoValor.getMonto());
+                    factura.setMontoRetencionTM(factura.getTotalLiquidado() * rangoValor.getMonto());
+                    break;
+                }
+            }
+        }
         return factura;
-        //TODO CALCULAR TIMBRE MUNICIPAL
     }
 
     public Factura updateFactura(Factura fac) {
@@ -255,7 +249,7 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
                     montoNoAmparado += dc.getMontoNoAmparado();
                     montoAmparado += dc.getMontoAmparado();
                     if (c.getIva()) {
-                        baseIva += dc.getMontoAmparado();
+                        baseIva += dc.getMontoFacturado();//dc.getMontoAmparado();
                     }
                     if (c.getIslr()) {
                         baseIslr += dc.getMontoAmparado();
@@ -285,14 +279,14 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
         factura.setGastosClinicos(gastosClinicos);
         factura.setHonorariosMedicos(honorariosMedicos);
 
-        factura.setTotalRetenido(
-                factura.getMontoRetencionIva() + factura.getMontoRetencionIsrl());
+//        factura.setTotalRetenido(factura.getMontoRetencionIva() + 
+//                factura.getMontoRetencionIsrl()+factura.getMontoDeducible()
+//                +
+//                factura.getMontoDescuentoProntoPago());
 
-        factura.setTotalLiquidado(
-                (baseIva * iva) + (baseIslr * islr) + montoAmparado - factura.getMontoDeducible());
+        factura.setTotalLiquidado((baseIva * iva) + montoAmparado);
 
-        factura.setTotalACancelar(
-                factura.getTotalLiquidado() - factura.getTotalRetenido());
+//        factura.setTotalACancelar(factura.getTotalLiquidado() - factura.getTotalRetenido());
         return factura;
     }
 }

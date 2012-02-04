@@ -41,6 +41,11 @@ public class SumaOrden extends BeanVO implements Serializable {
     @Column
     private Integer cantidadDetalles;
     /**
+     * Cantidad de Detalles Siniestros en la orden de pago
+     */
+    @Column
+    private Integer cantidadFacturas;
+    /**
      * Cantidad de Siniestros de Titulares
      */
     @Column
@@ -61,18 +66,12 @@ public class SumaOrden extends BeanVO implements Serializable {
     @Column
     private Double montoFamiliares;
     /**
-     * sustraendo aplica al ISLR
-     */
-    @Column
-    @BusinessKey
-    private Double sustraendo;
-    /**
-     * TM Timbre Municipal
+     * RetencionTM Timbre Municipal
      * 
      */
     @Column
     @BusinessKey
-    private Double montoTM;
+    private Double montoRetencionTM;
     /**
      * base para el ISLR
      */
@@ -108,13 +107,13 @@ public class SumaOrden extends BeanVO implements Serializable {
      */
     @Column
     @BusinessKey
-    private Double montoDescuentoProntoPago;
+    private Double montoRetencionProntoPago;
     /**
-     * descuento deducible
+     * Retencion deducible
      */
     @Column
     @BusinessKey
-    private Double montoDeducible;
+    private Double montoRetencionDeducible;
     /**
      * total de gastos clinicos
      * esto es a lo que se le retenie impuesto
@@ -193,6 +192,14 @@ public class SumaOrden extends BeanVO implements Serializable {
     }
 
     /**
+     * Cantidad de Detalles Siniestros en la orden de pago
+     * @return the cantidadFacturas
+     */
+    public Integer getCantidadFacturas() {
+        return cantidadFacturas;
+    }
+
+    /**
      * total de gastos clinicos
      * esto es a lo que se le retenie impuesto
      * @return the gastosClinicos
@@ -226,22 +233,6 @@ public class SumaOrden extends BeanVO implements Serializable {
     }
 
     /**
-     * descuento deducible
-     * @return the montoDeducible
-     */
-    public Double getMontoDeducible() {
-        return montoDeducible;
-    }
-
-    /**
-     * decuento pronto pago
-     * @return the montoDescuentoProntoPago
-     */
-    public Double getMontoDescuentoProntoPago() {
-        return montoDescuentoProntoPago;
-    }
-
-    /**
      * Suma de todos los montos a pagar a Beneficiarios
      * @return the montoFamiliares
      */
@@ -266,6 +257,14 @@ public class SumaOrden extends BeanVO implements Serializable {
     }
 
     /**
+     * Retencion deducible
+     * @return the montoRetencionDeducible
+     */
+    public Double getMontoRetencionDeducible() {
+        return montoRetencionDeducible;
+    }
+
+    /**
      * monto de retencion ISLR
      * @return the montoRetencionIsrl
      */
@@ -282,11 +281,19 @@ public class SumaOrden extends BeanVO implements Serializable {
     }
 
     /**
-     * TM Timbre Municipal
-     * @return the montoTM
+     * decuento pronto pago
+     * @return the montoRetencionProntoPago
      */
-    public Double getMontoTM() {
-        return montoTM;
+    public Double getMontoRetencionProntoPago() {
+        return montoRetencionProntoPago;
+    }
+
+    /**
+     * RetencionTM Timbre Municipal
+     * @return the montoRetencionTM
+     */
+    public Double getMontoRetencionTM() {
+        return montoRetencionTM;
     }
 
     /**
@@ -319,14 +326,6 @@ public class SumaOrden extends BeanVO implements Serializable {
      */
     public OrdenDePago getOrdenDePago() {
         return ordenDePago;
-    }
-
-    /**
-     * sustraendo aplica al ISLR
-     * @return the sustraendo
-     */
-    public Double getSustraendo() {
-        return sustraendo;
     }
 
     /**
@@ -386,6 +385,14 @@ public class SumaOrden extends BeanVO implements Serializable {
     }
 
     /**
+     * Cantidad de Detalles Siniestros en la orden de pago
+     * @param cantidadFacturas the cantidadFacturas to set
+     */
+    public void setCantidadFacturas(Integer cantidadFacturas) {
+        this.cantidadFacturas = cantidadFacturas;
+    }
+
+    /**
      * total de gastos clinicos
      * esto es a lo que se le retenie impuesto
      * @param gastosClinicos the gastosClinicos to set
@@ -419,22 +426,6 @@ public class SumaOrden extends BeanVO implements Serializable {
     }
 
     /**
-     * descuento deducible
-     * @param montoDeducible the montoDeducible to set
-     */
-    public void setMontoDeducible(Double montoDeducible) {
-        this.montoDeducible = montoDeducible;
-    }
-
-    /**
-     * decuento pronto pago
-     * @param montoDescuentoProntoPago the montoDescuentoProntoPago to set
-     */
-    public void setMontoDescuentoProntoPago(Double montoDescuentoProntoPago) {
-        this.montoDescuentoProntoPago = montoDescuentoProntoPago;
-    }
-
-    /**
      * Suma de todos los montos a pagar a Beneficiarios
      * @param montoFamiliares the montoFamiliares to set
      */
@@ -459,6 +450,14 @@ public class SumaOrden extends BeanVO implements Serializable {
     }
 
     /**
+     * Retencion deducible
+     * @param montoRetencionDeducible the montoRetencionDeducible to set
+     */
+    public void setMontoRetencionDeducible(Double montoRetencionDeducible) {
+        this.montoRetencionDeducible = montoRetencionDeducible;
+    }
+
+    /**
      * monto de retencion ISLR
      * @param montoRetencionIsrl the montoRetencionIsrl to set
      */
@@ -475,11 +474,19 @@ public class SumaOrden extends BeanVO implements Serializable {
     }
 
     /**
-     * TM Timbre Municipal
-     * @param montoTM the montoTM to set
+     * decuento pronto pago
+     * @param montoRetencionProntoPago the montoRetencionProntoPago to set
      */
-    public void setMontoTM(Double montoTM) {
-        this.montoTM = montoTM;
+    public void setMontoRetencionProntoPago(Double montoRetencionProntoPago) {
+        this.montoRetencionProntoPago = montoRetencionProntoPago;
+    }
+
+    /**
+     * RetencionTM Timbre Municipal
+     * @param montoRetencionTM the montoRetencionTM to set
+     */
+    public void setMontoRetencionTM(Double montoRetencionTM) {
+        this.montoRetencionTM = montoRetencionTM;
     }
 
     /**
@@ -515,14 +522,6 @@ public class SumaOrden extends BeanVO implements Serializable {
     }
 
     /**
-     * sustraendo aplica al ISLR
-     * @param sustraendo the sustraendo to set
-     */
-    public void setSustraendo(Double sustraendo) {
-        this.sustraendo = sustraendo;
-    }
-
-    /**
      * totalLiquidado - totalRetenido
      * @param totalACancelar the totalACancelar to set
      */
@@ -554,5 +553,4 @@ public class SumaOrden extends BeanVO implements Serializable {
         this.totalRetenido = totalRetenido;
     }
 
-  
 }

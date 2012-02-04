@@ -238,15 +238,10 @@ public class RifBeneficiarioDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void tipoCedulaActionPerformed(java.awt.event.ActionEvent evt) {
-        if (tipoCedula.getSelectedIndex() == 6 || tipoCedula.getSelectedIndex() == 7) {
-            numericControl2.setEnabled(false);
-            numericControl1.setEnabled(false);
-            numericControl1.setValue(null);
-            numericControl2.setText("0");
-        } else {
-            numericControl2.setEnabled(true);
-            numericControl1.setEnabled(true);
-        }
+
+        numericControl2.setEnabled(true);
+        numericControl1.setEnabled(true);
+
         doCedulaCompleta();
     }
 
@@ -399,7 +394,12 @@ public class RifBeneficiarioDialog extends javax.swing.JDialog {
                 rifConsulta = p.getRif();
             }
             if (tipoCedula.getSelectedIndex() >= 6) {
-                int next = Integer.valueOf(String.valueOf(new Date().getTime() / 2000).substring(1));
+                int next;
+                if (numericControl1.getText().trim().isEmpty()) {
+                    next = Integer.valueOf(String.valueOf(new Date().getTime() / 2000).substring(1));
+                } else {
+                    next = Integer.parseInt(numericControl1.getText().trim());
+                }
                 newPersistentObject = new Rif((TipoCedula) tipoCedula.getValue(), next);
             }
             if (rifConsulta != null) {

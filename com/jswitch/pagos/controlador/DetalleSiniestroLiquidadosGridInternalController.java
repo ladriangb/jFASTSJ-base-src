@@ -10,34 +10,71 @@ import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.siniestros.vista.detalle.DetalleSiniestroDetailFrame;
 import java.util.ArrayList;
+import java.util.Map;
 import org.hibernate.Hibernate;
+import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
+import org.hibernate.type.LongType;
+import org.hibernate.type.Type;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
 import org.openswing.swing.message.receive.java.VOResponse;
 import org.openswing.swing.message.receive.java.ValueObject;
+import org.openswing.swing.util.server.HibernateUtils;
 
 /**
  *
  * @author Luis Adrian Gonzalez Benavides
  */
 public class DetalleSiniestroLiquidadosGridInternalController extends DefaultGridInternalController {
-    
+
     OrdenDePagoDetailFrameController controller;
 
     public DetalleSiniestroLiquidadosGridInternalController(String classNameModelFullPath, String getMethodName, GridControl miGrid, OrdenDePagoDetailFrameController controller, DefaultGridInternalController... listSubGrids) {
         super(classNameModelFullPath, getMethodName, miGrid, listSubGrids);
         this.controller = controller;
     }
-    
+
     @Override
     public void doubleClick(int rowNumber, ValueObject persistentObject) {
         new DetalleSiniestroDetailFrameController(
                 DetalleSiniestroDetailFrame.class.getName(), miGrid,
                 (BeanVO) persistentObject, true, persistentObject.getClass());
     }
-    
+
+    @Override
+    public Response loadData(int action, int startIndex, Map filteredColumns, ArrayList currentSortedColumns, ArrayList currentSortedVersusColumns, Class valueObjectType, Map otherGridParams) {
+
+        if (beanVO != null) {
+            Session s = null;
+            try {
+                String sql = "FROM " + DetalleSiniestro.class.getName() + " C "
+                        + "WHERE C.ordenDePago.id=?";
+                SessionFactory sf = HibernateUtil.getSessionFactory();
+                s = sf.openSession();
+                Response res = HibernateUtils.getAllFromQuery(
+                        filteredColumns,
+                        currentSortedColumns,
+                        currentSortedVersusColumns,
+                        valueObjectType,
+                        sql,
+                        new Object[]{((OrdenDePago) beanVO).getId()},
+                        new Type[]{new LongType()},
+                        "C",
+                        sf,
+                        s);
+                return res;
+            } catch (Exception ex) {
+                LoggerUtil.error(this.getClass(), "loadData", ex);
+                return new ErrorResponse(ex.getMessage());
+            } finally {
+                s.close();
+            }
+        }
+        return new VOResponse();
+    }
+
     @Override
     public Response deleteRecords(ArrayList persistentObjects) throws Exception {
         Session s = null;
@@ -45,16 +82,13 @@ public class DetalleSiniestroLiquidadosGridInternalController extends DefaultGri
         try {
             s = HibernateUtil.getSessionFactory().openSession();
             s.beginTransaction();
-            for (Object o : persistentObjects) {
-                if (getSet() != null) {
-                    getSet().remove(o);
-                }
-            }
-            s.update(beanVO);
             es = (EtapaSiniestro) s.createQuery("FROM "
                     + EtapaSiniestro.class.getName() + " C WHERE "
                     + "idPropio=?").setString(0, "LIQ").uniqueResult();
             for (Object object : persistentObjects) {
+//                if (getSet() != null) {
+//                    getSet().remove(object);
+//                }
                 Long l = ((DetalleSiniestro) object).getId();
                 DetalleSiniestro sin = (DetalleSiniestro) s.get(DetalleSiniestro.class, l);
                 Hibernate.initialize(sin.getNotasTecnicas());
@@ -63,17 +97,17 @@ public class DetalleSiniestroLiquidadosGridInternalController extends DefaultGri
                 Hibernate.initialize(sin.getDiagnosticoSiniestros());
                 Hibernate.initialize(sin.getDocumentos());
                 sin.setEtapaSiniestro(es);
+                sin.setOrdenDePago(null);
                 s.update(sin);
             }
             s.getTransaction().commit();
-            
+           // s.update(beanVO);
             return new VOResponse(true);
         } catch (Exception ex) {
             LoggerUtil.error(this.getClass(), "deleteRecords", ex);
             return new ErrorResponse(ex.getMessage());
         } finally {
             s.close();
-            controller.calcularMontos((OrdenDePago) beanVO);
             controller.getVista().getMainPanel().getReloadButton().doClick();
         }
     }

@@ -1,17 +1,23 @@
 package com.jswitch.pagos.controlador;
 
+import com.jswitch.base.controlador.General;
 import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.controlador.util.DefaultGridInternalController;
 import com.jswitch.base.modelo.HibernateUtil;
+import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
 import com.jswitch.pagos.modelo.maestra.Factura;
 import com.jswitch.pagos.modelo.transaccional.DesgloseCobertura;
 import com.jswitch.pagos.modelo.transaccional.DesgloseSumaAsegurada;
 import com.jswitch.pagos.vista.FacturaDetailFrame;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import org.hibernate.classic.Session;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
+import org.openswing.swing.message.receive.java.VOListResponse;
+import org.openswing.swing.message.receive.java.VOResponse;
 
 /**
  * 
@@ -47,21 +53,63 @@ public class DesgloseCoberturaGridInternalController extends DefaultGridInternal
 
     @Override
     public Response insertRecords(int[] rowNumbers, ArrayList newValueObjects) throws Exception {
-        for (Object object : newValueObjects) {
-            DesgloseCobertura dc = (DesgloseCobertura) object;
-            if (dc.getMontoAmparado() == null) {
-                dc.setMontoAmparado(dc.getMontoFacturado());
-            }
-            dc.setMontoNoAmparado(dc.getMontoFacturado() - dc.getMontoAmparado());
-            if (dc.getMontoAmparado() > dc.getMontoFacturado()) {
-                return new ErrorResponse("No se puede amparar mas del monto facturado");
-            }
-            String logica = logicaNegocio(dc);
-            if (logica != null) {
-                return new ErrorResponse(logica);
+
+        DesgloseCobertura dc = (DesgloseCobertura) newValueObjects.get(0);
+        if (dc.getMontoAmparado() == null) {
+            dc.setMontoAmparado(dc.getMontoFacturado());
+        }
+        dc.setMontoNoAmparado(dc.getMontoFacturado() - dc.getMontoAmparado());
+        if (dc.getMontoAmparado() > dc.getMontoFacturado()) {
+            return new ErrorResponse("No se puede amparar mas del monto facturado");
+        }
+        String logica = logicaNegocio(dc);
+        if (logica != null) {
+            return new ErrorResponse(logica);
+        }
+        dc.setFactura((Factura) beanVO);
+        AuditoriaBasica ab = new AuditoriaBasica(new Date(), General.usuario.getUserName(), true);
+        dc.setAuditoria(ab);
+        ((Factura) beanVO).getDesgloseCobertura().add(dc);
+        Session s = null;
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+            s.beginTransaction();
+            s.save(dc);
+            s.getTransaction().commit();
+            List l = new ArrayList(0);
+            l.add(dc);
+            return new VOListResponse(l, false, l.size());
+        } catch (Exception ex) {
+            return new ErrorResponse(LoggerUtil.isInvalidStateException(this.getClass(), "insertRecords", ex));
+        } finally {
+            s.close();
+        }
+    }
+
+    @Override
+    public Response deleteRecords(ArrayList persistentObjects) throws Exception {
+
+        Object object = persistentObjects.get(0);
+        DesgloseCobertura desgloseC = ((DesgloseCobertura) object);
+        for (Object o : persistentObjects) {
+            if (getSet() != null) {
+                getSet().remove(o);
             }
         }
-        return super.insertRecords(rowNumbers, newValueObjects);
+        desgloseC.setFactura(null);
+        Session s = null;
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+            s.beginTransaction();
+            s.delete(desgloseC);
+            s.getTransaction().commit();
+            return new VOResponse(true);
+        } catch (Exception ex) {
+            return new ErrorResponse(LoggerUtil.isInvalidStateException(this.getClass(), "insertRecords", ex));
+        } finally {
+            s.close();
+        }
+
     }
 
     /**
@@ -73,9 +121,7 @@ public class DesgloseCoberturaGridInternalController extends DefaultGridInternal
         Factura factura = (Factura) beanVO;
         Double facturado = cobertura.getMontoFacturado();
         Double baseIva = !cobertura.getCobertura().getIva()
-                ? 0 : (cobertura.getMontoAmparado() * factura.getPorcentajeIva());
-        Double baseIslr = !cobertura.getCobertura().getIslr()
-                ? 0 : (cobertura.getMontoAmparado() * factura.getTipoConceptoSeniat().getPorcentajeRetencionIslr());
+                ? 0 : (cobertura.getMontoFacturado() * factura.getPorcentajeIva());
         Double amparado = cobertura.getMontoAmparado();
         for (DesgloseCobertura desgloseCobertura : factura.getDesgloseCobertura()) {
             if (cobertura.getId() == null
@@ -84,12 +130,10 @@ public class DesgloseCoberturaGridInternalController extends DefaultGridInternal
                 facturado += desgloseCobertura.getMontoFacturado();
                 amparado += desgloseCobertura.getMontoAmparado();
                 baseIva += !desgloseCobertura.getCobertura().getIva()
-                        ? 0 : (desgloseCobertura.getMontoAmparado() * factura.getPorcentajeIva());
-                baseIslr += !desgloseCobertura.getCobertura().getIslr()
-                        ? 0 : (desgloseCobertura.getMontoAmparado() * factura.getTipoConceptoSeniat().getPorcentajeRetencionIslr());
+                        ? 0 : (desgloseCobertura.getMontoFacturado() * factura.getPorcentajeIva());
             }
         }
-        Double totalLiquidado = ((baseIva) + (baseIslr) + amparado);
+        Double totalLiquidado = ((baseIva) + amparado);
         if (facturado > factura.getTotalFacturado()) {
             return "Valor Supera a La Factura";
         }
@@ -98,7 +142,8 @@ public class DesgloseCoberturaGridInternalController extends DefaultGridInternal
             liquidado += desgloseSumaAsegurada.getMonto();
         }
         if (liquidado < totalLiquidado) {
-            return "Cantidad no puede ser amparada";
+            return "Cantidad no puede ser amparada\n monto Liquidado " 
+                    + totalLiquidado + " > "+" suma Amparada" + liquidado;
         }
         return null;
     }

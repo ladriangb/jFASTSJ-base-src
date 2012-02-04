@@ -26,9 +26,9 @@ import org.openswing.swing.message.receive.java.VOListResponse;
  *
  * @author Orlando Becerra
  */
-public class SiniestroLookupController extends DefaultLookupController {
+public class ConfSiniestroLookupController extends DefaultLookupController {
 
-    public SiniestroLookupController(String classname, String detalleS) {
+    public ConfSiniestroLookupController(String classname, String detalleS) {
         this.setLookupDataLocator(new PersonaLookupDataLocator(classname, detalleS));
         this.setLookupGridController(new DefaultLookupGridController());
         setLookupValueObjectClassName(classname);

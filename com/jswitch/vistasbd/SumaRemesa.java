@@ -3,7 +3,7 @@ package com.jswitch.vistasbd;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.modelo.util.ehts.BusinessKey;
 import com.jswitch.base.modelo.util.ehts.Method;
-import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
+import com.jswitch.pagos.modelo.maestra.Remesa;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,8 +18,8 @@ import javax.persistence.Table;
  * @author Luis Adrian Gonzalez
  */
 @Entity
-@Table(name = "view_sumadetalle")
-public class SumaDetalle extends BeanVO implements Serializable {
+@Table(name = "view_sumaremesa")
+public class SumaRemesa extends BeanVO implements Serializable {
 
     /**
      * Pk autogenerado
@@ -30,16 +30,46 @@ public class SumaDetalle extends BeanVO implements Serializable {
     @BusinessKey(include = Method.TO_STRING)
     private Long id;
     /**
-     * Detalle al que pertenece la factura
+     * Remesa a la que pertenece
      */
     @OneToOne
     @PrimaryKeyJoinColumn
-    private DetalleSiniestro detalleSiniestro;
+    private Remesa remesa;
     /**
-     * suma de facturas dentro de todos los detalles
+     * Cantidad de Detalles Siniestros en la orden de pago
+     */
+    @Column
+    private Integer cantidadOrdenes;
+    /**
+     * Cantidad de Detalles Siniestros en la orden de pago
+     */
+    @Column
+    private Integer cantidadDetalles;
+    /**
+     * Cantidad de Detalles Siniestros en la orden de pago
      */
     @Column
     private Integer cantidadFacturas;
+    /**
+     * Cantidad de Siniestros de Titulares
+     */
+    @Column
+    private Integer numeroSiniestrosTitular;
+    /**
+     * Cantidad de Siniestros de Famililiares asegurados
+     */
+    @Column
+    private Integer numeroSiniestrosFamiliar;
+    /**
+     * Suma de todos los montos a pagar a Titulares
+     */
+    @Column
+    private Double montoTitulares;
+    /**
+     * Suma de todos los montos a pagar a Beneficiarios
+     */
+    @Column
+    private Double montoFamiliares;
     /**
      * RetencionTM Timbre Municipal
      * 
@@ -78,13 +108,13 @@ public class SumaDetalle extends BeanVO implements Serializable {
     @BusinessKey
     private Double montoRetencionIva;
     /**
-     * retencion pronto pago
+     * decuento pronto pago
      */
     @Column
     @BusinessKey
     private Double montoRetencionProntoPago;
     /**
-     * descuento deducible
+     * Retencion deducible
      */
     @Column
     @BusinessKey
@@ -139,7 +169,7 @@ public class SumaDetalle extends BeanVO implements Serializable {
     @BusinessKey
     private Double totalACancelar;
 
-    public SumaDetalle() {
+    public SumaRemesa() {
     }
 
     /**
@@ -159,7 +189,15 @@ public class SumaDetalle extends BeanVO implements Serializable {
     }
 
     /**
-     * suma de facturas dentro de todos los detalles
+     * Cantidad de Detalles Siniestros en la orden de pago
+     * @return the cantidadDetalles
+     */
+    public Integer getCantidadDetalles() {
+        return cantidadDetalles;
+    }
+
+    /**
+     * Cantidad de Detalles Siniestros en la orden de pago
      * @return the cantidadFacturas
      */
     public Integer getCantidadFacturas() {
@@ -167,11 +205,11 @@ public class SumaDetalle extends BeanVO implements Serializable {
     }
 
     /**
-     * Detalle al que pertenece la factura
-     * @return the detalleSiniestro
+     * Cantidad de Detalles Siniestros en la orden de pago
+     * @return the cantidadOrdenes
      */
-    public DetalleSiniestro getDetalleSiniestro() {
-        return detalleSiniestro;
+    public Integer getCantidadOrdenes() {
+        return cantidadOrdenes;
     }
 
     /**
@@ -208,6 +246,14 @@ public class SumaDetalle extends BeanVO implements Serializable {
     }
 
     /**
+     * Suma de todos los montos a pagar a Beneficiarios
+     * @return the montoFamiliares
+     */
+    public Double getMontoFamiliares() {
+        return montoFamiliares;
+    }
+
+    /**
      * total IVA
      * @return the montoIva
      */
@@ -224,7 +270,7 @@ public class SumaDetalle extends BeanVO implements Serializable {
     }
 
     /**
-     * descuento deducible
+     * Retencion deducible
      * @return the montoRetencionDeducible
      */
     public Double getMontoRetencionDeducible() {
@@ -248,7 +294,7 @@ public class SumaDetalle extends BeanVO implements Serializable {
     }
 
     /**
-     * retencion pronto pago
+     * decuento pronto pago
      * @return the montoRetencionProntoPago
      */
     public Double getMontoRetencionProntoPago() {
@@ -263,6 +309,37 @@ public class SumaDetalle extends BeanVO implements Serializable {
         return montoRetencionTM;
     }
 
+    /**
+     * Suma de todos los montos a pagar a Titulares
+     * @return the montoTitulares
+     */
+    public Double getMontoTitulares() {
+        return montoTitulares;
+    }
+
+    /**
+     * Cantidad de Siniestros de Famililiares asegurados
+     * @return the numeroSiniestrosFamiliar
+     */
+    public Integer getNumeroSiniestrosFamiliar() {
+        return numeroSiniestrosFamiliar;
+    }
+
+    /**
+     * Cantidad de Siniestros de Titulares
+     * @return the numeroSiniestrosTitular
+     */
+    public Integer getNumeroSiniestrosTitular() {
+        return numeroSiniestrosTitular;
+    }
+
+    /**
+     * Remesa a la que pertenece
+     * @return the remesa
+     */
+    public Remesa getRemesa() {
+        return remesa;
+    }
 
     /**
      * totalLiquidado - totalRetenido
@@ -313,7 +390,15 @@ public class SumaDetalle extends BeanVO implements Serializable {
     }
 
     /**
-     * suma de facturas dentro de todos los detalles
+     * Cantidad de Detalles Siniestros en la orden de pago
+     * @param cantidadDetalles the cantidadDetalles to set
+     */
+    public void setCantidadDetalles(Integer cantidadDetalles) {
+        this.cantidadDetalles = cantidadDetalles;
+    }
+
+    /**
+     * Cantidad de Detalles Siniestros en la orden de pago
      * @param cantidadFacturas the cantidadFacturas to set
      */
     public void setCantidadFacturas(Integer cantidadFacturas) {
@@ -321,11 +406,11 @@ public class SumaDetalle extends BeanVO implements Serializable {
     }
 
     /**
-     * Detalle al que pertenece la factura
-     * @param detalleSiniestro the detalleSiniestro to set
+     * Cantidad de Detalles Siniestros en la orden de pago
+     * @param cantidadOrdenes the cantidadOrdenes to set
      */
-    public void setDetalleSiniestro(DetalleSiniestro detalleSiniestro) {
-        this.detalleSiniestro = detalleSiniestro;
+    public void setCantidadOrdenes(Integer cantidadOrdenes) {
+        this.cantidadOrdenes = cantidadOrdenes;
     }
 
     /**
@@ -362,6 +447,14 @@ public class SumaDetalle extends BeanVO implements Serializable {
     }
 
     /**
+     * Suma de todos los montos a pagar a Beneficiarios
+     * @param montoFamiliares the montoFamiliares to set
+     */
+    public void setMontoFamiliares(Double montoFamiliares) {
+        this.montoFamiliares = montoFamiliares;
+    }
+
+    /**
      * total IVA
      * @param montoIva the montoIva to set
      */
@@ -378,7 +471,7 @@ public class SumaDetalle extends BeanVO implements Serializable {
     }
 
     /**
-     * descuento deducible
+     * Retencion deducible
      * @param montoRetencionDeducible the montoRetencionDeducible to set
      */
     public void setMontoRetencionDeducible(Double montoRetencionDeducible) {
@@ -402,7 +495,7 @@ public class SumaDetalle extends BeanVO implements Serializable {
     }
 
     /**
-     * retencion pronto pago
+     * decuento pronto pago
      * @param montoRetencionProntoPago the montoRetencionProntoPago to set
      */
     public void setMontoRetencionProntoPago(Double montoRetencionProntoPago) {
@@ -415,6 +508,38 @@ public class SumaDetalle extends BeanVO implements Serializable {
      */
     public void setMontoRetencionTM(Double montoRetencionTM) {
         this.montoRetencionTM = montoRetencionTM;
+    }
+
+    /**
+     * Suma de todos los montos a pagar a Titulares
+     * @param montoTitulares the montoTitulares to set
+     */
+    public void setMontoTitulares(Double montoTitulares) {
+        this.montoTitulares = montoTitulares;
+    }
+
+    /**
+     * Cantidad de Siniestros de Famililiares asegurados
+     * @param numeroSiniestrosFamiliar the numeroSiniestrosFamiliar to set
+     */
+    public void setNumeroSiniestrosFamiliar(Integer numeroSiniestrosFamiliar) {
+        this.numeroSiniestrosFamiliar = numeroSiniestrosFamiliar;
+    }
+
+    /**
+     * Cantidad de Siniestros de Titulares
+     * @param numeroSiniestrosTitular the numeroSiniestrosTitular to set
+     */
+    public void setNumeroSiniestrosTitular(Integer numeroSiniestrosTitular) {
+        this.numeroSiniestrosTitular = numeroSiniestrosTitular;
+    }
+
+    /**
+     * Remesa a la que pertenece
+     * @param remesa the remesa to set
+     */
+    public void setRemesa(Remesa remesa) {
+        this.remesa = remesa;
     }
 
     /**
@@ -449,5 +574,4 @@ public class SumaDetalle extends BeanVO implements Serializable {
         this.totalRetenido = totalRetenido;
     }
 
-    
 }

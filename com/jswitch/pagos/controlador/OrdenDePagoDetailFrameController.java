@@ -110,9 +110,7 @@ public class OrdenDePagoDetailFrameController
                 s.close();
             }
         }
-        Response res = super.insertRecord(newPersistentObject);
-        calcularMontos(p);
-        return res;
+        return super.insertRecord(newPersistentObject);
     }
 
     @Override
@@ -142,6 +140,7 @@ public class OrdenDePagoDetailFrameController
             }
             for (DetalleSiniestro detalleSiniestro : pago.getDetalleSiniestros()) {
                 detalleSiniestro.setEtapaSiniestro(etS);
+                detalleSiniestro.setOrdenDePago(pago);
                 s.update(detalleSiniestro);
             }
             s.getTransaction().commit();
@@ -173,81 +172,7 @@ public class OrdenDePagoDetailFrameController
         new BuscarDetallesGridFrameController(this, ordenDePago);
     }
 
-    /**
-     * Calcula los montos de todos los Detalles Siniestros Internos
-     */
-    public void calcularMontos(OrdenDePago ordenDePago) {
-        Session s = null;
-        try {
-            s = HibernateUtil.getSessionFactory().openSession();
-            s.beginTransaction();
-            Double l = 0d, r = 0d, f = 0d, c = 0d;
-            Double baseIva = 0d, iva = 0d, rIva = 0d, baseIslr = 0d, rIslr = 0d;
-            Double gC = 0d, hM = 0d, nA = 0d, am = 0d, de = 0d, tm = 0d, dPP = 0d;
-            Double mTi = 0d, mFa = 0d;
-            Integer tit = 0, fam = 0, det = 0, fac = 0;
-            for (DetalleSiniestro detalleSin : ordenDePago.getDetalleSiniestros()) {
-                if (detalleSin.getAuditoria().getActivo().booleanValue()) {
-                    det++;
-                    if (detalleSin.getSiniestro().getCertificado().getTitular().
-                            getPersona().getId().compareTo(
-                            detalleSin.getSiniestro().getAsegurado().
-                            getPersona().getId()) == 0) {
-                        mTi += detalleSin.getMontoACancelar();
-                        tit++;
-                    } else {
-                        mFa += detalleSin.getMontoACancelar();
-                        fam++;
-                    }
-                    fac += detalleSin.getCantidadFacturas();
-                    baseIva += detalleSin.getMontoBaseIva();
-                    iva += detalleSin.getMontoIva();
-                    rIva += detalleSin.getMontoRetenidoIva();
-                    baseIslr += detalleSin.getMontoBaseIslr();
-                    rIslr += detalleSin.getMontoRetenidoIslr();
-                    gC += detalleSin.getMontoGastosClinicos();
-                    hM += detalleSin.getMontoHonorariosMedicos();
-                    am += detalleSin.getMontoAmparado();
-                    de += detalleSin.getMontoDeducible();
-                    dPP += detalleSin.getMontoProntoPago();
-                    nA += detalleSin.getMontoNoAmparado();
-                    tm += detalleSin.getMontoTM();
-                    r += detalleSin.getMontoRetenido();
-                    l += detalleSin.getMontoLiquidado();
-                    f += detalleSin.getMontoFacturado();
-                    c += detalleSin.getMontoACancelar();
-                }
-            }
-            ordenDePago.setCantidadDetalles(det);
-            ordenDePago.setCantidadFacturas(fac);
-            ordenDePago.setNumeroSiniestrosTitular(tit);
-            ordenDePago.setNumeroSiniestrosFamiliar(fam);
-            ordenDePago.setMontoTitulares(mTi);
-            ordenDePago.setMontoFamiliar(mFa);
-            ordenDePago.setMontoIva(iva);
-            ordenDePago.setMontoBaseIva(baseIva);
-            ordenDePago.setMontoRetenidoIva(rIva);
-            ordenDePago.setMontoBaseIslr(baseIslr);
-            ordenDePago.setMontoRetenidoIslr(rIslr);
-            ordenDePago.setMontoGastosClinicos(gC);
-            ordenDePago.setMontoHonorariosMedicos(hM);
-            ordenDePago.setMontoAmparado(am);
-            ordenDePago.setMontoDeducible(de);
-            ordenDePago.setMontoProntoPago(dPP);
-            ordenDePago.setMontoNoAmparado(nA);
-            ordenDePago.setMontoTM(tm);
-            ordenDePago.setMontoRetenido(r);
-            ordenDePago.setMontoACancelar(c);
-            ordenDePago.setMontoFacturado(f);
-            ordenDePago.setMontoLiquidado(l);
-            s.update(ordenDePago);
-            s.getTransaction().commit();
-        } catch (Exception e) {
-            LoggerUtil.error(this.getClass(), "calcularMontos", e);
-        } finally {
-            s.close();
-        }
-    }
+   
 
     /**
      * la vista controlada

@@ -4,7 +4,7 @@ import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.vista.util.DefaultDetailFrame;
 import com.jswitch.configuracion.controlador.DiagnosticoPorPlanLookupController;
 import com.jswitch.configuracion.modelo.maestra.Plan;
-import com.jswitch.siniestros.controlador.SiniestroLookupController;
+import com.jswitch.siniestros.controlador.ConfSiniestroLookupController;
 import com.jswitch.siniestros.modelo.dominio.TipoSiniestro;
 import com.jswitch.siniestros.modelo.maestra.detalle.Vida;
 import com.jswitch.siniestros.modelo.utilitario.DetalleVida;
@@ -167,7 +167,7 @@ public class DetalleVidaNuevoDetailFrame extends DefaultDetailFrame {
         lookupDiagnostico = new DiagnosticoPorPlanLookupController();
         lookupDiagnostico.addLookup2ParentLink("diagnostico");
         codLookupControl4.setLookupController(lookupDiagnostico);
-        SiniestroLookupController tipoController = new SiniestroLookupController(TipoSiniestro.class.getName(), Vida.class.getName());
+        ConfSiniestroLookupController tipoController = new ConfSiniestroLookupController(TipoSiniestro.class.getName(), Vida.class.getName());
         tipoController.addLookup2ParentLink("tipoSiniestro");
         codLookupControl5.setLookupController(tipoController);
         

@@ -52,8 +52,13 @@ public class RangoValorGridInternalController extends DefaultGridInternalControl
             Session s = null;
 
             try {
-                String sql = "FROM " + RangoValor.class.getName() + " C "
-                        + " WHERE prontoPago.id=?";
+                String sql = "FROM " + RangoValor.class.getName() + " C ";
+                if (clase.equals(TimbreMunicipal.class)) {
+                    sql += " WHERE C.timbreMunicipal.id=?";
+                }
+                if (clase.equals(ConfiguracionProntoPago.class)) {
+                     sql += " WHERE C.prontoPago.id=?";
+                }
                 SessionFactory sf = HibernateUtil.getSessionFactory();
                 s = sf.openSession();
                 Response res = HibernateUtils.getBlockFromQuery(
