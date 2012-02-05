@@ -36,7 +36,6 @@ public class BuscaOrdenDePagoGridFrame extends DefaultGridFrame {
         textColumn7 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn3 = new org.openswing.swing.table.columns.client.TextColumn();
         decimalColumn2 = new org.openswing.swing.table.columns.client.DecimalColumn();
-        dateColumn1 = new org.openswing.swing.table.columns.client.DateColumn();
         textColumn4 = new org.openswing.swing.table.columns.client.TextColumn();
         dateColumn2 = new org.openswing.swing.table.columns.client.DateColumn();
         textColumn5 = new org.openswing.swing.table.columns.client.TextColumn();
@@ -94,6 +93,7 @@ public class BuscaOrdenDePagoGridFrame extends DefaultGridFrame {
         decimalColumn1.setColumnName("id");
         decimalColumn1.setColumnRequired(false);
         decimalColumn1.setColumnSortable(true);
+        decimalColumn1.setGrouping(false);
         decimalColumn1.setPreferredWidth(40);
         decimalColumn1.setSortVersus(org.openswing.swing.util.java.Consts.DESC_SORTED);
         gridData.getColumnContainer().add(decimalColumn1);
@@ -130,16 +130,10 @@ public class BuscaOrdenDePagoGridFrame extends DefaultGridFrame {
         gridData.getColumnContainer().add(textColumn3);
 
         decimalColumn2.setColumnFilterable(true);
-        decimalColumn2.setColumnName("montoPagar");
+        decimalColumn2.setColumnName("sumaOrden.totalACancelar");
         decimalColumn2.setColumnRequired(false);
         decimalColumn2.setColumnSortable(true);
         gridData.getColumnContainer().add(decimalColumn2);
-
-        dateColumn1.setColumnFilterable(true);
-        dateColumn1.setColumnName("fechaPago");
-        dateColumn1.setColumnRequired(false);
-        dateColumn1.setColumnSortable(true);
-        gridData.getColumnContainer().add(dateColumn1);
 
         textColumn4.setColumnFilterable(true);
         textColumn4.setColumnName("auditoria.usuarioInsert");
@@ -222,7 +216,6 @@ public class BuscaOrdenDePagoGridFrame extends DefaultGridFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.openswing.swing.table.columns.client.CheckBoxColumn checkBoxColumn1;
     private org.openswing.swing.client.CheckBoxControl checkBoxControl1;
-    private org.openswing.swing.table.columns.client.DateColumn dateColumn1;
     private org.openswing.swing.table.columns.client.DateColumn dateColumn2;
     private org.openswing.swing.table.columns.client.DateColumn dateColumn3;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn1;

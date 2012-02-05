@@ -7,6 +7,7 @@ import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.entidades.NotaTecnica;
 import com.jswitch.base.modelo.entidades.auditoria.Auditable;
 import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
+import com.jswitch.base.vista.util.SuperusuarioLoginDialog;
 import com.jswitch.pagos.modelo.maestra.Factura;
 import com.jswitch.pagos.modelo.transaccional.DesgloseSumaAsegurada;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
@@ -168,6 +169,9 @@ public class DesgloseSumaAseguradaGridInternalController extends DefaultGridInte
         montoPagado += monto;
         NotaTecnica notaTecnica = null;
         if (montoPendiente < 0) {
+            if (!SuperusuarioLoginDialog.VerificarSuperusuario("Necesita Aumento de Reserva")) {
+                return new ErrorResponse("Cancelado por el usuario");
+            }
             String nota = JOptionPane.showInputDialog(miGrid,
                     ClientSettings.getInstance().getResources().getResource("Justificacion de Aumento"),
                     "Fondo Auto-Administrado de Salud", JOptionPane.INFORMATION_MESSAGE);
@@ -177,6 +181,7 @@ public class DesgloseSumaAseguradaGridInternalController extends DefaultGridInte
             } else {
                 return new ErrorResponse("Cancelado por el usuario");
             }
+
             montoPendiente = 0d;
         }
         diagnosticoSiniestro.setMontoPagado(montoPagado);

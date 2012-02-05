@@ -57,7 +57,7 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
             JOptionPane.showMessageDialog(gridControl, ClientSettings.getInstance().getResources().getResource("noRamo.vida"), General.edition, JOptionPane.INFORMATION_MESSAGE);
             return;
         } else if (tipoDetalle.equals(Funerario.class) && !checkRamo("FUNE")) {
-            JOptionPane.showMessageDialog(gridControl, 
+            JOptionPane.showMessageDialog(gridControl,
                     ClientSettings.getInstance().getResources().getResource("noRamo.funerario"),
                     General.edition, JOptionPane.INFORMATION_MESSAGE);
             return;
@@ -72,7 +72,6 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
         if (beanVO != null) {
             vista.getMainPanel().reload();
             vista.getMainPanel().setMode(Consts.READONLY);
-            checkStatus();
         } else {
             vista.getMainPanel().setMode(Consts.INSERT);
         }
@@ -101,6 +100,7 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
         Hibernate.initialize(sin.getDiagnosticoSiniestros());
         Hibernate.initialize(sin.getDocumentos());
         s.close();
+        checkStatus();
         beanVO = sin;
         return new VOResponse(beanVO);
     }
@@ -151,11 +151,11 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
             Ramo ramo = (Ramo) q.uniqueResult();
             ((DetalleSiniestro) newPersistentObject).setRamo(ramo);
 
-            if (newPersistentObject instanceof Emergencia){
-               ((Emergencia) newPersistentObject).setClave(siniestro.getNumero());
-               
+            if (newPersistentObject instanceof Emergencia) {
+                ((Emergencia) newPersistentObject).setClave(siniestro.getNumero());
+
             }
-            
+
             if (newPersistentObject instanceof Reembolso) {
                 q = s.createQuery("FROM " + TipoPersona.class.getName() + " C"
                         + " WHERE C.idPropio='TIT'");
@@ -222,8 +222,6 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
         }
         return new VOResponse(d);
     }
-
-
 
     private void checkStatus() {
         DetalleSiniestro ds = ((DetalleSiniestro) beanVO);

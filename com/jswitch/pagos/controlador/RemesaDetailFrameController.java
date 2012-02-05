@@ -1,5 +1,6 @@
 package com.jswitch.pagos.controlador;
 
+import com.jswitch.base.controlador.General;
 import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
@@ -17,10 +18,15 @@ import java.io.File;
 import javax.swing.filechooser.FileFilter;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigInteger;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -31,6 +37,7 @@ import org.openswing.swing.client.ExportButton;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.client.InsertButton;
 import org.openswing.swing.mdi.client.MDIFrame;
+import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
 import org.openswing.swing.message.receive.java.VOResponse;
 import org.openswing.swing.message.receive.java.ValueObject;
@@ -66,25 +73,26 @@ public class RemesaDetailFrameController
     @Override
     public Response loadData(Class valueObjectClass) {
         Session s = HibernateUtil.getSessionFactory().openSession();
-        Remesa sin = (Remesa) s.get(Remesa.class, ((Remesa) beanVO).getId());
-        Hibernate.initialize(sin.getOrdenDePagos());
-        Hibernate.initialize(sin.getObservaciones());
-        Hibernate.initialize(sin.getDocumentos());
-        Hibernate.initialize(sin.getNotasTecnicas());
+        Remesa remesa = (Remesa) s.get(Remesa.class, ((Remesa) beanVO).getId());
+        Hibernate.initialize(remesa.getOrdenDePagos());
+        Hibernate.initialize(remesa.getObservaciones());
+        Hibernate.initialize(remesa.getDocumentos());
+        Hibernate.initialize(remesa.getNotasTecnicas());
         s.close();
-        beanVO = sin;
+        getVista().hideAll(remesa.getEstatusPago());
+        beanVO = remesa;
         return new VOResponse(beanVO);
     }
 
     @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
-        Remesa p = (Remesa) newPersistentObject;
-        if (p.getAutoSearch()) {
+        Remesa remesa = (Remesa) newPersistentObject;
+        if (remesa.getAutoSearch()) {
             Session s = null;
             try {
                 s = HibernateUtil.getSessionFactory().openSession();
                 String sql = null;
-                if (p.getTipoDetalleSiniestro().equals(TipoDetalleSiniestro.Todos)) {
+                if (remesa.getTipoDetalleSiniestro().equals(TipoDetalleSiniestro.Todos)) {
                     sql = "FROM "
                             + OrdenDePago.class.getName() + " C WHERE "
                             + "C.estatusPago=? AND C.codigoSIGECOF is not null";
@@ -96,14 +104,14 @@ public class RemesaDetailFrameController
                 }
                 Query q = s.createQuery(sql);
                 List ordenes = null;
-                if (p.getTipoDetalleSiniestro().equals(TipoDetalleSiniestro.Todos)) {
+                if (remesa.getTipoDetalleSiniestro().equals(TipoDetalleSiniestro.Todos)) {
                     ordenes = q.setString(0, EstatusPago.PENDIENTE.toString()).list();
                 } else {
                     ordenes = q.setString(0, EstatusPago.PENDIENTE.toString()).
-                            setString(1, p.getTipoDetalleSiniestro().toString()).list();
+                            setString(1, remesa.getTipoDetalleSiniestro().toString()).list();
                 }
                 for (Object objeto : ordenes) {
-                    p.getOrdenDePagos().add(
+                    remesa.getOrdenDePagos().add(
                             (OrdenDePago) objeto);
                 }
             } finally {
@@ -119,64 +127,52 @@ public class RemesaDetailFrameController
     public Response logicaNegocio(ValueObject persistentObject) {
         Session s = null;
         Remesa remesa = (Remesa) persistentObject;
-        EstatusPago etS = null;
-        EtapaSiniestro es = null;
-        if (remesa.getEstatusPago() == EstatusPago.ANULADO) {
-            etS = EstatusPago.PENDIENTE;
-        } else if (remesa.getEstatusPago() == EstatusPago.PENDIENTE
-                || remesa.getEstatusPago() == EstatusPago.SELECCIONADO) {
-            etS = EstatusPago.SELECCIONADO;
+        if (remesa.getCuentaBancaria() != null) {
+            remesa.setTipoCuenta(remesa.getCuentaBancaria().getTipoCuenta());
+            remesa.setNumeroCuentaDebitar(remesa.getCuentaBancaria().getNumero());
+        }
+        return new VOResponse(remesa);
+    }
 
-        } else if (remesa.getEstatusPago() == EstatusPago.PAGADO) {
-            etS = EstatusPago.PAGADO;
-        }
+    @Override
+    public Response logicaNegocioDespuesSave(ValueObject persistentObject, Session s) {
+        Long seq = null;
         try {
-            s = HibernateUtil.getSessionFactory().openSession();
-            s.beginTransaction();
-            if (etS == EstatusPago.ANULADO) {
-                es = (EtapaSiniestro) s.createQuery("FROM "
-                        + EtapaSiniestro.class.getName() + " C WHERE "
-                        + "idPropio=?").setString(0, "LIQ").uniqueResult();
-            } else if (etS == EstatusPago.PENDIENTE
-                    || etS == EstatusPago.SELECCIONADO) {
-                es = (EtapaSiniestro) s.createQuery("FROM "
-                        + EtapaSiniestro.class.getName() + " C WHERE "
-                        + "idPropio=?").setString(0, "ORD_PAG").uniqueResult();
-            } else if (etS == EstatusPago.PAGADO) {
-                es = (EtapaSiniestro) s.createQuery("FROM "
-                        + EtapaSiniestro.class.getName() + " C WHERE "
-                        + "idPropio=?").setString(0, "PAG").uniqueResult();
-                remesa.setFechaPagado(new Date());
-            }
-            for (OrdenDePago ordenDePago : remesa.getOrdenDePagos()) {
-                ordenDePago = (OrdenDePago) s.get(OrdenDePago.class, ordenDePago.getId());
-                Hibernate.initialize(ordenDePago.getDetalleSiniestros());
-                for (DetalleSiniestro detalleSiniestro : ordenDePago.getDetalleSiniestros()) {
-                    detalleSiniestro.setEtapaSiniestro(es);
-                    if (etS == EstatusPago.PAGADO) {
-                        detalleSiniestro.setFechaPagado(new Date());
-                    }
-                    s.update(detalleSiniestro);
-                }
-                if (etS == EstatusPago.PAGADO) {
-                    ordenDePago.setFechaPagado(new Date());
-                }
-                ordenDePago.setEstatusPago(etS);
-                ordenDePago.setRemesa(remesa);
-                s.update(ordenDePago);
-            }
-            s.getTransaction().commit();
-        } finally {
-            s.close();
+            seq = ((BigInteger) s.createSQLQuery("SELECT nextval('seq_remesa');").uniqueResult()).longValue();
+        } catch (Exception ex) {
+            return new ErrorResponse(LoggerUtil.isInvalidStateException(this.getClass(), "logicaNegocioDespuesSave", ex));
         }
-        return new VOResponse(persistentObject);
+        DecimalFormat nf = new DecimalFormat("00000");
+        Remesa remesa = (Remesa) persistentObject;
+        remesa.setNumRefLot(seq.intValue());
+        remesa.setRefLot(nf.format(seq));
+        for (OrdenDePago ordenDePago : remesa.getOrdenDePagos()) {
+            ordenDePago.setEstatusPago(EstatusPago.SELECCIONADO);
+            s.update(ordenDePago);
+        }
+        return new VOResponse(remesa);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() instanceof ExportButton) {
-            Transaccion tr = new Transaccion((Remesa) beanVO);
+            Remesa rm = (Remesa) beanVO;
+            if (rm.getFechaEnvio() == null || rm.getFechaPropuestaPago() == null || rm.getFechaValor() == null) {
+                JOptionPane.showMessageDialog(vista, "DEBE INGRESAR LAS FECHAS\nPARA PODER GENERAR EL .TXT", "", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (rm.getCuentaBancaria() == null) {
+                JOptionPane.showMessageDialog(vista, "DEBE INGRESAR LA CUENTA BANCARIA A DEBITAR\nPARA PODER GENERAR EL .TXT", "", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (rm.getNumRefCre() == null || rm.getNumRefDeb() == null) {
+                JOptionPane.showMessageDialog(vista, "DEBE INGRESAR LAS REFERENCIAS BANCARIAS\nPARA PODER GENERAR EL .TXT", "", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            Transaccion tr = null;
+
+            tr = new Transaccion((Remesa) beanVO);
 
             JFileChooser f = new JFileChooser(new File(""));
             f.setFileFilter(new FileFilter() {
@@ -239,9 +235,42 @@ public class RemesaDetailFrameController
             }
         } else if (e.getSource() instanceof InsertButton) {
             new BuscarOrdenDePagoGridFrameController((Remesa) beanVO, this);
+        } else if (((JButton) e.getSource()).getText().equalsIgnoreCase("PAGAR")) {
+            new PagarDetailFrameController(vista.getMainPanel());
+        } else {
+            int res = JOptionPane.showConfirmDialog(vista, "Esta a punto de Anular la \"Remesa\"\nEsta acción no se puede revertir\n¿Desea Continuar? ",
+                    General.empresa.getNombre(), JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            if (res == JOptionPane.YES_OPTION) {
+                anular();
+                vista.getMainPanel().getReloadButton().doClick();
+            }
         }
-//        OrdenDePago op = (OrdenDePago) beanVO;
-//        new BuscarDetallesGridFrameController(op.getPersonaPago(), op);
+    }
+
+    /**
+     * Establese la Orden de Pago como Nula
+     */
+    private void anular() {
+        Session s = null;
+        Remesa remesa = (Remesa) vista.getMainPanel().getVOModel().getValueObject();
+        remesa.setEstatusPago(EstatusPago.ANULADO);
+        remesa.getAuditoria().setActivo(false);
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+            s.beginTransaction();
+            s.update(remesa);
+            List<OrdenDePago> l = s.createQuery("FROM " + OrdenDePago.class.getName() + " C "
+                    + "WHERE C.remesa.id=?").setLong(0, remesa.getId()).list();
+            for (OrdenDePago ordenDePago : l) {
+                ordenDePago.setEstatusPago(EstatusPago.PENDIENTE);
+                ordenDePago.setRemesa(null);
+                s.update(ordenDePago);
+            }
+
+            s.getTransaction().commit();
+        } finally {
+            s.close();
+        }
     }
 
     /**

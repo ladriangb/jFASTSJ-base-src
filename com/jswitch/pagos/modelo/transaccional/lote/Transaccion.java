@@ -98,13 +98,13 @@ public class Transaccion {
         Remesa rem = null;
         try {
             s = HibernateUtil.getSessionFactory().openSession();
-            rem = (Remesa) s.get(Remesa.class, 57315L);
+            rem = (Remesa) s.get(Remesa.class, 2702L);
             Hibernate.initialize(rem.getDocumentos());
             Hibernate.initialize(rem.getNotasTecnicas());
             Hibernate.initialize(rem.getObservaciones());
             Hibernate.initialize(rem.getOrdenDePagos());
         } catch (Exception hibernateException) {
-            System.out.println(hibernateException);
+            hibernateException.printStackTrace();
             return;
         } finally {
             s.close();
@@ -173,18 +173,18 @@ public class Transaccion {
                 }
 
                 body.getCredito().setNumRefCre(remesa.getNumRefCre());
-               //TODO body.getCredito().setMonto(ordenDePago.getMontoACancelar());
+                body.getCredito().setMonto(ordenDePago.getSumaOrden().getTotalACancelar());
                 body.getCredito().setDuracionCheq(Integer.parseInt(
                         remesa.getDuracionCheque().toString().substring(1)));
                 //</editor-fold>
                 body.getDebito().setFechaValor(remesa.getFechaValor());
-                //TODO body.getDebito().setMonto(ordenDePago.getMontoACancelar());
+                body.getDebito().setMonto(ordenDePago.getSumaOrden().getTotalACancelar());
                 body.getDebito().setNombre(General.empresa.getNombre());
                 body.getDebito().setNumCuent(remesa.getNumeroCuentaDebitar());
                 body.getDebito().setNumRefDeb(remesa.getNumRefDeb());
                 body.getDebito().setRif(header.getRif());
                 body.getDebito().setTipoCuenta(remesa.getTipoCuenta().getNumero());
-                //TODO totalMontoLote += ordenDePago.getMontoACancelar();
+                totalMontoLote += ordenDePago.getSumaOrden().getTotalACancelar();
                 list.add(body);
                 //</editor-fold>
             } else {

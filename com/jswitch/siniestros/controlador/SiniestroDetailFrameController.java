@@ -21,11 +21,13 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import org.hibernate.Hibernate;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 import org.openswing.swing.client.GridControl;
+import org.openswing.swing.client.InsertButton;
 import org.openswing.swing.mdi.client.MDIFrame;
 import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
@@ -107,17 +109,29 @@ public class SiniestroDetailFrameController extends DefaultDetailFrameController
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (beanVO != null || !((Siniestro)beanVO).getCertificado().getTitular().getAuditoria().getActivo()
-                || !((Siniestro)beanVO).getAsegurado().getAuditoria().getActivo()) {
-            Class c = DetalleSiniestroChousser.showDialog();
-            if (c != null && c.getClass() != null) {
-                if (c.equals(Vida.class)) {
-                    new DetalleVidaNuevoDetrailController(DetalleVidaNuevoDetailFrame.class.getName(), ((SiniestroDetailFrame) vista).getGridData(), null, (Siniestro) beanVO, false);
-                } else {
-                    new DetalleSiniestroDetailFrameController(DetalleSiniestroDetailFrame.class.getName(), ((SiniestroDetailFrame) vista).getGridData(), null, true, (Siniestro) beanVO, c);
+        if (e.getSource() instanceof InsertButton) {
+            //<editor-fold defaultstate="collapsed" desc="Crear nuevo">
+            if (beanVO != null && ((Siniestro) beanVO).getCertificado().getTitular().getAuditoria().getActivo()
+                    && ((Siniestro) beanVO).getCertificado().getPoliza().getAuditoria().getActivo()
+                    && ((Siniestro) beanVO).getCertificado().getAuditoria().getActivo()
+                    && ((Siniestro) beanVO).getAsegurado().getAuditoria().getActivo()
+                    && ((Siniestro) beanVO).getCertificado().getPoliza().getVigenciaHasta().before(new Date())) {
+                Class c = DetalleSiniestroChousser.showDialog();
+                if (c != null && c.getClass() != null) {
+                    if (c.equals(Vida.class)) {
+                        new DetalleVidaNuevoDetrailController(DetalleVidaNuevoDetailFrame.class.getName(), ((SiniestroDetailFrame) vista).getGridData(), null, (Siniestro) beanVO, false);
+                    } else {
+                        new DetalleSiniestroDetailFrameController(DetalleSiniestroDetailFrame.class.getName(), ((SiniestroDetailFrame) vista).getGridData(), null, true, (Siniestro) beanVO, c);
+                    }
                 }
+            } else {
+                JOptionPane.showMessageDialog(gridControl,
+                        ClientSettings.getInstance().getResources().getResource("No se Permite Realizar el Siniestro a Este Asegurado"),
+                        General.edition, JOptionPane.INFORMATION_MESSAGE);
             }
+            //</editor-fold>
         } else if (e.getSource() == ((SiniestroDetailFrame) vista).getEstadoButton()) {
+            //<editor-fold defaultstate="collapsed" desc="Cambiar Estado">
             if (vista.getMainPanel().getMode() == Consts.READONLY) {
                 Siniestro ss = ((Siniestro) beanVO);
                 switch (((Siniestro) beanVO).getEstatusSiniestro()) {
@@ -157,10 +171,7 @@ public class SiniestroDetailFrameController extends DefaultDetailFrameController
             } else {
                 JOptionPane.showMessageDialog(null, "Debes guardar primero el Registro");
             }
+            //</editor-fold>
         }
-        else
-            JOptionPane.showMessageDialog(gridControl,
-                    ClientSettings.getInstance().getResources().getResource("No se Permite Realizar el Siniestro a Este Asegurado"),
-                    General.edition, JOptionPane.INFORMATION_MESSAGE);
     }
 }

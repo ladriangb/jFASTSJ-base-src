@@ -308,7 +308,6 @@ public class BuscarPersonaDialog extends InternalFrame {
                             Method method = clase.getMethod("init",
                                     new Class[]{GridControl.class,
                                         BeanVO.class, Boolean.class});
-                            //TODO PONER MAS GENERICO
                             BeanVO beanVO =
                                     (BeanVO) Class.forName(modelClass).newInstance();
                             if (beanVO instanceof OrdenDePago) {

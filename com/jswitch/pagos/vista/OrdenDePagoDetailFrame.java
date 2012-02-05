@@ -729,7 +729,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
         RemesaLookupController rem = new RemesaLookupController(Remesa.class.getName());
         rem.addLookup2ParentLink("remesa");
         codLookupControl2.setLookupController(rem);
-        codLookupControl2.setOpenDetail("persna", RemesaDetailFrameController.class.getName(),
+        codLookupControl2.setOpenDetail("remesa", RemesaDetailFrameController.class.getName(),
                 new Class[]{String.class, GridControl.class, BeanVO.class, Boolean.class},
                 new Object[]{RemesaDetailFrame.class.getName(), null, null, Boolean.TRUE}, 2);
 
@@ -825,6 +825,24 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
                 jButton2.setVisible(false);
                 setEnableGridInternalButtons(false);
                 break;
+            case PENDIENTE:
+                getMainPanel().setEditButton(editButton1);
+                getMainPanel().setSaveButton(saveButton1);
+                editButton1.setVisible(true);
+                saveButton1.setVisible(true);
+                gridControl5.setDeleteButton(deleteButton7);
+                gridControl5.setInsertButton(insertButton7);
+                gridControlDoc.setEditButton(editButtonDoc);
+                gridControlDoc.setDeleteButton(deleteButtonDoc);
+                gridControlDoc.setInsertButton(insertButtonDoc);
+                gridControlNot.setSaveButton(saveButtonNot);
+                gridControlNot.setInsertButton(insertButtonNot);
+                gridControlObs.setEditButton(editButtonObs);
+                gridControlObs.setDeleteButton(deleteButtonObs);
+                gridControlObs.setInsertButton(insertButtonObs);
+                jButton1.setVisible(true);
+                jButton2.setVisible(true);
+                setEnableGridInternalButtons(true);
         }
     }
 

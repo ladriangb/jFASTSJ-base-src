@@ -202,7 +202,7 @@
                               <Component id="labelControl7" linkSize="4" min="-2" max="-2" attributes="0"/>
                               <Component id="textControl5" linkSize="4" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="246" max="32767" attributes="0"/>
+                          <EmptySpace pref="252" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -331,7 +331,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="gridData" pref="319" max="32767" attributes="0"/>
+                      <Component id="gridData" pref="315" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -670,8 +670,8 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                     <Property name="columns" type="int" value="2"/>
-                    <Property name="rows" type="int" value="3"/>
                     <Property name="horizontalGap" type="int" value="2"/>
+                    <Property name="rows" type="int" value="3"/>
                     <Property name="verticalGap" type="int" value="2"/>
                   </Layout>
                   <SubComponents>
@@ -841,8 +841,8 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                     <Property name="columns" type="int" value="2"/>
-                    <Property name="rows" type="int" value="3"/>
                     <Property name="horizontalGap" type="int" value="2"/>
+                    <Property name="rows" type="int" value="3"/>
                     <Property name="verticalGap" type="int" value="2"/>
                   </Layout>
                   <SubComponents>
@@ -1015,8 +1015,8 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                     <Property name="columns" type="int" value="2"/>
-                    <Property name="rows" type="int" value="3"/>
                     <Property name="horizontalGap" type="int" value="2"/>
+                    <Property name="rows" type="int" value="3"/>
                     <Property name="verticalGap" type="int" value="2"/>
                   </Layout>
                   <SubComponents>
