@@ -17,7 +17,6 @@ import com.jswitch.fas.modelo.Dominios.EstadoSiniestro;
 import com.jswitch.siniestros.controlador.detalle.DetalleSiniestroGridInternalController;
 import com.jswitch.siniestros.controlador.SiniestroDetailFrameController;
 import com.jswitch.siniestros.controlador.TitularAseguradoLookupController;
-import com.jswitch.siniestros.modelo.dominio.EstatusSiniestro;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.siniestros.modelo.maestra.Siniestro;
 import java.awt.Color;
@@ -977,7 +976,6 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
             
             gridData.setEditButton(editButton2);
             gridData.setSaveButton(saveButton2);
-            gridData.setInsertButton(insertButton1);
             gridData.setDeleteButton(deleteButton1);
 
             insertButton1.setVisible(true);

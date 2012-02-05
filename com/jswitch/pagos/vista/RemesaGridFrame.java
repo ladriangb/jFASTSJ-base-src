@@ -86,53 +86,57 @@ public class RemesaGridFrame extends DefaultGridFrame {
         gridData.setSearchAdditionalRows(true);
         gridData.setValueObjectClassName(Remesa.class.getName());
 
+        decimalColumn1.setColumnFilterable(true);
         decimalColumn1.setColumnName("id");
-        decimalColumn1.setColumnRequired(false);
+        decimalColumn1.setColumnSortable(true);
+        decimalColumn1.setGrouping(false);
         decimalColumn1.setPreferredWidth(40);
         decimalColumn1.setSortVersus(org.openswing.swing.util.java.Consts.DESC_SORTED);
         gridData.getColumnContainer().add(decimalColumn1);
 
+        textColumn6.setColumnFilterable(true);
         textColumn6.setColumnName("estatusPago");
         textColumn6.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn6);
 
-        textColumn3.setColumnName("numRefLot");
+        textColumn3.setColumnFilterable(true);
+        textColumn3.setColumnName("refLot");
         textColumn3.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn3);
 
+        textColumn1.setColumnFilterable(true);
         textColumn1.setColumnName("numeroCuentaDebitar");
         textColumn1.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn1);
 
+        textColumn2.setColumnFilterable(true);
         textColumn2.setColumnName("tipoCuenta.nombre");
         textColumn2.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn2);
 
-        currencyColumn1.setColumnName("montoACancelar");
+        currencyColumn1.setColumnFilterable(true);
+        currencyColumn1.setColumnName("sumaRemesa.totalACancelar");
+        currencyColumn1.setColumnSortable(true);
         gridData.getColumnContainer().add(currencyColumn1);
 
         textColumn4.setColumnFilterable(true);
         textColumn4.setColumnName("auditoria.usuarioInsert");
-        textColumn4.setColumnRequired(false);
         textColumn4.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn4);
 
         dateTimeColumn1.setColumnFilterable(true);
         dateTimeColumn1.setColumnName("auditoria.fechaInsert");
-        dateTimeColumn1.setColumnRequired(false);
         dateTimeColumn1.setColumnSortable(true);
         dateTimeColumn1.setSortVersus(org.openswing.swing.util.java.Consts.DESC_SORTED);
         gridData.getColumnContainer().add(dateTimeColumn1);
 
         textColumn5.setColumnFilterable(true);
         textColumn5.setColumnName("auditoria.usuarioUpdate");
-        textColumn5.setColumnRequired(false);
         textColumn5.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn5);
 
         dateTimeColumn2.setColumnFilterable(true);
         dateTimeColumn2.setColumnName("auditoria.fechaUpdate");
-        dateTimeColumn2.setColumnRequired(false);
         dateTimeColumn2.setColumnSortable(true);
         gridData.getColumnContainer().add(dateTimeColumn2);
 

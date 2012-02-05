@@ -56,6 +56,7 @@ import com.jswitch.asegurados.vista.TitularGridFrame;
 import com.jswitch.auditoria.controlador.LogGridController;
 import com.jswitch.auditoria.vista.LogGridFrame;
 import com.jswitch.base.controlador.logger.LoggerUtil;
+import com.jswitch.base.controlador.sistema.empresa.EmpresaDetailFrameController;
 import com.jswitch.base.modelo.entidades.auditoria.AuditLogRecord;
 import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
 import com.jswitch.base.modelo.entidades.defaultData.ConfiguracionesGenerales;
@@ -355,7 +356,7 @@ public class MenuPrincipal implements ClientFacade {
     }
 
     public void getEmpresa(String name) {
-        new DefaultDetailFrameController(EmpresaDetailFrame.class.getName(), null, General.empresa, false);
+        new EmpresaDetailFrameController(EmpresaDetailFrame.class.getName(), null, General.empresa, false);
     }
 
     public void getConfiguracion(String name) {
@@ -545,16 +546,18 @@ public class MenuPrincipal implements ClientFacade {
 
     //<editor-fold defaultstate="collapsed" desc="Pagos">
     public void getNewPago() {
-        new BuscarPersonaDialog((java.awt.Component) null,
+        new BuscarPersonaDialog(((java.awt.Component) null),
                 OrdenDePagoDetailFrameController.class.getName(),
                 OrdenDePago.class.getName());
     }
 
     public void getPersonasAPagarGridFrame() {
 
-        String sql = "SELECT DISTINCT P.personaPago FROM "
+        String sql = "SELECT DISTINCT P FROM "
                 + DetalleSiniestro.class.getName()
-                + " as P WHERE P.etapaSiniestro.idPropio=?";
+                + " as D,"
+                + Persona.class.getName()
+                + " as P WHERE D.etapaSiniestro.idPropio=? AND D.personaPago.id=P.id";
 
         new PersonaGridControllerWhitSQL(
                 Personas2GridFrame.class.getName(),
@@ -719,6 +722,6 @@ public class MenuPrincipal implements ClientFacade {
 //        "17930"
         //AUN_NO_FUN();
         new RemesaDetailFrameController(RemesaDetailFrame.class.getName(),
-                null,null, true);
+                null, null, true);
     }
 }

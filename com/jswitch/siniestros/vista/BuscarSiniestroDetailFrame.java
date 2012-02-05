@@ -277,6 +277,7 @@ public class BuscarSiniestroDetailFrame extends DefaultDetailFrame {
     @Override
     public void inicializar(FormController formController, boolean addToMDIFrame) {
         initComponents();
+        this.getRootPane().setDefaultButton(jButton1);
         form1.setCreateInnerVO(false);
         form1.setFormController(formController);
         form1.getVOModel().setCreateInnerVO(true);

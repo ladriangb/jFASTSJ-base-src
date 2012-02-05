@@ -62,6 +62,7 @@ import java.util.List;
 import oracle.help.Help;
 import oracle.help.library.helpset.HelpSet;
 import oracle.help.library.helpset.HelpSetParseException;
+import org.hibernate.Hibernate;
 
 /**
  *
@@ -501,6 +502,7 @@ public class Principal implements MDIController, LoginController {
             General.licencia = (Licencia) s.createQuery("FROM " + Licencia.class.getName()
                     + " WHERE serialEquipo=? AND upper(nombreEquipo)=?").setBinary(0, serial2).setString(1, nombreEquipo).uniqueResult();
             General.empresa = (Empresa) s.createQuery("FROM " + Empresa.class.getName()).uniqueResult();
+            Hibernate.initialize(General.empresa.getCuentasBancarias());
             s.close();
         } catch (Exception ex) {
             LoggerUtil.warn(Principal.class, "validarLicencia", "Error en Conexion con Data Base");

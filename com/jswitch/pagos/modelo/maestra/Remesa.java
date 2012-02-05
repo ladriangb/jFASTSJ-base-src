@@ -1,5 +1,6 @@
 package com.jswitch.pagos.modelo.maestra;
 
+import com.jswitch.base.controlador.General;
 import com.jswitch.base.modelo.entidades.Documento;
 import com.jswitch.base.modelo.entidades.NotaTecnica;
 import com.jswitch.base.modelo.entidades.Observacion;
@@ -57,7 +58,7 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     /**
      * suma de valores detalles
      */
-    @OneToOne(mappedBy="remesa")
+    @OneToOne(mappedBy = "remesa")
     private SumaRemesa sumaRemesa;
     /**
      * Estado en el que se encuentra el pago
@@ -101,6 +102,14 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
      */
     @Column
     @BusinessKey
+    private String numNegociacion;
+    /**
+     *Numero de negociacion 
+     * Valor asignado por el Banco.  Será informado por éste a la implantación del servicio.
+     * Ej. 00002100
+     */
+    @Column
+    @BusinessKey
     private Integer numNeg;
     /**
      *Identificacion del lote del pago.
@@ -110,6 +119,14 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     @Column
     @BusinessKey
     private Integer numRefLot;
+    /**
+     *Identificacion del lote del pago.
+     * Valor asignado por la Empresa
+     * Ej. 00002100
+     */
+    @Column
+    @BusinessKey
+    private String refLot;
     /**
      * Tipo de Pago
      * Valor:
@@ -184,7 +201,6 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     @ManyToOne
     @BusinessKey
     private TipoCuentaBancaria tipoCuenta;
- 
     /**
      * Busqueda automatica de Ordenes de Pago
      */
@@ -239,6 +255,10 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     public Remesa() {
         estatusPago = EstatusPago.PENDIENTE;
         tipoDetalleSiniestro = Dominios.TipoDetalleSiniestro.Todos;
+        if (General.parametros != null && General.parametros.get("remesa.numNeg") != null) {
+            numNeg = General.parametros.get("remesa.numNeg").getValorInteger();
+            numNegociacion = General.parametros.get("remesa.numNeg").getValorString();
+        }
     }
 
     /**
@@ -366,6 +386,16 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     }
 
     /**
+     * Numero de negociacion
+     * Valor asignado por el Banco.  Será informado por éste a la implantación del servicio.
+     * Ej. 00002100
+     * @return the numNegociacion
+     */
+    public String getNumNegociacion() {
+        return numNegociacion;
+    }
+
+    /**
      * numero referencia Credito
      * Número asignado por la empresa que identifica el crédito. Es
      * utilizado para identificar la nota de crédito en el estado de
@@ -428,6 +458,16 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
      */
     public Set<OrdenDePago> getOrdenDePagos() {
         return ordenDePagos;
+    }
+
+    /**
+     * Identificacion del lote del pago.
+     * Valor asignado por la Empresa
+     * Ej. 00002100
+     * @return the refLot
+     */
+    public String getRefLot() {
+        return refLot;
     }
 
     /**
@@ -597,6 +637,16 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     }
 
     /**
+     * Numero de negociacion
+     * Valor asignado por el Banco.  Será informado por éste a la implantación del servicio.
+     * Ej. 00002100
+     * @param numNegociacion the numNegociacion to set
+     */
+    public void setNumNegociacion(String numNegociacion) {
+        this.numNegociacion = numNegociacion;
+    }
+
+    /**
      * numero referencia Credito
      * Número asignado por la empresa que identifica el crédito. Es
      * utilizado para identificar la nota de crédito en el estado de
@@ -662,6 +712,16 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     }
 
     /**
+     * Identificacion del lote del pago.
+     * Valor asignado por la Empresa
+     * Ej. 00002100
+     * @param refLot the refLot to set
+     */
+    public void setRefLot(String refLot) {
+        this.refLot = refLot;
+    }
+
+    /**
      * suma de valores detalles
      * @param sumaRemesa the sumaRemesa to set
      */
@@ -703,5 +763,4 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
         this.tipoPago = tipoPago;
     }
 
-  
 }

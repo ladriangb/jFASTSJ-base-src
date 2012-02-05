@@ -37,24 +37,24 @@ public class SumaAmparada extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private String nombre;
     /**
-     * 
+     * monto amparado
      */
     @Column
     private Double monto;
     /**
-     * 
+     * Plan al que esta adjunto
      */
-    //@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @ManyToOne
     @NotNull
-    //TODO bussines key
     private Plan plan;
     /**
+     * version
      */
     @Version
     @Column
     private Integer optLock;
     /**
+     * bitacora
      */
     @Embedded
     @BusinessKey
@@ -63,51 +63,99 @@ public class SumaAmparada extends BeanVO implements Serializable, Auditable {
     public SumaAmparada() {
     }
 
+    /**
+     * bitacora
+     * @return the auditoria
+     */
     public AuditoriaBasica getAuditoria() {
         return auditoria;
     }
 
-    public void setAuditoria(AuditoriaBasica auditoria) {
-        this.auditoria = auditoria;
-    }
-
+    /**
+     * PK autoincremtado
+     * @return the id
+     */
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Integer getOptLock() {
-        return optLock;
-    }
-
-    public void setOptLock(Integer optLock) {
-        this.optLock = optLock;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public Plan getPlan() {
-        return plan;
-    }
-
-    public void setPlan(Plan plan) {
-        this.plan = plan;
-    }
-
+    /**
+     * monto amparado
+     * @return the monto
+     */
     public Double getMonto() {
         return monto;
     }
 
+    /**
+     * Diagnostico al cual se esta cubriendo.
+     * @return the nombre
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * version
+     * @return the optLock
+     */
+    public Integer getOptLock() {
+        return optLock;
+    }
+
+    /**
+     * Plan al que esta adjunto
+     * @return the plan
+     */
+    public Plan getPlan() {
+        return plan;
+    }
+
+    /**
+     * bitacora
+     * @param auditoria the auditoria to set
+     */
+    public void setAuditoria(AuditoriaBasica auditoria) {
+        this.auditoria = auditoria;
+    }
+
+    /**
+     * PK autoincremtado
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * monto amparado
+     * @param monto the monto to set
+     */
     public void setMonto(Double monto) {
         this.monto = monto;
     }
+
+    /**
+     * Diagnostico al cual se esta cubriendo.
+     * @param nombre the nombre to set
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    /**
+     * version
+     * @param optLock the optLock to set
+     */
+    public void setOptLock(Integer optLock) {
+        this.optLock = optLock;
+    }
+
+    /**
+     * Plan al que esta adjunto
+     * @param plan the plan to set
+     */
+    public void setPlan(Plan plan) {
+        this.plan = plan;
+    }   
 }

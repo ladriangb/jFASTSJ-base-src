@@ -38,25 +38,24 @@ public class Presupuesto extends BeanVO implements Serializable, Auditable {
     @BusinessKey(include = Method.TO_STRING)
     private Long id;
     /**
-     *
+     * Persona q se encarga de negociar con la clinica
      */
-    //TODO agregar a tipo persona NEGOCIADOR
     @ManyToOne()
     private Persona analistaNegociador;
     /**
-     *
+     * presupuesto entregado por la clinica
      */
     @Column
     @BusinessKey
     private Double presupuestadoInicial;
     /**
-     *
+     * Presupuesto ajustado por el Analista
      */
     @Column
     @BusinessKey
     private Double presupuestadoAjustado;
     /**
-     *
+     * Fecha de Presupuesto
      */ 
     @Column
     @Temporal(value = TemporalType.DATE)
@@ -64,11 +63,13 @@ public class Presupuesto extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private Date fecha;
     /**
+     * version
      */
     @Version
     @Column
     private Integer optLock;
     /**
+     * bitacora
      */
     @Embedded
     @BusinessKey
@@ -77,60 +78,114 @@ public class Presupuesto extends BeanVO implements Serializable, Auditable {
     public Presupuesto() {
     }
 
-   
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Integer getOptLock() {
-        return optLock;
-    }
-
-    public void setOptLock(Integer optLock) {
-        this.optLock = optLock;
-    }
-
-    public AuditoriaBasica getAuditoria() {
-        return auditoria;
-    }
-
-    public void setAuditoria(AuditoriaBasica auditoria) {
-        this.auditoria = auditoria;
-    }
-
+    /**
+     * Persona q se encarga de negociar con la clinica
+     * @return the analistaNegociador
+     */
     public Persona getAnalistaNegociador() {
         return analistaNegociador;
     }
 
-    public void setAnalistaNegociador(Persona analistaNegociador) {
-        this.analistaNegociador = analistaNegociador;
+    /**
+     * bitacora
+     * @return the auditoria
+     */
+    public AuditoriaBasica getAuditoria() {
+        return auditoria;
     }
 
+    /**
+     * Fecha de Presupuesto
+     * @return the fecha
+     */
     public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    /**
+     * Pk autogenerado
+     * @return the id
+     */
+    public Long getId() {
+        return id;
     }
 
+    /**
+     * version
+     * @return the optLock
+     */
+    public Integer getOptLock() {
+        return optLock;
+    }
+
+    /**
+     * Presupuesto ajustado por el Analista
+     * @return the presupuestadoAjustado
+     */
     public Double getPresupuestadoAjustado() {
         return presupuestadoAjustado;
     }
 
-    public void setPresupuestadoAjustado(Double presupuestadoAjustado) {
-        this.presupuestadoAjustado = presupuestadoAjustado;
-    }
-
+    /**
+     * presupuesto entregado por la clinica
+     * @return the presupuestadoInicial
+     */
     public Double getPresupuestadoInicial() {
         return presupuestadoInicial;
     }
 
+    /**
+     * Persona q se encarga de negociar con la clinica
+     * @param analistaNegociador the analistaNegociador to set
+     */
+    public void setAnalistaNegociador(Persona analistaNegociador) {
+        this.analistaNegociador = analistaNegociador;
+    }
+
+    /**
+     * bitacora
+     * @param auditoria the auditoria to set
+     */
+    public void setAuditoria(AuditoriaBasica auditoria) {
+        this.auditoria = auditoria;
+    }
+
+    /**
+     * Fecha de Presupuesto
+     * @param fecha the fecha to set
+     */
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    /**
+     * Pk autogenerado
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * version
+     * @param optLock the optLock to set
+     */
+    public void setOptLock(Integer optLock) {
+        this.optLock = optLock;
+    }
+
+    /**
+     * Presupuesto ajustado por el Analista
+     * @param presupuestadoAjustado the presupuestadoAjustado to set
+     */
+    public void setPresupuestadoAjustado(Double presupuestadoAjustado) {
+        this.presupuestadoAjustado = presupuestadoAjustado;
+    }
+
+    /**
+     * presupuesto entregado por la clinica
+     * @param presupuestadoInicial the presupuestadoInicial to set
+     */
     public void setPresupuestadoInicial(Double presupuestadoInicial) {
         this.presupuestadoInicial = presupuestadoInicial;
     }

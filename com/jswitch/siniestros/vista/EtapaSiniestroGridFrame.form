@@ -82,9 +82,6 @@
         <Component class="org.openswing.swing.client.EditButton" name="editButton1">
         </Component>
         <Component class="org.openswing.swing.client.DeleteButton" name="deleteButton1">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteButton1ActionPerformed"/>
-          </Events>
         </Component>
         <Component class="org.openswing.swing.client.ReloadButton" name="reloadButton1">
         </Component>
@@ -109,7 +106,7 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="gridData" pref="348" max="32767" attributes="0"/>
+                  <Component id="gridData" pref="352" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
