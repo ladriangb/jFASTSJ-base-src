@@ -242,8 +242,11 @@ public class RifAseguradoDialog extends javax.swing.JDialog {
 
     private void tipoCedulaActionPerformed(java.awt.event.ActionEvent evt) {
 
-        numericControl2.setEnabled(true);
-        numericControl1.setEnabled(true);
+        if (tipoCedula.getSelectedIndex() >= 6) {
+            numericControl1.setEnabled(false);
+        } else {
+            numericControl1.setEnabled(true);
+        }
 
         doCedulaCompleta();
     }
@@ -303,41 +306,36 @@ public class RifAseguradoDialog extends javax.swing.JDialog {
         public Response insertRecord(ValueObject newPersistentObject) throws Exception {
             Rif rifConsulta = null;
             Asegurado p = null;
-            if (tipoCedula.getSelectedIndex() <= 5) {
-                Session s;
-                s = HibernateUtil.getSessionFactory().openSession();
-                Query q = null;
-                Query q2 = null;
-                if (idPersona == null) {
-                    q = s.createQuery("FROM " + Asegurado.class.getName()
-                            + " WHERE persona.rif.rif=?").
-                            setString(0, textControl2.getText());
+            Session s;
+            s = HibernateUtil.getSessionFactory().openSession();
+            Query q = null;
+            Query q2 = null;
+            if (idPersona == null) {
+                q = s.createQuery("FROM " + Asegurado.class.getName()
+                        + " WHERE persona.rif.rif=?").
+                        setString(0, textControl2.getText());
 
-                }
-                p = (Asegurado) q.uniqueResult();
-                try {
-                    if (p != null) {
-                        rifConsulta = p.getPersona().getRif();
-                        q2 = s.createQuery("SELECT c.titular, a FROM " + Certificado.class.getName() + " c "
-                                + " JOIN c.asegurados a  WHERE a.persona.rif.rif=?").
-                                setString(0, rifConsulta.getRif());
+            }
+            p = (Asegurado) q.uniqueResult();
+            try {
+                if (p != null) {
+                    rifConsulta = p.getPersona().getRif();
+                    q2 = s.createQuery("SELECT c.titular, a FROM " + Certificado.class.getName() + " c "
+                            + " JOIN c.asegurados a  WHERE a.persona.rif.rif=?").
+                            setString(0, rifConsulta.getRif());
 
-                        Object[] l = (Object[]) q2.uniqueResult();
-                        if (l != null) {
-                            return new ErrorResponse("Persona ya se encuentra asegurada\n"
-                                    + "en el certificado de " + ((Titular) l[0]).getPersona().getNombreLargo());
-                        }
-
-
+                    Object[] l = (Object[]) q2.uniqueResult();
+                    if (l != null) {
+                        return new ErrorResponse("Persona ya se encuentra asegurada\n"
+                                + "en el certificado de " + ((Titular) l[0]).getPersona().getNombreLargo());
                     }
-                } finally {
-                    s.close();
+
+
                 }
+            } finally {
+                s.close();
             }
-            if (tipoCedula.getSelectedIndex() >= 6) {
-                int next = Integer.valueOf(String.valueOf(new Date().getTime() / 2000).substring(1));
-                newPersistentObject = new Rif((TipoCedula) tipoCedula.getValue(), next);
-            }
+
             if (rifConsulta != null) {
                 if (linkForm != null && linkAttName != null) {
                     linkForm.getVOModel().setValue(linkAttName, p);
@@ -346,7 +344,7 @@ public class RifAseguradoDialog extends javax.swing.JDialog {
                 if (!editarRegistro) {
                     int r = JOptionPane.showConfirmDialog(MDIFrame.getInstance(), "RIF ya existe. Desea editar la persona?", "Mensaje", JOptionPane.YES_NO_OPTION);
                     if (r == JOptionPane.YES_OPTION) {
-                        new DefaultDetailFrameController(AseguradoDetailFrame.class.getName(), vista.getGridAsegurado(), (BeanVO) p, false);
+                        new AseguradoDetailFrameController(AseguradoDetailFrame.class.getName(), vista.getGridAsegurado(), (BeanVO) p, false);
                     }
                     agregarAlGrid(p);
                 } else {
@@ -403,7 +401,9 @@ public class RifAseguradoDialog extends javax.swing.JDialog {
                 try {
                     s = HibernateUtil.getSessionFactory().openSession();
                     Transaction tx = s.beginTransaction();
+                    p.setCertificado(((Certificado) vista.getBeanVO()));
                     s.update(vista.getBeanVO());
+                    s.update(p);
                     tx.commit();
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -437,13 +437,11 @@ public class RifAseguradoDialog extends javax.swing.JDialog {
             }
             if (tipoCedula.getSelectedIndex() >= 6) {
                 int next;
-                if (numericControl1.getText().trim().isEmpty()) {
+                if (numericControl2.getText().trim().isEmpty()) {
                     next = Integer.valueOf(String.valueOf(new Date().getTime() / 2000).substring(1));
-                } else {
-                    next = Integer.parseInt(numericControl1.getText().trim());
+                    newPersistentObject = new Rif((TipoCedula) tipoCedula.getValue(), next);
                 }
-                newPersistentObject = new Rif((TipoCedula) tipoCedula.getValue(), next);
-            
+
             }
             if (rifConsulta != null) {
                 if (linkForm != null && linkAttName != null) {

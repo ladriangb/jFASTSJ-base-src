@@ -239,8 +239,11 @@ public class RifBeneficiarioDialog extends javax.swing.JDialog {
 
     private void tipoCedulaActionPerformed(java.awt.event.ActionEvent evt) {
 
-        numericControl2.setEnabled(true);
-        numericControl1.setEnabled(true);
+        if (tipoCedula.getSelectedIndex() >= 6) {
+            numericControl1.setEnabled(false);
+        } else {
+            numericControl1.setEnabled(true);
+        }
 
         doCedulaCompleta();
     }
@@ -300,31 +303,29 @@ public class RifBeneficiarioDialog extends javax.swing.JDialog {
         public Response insertRecord(ValueObject newPersistentObject) throws Exception {
             Rif rifConsulta = null;
             Beneficiario p = null;
-            if (tipoCedula.getSelectedIndex() <= 5) {
-                Session s;
-                s = HibernateUtil.getSessionFactory().openSession();
-                Query q = null;
-                if (idPersona == null) {
+            Session s;
+            s = HibernateUtil.getSessionFactory().openSession();
+            Query q = null;
+            if (idPersona == null) {
 //                    q = s.createQuery("FROM " + Beneficiario.class.getName()
 //                            + " WHERE persona.rif.rif=?").
 //                            setString(0, textControl2.getText());
-                    q = s.createQuery("SELECT a FROM " + Certificado.class.getName() + " c "
-                            + " JOIN c.beneficiarios a WHERE a.persona.rif.rif=? AND c.id=?").
-                            setString(0, textControl2.getText()).
-                            setLong(1, ((Certificado) vista.getBeanVO()).getId());
-                } else {
-                }
-                p = (Beneficiario) q.uniqueResult();
-                s.close();
-                if (p != null) {
-                    rifConsulta = p.getPersona().getRif();
-                }
+                q = s.createQuery("SELECT a FROM " + Certificado.class.getName() + " c "
+                        + " JOIN c.beneficiarios a WHERE a.persona.rif.rif=? AND c.id=?").
+                        setString(0, textControl2.getText()).
+                        setLong(1, ((Certificado) vista.getBeanVO()).getId());
+            } else {
+            }
+            p = (Beneficiario) q.uniqueResult();
+            s.close();
+            if (p != null) {
+                rifConsulta = p.getPersona().getRif();
+            }
 
-            }
-            if (tipoCedula.getSelectedIndex() >= 6) {
-                int next = Integer.valueOf(String.valueOf(new Date().getTime() / 2000).substring(1));
-                newPersistentObject = new Rif((TipoCedula) tipoCedula.getValue(), next);
-            }
+//            if (tipoCedula.getSelectedIndex() >= 6) {
+//                int next = Integer.valueOf(String.valueOf(new Date().getTime() / 2000).substring(1));
+//                newPersistentObject = new Rif((TipoCedula) tipoCedula.getValue(), next);
+//            }
             if (rifConsulta != null) {
                 if (linkForm != null && linkAttName != null) {
                     linkForm.getVOModel().setValue(linkAttName, p);
@@ -365,6 +366,8 @@ public class RifBeneficiarioDialog extends javax.swing.JDialog {
                 s = HibernateUtil.getSessionFactory().openSession();
                 Transaction tx = s.beginTransaction();
                 s.update(vista.getBeanVO());
+                p.setCertificado(((Certificado) vista.getBeanVO()));
+                s.update(p);
                 tx.commit();
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -395,12 +398,11 @@ public class RifBeneficiarioDialog extends javax.swing.JDialog {
             }
             if (tipoCedula.getSelectedIndex() >= 6) {
                 int next;
-                if (numericControl1.getText().trim().isEmpty()) {
+                if (numericControl2.getText().trim().isEmpty()) {
                     next = Integer.valueOf(String.valueOf(new Date().getTime() / 2000).substring(1));
-                } else {
-                    next = Integer.parseInt(numericControl1.getText().trim());
+                    newPersistentObject = new Rif((TipoCedula) tipoCedula.getValue(), next);
+
                 }
-                newPersistentObject = new Rif((TipoCedula) tipoCedula.getValue(), next);
             }
             if (rifConsulta != null) {
                 if (linkForm != null && linkAttName != null) {
