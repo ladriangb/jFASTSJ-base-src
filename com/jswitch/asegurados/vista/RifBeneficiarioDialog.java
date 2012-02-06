@@ -337,6 +337,7 @@ public class RifBeneficiarioDialog extends javax.swing.JDialog {
                         new BeneficiarioDetailFrameController(BeneficiarioDetailFrame.class.getName(), vista.getGridBeneficiario(), (BeanVO) p, true,
                                 (Certificado) vista.getBeanVO(), vista.getMainPanel().getReloadButton());
                     }
+                    //TODO else
                     agregarAlGrid(p);
                 } else {
                     JOptionPane.showMessageDialog(MDIFrame.getInstance(), "RIF ya existe!!!", "Mensaje", JOptionPane.WARNING_MESSAGE);

@@ -43,7 +43,7 @@ import org.openswing.swing.message.receive.java.ValueObject;
 public class PolizaDetailFrameController extends DefaultDetailFrameController {
 
     public PolizaDetailFrameController(
-            String detailFramePath, GridControl gridControl, BeanVO beanVO, boolean aplicarLogicaNegocio) {
+            String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio) {
         super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
         if (beanVO == null) {
             ((PolizaDetailFrame) vista).setVisiblePaneles(false);
