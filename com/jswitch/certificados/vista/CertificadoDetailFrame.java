@@ -17,6 +17,10 @@ import com.jswitch.base.controlador.util.DefaultDocumentosAnexosGridController;
 import com.jswitch.base.modelo.entidades.Documento;
 import com.jswitch.base.modelo.entidades.NotaTecnica;
 import com.jswitch.base.modelo.entidades.Observacion;
+import com.jswitch.polizas.controlador.PolizaDetailFrameController;
+import com.jswitch.polizas.controlador.PolizaLookupControllerPorNombre;
+import com.jswitch.polizas.modelo.maestra.Poliza;
+import com.jswitch.polizas.vista.PolizaDetailFrame;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.form.client.Form;
 import org.openswing.swing.form.client.FormController;
@@ -59,7 +63,7 @@ public class CertificadoDetailFrame extends DefaultDetailFrame {
         checkBoxControl1 = new org.openswing.swing.client.CheckBoxControl();
         textControl1 = new org.openswing.swing.client.TextControl();
         labelControl4 = new org.openswing.swing.client.LabelControl();
-        textControl2 = new org.openswing.swing.client.TextControl();
+        codLookupControl2 = new org.openswing.swing.client.CodLookupControl();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel12 = new javax.swing.JPanel();
         gridControl4 = new org.openswing.swing.client.GridControl();
@@ -196,7 +200,10 @@ public class CertificadoDetailFrame extends DefaultDetailFrame {
 
         labelControl4.setLabel("Poliza.numero");
 
-        textControl2.setAttributeName("poliza.numero");
+        codLookupControl2.setAttributeName("poliza.numero");
+        codLookupControl2.setEnabledOnEdit(false);
+        codLookupControl2.setEnabledOnInsert(false);
+        codLookupControl2.setLookupButtonVisible(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -208,7 +215,7 @@ public class CertificadoDetailFrame extends DefaultDetailFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(labelControl4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE))
+                        .addComponent(codLookupControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(labelControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -234,7 +241,7 @@ public class CertificadoDetailFrame extends DefaultDetailFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelControl4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textControl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(codLookupControl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(numericControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -787,6 +794,17 @@ public class CertificadoDetailFrame extends DefaultDetailFrame {
                 TitularDetailFrameController.class.getName(),
                 new Class[]{String.class, GridControl.class, BeanVO.class, Boolean.class},
                 new Object[]{TitularDetailFrame.class.getName(), null, null, Boolean.FALSE}, 2);
+
+
+        PolizaLookupControllerPorNombre polizaloo =
+                new PolizaLookupControllerPorNombre(Poliza.class.getName());
+        polizaloo.addLookup2ParentLink("poliza");
+        codLookupControl2.setLookupController(polizaloo);
+        codLookupControl2.setOpenDetail("poliza",
+                PolizaDetailFrameController.class.getName(),
+                new Class[]{String.class, GridControl.class, BeanVO.class, Boolean.class},
+                new Object[]{PolizaDetailFrame.class.getName(), null, null, false}, 1);
+
 //        codLookupControl1.setNewDetail("titular"
 //                , DefaultDetailFrameController.class.getName()
 //                , new Class[]{String.class , GridControl.class, BeanVO.class , Boolean.class}
@@ -884,6 +902,7 @@ public class CertificadoDetailFrame extends DefaultDetailFrame {
     private org.openswing.swing.client.CheckBoxControl checkBoxControl1;
     private org.openswing.swing.table.columns.client.CodLookupColumn codLookupColumnDoc;
     private org.openswing.swing.client.CodLookupControl codLookupControl1;
+    private org.openswing.swing.client.CodLookupControl codLookupControl2;
     private org.openswing.swing.table.columns.client.DateColumn dateColumnDoc;
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn1;
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn2;
@@ -971,6 +990,5 @@ public class CertificadoDetailFrame extends DefaultDetailFrame {
     private org.openswing.swing.table.columns.client.TextColumn textColumnObs2;
     private org.openswing.swing.table.columns.client.TextColumn textColumnObs3;
     private org.openswing.swing.client.TextControl textControl1;
-    private org.openswing.swing.client.TextControl textControl2;
     // End of variables declaration//GEN-END:variables
 }

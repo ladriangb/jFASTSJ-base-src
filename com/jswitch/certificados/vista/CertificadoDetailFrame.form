@@ -172,7 +172,7 @@
                                   <Group type="102" attributes="0">
                                       <Component id="labelControl4" linkSize="2" min="-2" max="-2" attributes="1"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="textControl2" pref="508" max="32767" attributes="0"/>
+                                      <Component id="codLookupControl2" pref="508" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="labelControl1" linkSize="2" min="-2" max="-2" attributes="1"/>
@@ -203,7 +203,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="labelControl4" linkSize="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="textControl2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="codLookupControl2" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
@@ -286,11 +286,14 @@
                         <Property name="label" type="java.lang.String" value="Poliza.numero"/>
                       </Properties>
                     </Component>
-                    <Component class="org.openswing.swing.client.TextControl" name="textControl2">
+                    <Component class="org.openswing.swing.client.CodLookupControl" name="codLookupControl2">
                       <Properties>
                         <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                           <Connection code="&quot;poliza.numero&quot;" type="code"/>
                         </Property>
+                        <Property name="enabledOnEdit" type="boolean" value="false"/>
+                        <Property name="enabledOnInsert" type="boolean" value="false"/>
+                        <Property name="lookupButtonVisible" type="boolean" value="false"/>
                       </Properties>
                     </Component>
                   </SubComponents>
