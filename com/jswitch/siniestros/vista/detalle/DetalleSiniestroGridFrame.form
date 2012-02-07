@@ -113,6 +113,7 @@
           <SubComponents>
             <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn1">
               <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
                 <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="&quot;id&quot;" type="code"/>
                 </Property>
@@ -148,6 +149,7 @@
                 <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="&quot;siniestro.numero&quot;" type="code"/>
                 </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
                 <Property name="columnSortable" type="boolean" value="true"/>
               </Properties>
             </Component>
@@ -157,6 +159,7 @@
                 <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="&quot;tipoDetalle&quot;" type="code"/>
                 </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
                 <Property name="columnSortable" type="boolean" value="true"/>
               </Properties>
             </Component>
@@ -166,6 +169,7 @@
                 <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="&quot;personaPago.rif.rif&quot;" type="code"/>
                 </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
                 <Property name="columnSortable" type="boolean" value="true"/>
               </Properties>
             </Component>
@@ -175,6 +179,7 @@
                 <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="&quot;personaPago.nombreLargo&quot;" type="code"/>
                 </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
                 <Property name="columnSortable" type="boolean" value="true"/>
               </Properties>
             </Component>
@@ -184,6 +189,7 @@
                 <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="&quot;tipoPersona.nombre&quot;" type="code"/>
                 </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
                 <Property name="columnSortable" type="boolean" value="true"/>
               </Properties>
             </Component>
@@ -193,6 +199,7 @@
                 <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="&quot;tratamientoEfectuado&quot;" type="code"/>
                 </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
                 <Property name="columnSortable" type="boolean" value="true"/>
               </Properties>
             </Component>
@@ -202,6 +209,7 @@
                 <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="&quot;tipoSiniestro.nombre&quot;" type="code"/>
                 </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
                 <Property name="columnSortable" type="boolean" value="true"/>
               </Properties>
             </Component>
@@ -211,6 +219,7 @@
                 <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="&quot;tipoEnfermedad&quot;" type="code"/>
                 </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
                 <Property name="columnSortable" type="boolean" value="true"/>
               </Properties>
             </Component>
@@ -220,6 +229,7 @@
                 <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="&quot;ramo.nombre&quot;" type="code"/>
                 </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
                 <Property name="columnSortable" type="boolean" value="true"/>
               </Properties>
             </Component>
@@ -229,6 +239,7 @@
                 <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="&quot;fechaPagado&quot;" type="code"/>
                 </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
                 <Property name="columnSortable" type="boolean" value="true"/>
               </Properties>
             </Component>
@@ -238,6 +249,7 @@
                 <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="&quot;fechaVencimiento&quot;" type="code"/>
                 </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
                 <Property name="columnSortable" type="boolean" value="true"/>
               </Properties>
             </Component>
@@ -247,6 +259,7 @@
                 <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="&quot;fechaLiquidado&quot;" type="code"/>
                 </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
                 <Property name="columnSortable" type="boolean" value="true"/>
               </Properties>
             </Component>
@@ -452,6 +465,7 @@
                 <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="&quot;auditoria.fechaInsert&quot;" type="code"/>
                 </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
                 <Property name="columnSortable" type="boolean" value="true"/>
               </Properties>
             </Component>
@@ -471,6 +485,7 @@
                 <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="&quot;auditoria.fechaUpdate&quot;" type="code"/>
                 </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
                 <Property name="columnSortable" type="boolean" value="true"/>
               </Properties>
             </Component>

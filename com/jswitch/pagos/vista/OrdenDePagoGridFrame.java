@@ -2,6 +2,7 @@ package com.jswitch.pagos.vista;
 
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.vista.util.DefaultGridFrame;
+import com.jswitch.fas.modelo.Dominios;
 import com.jswitch.pagos.modelo.maestra.OrdenDePago;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.mdi.client.MDIFrame;
@@ -28,7 +29,7 @@ public class OrdenDePagoGridFrame extends DefaultGridFrame {
         filterButton1 = new org.openswing.swing.client.FilterButton();
         gridData = new org.openswing.swing.client.GridControl();
         decimalColumn1 = new org.openswing.swing.table.columns.client.DecimalColumn();
-        textColumn8 = new org.openswing.swing.table.columns.client.TextColumn();
+        comboColumn1 = new org.openswing.swing.table.columns.client.ComboColumn();
         textColumn6 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn7 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn3 = new org.openswing.swing.table.columns.client.TextColumn();
@@ -111,11 +112,12 @@ public class OrdenDePagoGridFrame extends DefaultGridFrame {
         decimalColumn1.setSortVersus(org.openswing.swing.util.java.Consts.DESC_SORTED);
         gridData.getColumnContainer().add(decimalColumn1);
 
-        textColumn8.setColumnFilterable(true);
-        textColumn8.setColumnName("estatusPago");
-        textColumn8.setColumnRequired(false);
-        textColumn8.setColumnSortable(true);
-        gridData.getColumnContainer().add(textColumn8);
+        comboColumn1.setColumnFilterable(true);
+        comboColumn1.setColumnName("estatusPago");
+        comboColumn1.setColumnRequired(false);
+        comboColumn1.setColumnSortable(true);
+        comboColumn1.setDomainId(Dominios.EstatusPago().getDomainId());
+        gridData.getColumnContainer().add(comboColumn1);
 
         textColumn6.setColumnFilterable(true);
         textColumn6.setColumnName("personaPago.rif.rif");
@@ -376,6 +378,7 @@ public class OrdenDePagoGridFrame extends DefaultGridFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.openswing.swing.table.columns.client.TextColumn auditoria;
+    private org.openswing.swing.table.columns.client.ComboColumn comboColumn1;
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn1;
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn2;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn1;
@@ -413,6 +416,5 @@ public class OrdenDePagoGridFrame extends DefaultGridFrame {
     private org.openswing.swing.table.columns.client.TextColumn textColumn5;
     private org.openswing.swing.table.columns.client.TextColumn textColumn6;
     private org.openswing.swing.table.columns.client.TextColumn textColumn7;
-    private org.openswing.swing.table.columns.client.TextColumn textColumn8;
     // End of variables declaration//GEN-END:variables
 }

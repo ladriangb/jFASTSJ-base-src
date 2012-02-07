@@ -2,6 +2,7 @@ package com.jswitch.siniestros.vista;
 
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.vista.util.DefaultGridFrame;
+import com.jswitch.fas.modelo.Dominios;
 import com.jswitch.siniestros.modelo.maestra.Siniestro;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.mdi.client.MDIFrame;
@@ -26,11 +27,9 @@ public class SiniestroGridFrame extends DefaultGridFrame {
         exportButton1 = new org.openswing.swing.client.ExportButton();
         navigatorBar1 = new org.openswing.swing.client.NavigatorBar();
         filterButton1 = new org.openswing.swing.client.FilterButton();
-        editButton1 = new org.openswing.swing.client.EditButton();
-        saveButton1 = new org.openswing.swing.client.SaveButton();
         gridData = new org.openswing.swing.client.GridControl();
         decimalColumn1 = new org.openswing.swing.table.columns.client.DecimalColumn();
-        textColumn6 = new org.openswing.swing.table.columns.client.TextColumn();
+        comboColumn1 = new org.openswing.swing.table.columns.client.ComboColumn();
         textColumn3 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn1 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn2 = new org.openswing.swing.table.columns.client.TextColumn();
@@ -48,10 +47,6 @@ public class SiniestroGridFrame extends DefaultGridFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(editButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(saveButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(reloadButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(exportButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -59,7 +54,7 @@ public class SiniestroGridFrame extends DefaultGridFrame {
                 .addComponent(navigatorBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(filterButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(292, Short.MAX_VALUE))
+                .addContainerGap(368, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -68,20 +63,16 @@ public class SiniestroGridFrame extends DefaultGridFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(filterButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(navigatorBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(saveButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(exportButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(reloadButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(reloadButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        gridData.setEditButton(editButton1);
         gridData.setExportButton(exportButton1);
         gridData.setFilterButton(filterButton1);
         gridData.setInsertRowsOnTop(false);
         gridData.setNavBar(navigatorBar1);
         gridData.setReloadButton(reloadButton1);
-        gridData.setSaveButton(saveButton1);
         gridData.setSearchAdditionalRows(true);
         gridData.setValueObjectClassName(Siniestro.class.getName());
 
@@ -93,23 +84,28 @@ public class SiniestroGridFrame extends DefaultGridFrame {
         decimalColumn1.setSortVersus(org.openswing.swing.util.java.Consts.DESC_SORTED);
         gridData.getColumnContainer().add(decimalColumn1);
 
-        textColumn6.setColumnFilterable(true);
-        textColumn6.setColumnName("estatusSiniestro");
-        textColumn6.setColumnSortable(true);
-        gridData.getColumnContainer().add(textColumn6);
+        comboColumn1.setColumnFilterable(true);
+        comboColumn1.setColumnName("estatusSiniestro");
+        comboColumn1.setColumnRequired(false);
+        comboColumn1.setColumnSortable(true);
+        comboColumn1.setDomainId(Dominios.EstadoSiniestro().getDomainId());
+        gridData.getColumnContainer().add(comboColumn1);
 
         textColumn3.setColumnFilterable(true);
         textColumn3.setColumnName("numero");
+        textColumn3.setColumnRequired(false);
         textColumn3.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn3);
 
         textColumn1.setColumnFilterable(true);
         textColumn1.setColumnName("certificado.titular.persona.nombreLargo");
+        textColumn1.setColumnRequired(false);
         textColumn1.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn1);
 
         textColumn2.setColumnFilterable(true);
         textColumn2.setColumnName("asegurado.persona.nombreLargo");
+        textColumn2.setColumnRequired(false);
         textColumn2.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn2);
 
@@ -119,7 +115,10 @@ public class SiniestroGridFrame extends DefaultGridFrame {
         textColumn4.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn4);
 
+        dateColumn1.setColumnFilterable(true);
         dateColumn1.setColumnName("auditoria.fechaInsert");
+        dateColumn1.setColumnRequired(false);
+        dateColumn1.setColumnSortable(true);
         gridData.getColumnContainer().add(dateColumn1);
 
         textColumn5.setColumnFilterable(true);
@@ -128,7 +127,10 @@ public class SiniestroGridFrame extends DefaultGridFrame {
         textColumn5.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn5);
 
+        dateColumn2.setColumnFilterable(true);
         dateColumn2.setColumnName("auditoria.fechaUpdate");
+        dateColumn2.setColumnRequired(false);
+        dateColumn2.setColumnSortable(true);
         gridData.getColumnContainer().add(dateColumn2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -184,22 +186,20 @@ public class SiniestroGridFrame extends DefaultGridFrame {
         return gridData;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private org.openswing.swing.table.columns.client.ComboColumn comboColumn1;
     private org.openswing.swing.table.columns.client.DateColumn dateColumn1;
     private org.openswing.swing.table.columns.client.DateColumn dateColumn2;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn1;
-    private org.openswing.swing.client.EditButton editButton1;
     private org.openswing.swing.client.ExportButton exportButton1;
     private org.openswing.swing.client.FilterButton filterButton1;
     private org.openswing.swing.client.GridControl gridData;
     private javax.swing.JPanel jPanel1;
     private org.openswing.swing.client.NavigatorBar navigatorBar1;
     private org.openswing.swing.client.ReloadButton reloadButton1;
-    private org.openswing.swing.client.SaveButton saveButton1;
     private org.openswing.swing.table.columns.client.TextColumn textColumn1;
     private org.openswing.swing.table.columns.client.TextColumn textColumn2;
     private org.openswing.swing.table.columns.client.TextColumn textColumn3;
     private org.openswing.swing.table.columns.client.TextColumn textColumn4;
     private org.openswing.swing.table.columns.client.TextColumn textColumn5;
-    private org.openswing.swing.table.columns.client.TextColumn textColumn6;
     // End of variables declaration//GEN-END:variables
 }

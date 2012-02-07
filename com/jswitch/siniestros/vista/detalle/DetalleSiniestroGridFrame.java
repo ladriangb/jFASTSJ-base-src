@@ -78,6 +78,7 @@ public class DetalleSiniestroGridFrame extends DefaultGridFrame {
         gridData.setSearchAdditionalRows(true);
         gridData.setValueObjectClassName(Emergencia.class.getName());
 
+        decimalColumn1.setColumnFilterable(true);
         decimalColumn1.setColumnName("id");
         decimalColumn1.setColumnRequired(false);
         decimalColumn1.setColumnSortable(true);
@@ -99,61 +100,73 @@ public class DetalleSiniestroGridFrame extends DefaultGridFrame {
 
         textColumn8.setColumnFilterable(true);
         textColumn8.setColumnName("siniestro.numero");
+        textColumn8.setColumnRequired(false);
         textColumn8.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn8);
 
         textColumn11.setColumnFilterable(true);
         textColumn11.setColumnName("tipoDetalle");
+        textColumn11.setColumnRequired(false);
         textColumn11.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn11);
 
         textColumn4.setColumnFilterable(true);
         textColumn4.setColumnName("personaPago.rif.rif");
+        textColumn4.setColumnRequired(false);
         textColumn4.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn4);
 
         textColumn1.setColumnFilterable(true);
         textColumn1.setColumnName("personaPago.nombreLargo");
+        textColumn1.setColumnRequired(false);
         textColumn1.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn1);
 
         textColumn2.setColumnFilterable(true);
         textColumn2.setColumnName("tipoPersona.nombre");
+        textColumn2.setColumnRequired(false);
         textColumn2.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn2);
 
         textColumn3.setColumnFilterable(true);
         textColumn3.setColumnName("tratamientoEfectuado");
+        textColumn3.setColumnRequired(false);
         textColumn3.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn3);
 
         textColumn6.setColumnFilterable(true);
         textColumn6.setColumnName("tipoSiniestro.nombre");
+        textColumn6.setColumnRequired(false);
         textColumn6.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn6);
 
         textColumn7.setColumnFilterable(true);
         textColumn7.setColumnName("tipoEnfermedad");
+        textColumn7.setColumnRequired(false);
         textColumn7.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn7);
 
         textColumn12.setColumnFilterable(true);
         textColumn12.setColumnName("ramo.nombre");
+        textColumn12.setColumnRequired(false);
         textColumn12.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn12);
 
         dateColumn3.setColumnFilterable(true);
         dateColumn3.setColumnName("fechaPagado");
+        dateColumn3.setColumnRequired(false);
         dateColumn3.setColumnSortable(true);
         gridData.getColumnContainer().add(dateColumn3);
 
         dateColumn4.setColumnFilterable(true);
         dateColumn4.setColumnName("fechaVencimiento");
+        dateColumn4.setColumnRequired(false);
         dateColumn4.setColumnSortable(true);
         gridData.getColumnContainer().add(dateColumn4);
 
         dateColumn5.setColumnFilterable(true);
         dateColumn5.setColumnName("fechaLiquidado");
+        dateColumn5.setColumnRequired(false);
         dateColumn5.setColumnSortable(true);
         gridData.getColumnContainer().add(dateColumn5);
 
@@ -283,6 +296,7 @@ public class DetalleSiniestroGridFrame extends DefaultGridFrame {
 
         dateColumn1.setColumnFilterable(true);
         dateColumn1.setColumnName("auditoria.fechaInsert");
+        dateColumn1.setColumnRequired(false);
         dateColumn1.setColumnSortable(true);
         gridData.getColumnContainer().add(dateColumn1);
 
@@ -294,6 +308,7 @@ public class DetalleSiniestroGridFrame extends DefaultGridFrame {
 
         dateColumn2.setColumnFilterable(true);
         dateColumn2.setColumnName("auditoria.fechaUpdate");
+        dateColumn2.setColumnRequired(false);
         dateColumn2.setColumnSortable(true);
         gridData.getColumnContainer().add(dateColumn2);
 

@@ -28,8 +28,8 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jTabbedPane1" alignment="1" pref="639" max="32767" attributes="0"/>
+                  <Component id="jPanel1" max="32767" attributes="0"/>
+                  <Component id="jTabbedPane1" alignment="0" pref="639" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -39,9 +39,8 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
               <Component id="jTabbedPane1" pref="441" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -54,8 +53,8 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="editButton1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="reloadButton2" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                   <Component id="saveButton1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="466" max="32767" attributes="0"/>
                   <Component id="jButton1" min="-2" pref="83" max="-2" attributes="0"/>
@@ -66,13 +65,11 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="reloadButton2" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="jButton1" alignment="0" pref="33" max="32767" attributes="1"/>
-                      <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="editButton1" alignment="0" max="32767" attributes="1"/>
-                          <Component id="saveButton1" alignment="0" max="32767" attributes="1"/>
-                      </Group>
+                      <Component id="saveButton1" alignment="1" min="-2" max="-2" attributes="1"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -80,8 +77,6 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="org.openswing.swing.client.EditButton" name="editButton1">
-        </Component>
         <Component class="org.openswing.swing.client.SaveButton" name="saveButton1">
         </Component>
         <Component class="javax.swing.JButton" name="jButton1">
@@ -91,6 +86,8 @@
             </Property>
             <Property name="text" type="java.lang.String" value="CERRAR"/>
           </Properties>
+        </Component>
+        <Component class="org.openswing.swing.client.ReloadButton" name="reloadButton2">
         </Component>
       </SubComponents>
     </Container>
@@ -103,8 +100,8 @@
             <Property name="VOClassName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="Siniestro.class.getName()" type="code"/>
             </Property>
-            <Property name="editButton" type="org.openswing.swing.client.EditButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="editButton1"/>
+            <Property name="reloadButton" type="org.openswing.swing.client.ReloadButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="reloadButton2"/>
             </Property>
             <Property name="saveButton" type="org.openswing.swing.client.SaveButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="saveButton1"/>
@@ -131,15 +128,20 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
                                   <Component id="labelControl1" linkSize="3" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="textControl1" pref="456" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
+                                  <Component id="labelControl2" linkSize="3" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="dateControl1" pref="456" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
                                   <Component id="labelControl4" linkSize="3" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="codLookupControl3" pref="456" max="32767" attributes="0"/>
+                                  <Component id="codLookupControl1" pref="456" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="labelControl3" linkSize="3" min="-2" max="-2" attributes="0"/>
@@ -175,15 +177,20 @@
                               <Component id="labelControl1" linkSize="4" alignment="0" max="32767" attributes="1"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="labelControl4" linkSize="4" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="labelControl3" linkSize="4" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="1">
-                                  <Component id="codLookupControl3" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="labelControl2" linkSize="4" pref="21" max="32767" attributes="1"/>
+                              <Component id="dateControl1" linkSize="4" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="labelControl4" linkSize="4" min="-2" max="-2" attributes="0"/>
+                              <Component id="codLookupControl1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="labelControl3" linkSize="4" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                                   <Component id="codLookupControl4" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -202,7 +209,7 @@
                               <Component id="labelControl7" linkSize="4" min="-2" max="-2" attributes="0"/>
                               <Component id="textControl5" linkSize="4" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="252" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="219" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -279,19 +286,39 @@
                     <Property name="enabledOnInsert" type="boolean" value="false"/>
                   </Properties>
                 </Component>
-                <Component class="org.openswing.swing.client.CodLookupControl" name="codLookupControl3">
-                  <Properties>
-                    <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="&quot;asegurado.persona.nombreLargo&quot;" type="code"/>
-                    </Property>
-                    <Property name="lookupButtonVisible" type="boolean" value="false"/>
-                  </Properties>
-                </Component>
                 <Component class="org.openswing.swing.client.CodLookupControl" name="codLookupControl4">
                   <Properties>
                     <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="&quot;certificado.titular.persona.nombreLargo&quot;" type="code"/>
                     </Property>
+                    <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="enabledOnEdit" type="boolean" value="false"/>
+                    <Property name="enabledOnInsert" type="boolean" value="false"/>
+                    <Property name="lookupButtonVisible" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.client.LabelControl" name="labelControl2">
+                  <Properties>
+                    <Property name="label" type="java.lang.String" value="siniestro.fechaCreacion"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.client.DateControl" name="dateControl1">
+                  <Properties>
+                    <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;fechaCreacion&quot;" type="code"/>
+                    </Property>
+                    <Property name="enabledOnEdit" type="boolean" value="false"/>
+                    <Property name="required" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.client.CodLookupControl" name="codLookupControl1">
+                  <Properties>
+                    <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;asegurado.persona.nombreLargo&quot;" type="code"/>
+                    </Property>
+                    <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="enabledOnEdit" type="boolean" value="false"/>
+                    <Property name="enabledOnInsert" type="boolean" value="false"/>
                     <Property name="lookupButtonVisible" type="boolean" value="false"/>
                   </Properties>
                 </Component>

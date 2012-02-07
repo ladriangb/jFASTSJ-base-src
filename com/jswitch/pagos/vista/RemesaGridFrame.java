@@ -2,6 +2,7 @@ package com.jswitch.pagos.vista;
 
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.vista.util.DefaultGridFrame;
+import com.jswitch.fas.modelo.Dominios;
 import com.jswitch.pagos.modelo.maestra.Remesa;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.mdi.client.MDIFrame;
@@ -28,13 +29,13 @@ public class RemesaGridFrame extends DefaultGridFrame {
         filterButton1 = new org.openswing.swing.client.FilterButton();
         gridData = new org.openswing.swing.client.GridControl();
         decimalColumn1 = new org.openswing.swing.table.columns.client.DecimalColumn();
-        textColumn6 = new org.openswing.swing.table.columns.client.TextColumn();
+        comboColumn1 = new org.openswing.swing.table.columns.client.ComboColumn();
         textColumn3 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn1 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn2 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn7 = new org.openswing.swing.table.columns.client.TextColumn();
-        textColumn8 = new org.openswing.swing.table.columns.client.TextColumn();
-        textColumn9 = new org.openswing.swing.table.columns.client.TextColumn();
+        comboColumn3 = new org.openswing.swing.table.columns.client.ComboColumn();
+        comboColumn2 = new org.openswing.swing.table.columns.client.ComboColumn();
         textColumn10 = new org.openswing.swing.table.columns.client.TextColumn();
         integerColumn1 = new org.openswing.swing.table.columns.client.IntegerColumn();
         integerColumn2 = new org.openswing.swing.table.columns.client.IntegerColumn();
@@ -119,11 +120,12 @@ public class RemesaGridFrame extends DefaultGridFrame {
         decimalColumn1.setSortVersus(org.openswing.swing.util.java.Consts.DESC_SORTED);
         gridData.getColumnContainer().add(decimalColumn1);
 
-        textColumn6.setColumnFilterable(true);
-        textColumn6.setColumnName("estatusPago");
-        textColumn6.setColumnRequired(false);
-        textColumn6.setColumnSortable(true);
-        gridData.getColumnContainer().add(textColumn6);
+        comboColumn1.setColumnFilterable(true);
+        comboColumn1.setColumnName("estatusPago");
+        comboColumn1.setColumnRequired(false);
+        comboColumn1.setColumnSortable(true);
+        comboColumn1.setDomainId(Dominios.EstatusPago().getDomainId());
+        gridData.getColumnContainer().add(comboColumn1);
 
         textColumn3.setColumnFilterable(true);
         textColumn3.setColumnName("refLot");
@@ -149,17 +151,19 @@ public class RemesaGridFrame extends DefaultGridFrame {
         textColumn7.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn7);
 
-        textColumn8.setColumnFilterable(true);
-        textColumn8.setColumnName("tipoPago");
-        textColumn8.setColumnRequired(false);
-        textColumn8.setColumnSortable(true);
-        gridData.getColumnContainer().add(textColumn8);
+        comboColumn3.setColumnFilterable(true);
+        comboColumn3.setColumnName("tipoPago");
+        comboColumn3.setColumnRequired(false);
+        comboColumn3.setColumnSortable(true);
+        comboColumn3.setDomainId(Dominios.TipoPago().getDomainId());
+        gridData.getColumnContainer().add(comboColumn3);
 
-        textColumn9.setColumnFilterable(true);
-        textColumn9.setColumnName("duracionCheque");
-        textColumn9.setColumnRequired(false);
-        textColumn9.setColumnSortable(true);
-        gridData.getColumnContainer().add(textColumn9);
+        comboColumn2.setColumnFilterable(true);
+        comboColumn2.setColumnName("duracionCheque");
+        comboColumn2.setColumnRequired(false);
+        comboColumn2.setColumnSortable(true);
+        comboColumn2.setDomainId(Dominios.DuracionCheque().getDomainId());
+        gridData.getColumnContainer().add(comboColumn2);
 
         textColumn10.setColumnFilterable(true);
         textColumn10.setColumnName("numNegociacion");
@@ -438,6 +442,9 @@ public class RemesaGridFrame extends DefaultGridFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.openswing.swing.table.columns.client.TextColumn auditoria;
+    private org.openswing.swing.table.columns.client.ComboColumn comboColumn1;
+    private org.openswing.swing.table.columns.client.ComboColumn comboColumn2;
+    private org.openswing.swing.table.columns.client.ComboColumn comboColumn3;
     private org.openswing.swing.table.columns.client.DateColumn dateColumn1;
     private org.openswing.swing.table.columns.client.DateColumn dateColumn2;
     private org.openswing.swing.table.columns.client.DateColumn dateColumn3;
@@ -481,9 +488,6 @@ public class RemesaGridFrame extends DefaultGridFrame {
     private org.openswing.swing.table.columns.client.TextColumn textColumn2;
     private org.openswing.swing.table.columns.client.TextColumn textColumn3;
     private org.openswing.swing.table.columns.client.TextColumn textColumn5;
-    private org.openswing.swing.table.columns.client.TextColumn textColumn6;
     private org.openswing.swing.table.columns.client.TextColumn textColumn7;
-    private org.openswing.swing.table.columns.client.TextColumn textColumn8;
-    private org.openswing.swing.table.columns.client.TextColumn textColumn9;
     // End of variables declaration//GEN-END:variables
 }

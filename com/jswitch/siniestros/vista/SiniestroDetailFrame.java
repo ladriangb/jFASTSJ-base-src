@@ -49,9 +49,9 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        editButton1 = new org.openswing.swing.client.EditButton();
         saveButton1 = new org.openswing.swing.client.SaveButton();
         jButton1 = new javax.swing.JButton();
+        reloadButton2 = new org.openswing.swing.client.ReloadButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         form1 = new org.openswing.swing.form.client.Form();
         jPanel2 = new javax.swing.JPanel();
@@ -65,8 +65,10 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
         numericControl1 = new org.openswing.swing.client.NumericControl();
         textControl5 = new org.openswing.swing.client.TextControl();
         comboBoxControl1 = new org.openswing.swing.client.ComboBoxControl();
-        codLookupControl3 = new org.openswing.swing.client.CodLookupControl();
         codLookupControl4 = new org.openswing.swing.client.CodLookupControl();
+        labelControl2 = new org.openswing.swing.client.LabelControl();
+        dateControl1 = new org.openswing.swing.client.DateControl();
+        codLookupControl1 = new org.openswing.swing.client.CodLookupControl();
         jPanel12 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         insertButton1 = new org.openswing.swing.client.InsertButton();
@@ -143,8 +145,8 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(editButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(reloadButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
                 .addComponent(saveButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 466, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -153,17 +155,16 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(reloadButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(editButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(saveButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(saveButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         form1.setVOClassName(Siniestro.class.getName());
-        form1.setEditButton(editButton1);
+        form1.setReloadButton(reloadButton2);
         form1.setSaveButton(saveButton1);
         form1.setLayout(new java.awt.GridLayout(1, 2));
 
@@ -198,11 +199,23 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
         comboBoxControl1.setEnabledOnEdit(false);
         comboBoxControl1.setEnabledOnInsert(false);
 
-        codLookupControl3.setAttributeName("asegurado.persona.nombreLargo");
-        codLookupControl3.setLookupButtonVisible(false);
-
         codLookupControl4.setAttributeName("certificado.titular.persona.nombreLargo");
+        codLookupControl4.setEnabled(false);
+        codLookupControl4.setEnabledOnEdit(false);
+        codLookupControl4.setEnabledOnInsert(false);
         codLookupControl4.setLookupButtonVisible(false);
+
+        labelControl2.setLabel("siniestro.fechaCreacion");
+
+        dateControl1.setAttributeName("fechaCreacion");
+        dateControl1.setEnabledOnEdit(false);
+        dateControl1.setRequired(true);
+
+        codLookupControl1.setAttributeName("asegurado.persona.nombreLargo");
+        codLookupControl1.setEnabled(false);
+        codLookupControl1.setEnabledOnEdit(false);
+        codLookupControl1.setEnabledOnInsert(false);
+        codLookupControl1.setLookupButtonVisible(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -216,9 +229,13 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(textControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(labelControl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dateControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(labelControl4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(codLookupControl3, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE))
+                        .addComponent(codLookupControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(labelControl3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -238,7 +255,7 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
                 .addContainerGap())
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {labelControl1, labelControl3, labelControl4, labelControl5, labelControl6, labelControl7});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {labelControl1, labelControl2, labelControl3, labelControl4, labelControl5, labelControl6, labelControl7});
 
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,14 +265,18 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
                     .addComponent(textControl1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(labelControl1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(labelControl4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelControl3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(codLookupControl3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labelControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
+                    .addComponent(dateControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labelControl4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(codLookupControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelControl3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
                         .addComponent(codLookupControl4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -269,10 +290,10 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelControl7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textControl5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(246, Short.MAX_VALUE))
+                .addGap(219, 219, 219))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {comboBoxControl1, labelControl1, labelControl3, labelControl4, labelControl5, labelControl6, labelControl7, numericControl1, textControl1, textControl5});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {comboBoxControl1, dateControl1, labelControl1, labelControl2, labelControl3, labelControl4, labelControl5, labelControl6, labelControl7, numericControl1, textControl1, textControl5});
 
         form1.add(jPanel2);
 
@@ -388,7 +409,7 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(gridData, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
+                .addComponent(gridData, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -673,16 +694,15 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE))
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(17, 17, 17)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -756,8 +776,8 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
         lookupAsegurado = new TitularAseguradoLookupController();
         lookupAsegurado.addLookup2ParentLink("asegurado");
 
-        codLookupControl3.setLookupController(lookupAsegurado);
-        codLookupControl3.setOpenDetail("asegurado", AseguradoDetailFrameController.class.getName(), new Class[]{String.class, GridControl.class, BeanVO.class, Boolean.class}, new Object[]{AseguradoDetailFrame.class.getName(), null, null, Boolean.FALSE}, 2);
+        codLookupControl1.setLookupController(lookupAsegurado);
+        codLookupControl1.setOpenDetail("asegurado", AseguradoDetailFrameController.class.getName(), new Class[]{String.class, GridControl.class, BeanVO.class, Boolean.class}, new Object[]{AseguradoDetailFrame.class.getName(), null, null, Boolean.FALSE}, 2);
 
         codLookupControl4.setLookupController(new LookupController());
         codLookupControl4.setOpenDetail("asegurado.certificado.titular", TitularDetailFrameController.class.getName(), new Class[]{String.class, GridControl.class, BeanVO.class, Boolean.class}, new Object[]{TitularDetailFrame.class.getName(), null, null, Boolean.FALSE}, 2);
@@ -826,10 +846,11 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
     private org.openswing.swing.table.columns.client.ButtonColumn buttonColumnDoc;
     private org.openswing.swing.table.columns.client.CheckBoxColumn checkBoxColumn1;
     private org.openswing.swing.table.columns.client.CodLookupColumn codLookupColumnDoc;
-    private org.openswing.swing.client.CodLookupControl codLookupControl3;
+    private org.openswing.swing.client.CodLookupControl codLookupControl1;
     private org.openswing.swing.client.CodLookupControl codLookupControl4;
     private org.openswing.swing.client.ComboBoxControl comboBoxControl1;
     private org.openswing.swing.table.columns.client.DateColumn dateColumnDoc;
+    private org.openswing.swing.client.DateControl dateControl1;
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn1;
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn2;
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn3;
@@ -843,7 +864,6 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
     private org.openswing.swing.client.DeleteButton deleteButton1;
     private org.openswing.swing.client.DeleteButton deleteButtonDoc;
     private org.openswing.swing.client.DeleteButton deleteButtonObs;
-    private org.openswing.swing.client.EditButton editButton1;
     private org.openswing.swing.client.EditButton editButton2;
     private org.openswing.swing.client.EditButton editButtonDoc;
     private org.openswing.swing.client.EditButton editButtonObs;
@@ -872,6 +892,7 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
     private javax.swing.JPanel jPanelObs;
     private javax.swing.JTabbedPane jTabbedPane1;
     private org.openswing.swing.client.LabelControl labelControl1;
+    private org.openswing.swing.client.LabelControl labelControl2;
     private org.openswing.swing.client.LabelControl labelControl3;
     private org.openswing.swing.client.LabelControl labelControl4;
     private org.openswing.swing.client.LabelControl labelControl5;
@@ -882,6 +903,7 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
     private org.openswing.swing.client.NumericControl numericControl1;
     private javax.swing.JPanel observaciones;
     private org.openswing.swing.client.ReloadButton reloadButton1;
+    private org.openswing.swing.client.ReloadButton reloadButton2;
     private org.openswing.swing.client.ReloadButton reloadButtonDoc;
     private org.openswing.swing.client.ReloadButton reloadButtonNot;
     private org.openswing.swing.client.ReloadButton reloadButtonObs;
@@ -930,7 +952,6 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
             form1.setEditButton(null);
             form1.setSaveButton(null);
 
-            editButton1.setVisible(false);
             saveButton1.setVisible(false);
 
             gridData.setEditButton(null);
@@ -968,12 +989,10 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
             gridControlDoc.setEditButton(null);
 
         } else {
-            form1.setEditButton(editButton1);
             form1.setSaveButton(saveButton1);
 
-            editButton1.setVisible(true);
-            saveButton1.setVisible(true);            
-            
+            saveButton1.setVisible(true);
+
             gridData.setEditButton(editButton2);
             gridData.setSaveButton(saveButton2);
             gridData.setDeleteButton(deleteButton1);
@@ -981,8 +1000,8 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
             insertButton1.setVisible(true);
             editButton2.setVisible(true);
             deleteButton1.setVisible(true);
-            saveButton2.setVisible(true);            
-            
+            saveButton2.setVisible(true);
+
             jPanel13.setVisible(true);
 
             gridControlObs.setInsertButton(insertButtonObs);

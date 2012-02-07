@@ -52,10 +52,6 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="editButton1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="saveButton1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="reloadButton1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="exportButton1" min="-2" max="-2" attributes="0"/>
@@ -63,7 +59,7 @@
                   <Component id="navigatorBar1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="filterButton1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="292" max="32767" attributes="0"/>
+                  <EmptySpace pref="368" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -74,10 +70,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="filterButton1" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="navigatorBar1" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="saveButton1" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="exportButton1" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="reloadButton1" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="editButton1" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -93,17 +87,10 @@
         </Component>
         <Component class="org.openswing.swing.client.FilterButton" name="filterButton1">
         </Component>
-        <Component class="org.openswing.swing.client.EditButton" name="editButton1">
-        </Component>
-        <Component class="org.openswing.swing.client.SaveButton" name="saveButton1">
-        </Component>
       </SubComponents>
     </Container>
     <Container class="org.openswing.swing.client.GridControl" name="gridData">
       <Properties>
-        <Property name="editButton" type="org.openswing.swing.client.EditButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="editButton1"/>
-        </Property>
         <Property name="exportButton" type="org.openswing.swing.client.ExportButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="exportButton1"/>
         </Property>
@@ -116,9 +103,6 @@
         </Property>
         <Property name="reloadButton" type="org.openswing.swing.client.ReloadButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="reloadButton1"/>
-        </Property>
-        <Property name="saveButton" type="org.openswing.swing.client.SaveButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="saveButton1"/>
         </Property>
         <Property name="searchAdditionalRows" type="boolean" value="true"/>
         <Property name="valueObjectClassName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -140,13 +124,17 @@
             <Property name="sortVersus" type="java.lang.String" value="DESC"/>
           </Properties>
         </Component>
-        <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn6">
+        <Component class="org.openswing.swing.table.columns.client.ComboColumn" name="comboColumn1">
           <Properties>
             <Property name="columnFilterable" type="boolean" value="true"/>
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;estatusSiniestro&quot;" type="code"/>
             </Property>
+            <Property name="columnRequired" type="boolean" value="false"/>
             <Property name="columnSortable" type="boolean" value="true"/>
+            <Property name="domainId" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="Dominios.EstadoSiniestro().getDomainId()" type="code"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn3">
@@ -155,6 +143,7 @@
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;numero&quot;" type="code"/>
             </Property>
+            <Property name="columnRequired" type="boolean" value="false"/>
             <Property name="columnSortable" type="boolean" value="true"/>
           </Properties>
         </Component>
@@ -164,6 +153,7 @@
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;certificado.titular.persona.nombreLargo&quot;" type="code"/>
             </Property>
+            <Property name="columnRequired" type="boolean" value="false"/>
             <Property name="columnSortable" type="boolean" value="true"/>
           </Properties>
         </Component>
@@ -173,6 +163,7 @@
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;asegurado.persona.nombreLargo&quot;" type="code"/>
             </Property>
+            <Property name="columnRequired" type="boolean" value="false"/>
             <Property name="columnSortable" type="boolean" value="true"/>
           </Properties>
         </Component>
@@ -188,9 +179,12 @@
         </Component>
         <Component class="org.openswing.swing.table.columns.client.DateColumn" name="dateColumn1">
           <Properties>
+            <Property name="columnFilterable" type="boolean" value="true"/>
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;auditoria.fechaInsert&quot;" type="code"/>
             </Property>
+            <Property name="columnRequired" type="boolean" value="false"/>
+            <Property name="columnSortable" type="boolean" value="true"/>
           </Properties>
         </Component>
         <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn5">
@@ -205,9 +199,12 @@
         </Component>
         <Component class="org.openswing.swing.table.columns.client.DateColumn" name="dateColumn2">
           <Properties>
+            <Property name="columnFilterable" type="boolean" value="true"/>
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;auditoria.fechaUpdate&quot;" type="code"/>
             </Property>
+            <Property name="columnRequired" type="boolean" value="false"/>
+            <Property name="columnSortable" type="boolean" value="true"/>
           </Properties>
         </Component>
       </SubComponents>
