@@ -1,5 +1,6 @@
 package com.jswitch.fas.controlador;
 
+import com.jswitch.asegurados.controlador.AgotamientoGridFrameController;
 import com.jswitch.asegurados.controlador.AseguradoDetailFrameController;
 import com.jswitch.asegurados.controlador.AseguradoGridFrameController;
 import com.jswitch.asegurados.controlador.BeneficiarioGridFrameController;
@@ -40,6 +41,7 @@ import com.jswitch.asegurados.modelo.maestra.Beneficiario;
 import com.jswitch.certificados.modelo.maestra.Certificado;
 import com.jswitch.polizas.modelo.maestra.Poliza;
 import com.jswitch.asegurados.modelo.maestra.Titular;
+import com.jswitch.asegurados.vista.AgotamientoGridFrame;
 import com.jswitch.asegurados.vista.AseguradoDetailFrame;
 import com.jswitch.asegurados.vista.AseguradoGridFrame;
 import com.jswitch.asegurados.vista.BeneficiarioDetailFrame;
@@ -141,6 +143,7 @@ import com.jswitch.siniestros.vista.EtapaSiniestroGridFrame;
 import com.jswitch.siniestros.vista.TipoSiniestroGridFrame;
 import com.jswitch.siniestros.vista.detalle.DetalleSiniestroGridFrame;
 import com.jswitch.siniestros.vista.detalle.DetalleSiniestroDetailFrame;
+import com.jswitch.vistasbd.Agotamiento;
 import de.muntjak.tinylookandfeel.TinyLookAndFeel;
 import de.muntjak.tinylookandfeel.controlpanel.ControlPanel;
 import java.io.File;
@@ -306,6 +309,10 @@ public class MenuPrincipal implements ClientFacade {
 
     public void getAsegurados() {
         new AseguradoGridFrameController(AseguradoGridFrame.class.getName(), AseguradoDetailFrame.class.getName(), Asegurado.class.getName(), null);
+    }
+
+    public void getAgotamiento() {
+        new AgotamientoGridFrameController(AgotamientoGridFrame.class.getName(), AseguradoDetailFrame.class.getName(), Agotamiento.class.getName(), null);
     }
 
     public void getBeneficiarios() {

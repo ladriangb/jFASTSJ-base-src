@@ -83,7 +83,7 @@ public class SumaOrden extends BeanVO implements Serializable {
      */
     @Column
     @BusinessKey
-    private Double montoRetencionIsrl;
+    private Double montoRetencionIslr;
     /**
      * total de base para el IVA
      */
@@ -266,10 +266,10 @@ public class SumaOrden extends BeanVO implements Serializable {
 
     /**
      * monto de retencion ISLR
-     * @return the montoRetencionIsrl
+     * @return the montoRetencionIslr
      */
-    public Double getMontoRetencionIsrl() {
-        return montoRetencionIsrl;
+    public Double getMontoRetencionIslr() {
+        return montoRetencionIslr;
     }
 
     /**
@@ -459,10 +459,10 @@ public class SumaOrden extends BeanVO implements Serializable {
 
     /**
      * monto de retencion ISLR
-     * @param montoRetencionIsrl the montoRetencionIsrl to set
+     * @param montoRetencionIslr the montoRetencionIslr to set
      */
-    public void setMontoRetencionIsrl(Double montoRetencionIsrl) {
-        this.montoRetencionIsrl = montoRetencionIsrl;
+    public void setMontoRetencionIslr(Double montoRetencionIslr) {
+        this.montoRetencionIslr = montoRetencionIslr;
     }
 
     /**

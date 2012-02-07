@@ -118,7 +118,6 @@
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;id&quot;" type="code"/>
             </Property>
-            <Property name="columnRequired" type="boolean" value="false"/>
             <Property name="columnSortable" type="boolean" value="true"/>
             <Property name="preferredWidth" type="int" value="40"/>
             <Property name="sortVersus" type="java.lang.String" value="DESC"/>
@@ -130,7 +129,6 @@
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;persona.rif.rif&quot;" type="code"/>
             </Property>
-            <Property name="columnRequired" type="boolean" value="false"/>
             <Property name="columnSortable" type="boolean" value="true"/>
           </Properties>
         </Component>
@@ -140,17 +138,65 @@
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;persona.nombreLargo&quot;" type="code"/>
             </Property>
-            <Property name="columnRequired" type="boolean" value="false"/>
             <Property name="columnSortable" type="boolean" value="true"/>
           </Properties>
         </Component>
-        <Component class="org.openswing.swing.table.columns.client.CheckBoxColumn" name="checkBoxColumn1">
+        <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn10">
+          <Properties>
+            <Property name="columnFilterable" type="boolean" value="true"/>
+            <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;certificado.poliza.numero&quot;" type="code"/>
+            </Property>
+            <Property name="columnSortable" type="boolean" value="true"/>
+          </Properties>
+        </Component>
+        <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn7">
+          <Properties>
+            <Property name="columnFilterable" type="boolean" value="true"/>
+            <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;tipoContrato.nombre&quot;" type="code"/>
+            </Property>
+            <Property name="columnSortable" type="boolean" value="true"/>
+          </Properties>
+        </Component>
+        <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn8">
+          <Properties>
+            <Property name="columnFilterable" type="boolean" value="true"/>
+            <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;departamento.nombre&quot;" type="code"/>
+            </Property>
+            <Property name="columnSortable" type="boolean" value="true"/>
+          </Properties>
+        </Component>
+        <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn9">
+          <Properties>
+            <Property name="columnFilterable" type="boolean" value="true"/>
+            <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;codigoEmpleado&quot;" type="code"/>
+            </Property>
+            <Property name="columnSortable" type="boolean" value="true"/>
+          </Properties>
+        </Component>
+        <Component class="org.openswing.swing.table.columns.client.DateColumn" name="dateColumn1">
+          <Properties>
+            <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;fechaIngresoEmpresa&quot;" type="code"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="org.openswing.swing.table.columns.client.DateColumn" name="dateColumn2">
+          <Properties>
+            <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;fechaInduccion&quot;" type="code"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="org.openswing.swing.table.columns.client.CheckBoxColumn" name="auditoria">
           <Properties>
             <Property name="columnFilterable" type="boolean" value="true"/>
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;auditoria.activo&quot;" type="code"/>
             </Property>
-            <Property name="columnRequired" type="boolean" value="false"/>
             <Property name="columnSortable" type="boolean" value="true"/>
           </Properties>
         </Component>
@@ -160,7 +206,6 @@
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;auditoria.usuarioInsert&quot;" type="code"/>
             </Property>
-            <Property name="columnRequired" type="boolean" value="false"/>
             <Property name="columnSortable" type="boolean" value="true"/>
           </Properties>
         </Component>
@@ -170,7 +215,6 @@
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;auditoria.fechaInsert&quot;" type="code"/>
             </Property>
-            <Property name="columnRequired" type="boolean" value="false"/>
             <Property name="columnSortable" type="boolean" value="true"/>
           </Properties>
         </Component>
@@ -180,7 +224,6 @@
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;auditoria.usuarioUpdate&quot;" type="code"/>
             </Property>
-            <Property name="columnRequired" type="boolean" value="false"/>
             <Property name="columnSortable" type="boolean" value="true"/>
           </Properties>
         </Component>
@@ -190,7 +233,6 @@
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;auditoria.fechaUpdate&quot;" type="code"/>
             </Property>
-            <Property name="columnRequired" type="boolean" value="false"/>
             <Property name="columnSortable" type="boolean" value="true"/>
           </Properties>
         </Component>

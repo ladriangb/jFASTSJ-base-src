@@ -47,10 +47,6 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="gridData" pref="664" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="editButton1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="saveButton1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="reloadButton1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="exportButton1" min="-2" max="-2" attributes="0"/>
@@ -69,8 +65,6 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="editButton1" min="-2" max="-2" attributes="0"/>
-                      <Component id="saveButton1" min="-2" max="-2" attributes="0"/>
                       <Component id="reloadButton1" min="-2" max="-2" attributes="0"/>
                       <Component id="exportButton1" min="-2" max="-2" attributes="0"/>
                       <Component id="navigatorBar1" min="-2" max="-2" attributes="0"/>
@@ -92,15 +86,8 @@
         </Component>
         <Component class="org.openswing.swing.client.FilterButton" name="filterButton1">
         </Component>
-        <Component class="org.openswing.swing.client.EditButton" name="editButton1">
-        </Component>
-        <Component class="org.openswing.swing.client.SaveButton" name="saveButton1">
-        </Component>
         <Container class="org.openswing.swing.client.GridControl" name="gridData">
           <Properties>
-            <Property name="editButton" type="org.openswing.swing.client.EditButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="editButton1"/>
-            </Property>
             <Property name="exportButton" type="org.openswing.swing.client.ExportButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="exportButton1"/>
             </Property>
@@ -109,14 +96,12 @@
             </Property>
             <Property name="functionId" type="java.lang.String" value="detalleSinGrid"/>
             <Property name="insertRowsOnTop" type="boolean" value="false"/>
+            <Property name="maxSortedColumns" type="int" value="3"/>
             <Property name="navBar" type="org.openswing.swing.client.NavigatorBar" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="navigatorBar1"/>
             </Property>
             <Property name="reloadButton" type="org.openswing.swing.client.ReloadButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="reloadButton1"/>
-            </Property>
-            <Property name="saveButton" type="org.openswing.swing.client.SaveButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="saveButton1"/>
             </Property>
             <Property name="searchAdditionalRows" type="boolean" value="true"/>
             <Property name="valueObjectClassName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -166,6 +151,24 @@
                 <Property name="columnSortable" type="boolean" value="true"/>
               </Properties>
             </Component>
+            <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn11">
+              <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;tipoDetalle&quot;" type="code"/>
+                </Property>
+                <Property name="columnSortable" type="boolean" value="true"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn4">
+              <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;personaPago.rif.rif&quot;" type="code"/>
+                </Property>
+                <Property name="columnSortable" type="boolean" value="true"/>
+              </Properties>
+            </Component>
             <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn1">
               <Properties>
                 <Property name="columnFilterable" type="boolean" value="true"/>
@@ -182,27 +185,6 @@
                   <Connection code="&quot;tipoPersona.nombre&quot;" type="code"/>
                 </Property>
                 <Property name="columnSortable" type="boolean" value="true"/>
-              </Properties>
-            </Component>
-            <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn2">
-              <Properties>
-                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="&quot;sumaDetalle.totalFacturado&quot;" type="code"/>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn3">
-              <Properties>
-                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="&quot;sumaDetalle.totalLiquidado&quot;" type="code"/>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn4">
-              <Properties>
-                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="&quot;sumaDetalle.totalACancelar&quot;" type="code"/>
-                </Property>
               </Properties>
             </Component>
             <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn3">
@@ -227,22 +209,234 @@
               <Properties>
                 <Property name="columnFilterable" type="boolean" value="true"/>
                 <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="&quot;etapaSiniestro.nombre&quot;" type="code"/>
+                  <Connection code="&quot;tipoEnfermedad&quot;" type="code"/>
                 </Property>
                 <Property name="columnSortable" type="boolean" value="true"/>
               </Properties>
             </Component>
-            <Component class="org.openswing.swing.table.columns.client.CheckBoxColumn" name="checkBoxColumn1">
+            <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn12">
               <Properties>
                 <Property name="columnFilterable" type="boolean" value="true"/>
                 <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="&quot;auditoria.activo&quot;" type="code"/>
+                  <Connection code="&quot;ramo.nombre&quot;" type="code"/>
+                </Property>
+                <Property name="columnSortable" type="boolean" value="true"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.DateColumn" name="dateColumn3">
+              <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;fechaPagado&quot;" type="code"/>
+                </Property>
+                <Property name="columnSortable" type="boolean" value="true"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.DateColumn" name="dateColumn4">
+              <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;fechaVencimiento&quot;" type="code"/>
+                </Property>
+                <Property name="columnSortable" type="boolean" value="true"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.DateColumn" name="dateColumn5">
+              <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;fechaLiquidado&quot;" type="code"/>
+                </Property>
+                <Property name="columnSortable" type="boolean" value="true"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn6">
+              <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;sumaDetalle.cantidadFacturas&quot;" type="code"/>
                 </Property>
                 <Property name="columnRequired" type="boolean" value="false"/>
                 <Property name="columnSortable" type="boolean" value="true"/>
               </Properties>
             </Component>
-            <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn4">
+            <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn11">
+              <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;sumaDetalle.montoRetencionTM&quot;" type="code"/>
+                </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
+                <Property name="columnSortable" type="boolean" value="true"/>
+                <Property name="decimals" type="int" value="2"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn12">
+              <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;sumaDetalle.baseIslr&quot;" type="code"/>
+                </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
+                <Property name="columnSortable" type="boolean" value="true"/>
+                <Property name="decimals" type="int" value="2"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn13">
+              <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;sumaDetalle.montoRetencionIslr&quot;" type="code"/>
+                </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
+                <Property name="columnSortable" type="boolean" value="true"/>
+                <Property name="decimals" type="int" value="2"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn14">
+              <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;sumaDetalle.baseIva&quot;" type="code"/>
+                </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
+                <Property name="columnSortable" type="boolean" value="true"/>
+                <Property name="decimals" type="int" value="2"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn15">
+              <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;sumaDetalle.montoIva&quot;" type="code"/>
+                </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
+                <Property name="columnSortable" type="boolean" value="true"/>
+                <Property name="decimals" type="int" value="2"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn16">
+              <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;sumaDetalle.montoRetencionIva&quot;" type="code"/>
+                </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
+                <Property name="columnSortable" type="boolean" value="true"/>
+                <Property name="decimals" type="int" value="2"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn17">
+              <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;sumaDetalle.montoRetencionProntoPago&quot;" type="code"/>
+                </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
+                <Property name="columnSortable" type="boolean" value="true"/>
+                <Property name="decimals" type="int" value="2"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn18">
+              <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;sumaDetalle.montoRetencionDeducible&quot;" type="code"/>
+                </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
+                <Property name="columnSortable" type="boolean" value="true"/>
+                <Property name="decimals" type="int" value="2"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn19">
+              <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;sumaDetalle.gastosClinicos&quot;" type="code"/>
+                </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
+                <Property name="columnSortable" type="boolean" value="true"/>
+                <Property name="decimals" type="int" value="2"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn20">
+              <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;sumaDetalle.honorariosMedicos&quot;" type="code"/>
+                </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
+                <Property name="columnSortable" type="boolean" value="true"/>
+                <Property name="decimals" type="int" value="2"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn21">
+              <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;sumaDetalle.montoNoAmparado&quot;" type="code"/>
+                </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
+                <Property name="columnSortable" type="boolean" value="true"/>
+                <Property name="decimals" type="int" value="2"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn22">
+              <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;sumaDetalle.montoAmparado&quot;" type="code"/>
+                </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
+                <Property name="columnSortable" type="boolean" value="true"/>
+                <Property name="decimals" type="int" value="2"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn23">
+              <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;sumaDetalle.totalFacturado&quot;" type="code"/>
+                </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
+                <Property name="columnSortable" type="boolean" value="true"/>
+                <Property name="decimals" type="int" value="2"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn24">
+              <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;sumaDetalle.totalLiquidado&quot;" type="code"/>
+                </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
+                <Property name="columnSortable" type="boolean" value="true"/>
+                <Property name="decimals" type="int" value="2"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn25">
+              <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;sumaDetalle.totalRetenido&quot;" type="code"/>
+                </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
+                <Property name="columnSortable" type="boolean" value="true"/>
+                <Property name="decimals" type="int" value="2"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn26">
+              <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;sumaDetalle.totalACancelar&quot;" type="code"/>
+                </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
+                <Property name="columnSortable" type="boolean" value="true"/>
+                <Property name="decimals" type="int" value="2"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.TextColumn" name="auditoria">
               <Properties>
                 <Property name="columnFilterable" type="boolean" value="true"/>
                 <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">

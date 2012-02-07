@@ -12,6 +12,7 @@ import com.jswitch.pagos.modelo.maestra.Factura;
 import com.jswitch.pagos.modelo.transaccional.DesgloseSumaAsegurada;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.siniestros.modelo.maestra.DiagnosticoSiniestro;
+import com.jswitch.siniestros.modelo.transaccional.MantenimientoDiagnostico;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,7 +28,8 @@ import org.openswing.swing.util.client.ClientSettings;
 
 /**
  *
- * @author Adrian
+ * Manejador al agregar un desglose de suma asegurada a la factura
+ * @author Luis Adrian Gonzalez
  */
 public class DesgloseSumaAseguradaGridInternalController extends DefaultGridInternalController {
 
@@ -46,47 +48,54 @@ public class DesgloseSumaAseguradaGridInternalController extends DefaultGridInte
 
     @Override
     public Response updateRecords(int[] rowNumbers, ArrayList oldPersistentObjects, ArrayList persistentObjects) throws Exception {
-        loadDetalleSiniestro(((Factura) beanVO).getDetalleSiniestro());
-        DesgloseSumaAsegurada desgloseSumaAsegurada = ((DesgloseSumaAsegurada) persistentObjects.get(0));
-        DesgloseSumaAsegurada oldDesgloseSumaAsegurada = ((DesgloseSumaAsegurada) oldPersistentObjects.get(0));
-        String x = logicaNegocio(desgloseSumaAsegurada);
-        if (x == null) {
-            for (DiagnosticoSiniestro ds : detalleSiniestro.getDiagnosticoSiniestros()) {
-                if (ds.getId().compareTo(desgloseSumaAsegurada.getDiagnosticoSiniestro().getId()) == 0) {
+        if (persistentObjects.size() > 0) {
+            Session s = null;
+            try {
+                s = HibernateUtil.getSessionFactory().openSession();
+                s.beginTransaction();
+                loadDetalleSiniestro();
+                DesgloseSumaAsegurada desgloseSumaAsegurada = ((DesgloseSumaAsegurada) persistentObjects.get(0));
+                DesgloseSumaAsegurada oldDesgloseSumaAsegurada = ((DesgloseSumaAsegurada) oldPersistentObjects.get(0));
+                String x = logicaNegocio(desgloseSumaAsegurada);
+                if (x == null) {
+                    DiagnosticoSiniestro ds = (DiagnosticoSiniestro) s.createQuery("FROM " + DiagnosticoSiniestro.class.getName()
+                            + " C WHERE C.id=?").setLong(0, desgloseSumaAsegurada.getDiagnosticoSiniestro().getId()).uniqueResult();
                     Response res = pagarDiagnostico(ds,
-                            desgloseSumaAsegurada.getMonto() - oldDesgloseSumaAsegurada.getMonto());
+                            desgloseSumaAsegurada.getMonto()
+                            - oldDesgloseSumaAsegurada.getMonto(), s);
                     if (res instanceof ErrorResponse) {
                         return res;
                     }
-                    break;
+                } else {
+                    return new ErrorResponse(x);
                 }
+                s.getTransaction().commit();
+            } catch (Exception ex) {
+                return new ErrorResponse(LoggerUtil.isInvalidStateException(this.getClass(), "insertRecords", ex));
+            } finally {
+                s.close();
             }
-        } else {
-            return new ErrorResponse(x);
         }
         return super.updateRecords(rowNumbers, oldPersistentObjects, persistentObjects);
     }
 
     @Override
     public Response deleteRecords(ArrayList persistentObjects) throws Exception {
-        loadDetalleSiniestro(((Factura) beanVO).getDetalleSiniestro());
-        Object object = persistentObjects.get(0);
-        DesgloseSumaAsegurada desgloseSumaAsegurada = ((DesgloseSumaAsegurada) object);
-        for (DiagnosticoSiniestro ds : detalleSiniestro.getDiagnosticoSiniestros()) {
-            if (ds.getId().compareTo(desgloseSumaAsegurada.getDiagnosticoSiniestro().getId()) == 0) {
-                Response res = pagarDiagnostico(ds,
-                        desgloseSumaAsegurada.getMonto() * -1);
-                if (res instanceof ErrorResponse) {
-                    return res;
-                }
-                break;
-            }
-        }
-        desgloseSumaAsegurada.setFactura(null);
         Session s = null;
         try {
             s = HibernateUtil.getSessionFactory().openSession();
             s.beginTransaction();
+            loadDetalleSiniestro();
+            Object object = persistentObjects.get(0);
+            DesgloseSumaAsegurada desgloseSumaAsegurada = ((DesgloseSumaAsegurada) object);
+            DiagnosticoSiniestro ds = (DiagnosticoSiniestro) s.createQuery("FROM " + DiagnosticoSiniestro.class.getName()
+                    + " C WHERE C.id=?").setLong(0, desgloseSumaAsegurada.getDiagnosticoSiniestro().getId()).uniqueResult();
+            Response res = pagarDiagnostico(ds,
+                    desgloseSumaAsegurada.getMonto() * -1, s);
+            if (res instanceof ErrorResponse) {
+                return res;
+            }
+            desgloseSumaAsegurada.setFactura(null);
             s.delete(desgloseSumaAsegurada);
             s.getTransaction().commit();
             return new VOResponse(true);
@@ -101,34 +110,29 @@ public class DesgloseSumaAseguradaGridInternalController extends DefaultGridInte
     @Override
     public Response insertRecords(int[] rowNumbers, ArrayList newValueObjects) throws Exception {
         Factura factura = (Factura) beanVO;
-        loadDetalleSiniestro(factura.getDetalleSiniestro());
-        DesgloseSumaAsegurada desgloseSumaAsegurada = ((DesgloseSumaAsegurada) newValueObjects.get(0));
-        String x = logicaNegocio(desgloseSumaAsegurada);
-        if (x == null) {
-            desgloseSumaAsegurada.setFactura(factura);
-            for (DiagnosticoSiniestro ds : detalleSiniestro.getDiagnosticoSiniestros()) {
-                if (ds.getId().compareTo(desgloseSumaAsegurada.getDiagnosticoSiniestro().getId()) == 0) {
-                    Response res = pagarDiagnostico(ds,
-                            desgloseSumaAsegurada.getMonto());
-                    if (res instanceof ErrorResponse) {
-                        return res;
-                    }
-                    break;
-                }
-            }
-            AuditoriaBasica ab = new AuditoriaBasica(new Date(), General.usuario.getUserName(), true);
-            if (desgloseSumaAsegurada instanceof Auditable) {
-                desgloseSumaAsegurada.setAuditoria(ab);
-            }
-
-        } else {
-            return new ErrorResponse(x);
-        }
-
         Session s = null;
         try {
             s = HibernateUtil.getSessionFactory().openSession();
             s.beginTransaction();
+            loadDetalleSiniestro();
+            DesgloseSumaAsegurada desgloseSumaAsegurada = ((DesgloseSumaAsegurada) newValueObjects.get(0));
+            String x = logicaNegocio(desgloseSumaAsegurada);
+            if (x == null) {
+                desgloseSumaAsegurada.setFactura(factura);
+                DiagnosticoSiniestro ds = (DiagnosticoSiniestro) s.createQuery("FROM " + DiagnosticoSiniestro.class.getName()
+                        + " C WHERE C.id=?").setLong(0, desgloseSumaAsegurada.getDiagnosticoSiniestro().getId()).uniqueResult();
+                Response res = pagarDiagnostico(ds,
+                        desgloseSumaAsegurada.getMonto(), s);
+                if (res instanceof ErrorResponse) {
+                    return res;
+                }
+                AuditoriaBasica ab = new AuditoriaBasica(new Date(), General.usuario.getUserName(), true);
+                if (desgloseSumaAsegurada instanceof Auditable) {
+                    desgloseSumaAsegurada.setAuditoria(ab);
+                }
+            } else {
+                return new ErrorResponse(x);
+            }
             s.save(desgloseSumaAsegurada);
             s.getTransaction().commit();
             List l = new ArrayList(0);
@@ -160,14 +164,18 @@ public class DesgloseSumaAseguradaGridInternalController extends DefaultGridInte
         return null;
     }
 
-    private Response pagarDiagnostico(DiagnosticoSiniestro diagnosticoSiniestro, Double monto) {
-
-        Session s = null;
-
+    /**
+     * Actualiza los montos del diagnosticoSiniestro
+     * @param diagnosticoSiniestro diagnostico a cambiar
+     * @param monto monto actual a guardar
+     * @param s session 
+     * @return Response de creasion
+     */
+    private Response pagarDiagnostico(DiagnosticoSiniestro diagnosticoSiniestro, Double monto, Session s) {
         Double montoPendiente = diagnosticoSiniestro.getMontoPendiente(), montoPagado = diagnosticoSiniestro.getMontoPagado();
         montoPendiente -= monto;
         montoPagado += monto;
-        NotaTecnica notaTecnica = null;
+        MantenimientoDiagnostico mantenimientoDiagnostico = null;
         if (montoPendiente < 0) {
             if (!SuperusuarioLoginDialog.VerificarSuperusuario("Necesita Aumento de Reserva")) {
                 return new ErrorResponse("Cancelado por el usuario");
@@ -176,39 +184,29 @@ public class DesgloseSumaAseguradaGridInternalController extends DefaultGridInte
                     ClientSettings.getInstance().getResources().getResource("Justificacion de Aumento"),
                     "Fondo Auto-Administrado de Salud", JOptionPane.INFORMATION_MESSAGE);
             if (nota != null) {
-                notaTecnica = new NotaTecnica("Modificacion de monto por: " + nota,
-                        new AuditoriaBasica(new Date(), General.usuario.getUserName(), Boolean.TRUE));
+                mantenimientoDiagnostico = new MantenimientoDiagnostico();
+                mantenimientoDiagnostico.setAuditoria(new AuditoriaBasica(new Date(), 
+                        General.usuario.getUserName(), Boolean.TRUE));
+                mantenimientoDiagnostico.setDiagnosticoSiniestro(diagnosticoSiniestro);
+                mantenimientoDiagnostico.setJustificacion(nota);
+                mantenimientoDiagnostico.setMontoAnterior(diagnosticoSiniestro.getMontoPendiente());
+                mantenimientoDiagnostico.setMontoActual(montoPendiente);
             } else {
                 return new ErrorResponse("Cancelado por el usuario");
             }
-
             montoPendiente = 0d;
         }
         diagnosticoSiniestro.setMontoPagado(montoPagado);
         diagnosticoSiniestro.setMontoPendiente(montoPendiente);
-        s = null;
-        loadDetalleSiniestro(((Factura) beanVO).getDetalleSiniestro());
-        try {
-            s = HibernateUtil.getSessionFactory().openSession();
-            s.beginTransaction();
-            s.update(diagnosticoSiniestro);
-            if (notaTecnica != null) {
-                s.save(notaTecnica);
-                detalleSiniestro.getNotasTecnicas().add(notaTecnica);
-                s.update(detalleSiniestro);
-            }
-            s.getTransaction().commit();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-//            return new ErrorResponse("no se puede actualizar el DetalleSiniestro");
-        } finally {
-            s.close();
+        loadDetalleSiniestro();
+        s.update(diagnosticoSiniestro);
+        if (mantenimientoDiagnostico != null) {
+            s.save(mantenimientoDiagnostico);
         }
-
         return new VOResponse(diagnosticoSiniestro);
     }
 
-    private void loadDetalleSiniestro(DetalleSiniestro detalleSiniestro) {
+    private void loadDetalleSiniestro() {
         this.detalleSiniestro = vista.getDetalleSiniestro();
     }
 

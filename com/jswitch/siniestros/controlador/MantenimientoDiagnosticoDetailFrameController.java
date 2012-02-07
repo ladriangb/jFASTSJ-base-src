@@ -18,7 +18,7 @@ import org.openswing.swing.message.receive.java.ValueObject;
 import org.openswing.swing.util.java.Consts;
 
 /**
- *
+ * manejador de la vista que muestra los cambios y actualizaciones a los detalles
  * @author Adrian
  */
 public class MantenimientoDiagnosticoDetailFrameController extends DefaultDetailFrameController {
@@ -28,7 +28,7 @@ public class MantenimientoDiagnosticoDetailFrameController extends DefaultDetail
     private DefaultDetailFrame frame;
 
     public MantenimientoDiagnosticoDetailFrameController(DefaultDetailFrame frame,
-            boolean b, DiagnosticoSiniestro diagnosticoSiniestro, DetalleSiniestro detalleSiniestro) {
+            Boolean b, DiagnosticoSiniestro diagnosticoSiniestro, DetalleSiniestro detalleSiniestro) {
         this.frame = frame;
         this.diagnosticoSin = diagnosticoSiniestro;
         vista = new MantenimientoDiagnosticoDetailFrame();
@@ -86,9 +86,9 @@ public class MantenimientoDiagnosticoDetailFrameController extends DefaultDetail
         Date d = new Date();
         diagnosticoSin.getAuditoria().setFechaUpdate(d);
         diagnosticoSin.getAuditoria().setUsuarioUpdate(General.usuario.getUserName());
-        NotaTecnica nota = new NotaTecnica("Modificacion monto reservado: "
-                + ((MantenimientoDiagnostico) newPersistentObject).getJustificacion(),
-                new AuditoriaBasica(d, General.usuario.getUserName(), Boolean.TRUE));
+//        NotaTecnica nota = new NotaTecnica("Modificacion monto reservado: "
+//                + ((MantenimientoDiagnostico) newPersistentObject).getJustificacion(),
+//                new AuditoriaBasica(d, General.usuario.getUserName(), Boolean.TRUE));
         Session s = null;
         try {
             s = HibernateUtil.getSessionFactory().openSession();
@@ -101,21 +101,21 @@ public class MantenimientoDiagnosticoDetailFrameController extends DefaultDetail
         } finally {
             s.close();
         }
-        loadDetalleSiniestro(diagnosticoSin.getDetalleSiniestro());
-        s = null;
-        try {
-            s = HibernateUtil.getSessionFactory().openSession();
-            s.beginTransaction();
-            s.save(nota);
-            detalleSiniestro.getNotasTecnicas().add(nota);
-            s.update(detalleSiniestro);
-            s.getTransaction().commit();
-
-        } catch (Exception ex) {
-            System.out.println(ex);
-        } finally {
-            s.close();
-        }
+//        loadDetalleSiniestro(diagnosticoSin.getDetalleSiniestro());
+//        s = null;
+//        try {
+//            s = HibernateUtil.getSessionFactory().openSession();
+//            s.beginTransaction();
+//            s.save(nota);
+//            detalleSiniestro.getNotasTecnicas().add(nota);
+//            s.update(detalleSiniestro);
+//            s.getTransaction().commit();
+//
+//        } catch (Exception ex) {
+//            System.out.println(ex);
+//        } finally {
+//            s.close();
+//        }
         Response res = super.insertRecord(newPersistentObject);
         frame.getMainPanel().getReloadButton().doClick();
         return res;

@@ -32,6 +32,7 @@ public class CertificadosGridFrame extends DefaultGridFrame {
         decimalColumn1 = new org.openswing.swing.table.columns.client.DecimalColumn();
         textColumn1 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn2 = new org.openswing.swing.table.columns.client.TextColumn();
+        textColumn3 = new org.openswing.swing.table.columns.client.TextColumn();
         checkBoxColumn1 = new org.openswing.swing.table.columns.client.CheckBoxColumn();
         textColumn4 = new org.openswing.swing.table.columns.client.TextColumn();
         dateTimeColumn1 = new org.openswing.swing.table.columns.client.DateTimeColumn();
@@ -96,6 +97,11 @@ public class CertificadosGridFrame extends DefaultGridFrame {
         textColumn2.setColumnName("titular.persona.nombreLargo");
         textColumn2.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn2);
+
+        textColumn3.setColumnFilterable(true);
+        textColumn3.setColumnName("poliza.numero");
+        textColumn3.setColumnSortable(true);
+        gridData.getColumnContainer().add(textColumn3);
 
         checkBoxColumn1.setColumnFilterable(true);
         checkBoxColumn1.setColumnName("auditoria.activo");
@@ -188,6 +194,7 @@ public class CertificadosGridFrame extends DefaultGridFrame {
     private org.openswing.swing.client.SaveButton saveButton1;
     private org.openswing.swing.table.columns.client.TextColumn textColumn1;
     private org.openswing.swing.table.columns.client.TextColumn textColumn2;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn3;
     private org.openswing.swing.table.columns.client.TextColumn textColumn4;
     private org.openswing.swing.table.columns.client.TextColumn textColumn5;
     // End of variables declaration//GEN-END:variables

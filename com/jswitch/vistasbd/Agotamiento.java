@@ -35,20 +35,20 @@ public class Agotamiento extends BeanVO implements Serializable {
     /**
      * año de insidencia del siniestro
      */
-    @Column(updatable = false, insertable = false)
+    @Column
     @BusinessKey
     @Id
     private Integer ayo;
     /**
      * monto reservado para gastos
      */
-    @Column(updatable = false, insertable = false)
+    @Column
     @BusinessKey
     private Double montoPendiente;
     /**
      * monto total consumido 
      */
-    @Column(updatable = false, insertable = false)
+    @Column
     @BusinessKey
     private Double montoPagado;
 

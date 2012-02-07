@@ -22,7 +22,7 @@ import org.openswing.swing.message.receive.java.ValueObject;
 
 /**
  *
- * @author Adrian
+ * @author Luis Adrian Gonzalez
  */
 public class CertificadoDetailController extends DefaultDetailFrameController {
 

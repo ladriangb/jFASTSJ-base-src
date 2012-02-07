@@ -31,7 +31,18 @@ public class AseguradoGridFrame extends DefaultGridFrame {
         decimalColumn1 = new org.openswing.swing.table.columns.client.DecimalColumn();
         textColumn1 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn2 = new org.openswing.swing.table.columns.client.TextColumn();
-        checkBoxColumn1 = new org.openswing.swing.table.columns.client.CheckBoxColumn();
+        textColumn10 = new org.openswing.swing.table.columns.client.TextColumn();
+        textColumn3 = new org.openswing.swing.table.columns.client.TextColumn();
+        textColumn6 = new org.openswing.swing.table.columns.client.TextColumn();
+        textColumn7 = new org.openswing.swing.table.columns.client.TextColumn();
+        textColumn8 = new org.openswing.swing.table.columns.client.TextColumn();
+        textColumn9 = new org.openswing.swing.table.columns.client.TextColumn();
+        currencyColumn1 = new org.openswing.swing.table.columns.client.CurrencyColumn();
+        currencyColumn2 = new org.openswing.swing.table.columns.client.CurrencyColumn();
+        currencyColumn3 = new org.openswing.swing.table.columns.client.CurrencyColumn();
+        dateColumn1 = new org.openswing.swing.table.columns.client.DateColumn();
+        dateColumn2 = new org.openswing.swing.table.columns.client.DateColumn();
+        auditoria = new org.openswing.swing.table.columns.client.CheckBoxColumn();
         textColumn4 = new org.openswing.swing.table.columns.client.TextColumn();
         dateTimeColumn1 = new org.openswing.swing.table.columns.client.DateTimeColumn();
         textColumn5 = new org.openswing.swing.table.columns.client.TextColumn();
@@ -98,12 +109,66 @@ public class AseguradoGridFrame extends DefaultGridFrame {
         textColumn2.setEditableOnEdit(true);
         gridData.getColumnContainer().add(textColumn2);
 
-        checkBoxColumn1.setColumnFilterable(true);
-        checkBoxColumn1.setColumnName("auditoria.activo");
-        checkBoxColumn1.setColumnRequired(false);
-        checkBoxColumn1.setColumnSortable(true);
-        checkBoxColumn1.setEditableOnEdit(true);
-        gridData.getColumnContainer().add(checkBoxColumn1);
+        textColumn10.setColumnFilterable(true);
+        textColumn10.setColumnName("certificado.poliza.numero");
+        textColumn10.setColumnSortable(true);
+        gridData.getColumnContainer().add(textColumn10);
+
+        textColumn3.setColumnFilterable(true);
+        textColumn3.setColumnName("certificado.titular.persona.rif.rif");
+        textColumn3.setColumnSortable(true);
+        gridData.getColumnContainer().add(textColumn3);
+
+        textColumn6.setColumnFilterable(true);
+        textColumn6.setColumnName("certificado.titular.persona.nombreLargo");
+        textColumn6.setColumnSortable(true);
+        gridData.getColumnContainer().add(textColumn6);
+
+        textColumn7.setColumnFilterable(true);
+        textColumn7.setColumnName("parentesco.nombre");
+        textColumn7.setColumnSortable(true);
+        gridData.getColumnContainer().add(textColumn7);
+
+        textColumn8.setColumnFilterable(true);
+        textColumn8.setColumnName("plazoEspera.nombre");
+        textColumn8.setColumnSortable(true);
+        gridData.getColumnContainer().add(textColumn8);
+
+        textColumn9.setColumnFilterable(true);
+        textColumn9.setColumnName("plan.nombre");
+        textColumn9.setColumnSortable(true);
+        gridData.getColumnContainer().add(textColumn9);
+
+        currencyColumn1.setColumnFilterable(true);
+        currencyColumn1.setColumnName("primaTotal");
+        currencyColumn1.setColumnSortable(true);
+        currencyColumn1.setCurrencySymbol("VEB");
+        gridData.getColumnContainer().add(currencyColumn1);
+
+        currencyColumn2.setColumnFilterable(true);
+        currencyColumn2.setColumnName("primaAporte");
+        currencyColumn2.setColumnSortable(true);
+        currencyColumn2.setCurrencySymbol("VEB");
+        gridData.getColumnContainer().add(currencyColumn2);
+
+        currencyColumn3.setColumnFilterable(true);
+        currencyColumn3.setColumnName("primaAsegurado");
+        currencyColumn3.setColumnSortable(true);
+        currencyColumn3.setCurrencySymbol("VEB");
+        gridData.getColumnContainer().add(currencyColumn3);
+
+        dateColumn1.setColumnName("fechaIngresoFondo");
+        gridData.getColumnContainer().add(dateColumn1);
+
+        dateColumn2.setColumnName("fechaEgresoFondo");
+        gridData.getColumnContainer().add(dateColumn2);
+
+        auditoria.setColumnFilterable(true);
+        auditoria.setColumnName("auditoria.activo");
+        auditoria.setColumnRequired(false);
+        auditoria.setColumnSortable(true);
+        auditoria.setEditableOnEdit(true);
+        gridData.getColumnContainer().add(auditoria);
 
         textColumn4.setColumnFilterable(true);
         textColumn4.setColumnName("auditoria.usuarioInsert");
@@ -186,7 +251,12 @@ public class AseguradoGridFrame extends DefaultGridFrame {
         return gridData;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private org.openswing.swing.table.columns.client.CheckBoxColumn checkBoxColumn1;
+    private org.openswing.swing.table.columns.client.CheckBoxColumn auditoria;
+    private org.openswing.swing.table.columns.client.CurrencyColumn currencyColumn1;
+    private org.openswing.swing.table.columns.client.CurrencyColumn currencyColumn2;
+    private org.openswing.swing.table.columns.client.CurrencyColumn currencyColumn3;
+    private org.openswing.swing.table.columns.client.DateColumn dateColumn1;
+    private org.openswing.swing.table.columns.client.DateColumn dateColumn2;
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn1;
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn2;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn1;
@@ -197,8 +267,14 @@ public class AseguradoGridFrame extends DefaultGridFrame {
     private org.openswing.swing.client.NavigatorBar navigatorBar1;
     private org.openswing.swing.client.ReloadButton reloadButton1;
     private org.openswing.swing.table.columns.client.TextColumn textColumn1;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn10;
     private org.openswing.swing.table.columns.client.TextColumn textColumn2;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn3;
     private org.openswing.swing.table.columns.client.TextColumn textColumn4;
     private org.openswing.swing.table.columns.client.TextColumn textColumn5;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn6;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn7;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn8;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn9;
     // End of variables declaration//GEN-END:variables
 }

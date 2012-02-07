@@ -111,11 +111,50 @@ public class SiniestroDetailFrameController extends DefaultDetailFrameController
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() instanceof InsertButton) {
             //<editor-fold defaultstate="collapsed" desc="Crear nuevo">
-            if (beanVO != null && ((Siniestro) beanVO).getCertificado().getTitular().getAuditoria().getActivo()
-                    && ((Siniestro) beanVO).getCertificado().getPoliza().getAuditoria().getActivo()
-                    && ((Siniestro) beanVO).getCertificado().getAuditoria().getActivo()
-                    && ((Siniestro) beanVO).getAsegurado().getAuditoria().getActivo()
-                    && ((Siniestro) beanVO).getCertificado().getPoliza().getVigenciaHasta().before(new Date())) {
+            if (beanVO != null) {
+                if (((Siniestro) beanVO).getCertificado().getPoliza().getVigenciaHasta().after(new Date())) {
+                    JOptionPane.showMessageDialog(gridControl,
+                            ClientSettings.getInstance().getResources().getResource(
+                            "No se Permite Realizar el Siniestro a Este Asegurado\n"
+                            + "La Poliza no esta Vigente"),
+                            General.edition, JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
+                if (((Siniestro) beanVO).getAsegurado().getAuditoria().getActivo()) {
+                    JOptionPane.showMessageDialog(gridControl,
+                            ClientSettings.getInstance().getResources().getResource(
+                            "No se Permite Realizar el Siniestro a Este Asegurado\n"
+                            + "El Asegurado no está Activo"),
+                            General.edition, JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
+                if (((Siniestro) beanVO).getCertificado().getAuditoria().getActivo()) {
+                    JOptionPane.showMessageDialog(gridControl,
+                            ClientSettings.getInstance().getResources().getResource(
+                            "No se Permite Realizar el Siniestro a Este Asegurado\n"
+                            + "El Certificado no está Activo"),
+                            General.edition, JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
+                if (((Siniestro) beanVO).getCertificado().getPoliza().getAuditoria().getActivo()) {
+                    JOptionPane.showMessageDialog(gridControl,
+                            ClientSettings.getInstance().getResources().getResource(
+                            "No se Permite Realizar el Siniestro a Este Asegurado\n"
+                            + "El Poliza no está Activo"),
+                            General.edition, JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
+
+                if (((Siniestro) beanVO).getCertificado().getTitular().getAuditoria().getActivo()) {
+                    JOptionPane.showMessageDialog(gridControl,
+                            ClientSettings.getInstance().getResources().getResource(
+                            "No se Permite Realizar el Siniestro a Este Asegurado\n"
+                            + "El Titular del certificado no está Activo"),
+                            General.edition, JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
+
+
                 Class c = DetalleSiniestroChousser.showDialog();
                 if (c != null && c.getClass() != null) {
                     if (c.equals(Vida.class)) {
@@ -124,10 +163,6 @@ public class SiniestroDetailFrameController extends DefaultDetailFrameController
                         new DetalleSiniestroDetailFrameController(DetalleSiniestroDetailFrame.class.getName(), ((SiniestroDetailFrame) vista).getGridData(), null, true, (Siniestro) beanVO, c);
                     }
                 }
-            } else {
-                JOptionPane.showMessageDialog(gridControl,
-                        ClientSettings.getInstance().getResources().getResource("No se Permite Realizar el Siniestro a Este Asegurado"),
-                        General.edition, JOptionPane.INFORMATION_MESSAGE);
             }
             //</editor-fold>
         } else if (e.getSource() == ((SiniestroDetailFrame) vista).getEstadoButton()) {
@@ -169,7 +204,7 @@ public class SiniestroDetailFrameController extends DefaultDetailFrameController
                 }
                 ((SiniestroDetailFrame) vista).validarEstado(ss);
             } else {
-                JOptionPane.showMessageDialog(null, "Debes guardar primero el Registro");
+                JOptionPane.showMessageDialog(vista, "Debes guardar primero el Registro");
             }
             //</editor-fold>
         }

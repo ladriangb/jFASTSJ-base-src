@@ -29,7 +29,7 @@ import org.openswing.swing.util.java.Consts;
 
 /**
  *
- * @author bc
+ * @author Luis Adrian Gonzalez Benavides
  */
 public class CertificadoDetailFrame extends DefaultDetailFrame {
 
@@ -803,7 +803,7 @@ public class CertificadoDetailFrame extends DefaultDetailFrame {
         codLookupControl2.setOpenDetail("poliza",
                 PolizaDetailFrameController.class.getName(),
                 new Class[]{String.class, GridControl.class, BeanVO.class, Boolean.class},
-                new Object[]{PolizaDetailFrame.class.getName(), null, null, false}, 1);
+                new Object[]{PolizaDetailFrame.class.getName(), null, null, Boolean.FALSE}, 2);
 
 //        codLookupControl1.setNewDetail("titular"
 //                , DefaultDetailFrameController.class.getName()

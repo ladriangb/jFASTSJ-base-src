@@ -31,7 +31,7 @@ import javax.persistence.Version;
 
 /**
  *
- * @author Personal
+ * @author Luis Adrian Gonzalez
  */
 @Entity
 @Table(name = "ASEG_Poliza")
