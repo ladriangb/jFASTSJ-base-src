@@ -27,10 +27,10 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace min="10" pref="10" max="10" attributes="0"/>
-              <Component id="gridData" pref="664" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <Component id="gridData" pref="638" max="32767" attributes="0"/>
+              <EmptySpace min="10" pref="10" max="10" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -38,8 +38,8 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="gridData" pref="438" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="gridData" pref="369" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -60,7 +60,7 @@
                   <Component id="navigatorBar1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="filterButton1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="368" max="32767" attributes="0"/>
+                  <EmptySpace pref="342" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

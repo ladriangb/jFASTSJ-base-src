@@ -652,6 +652,7 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
         codLookupColumn2.setColumnSortable(true);
         codLookupColumn2.setEditableOnEdit(true);
         codLookupColumn2.setEditableOnInsert(true);
+        codLookupColumn2.setHideButton(true);
         gridControl5.getColumnContainer().add(codLookupColumn2);
 
         decimalColumn1.setColumnName("monto");
@@ -712,8 +713,8 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(146, Short.MAX_VALUE))
-            .addComponent(gridControl5, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+                .addContainerGap(150, Short.MAX_VALUE))
+            .addComponent(gridControl5, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Suma Asegurada", jPanel14);
@@ -795,8 +796,8 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(146, Short.MAX_VALUE))
-            .addComponent(gridControl6, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+                .addContainerGap(150, Short.MAX_VALUE))
+            .addComponent(gridControl6, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Desglose Cobertura", jPanel16);
@@ -821,7 +822,7 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(form1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents

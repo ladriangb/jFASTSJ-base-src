@@ -38,7 +38,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" pref="388" max="32767" attributes="0"/>
+              <Component id="jTabbedPane1" pref="392" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -190,9 +190,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel8" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="260" max="32767" attributes="0"/>
+                      <EmptySpace pref="264" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="gridControl1" alignment="1" pref="360" max="32767" attributes="0"/>
+                  <Component id="gridControl1" alignment="1" pref="364" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -266,7 +266,7 @@
                     </Property>
                     <Property name="columnSortable" type="boolean" value="true"/>
                     <Property name="currencySymbol" type="java.lang.String" value="%"/>
-                    <Property name="decimals" type="int" value="2"/>
+                    <Property name="decimals" type="int" value="4"/>
                     <Property name="editableOnEdit" type="boolean" value="true"/>
                     <Property name="editableOnInsert" type="boolean" value="true"/>
                   </Properties>

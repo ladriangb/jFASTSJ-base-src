@@ -3,10 +3,13 @@ package com.jswitch.vistasbd;
 import com.jswitch.asegurados.modelo.maestra.Asegurado;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.modelo.util.ehts.BusinessKey;
+import com.jswitch.base.modelo.util.ehts.Method;
 import com.jswitch.configuracion.modelo.dominio.patologias.Diagnostico;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -19,37 +22,39 @@ import javax.persistence.Table;
 public class Agotamiento extends BeanVO implements Serializable {
 
     /**
+     * Pk autogenerado
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column
+    @BusinessKey(include = Method.TO_STRING)
+    private String id;
+    /**
      * Asegurado en cuestion 
      */
     @ManyToOne()
     @BusinessKey
-    @Id
     private Asegurado asegurado;
     /**
      * diagnostico al cual se le agota la cobertura
      */
     @ManyToOne
     @BusinessKey
-    @Id
     private Diagnostico diagnostico;
     /**
      * año de insidencia del siniestro
      */
     @Column
-    @BusinessKey
-    @Id
     private Integer ayo;
     /**
      * monto reservado para gastos
      */
     @Column
-    @BusinessKey
     private Double montoPendiente;
     /**
      * monto total consumido 
      */
     @Column
-    @BusinessKey
     private Double montoPagado;
 
     public Agotamiento() {
@@ -82,6 +87,14 @@ public class Agotamiento extends BeanVO implements Serializable {
      */
     public Diagnostico getDiagnostico() {
         return diagnostico;
+    }
+
+    /**
+     * Pk autogenerado
+     * @return the id
+     */
+    public String getId() {
+        return id;
     }
 
     /**
@@ -125,6 +138,14 @@ public class Agotamiento extends BeanVO implements Serializable {
     }
 
     /**
+     * Pk autogenerado
+     * @param id the id to set
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    /**
      * monto total consumido
      * @param montoPagado the montoPagado to set
      */
@@ -139,4 +160,5 @@ public class Agotamiento extends BeanVO implements Serializable {
     public void setMontoPendiente(Double montoPendiente) {
         this.montoPendiente = montoPendiente;
     }
+
 }

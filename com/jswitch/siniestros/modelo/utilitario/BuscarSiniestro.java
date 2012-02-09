@@ -1,6 +1,7 @@
 package com.jswitch.siniestros.modelo.utilitario;
 
 import com.jswitch.base.modelo.util.bean.BeanVO;
+import com.jswitch.configuracion.modelo.dominio.patologias.Diagnostico;
 import com.jswitch.fas.modelo.Dominios.TipoDetalleSiniestro;
 import com.jswitch.persona.modelo.maestra.Persona;
 import com.jswitch.siniestros.modelo.maestra.Siniestro;
@@ -32,7 +33,19 @@ public class BuscarSiniestro extends BeanVO {
      */
     private Siniestro siniestro;
 
+    /**
+     * Diagnostico
+     */
+    private Diagnostico diagnostico;
     public BuscarSiniestro() {
+    }
+
+    /**
+     * Diagnostico
+     * @return the diagnostico
+     */
+    public Diagnostico getDiagnostico() {
+        return diagnostico;
     }
 
     /**
@@ -76,6 +89,14 @@ public class BuscarSiniestro extends BeanVO {
     }
 
     /**
+     * Diagnostico
+     * @param diagnostico the diagnostico to set
+     */
+    public void setDiagnostico(Diagnostico diagnostico) {
+        this.diagnostico = diagnostico;
+    }
+
+    /**
      * Persona asegurado q sufrio el siniestro
      * @param personaAseg the personaAseg to set
      */
@@ -114,4 +135,5 @@ public class BuscarSiniestro extends BeanVO {
     public void setTipoDetalleSiniestro(TipoDetalleSiniestro tipoDetalleSiniestro) {
         this.tipoDetalleSiniestro = tipoDetalleSiniestro;
     }
+    
 }

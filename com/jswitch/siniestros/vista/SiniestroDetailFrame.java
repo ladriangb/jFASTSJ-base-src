@@ -72,13 +72,10 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
         jPanel12 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         insertButton1 = new org.openswing.swing.client.InsertButton();
-        deleteButton1 = new org.openswing.swing.client.DeleteButton();
         reloadButton1 = new org.openswing.swing.client.ReloadButton();
         exportButton1 = new org.openswing.swing.client.ExportButton();
         navigatorBar1 = new org.openswing.swing.client.NavigatorBar();
         filterButton1 = new org.openswing.swing.client.FilterButton();
-        editButton2 = new org.openswing.swing.client.EditButton();
-        saveButton2 = new org.openswing.swing.client.SaveButton();
         gridData = new org.openswing.swing.client.GridControl();
         decimalColumn1 = new org.openswing.swing.table.columns.client.DecimalColumn();
         textColumn3 = new org.openswing.swing.table.columns.client.TextColumn();
@@ -309,12 +306,6 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
                 .addContainerGap()
                 .addComponent(insertButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(editButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(deleteButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addComponent(saveButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(reloadButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(exportButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -322,38 +313,33 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
                 .addComponent(navigatorBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(filterButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(154, Short.MAX_VALUE))
+                .addContainerGap(268, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(insertButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(filterButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(navigatorBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(saveButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(exportButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(reloadButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(deleteButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(insertButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        gridData.setDeleteButton(deleteButton1);
-        gridData.setEditButton(editButton2);
         gridData.setExportButton(exportButton1);
         gridData.setFilterButton(filterButton1);
         gridData.setFunctionId("certificadosGrid");
         gridData.setInsertRowsOnTop(false);
         gridData.setNavBar(navigatorBar1);
         gridData.setReloadButton(reloadButton1);
-        gridData.setSaveButton(saveButton2);
         gridData.setSearchAdditionalRows(true);
         gridData.setValueObjectClassName(DetalleSiniestro.class.getName());
 
         decimalColumn1.setColumnName("id");
         decimalColumn1.setColumnRequired(false);
+        decimalColumn1.setGrouping(false);
         decimalColumn1.setPreferredWidth(40);
         gridData.getColumnContainer().add(decimalColumn1);
 
@@ -861,10 +847,8 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumnNot;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumnNot1;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumnObs;
-    private org.openswing.swing.client.DeleteButton deleteButton1;
     private org.openswing.swing.client.DeleteButton deleteButtonDoc;
     private org.openswing.swing.client.DeleteButton deleteButtonObs;
-    private org.openswing.swing.client.EditButton editButton2;
     private org.openswing.swing.client.EditButton editButtonDoc;
     private org.openswing.swing.client.EditButton editButtonObs;
     private org.openswing.swing.client.ExportButton exportButton1;
@@ -908,7 +892,6 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
     private org.openswing.swing.client.ReloadButton reloadButtonNot;
     private org.openswing.swing.client.ReloadButton reloadButtonObs;
     private org.openswing.swing.client.SaveButton saveButton1;
-    private org.openswing.swing.client.SaveButton saveButton2;
     private org.openswing.swing.client.SaveButton saveButtonDoc;
     private org.openswing.swing.client.SaveButton saveButtonNot;
     private org.openswing.swing.client.SaveButton saveButtonObs;
@@ -960,10 +943,7 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
             gridData.setDeleteButton(null);
 
             insertButton1.setVisible(false);
-            editButton2.setVisible(false);
-            deleteButton1.setVisible(false);
-            saveButton2.setVisible(false);
-
+            
             jPanel13.setVisible(false);
 
             gridControlObs.setInsertButton(null);
@@ -993,15 +973,10 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
 
             saveButton1.setVisible(true);
 
-            gridData.setEditButton(editButton2);
-            gridData.setSaveButton(saveButton2);
-            gridData.setDeleteButton(deleteButton1);
-
+            
+            
             insertButton1.setVisible(true);
-            editButton2.setVisible(true);
-            deleteButton1.setVisible(true);
-            saveButton2.setVisible(true);
-
+            
             jPanel13.setVisible(true);
 
             gridControlObs.setInsertButton(insertButtonObs);

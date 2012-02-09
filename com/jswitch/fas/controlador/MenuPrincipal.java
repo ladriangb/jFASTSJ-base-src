@@ -34,6 +34,7 @@ import com.jswitch.asegurados.controlador.TitularDetailFrameController;
 import com.jswitch.asegurados.controlador.TitularGridController;
 import com.jswitch.configuracion.controlador.RamoCoberturaGridFrameController;
 import com.jswitch.asegurados.modelo.dominio.Parentesco;
+import com.jswitch.configuracion.modelo.dominio.PartidaPresupuestaria;
 import com.jswitch.configuracion.modelo.dominio.PlazoEspera;
 import com.jswitch.configuracion.modelo.dominio.Ramo;
 import com.jswitch.asegurados.modelo.maestra.Asegurado;
@@ -47,6 +48,7 @@ import com.jswitch.asegurados.vista.AseguradoGridFrame;
 import com.jswitch.asegurados.vista.BeneficiarioDetailFrame;
 import com.jswitch.asegurados.vista.BeneficiarioGridFrame;
 import com.jswitch.asegurados.vista.BuscarAseguradoDialog;
+import com.jswitch.asegurados.vista.TipoContratoGridFrame;
 import com.jswitch.certificados.vista.CertificadosGridFrame;
 import com.jswitch.configuracion.controlador.ConfiguracionPrimaAllGridFrameController;
 import com.jswitch.configuracion.modelo.maestra.ConfiguracionPrima;
@@ -125,6 +127,7 @@ import com.jswitch.persona.controlador.PersonasDetailController;
 import com.jswitch.persona.modelo.maestra.PersonaNatural;
 import com.jswitch.persona.vista.BuscarPersonaDialog;
 import com.jswitch.persona.vista.RifBusquedaDialog;
+import com.jswitch.siniestros.controlador.BuscarDetalleSiniestroDetrailController;
 import com.jswitch.siniestros.controlador.BuscarSiniestroDetrailController;
 import com.jswitch.siniestros.controlador.SiniestroGridFrameController;
 import com.jswitch.siniestros.controlador.detalle.DetalleSiniestroGridFrameController;
@@ -138,6 +141,7 @@ import com.jswitch.siniestros.modelo.maestra.detalle.Emergencia;
 import com.jswitch.siniestros.modelo.maestra.detalle.Funerario;
 import com.jswitch.siniestros.modelo.maestra.detalle.Reembolso;
 import com.jswitch.siniestros.modelo.maestra.detalle.Vida;
+import com.jswitch.siniestros.vista.BuscarDetalleSiniestroDetailFrame;
 import com.jswitch.siniestros.vista.BuscarSiniestroDetailFrame;
 import com.jswitch.siniestros.vista.EtapaSiniestroGridFrame;
 import com.jswitch.siniestros.vista.TipoSiniestroGridFrame;
@@ -269,6 +273,10 @@ public class MenuPrincipal implements ClientFacade {
         new DefaultAllGridFrameController(CodigoAreaGridFrame.class.getName(), null, TipoCuentaBancaria.class.getName(), "Tipo Cuenta Bancaria");
     }
 
+    public void getPartidaPresupuestaria() {
+        new DefaultAllGridFrameController(CodigoAreaGridFrame.class.getName(), null, PartidaPresupuestaria.class.getName(), "Partidas Presupuestaria");
+    }
+    
     public void getCodigoArea() {
         new DefaultAllGridFrameController(CodigoAreaGridFrame.class.getName(), null, TipoCodigoArea.class.getName(), "Codigos de Area");
     }
@@ -288,7 +296,7 @@ public class MenuPrincipal implements ClientFacade {
     }
 
     public void getTipoContrato() {
-        new DefaultAllGridFrameController(DefaultMantenimientoGridFrame.class.getName(), null, TipoContrato.class.getName(), "Tipo de Contrato");
+        new DefaultAllGridFrameController(TipoContratoGridFrame.class.getName(), null, TipoContrato.class.getName(), "Tipo de Contrato");
     }
 
     public void getDepartamento() {
@@ -546,8 +554,11 @@ public class MenuPrincipal implements ClientFacade {
 
     }
 
-    public void getBuscarSin() {
-        new BuscarSiniestroDetrailController(BuscarSiniestroDetailFrame.class.getName(), null, null, true);
+    public void getBuscarDetalleSin() {
+        new BuscarDetalleSiniestroDetrailController(BuscarDetalleSiniestroDetailFrame.class.getName(), null, null, true);
+    }
+        public void getBuscarSin() {
+        new BuscarSiniestroDetrailController(BuscarSiniestroDetailFrame.class.getName(), null, null, false);
     }
     // </editor-fold>
 

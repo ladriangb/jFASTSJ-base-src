@@ -6,9 +6,7 @@ import java.util.Map;
 import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.controlador.util.DefaultGridFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
-import com.jswitch.base.modelo.entidades.auditoria.Auditable;
 import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
-import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.configuracion.modelo.maestra.Plan;
 import com.jswitch.configuracion.modelo.transaccional.ConfiguracionSiniestro;
 import com.jswitch.siniestros.modelo.maestra.detalle.APS;
@@ -91,7 +89,7 @@ public class PlanesGridFrameController extends DefaultGridFrameController implem
                     Reembolso.class.getSimpleName(),
                     Vida.class.getSimpleName()};
                 for (String o : clases) {
-                    ConfiguracionSiniestro cs = new ConfiguracionSiniestro(o, 0d, 0d, plan, ab);
+                    ConfiguracionSiniestro cs = new ConfiguracionSiniestro(o, Double.POSITIVE_INFINITY, 0d, plan, ab);
                     s.save(cs);
                     plan.getConfiguracionSiniestros().add(cs);
                 }

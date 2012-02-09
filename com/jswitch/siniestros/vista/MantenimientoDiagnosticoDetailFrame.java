@@ -37,7 +37,6 @@ public class MantenimientoDiagnosticoDetailFrame extends DefaultDetailFrame {
         numericControl1 = new org.openswing.swing.client.NumericControl();
         labelControl2 = new org.openswing.swing.client.LabelControl();
         textControl1 = new org.openswing.swing.client.TextControl();
-        textControl2 = new org.openswing.swing.client.TextControl();
         codLookupControl1 = new org.openswing.swing.client.CodLookupControl();
         labelControl4 = new org.openswing.swing.client.LabelControl();
         labelControl5 = new org.openswing.swing.client.LabelControl();
@@ -45,6 +44,7 @@ public class MantenimientoDiagnosticoDetailFrame extends DefaultDetailFrame {
         numericControl2 = new org.openswing.swing.client.NumericControl();
         textControl3 = new org.openswing.swing.client.TextControl();
         labelControl3 = new org.openswing.swing.client.LabelControl();
+        textControl2 = new org.openswing.swing.client.TextControl();
         jPanel3 = new javax.swing.JPanel();
         gridData = new org.openswing.swing.client.GridControl();
         decimalColumn1 = new org.openswing.swing.table.columns.client.DecimalColumn();
@@ -97,11 +97,6 @@ public class MantenimientoDiagnosticoDetailFrame extends DefaultDetailFrame {
         textControl1.setEnabledOnEdit(false);
         textControl1.setEnabledOnInsert(false);
 
-        textControl2.setAttributeName("diagnosticoSiniestro.diagnostico.especialidad.ramo.nombre");
-        textControl2.setEnabled(false);
-        textControl2.setEnabledOnEdit(false);
-        textControl2.setEnabledOnInsert(false);
-
         codLookupControl1.setAttributeName("diagnosticoSiniestro.diagnostico.nombre");
         codLookupControl1.setEnableCodBox(false);
         codLookupControl1.setLookupButtonVisible(false);
@@ -124,6 +119,12 @@ public class MantenimientoDiagnosticoDetailFrame extends DefaultDetailFrame {
         textControl3.setRequired(true);
 
         labelControl3.setLabel("justificacion");
+
+        textControl2.setAttributeName("diagnosticoSiniestro.detalleSiniestro.ramo.nombre");
+        textControl2.setEnabled(false);
+        textControl2.setEnabledOnEdit(false);
+        textControl2.setEnabledOnInsert(false);
+        textControl2.setUpperCase(true);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -184,12 +185,12 @@ public class MantenimientoDiagnosticoDetailFrame extends DefaultDetailFrame {
                     .addComponent(textControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelControl4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(textControl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelControl5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labelControl5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textControl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {codLookupControl1, labelControl1, labelControl2, labelControl3, labelControl4, labelControl5, labelControl6, numericControl1, numericControl2, textControl1, textControl2, textControl3});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {codLookupControl1, labelControl1, labelControl2, labelControl3, labelControl4, labelControl5, labelControl6, numericControl1, numericControl2, textControl1, textControl3});
 
         form1.add(jPanel2);
 

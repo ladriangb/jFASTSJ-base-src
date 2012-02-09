@@ -293,7 +293,7 @@ public class Principal implements MDIController, LoginController {
                 + "\n"
                 + "\n"
                 + "Copyright 2009 Orlando Becerra - Todos los Derechos Reservados\n"
-                + "Telefonos: 0416-6762389; 0414-3765465 - Email: jsipolee@gmail.com\n"
+                + "Telefonos: 0416-6762389; 0414-3765465 - Email: switchdevelopers@gmail.com\n"
                 + "Version: 1.2 - 15/12/2009";
     }
 
@@ -445,12 +445,12 @@ public class Principal implements MDIController, LoginController {
         boolean valido = (validos != null && validos.equals("si"));
         if (!valido) {
             LoggerUtil.warn(this.getClass(), "validarLicencia", "No ejecuto desde .EXE");
-            CorreoSTMP.enviarCorreo("jsipolee@jsipol.com", "jsipolee@gmail.com",
-                    Equipo.getSerial() + " No ejecuto desde .EXE jSipol Express Edition ", new Date().toString());
+            CorreoSTMP.enviarCorreo("switchdevelopers@jsipol.com", "switchdevelopers@gmail.com",
+                    Equipo.getSerial() + " No ejecuto desde .EXE ASCLEPIO from switch-developers ", new Date().toString());
             JOptionPane.showMessageDialog(null,
-                    "Distribucion no autorizada de jSipol Express Edition.\n"
+                    "Distribucion no autorizada de ASCLEPIO from switch-developers.\n"
                     + "Contacte al proveedor para mayor informacion.\n"
-                    + "jsipolee@gmail.com 0416-6762389 0414-3765465",
+                    + "switchdevelopers@gmail.com 0416-6762389 0414-3765465 0412-6529955",
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
             System.exit(1);
@@ -462,34 +462,34 @@ public class Principal implements MDIController, LoginController {
         if (General.licencia == null) {
             System.out.println("Error de nulo");
             LoggerUtil.warn(this.getClass(), "validarLicencia", "Copia no autorizada");
-            CorreoSTMP.enviarCorreo("jsipolee@jsipol.com", "jsipolee@gmail.com",
-                    Equipo.getSerial() + " Copia no autorizada de jSipol Express Edition", new Date().toString());
+            CorreoSTMP.enviarCorreo("switchdevelopers@jsipol.com", "switchdevelopers@gmail.com",
+                    Equipo.getSerial() + " Copia no autorizada de ASCLEPIO from switch-developers", new Date().toString());
             JOptionPane.showMessageDialog(null,
-                    "Copia no autorizada de jSipol Express Edition.\n"
+                    "Copia no autorizada de ASCLEPIO from switch-developers.\n"
                     + "Contacte al proveedor si desea una copia legal.\n"
-                    + "jsipolee@gmail.com 0416-6762389 0414-3765465",
+                    + "switchdevelopers@gmail.com 0416-6762389 0414-3765465 0412-6529955",
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
             System.exit(1);
         } else if (!General.licencia.isActivo()) {
             LoggerUtil.warn(this.getClass(), "validarLicencia", "Copia inactiva");
-            CorreoSTMP.enviarCorreo("jsipolee@jsipol.com", "jsipolee@gmail.com",
-                    Equipo.getSerial() + " jSipol Express Edition inactivo", new Date().toString());
+            CorreoSTMP.enviarCorreo("switchdevelopers@jsipol.com", "switchdevelopers@gmail.com",
+                    Equipo.getSerial() + " ASCLEPIO from switch-developers inactivo", new Date().toString());
             JOptionPane.showMessageDialog(null,
-                    "jSipol Express Edition inactivo.\n"
+                    "ASCLEPIO from switch-developers inactivo.\n"
                     + "Contacte al proveedor porfavor.\n"
-                    + "jsipolee@gmail.com 0416-6762389 0414-3765465",
+                    + "switchdevelopers@gmail.com 0416-6762389 0414-3765465",
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
             System.exit(1);
         } else if (!(General.licencia.getFechaDesde().before(new Date()) && General.licencia.getFechaHasta().after(new Date()))) {
             LoggerUtil.warn(this.getClass(), "validarLicencia", "Copia caduco");
-            CorreoSTMP.enviarCorreo("jsipolee@jsipol.com", "jsipolee@gmail.com",
-                    Equipo.getSerial() + " jSipol Express Edition caduco", new Date().toString());
+            CorreoSTMP.enviarCorreo("switchdevelopers@jsipol.com", "switchdevelopers@gmail.com",
+                    Equipo.getSerial() + " ASCLEPIO from switch-developers caduco", new Date().toString());
             JOptionPane.showMessageDialog(null,
-                    "jSipol Express Edition caduco.\n"
+                    "ASCLEPIO from switch-developers caduco.\n"
                     + "Contacte al proveedor porfavor.\n"
-                    + "jsipolee@gmail.com 0416-6762389 0414-3765465",
+                    + "switchdevelopers@gmail.com 0416-6762389 0414-3765465",
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
             System.exit(1);

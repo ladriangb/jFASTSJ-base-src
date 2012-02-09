@@ -1,11 +1,10 @@
-package com.jswitch.asegurados.modelo.dominio;
+package com.jswitch.configuracion.modelo.dominio;
 
 import com.jswitch.base.modelo.entidades.auditoria.Auditable;
 import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.modelo.util.ehts.BusinessKey;
 import com.jswitch.base.modelo.util.ehts.Method;
-import com.jswitch.configuracion.modelo.dominio.PartidaPresupuestaria;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -13,17 +12,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
 /**
- *
- * @author Personal
+ * Entidad de la partida presupuestaria
+ * 
+ * @author Luis Adrian Gonzalez Benavides
  */
 @Entity
-@Table(name = "ASEG_TipoContrato")
-public class TipoContrato extends BeanVO implements Serializable, Auditable {
+@Table(name = "CONF_PartidaPresupuestaria")
+public class PartidaPresupuestaria extends BeanVO implements Serializable, Auditable {
 
     /**
      * Pk autogenerado
@@ -34,40 +33,46 @@ public class TipoContrato extends BeanVO implements Serializable, Auditable {
     @BusinessKey(include = Method.TO_STRING)
     private Long id;
     /**
-     * Identificador de tipo de Contrato
+     * Identificador de la Partida
      */
     @Column
     @BusinessKey
     private String nombre;
     /**
-     * Partida por la que se consume
+     * Numero de la Partida
      */
-    @ManyToOne
+    @Column
     @BusinessKey
-    private PartidaPresupuestaria partidaPresupuestaria;
+    private String numero;
     /**
-     * Version
+     * version
      */
     @Version
     @Column
     private Integer optLock;
     /**
-     * Bitacora
+     * Auditoria
      */
     @Embedded
     @BusinessKey
     private AuditoriaBasica auditoria;
 
-    public TipoContrato() {
+    public PartidaPresupuestaria() {
     }
 
-    public TipoContrato(String nombre, AuditoriaBasica auditoria) {
+    public PartidaPresupuestaria(String nombre, AuditoriaBasica auditoria) {
         this.nombre = nombre;
         this.auditoria = auditoria;
     }
 
+    public PartidaPresupuestaria(String nombre, String numero, AuditoriaBasica auditoria) {
+        this.nombre = nombre;
+        this.numero = numero;
+        this.auditoria = auditoria;
+    }
+
     /**
-     * Bitacora
+     * Auditoria
      * @return the auditoria
      */
     public AuditoriaBasica getAuditoria() {
@@ -83,7 +88,7 @@ public class TipoContrato extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     * Identificador de tipo de Contrato
+     * Identificador de la Partida
      * @return the nombre
      */
     public String getNombre() {
@@ -91,7 +96,15 @@ public class TipoContrato extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     * Version
+     * Numero de la Partida
+     * @return the numero
+     */
+    public String getNumero() {
+        return numero;
+    }
+
+    /**
+     * version
      * @return the optLock
      */
     public Integer getOptLock() {
@@ -99,15 +112,7 @@ public class TipoContrato extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     * Partida por la que se consume
-     * @return the partidaPresupuestaria
-     */
-    public PartidaPresupuestaria getPartidaPresupuestaria() {
-        return partidaPresupuestaria;
-    }
-
-    /**
-     * Bitacora
+     * Auditoria
      * @param auditoria the auditoria to set
      */
     public void setAuditoria(AuditoriaBasica auditoria) {
@@ -123,7 +128,7 @@ public class TipoContrato extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     * Identificador de tipo de Contrato
+     * Identificador de la Partida
      * @param nombre the nombre to set
      */
     public void setNombre(String nombre) {
@@ -131,20 +136,19 @@ public class TipoContrato extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     * Version
+     * Numero de la Partida
+     * @param numero the numero to set
+     */
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    /**
+     * version
      * @param optLock the optLock to set
      */
     public void setOptLock(Integer optLock) {
         this.optLock = optLock;
     }
-
-    /**
-     * Partida por la que se consume
-     * @param partidaPresupuestaria the partidaPresupuestaria to set
-     */
-    public void setPartidaPresupuestaria(PartidaPresupuestaria partidaPresupuestaria) {
-        this.partidaPresupuestaria = partidaPresupuestaria;
-    }
-
     
 }

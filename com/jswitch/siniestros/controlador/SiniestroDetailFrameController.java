@@ -118,7 +118,7 @@ public class SiniestroDetailFrameController extends DefaultDetailFrameController
         if (e.getSource() instanceof InsertButton) {
             //<editor-fold defaultstate="collapsed" desc="Crear nuevo">
             if (beanVO != null) {
-                if (((Siniestro) beanVO).getCertificado().getPoliza().getVigenciaHasta().after(new Date())) {
+                if (((Siniestro) beanVO).getCertificado().getPoliza().getVigenciaHasta().before(new Date())) {
                     JOptionPane.showMessageDialog(gridControl,
                             ClientSettings.getInstance().getResources().getResource(
                             "No se Permite Realizar el Siniestro a Este Asegurado\n"
@@ -126,7 +126,7 @@ public class SiniestroDetailFrameController extends DefaultDetailFrameController
                             General.edition, JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }
-                if (((Siniestro) beanVO).getAsegurado().getAuditoria().getActivo()) {
+                if (!((Siniestro) beanVO).getAsegurado().getAuditoria().getActivo()) {
                     JOptionPane.showMessageDialog(gridControl,
                             ClientSettings.getInstance().getResources().getResource(
                             "No se Permite Realizar el Siniestro a Este Asegurado\n"
@@ -134,7 +134,7 @@ public class SiniestroDetailFrameController extends DefaultDetailFrameController
                             General.edition, JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }
-                if (((Siniestro) beanVO).getCertificado().getAuditoria().getActivo()) {
+                if (!((Siniestro) beanVO).getCertificado().getAuditoria().getActivo()) {
                     JOptionPane.showMessageDialog(gridControl,
                             ClientSettings.getInstance().getResources().getResource(
                             "No se Permite Realizar el Siniestro a Este Asegurado\n"
@@ -142,7 +142,7 @@ public class SiniestroDetailFrameController extends DefaultDetailFrameController
                             General.edition, JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }
-                if (((Siniestro) beanVO).getCertificado().getPoliza().getAuditoria().getActivo()) {
+                if (!((Siniestro) beanVO).getCertificado().getPoliza().getAuditoria().getActivo()) {
                     JOptionPane.showMessageDialog(gridControl,
                             ClientSettings.getInstance().getResources().getResource(
                             "No se Permite Realizar el Siniestro a Este Asegurado\n"
@@ -151,7 +151,7 @@ public class SiniestroDetailFrameController extends DefaultDetailFrameController
                     return;
                 }
 
-                if (((Siniestro) beanVO).getCertificado().getTitular().getAuditoria().getActivo()) {
+                if (!((Siniestro) beanVO).getCertificado().getTitular().getAuditoria().getActivo()) {
                     JOptionPane.showMessageDialog(gridControl,
                             ClientSettings.getInstance().getResources().getResource(
                             "No se Permite Realizar el Siniestro a Este Asegurado\n"

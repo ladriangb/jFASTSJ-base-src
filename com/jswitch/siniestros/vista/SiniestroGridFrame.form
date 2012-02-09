@@ -25,189 +25,293 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Component id="jPanel2" alignment="1" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="10" pref="10" max="10" attributes="0"/>
-              <Component id="gridData" pref="664" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="exportButton2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="gridControl1" pref="636" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+              <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="gridData" pref="438" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="exportButton2" min="-2" max="-2" attributes="0"/>
+                  <Component id="gridControl1" pref="214" max="32767" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="jPanel1">
+    <Container class="javax.swing.JPanel" name="jPanel2">
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="reloadButton1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="exportButton1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="navigatorBar1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="filterButton1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="368" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="684" max="32767" attributes="0"/>
+              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="gridData" alignment="0" pref="664" max="32767" attributes="1"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="13" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="filterButton1" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="navigatorBar1" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="exportButton1" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="reloadButton1" alignment="0" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="280" max="32767" attributes="0"/>
+              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="gridData" pref="196" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="org.openswing.swing.client.ReloadButton" name="reloadButton1">
-        </Component>
-        <Component class="org.openswing.swing.client.ExportButton" name="exportButton1">
-        </Component>
-        <Component class="org.openswing.swing.client.NavigatorBar" name="navigatorBar1">
-        </Component>
-        <Component class="org.openswing.swing.client.FilterButton" name="filterButton1">
-        </Component>
+        <Container class="javax.swing.JPanel" name="jPanel1">
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="reloadButton1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="exportButton1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="navigatorBar1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="filterButton1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="358" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace pref="13" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="filterButton1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="navigatorBar1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="exportButton1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="reloadButton1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="org.openswing.swing.client.ReloadButton" name="reloadButton1">
+            </Component>
+            <Component class="org.openswing.swing.client.ExportButton" name="exportButton1">
+            </Component>
+            <Component class="org.openswing.swing.client.NavigatorBar" name="navigatorBar1">
+            </Component>
+            <Component class="org.openswing.swing.client.FilterButton" name="filterButton1">
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="org.openswing.swing.client.GridControl" name="gridData">
+          <Properties>
+            <Property name="exportButton" type="org.openswing.swing.client.ExportButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="exportButton1"/>
+            </Property>
+            <Property name="filterButton" type="org.openswing.swing.client.FilterButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="filterButton1"/>
+            </Property>
+            <Property name="insertRowsOnTop" type="boolean" value="false"/>
+            <Property name="navBar" type="org.openswing.swing.client.NavigatorBar" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="navigatorBar1"/>
+            </Property>
+            <Property name="reloadButton" type="org.openswing.swing.client.ReloadButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="reloadButton1"/>
+            </Property>
+            <Property name="searchAdditionalRows" type="boolean" value="true"/>
+            <Property name="valueObjectClassName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="Siniestro.class.getName()" type="code"/>
+            </Property>
+          </Properties>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+          <SubComponents>
+            <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn1">
+              <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;id&quot;" type="code"/>
+                </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
+                <Property name="columnSortable" type="boolean" value="true"/>
+                <Property name="grouping" type="boolean" value="false"/>
+                <Property name="preferredWidth" type="int" value="40"/>
+                <Property name="sortVersus" type="java.lang.String" value="DESC"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.ComboColumn" name="comboColumn1">
+              <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;estatusSiniestro&quot;" type="code"/>
+                </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
+                <Property name="columnSortable" type="boolean" value="true"/>
+                <Property name="domainId" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="Dominios.EstadoSiniestro().getDomainId()" type="code"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn3">
+              <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;numero&quot;" type="code"/>
+                </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
+                <Property name="columnSortable" type="boolean" value="true"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn1">
+              <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;certificado.titular.persona.nombreLargo&quot;" type="code"/>
+                </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
+                <Property name="columnSortable" type="boolean" value="true"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn2">
+              <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;asegurado.persona.nombreLargo&quot;" type="code"/>
+                </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
+                <Property name="columnSortable" type="boolean" value="true"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.IntegerColumn" name="integerColumn1">
+              <Properties>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;ayo&quot;" type="code"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.IntegerColumn" name="integerColumn2">
+              <Properties>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;mes&quot;" type="code"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn4">
+              <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;auditoria.usuarioInsert&quot;" type="code"/>
+                </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
+                <Property name="columnSortable" type="boolean" value="true"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.DateColumn" name="dateColumn1">
+              <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;auditoria.fechaInsert&quot;" type="code"/>
+                </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
+                <Property name="columnSortable" type="boolean" value="true"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn5">
+              <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;auditoria.usuarioUpdate&quot;" type="code"/>
+                </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
+                <Property name="columnSortable" type="boolean" value="true"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.table.columns.client.DateColumn" name="dateColumn2">
+              <Properties>
+                <Property name="columnFilterable" type="boolean" value="true"/>
+                <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;auditoria.fechaUpdate&quot;" type="code"/>
+                </Property>
+                <Property name="columnRequired" type="boolean" value="false"/>
+                <Property name="columnSortable" type="boolean" value="true"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
       </SubComponents>
     </Container>
-    <Container class="org.openswing.swing.client.GridControl" name="gridData">
+    <Container class="org.openswing.swing.client.GridControl" name="gridControl1">
       <Properties>
         <Property name="exportButton" type="org.openswing.swing.client.ExportButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="exportButton1"/>
+          <ComponentRef name="exportButton2"/>
         </Property>
-        <Property name="filterButton" type="org.openswing.swing.client.FilterButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="filterButton1"/>
-        </Property>
-        <Property name="insertRowsOnTop" type="boolean" value="false"/>
-        <Property name="navBar" type="org.openswing.swing.client.NavigatorBar" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="navigatorBar1"/>
-        </Property>
-        <Property name="reloadButton" type="org.openswing.swing.client.ReloadButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="reloadButton1"/>
-        </Property>
-        <Property name="searchAdditionalRows" type="boolean" value="true"/>
         <Property name="valueObjectClassName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="Siniestro.class.getName()" type="code"/>
+          <Connection code="ListaDiagnostico.class.getName()" type="code"/>
         </Property>
       </Properties>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
       <SubComponents>
-        <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn1">
+        <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn10">
           <Properties>
             <Property name="columnFilterable" type="boolean" value="true"/>
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="&quot;id&quot;" type="code"/>
-            </Property>
-            <Property name="columnRequired" type="boolean" value="false"/>
-            <Property name="columnSortable" type="boolean" value="true"/>
-            <Property name="preferredWidth" type="int" value="40"/>
-            <Property name="sortVersus" type="java.lang.String" value="DESC"/>
-          </Properties>
-        </Component>
-        <Component class="org.openswing.swing.table.columns.client.ComboColumn" name="comboColumn1">
-          <Properties>
-            <Property name="columnFilterable" type="boolean" value="true"/>
-            <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="&quot;estatusSiniestro&quot;" type="code"/>
-            </Property>
-            <Property name="columnRequired" type="boolean" value="false"/>
-            <Property name="columnSortable" type="boolean" value="true"/>
-            <Property name="domainId" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="Dominios.EstadoSiniestro().getDomainId()" type="code"/>
-            </Property>
-          </Properties>
-        </Component>
-        <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn3">
-          <Properties>
-            <Property name="columnFilterable" type="boolean" value="true"/>
-            <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="&quot;numero&quot;" type="code"/>
+              <Connection code="&quot;siniestro.numero&quot;" type="code"/>
             </Property>
             <Property name="columnRequired" type="boolean" value="false"/>
             <Property name="columnSortable" type="boolean" value="true"/>
           </Properties>
         </Component>
-        <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn1">
+        <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn6">
           <Properties>
-            <Property name="columnFilterable" type="boolean" value="true"/>
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="&quot;certificado.titular.persona.nombreLargo&quot;" type="code"/>
+              <Connection code="&quot;detalleSiniestro.tipoDetalle&quot;" type="code"/>
             </Property>
-            <Property name="columnRequired" type="boolean" value="false"/>
-            <Property name="columnSortable" type="boolean" value="true"/>
+            <Property name="preferredWidth" type="int" value="200"/>
           </Properties>
         </Component>
-        <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn2">
+        <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn7">
           <Properties>
-            <Property name="columnFilterable" type="boolean" value="true"/>
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="&quot;asegurado.persona.nombreLargo&quot;" type="code"/>
+              <Connection code="&quot;diagnosticoSiniestro.diagnostico.nombre&quot;" type="code"/>
             </Property>
-            <Property name="columnRequired" type="boolean" value="false"/>
-            <Property name="columnSortable" type="boolean" value="true"/>
+            <Property name="preferredWidth" type="int" value="200"/>
           </Properties>
         </Component>
-        <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn4">
+        <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn8">
           <Properties>
-            <Property name="columnFilterable" type="boolean" value="true"/>
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="&quot;auditoria.usuarioInsert&quot;" type="code"/>
+              <Connection code="&quot;diagnosticoSiniestro.diagnostico.especialidad.nombre&quot;" type="code"/>
             </Property>
-            <Property name="columnRequired" type="boolean" value="false"/>
-            <Property name="columnSortable" type="boolean" value="true"/>
-          </Properties>
-        </Component>
-        <Component class="org.openswing.swing.table.columns.client.DateColumn" name="dateColumn1">
-          <Properties>
-            <Property name="columnFilterable" type="boolean" value="true"/>
-            <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="&quot;auditoria.fechaInsert&quot;" type="code"/>
-            </Property>
-            <Property name="columnRequired" type="boolean" value="false"/>
-            <Property name="columnSortable" type="boolean" value="true"/>
-          </Properties>
-        </Component>
-        <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn5">
-          <Properties>
-            <Property name="columnFilterable" type="boolean" value="true"/>
-            <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="&quot;auditoria.usuarioUpdate&quot;" type="code"/>
-            </Property>
-            <Property name="columnRequired" type="boolean" value="false"/>
-            <Property name="columnSortable" type="boolean" value="true"/>
-          </Properties>
-        </Component>
-        <Component class="org.openswing.swing.table.columns.client.DateColumn" name="dateColumn2">
-          <Properties>
-            <Property name="columnFilterable" type="boolean" value="true"/>
-            <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="&quot;auditoria.fechaUpdate&quot;" type="code"/>
-            </Property>
-            <Property name="columnRequired" type="boolean" value="false"/>
-            <Property name="columnSortable" type="boolean" value="true"/>
+            <Property name="preferredWidth" type="int" value="200"/>
           </Properties>
         </Component>
       </SubComponents>
     </Container>
+    <Component class="org.openswing.swing.client.ExportButton" name="exportButton2">
+    </Component>
   </SubComponents>
 </Form>

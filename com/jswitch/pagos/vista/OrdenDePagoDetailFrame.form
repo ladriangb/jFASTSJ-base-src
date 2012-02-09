@@ -40,12 +40,12 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="337" max="32767" attributes="0"/>
+              <EmptySpace pref="341" max="32767" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-                  <Component id="jTabbedPane1" pref="326" max="32767" attributes="0"/>
+                  <Component id="jTabbedPane1" pref="330" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -219,7 +219,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="checkBoxControl1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="51" max="32767" attributes="0"/>
+                      <EmptySpace pref="55" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -386,7 +386,7 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jPanel15" min="-2" max="-2" attributes="1"/>
-                          <Component id="gridControl5" alignment="1" pref="274" max="32767" attributes="2"/>
+                          <Component id="gridControl5" alignment="1" pref="278" max="32767" attributes="2"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -539,7 +539,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="298" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="302" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -574,9 +574,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanel13" min="-2" max="-2" attributes="1"/>
-                          <EmptySpace pref="174" max="32767" attributes="0"/>
+                          <EmptySpace pref="178" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="gridControlObs" alignment="0" pref="274" max="32767" attributes="2"/>
+                      <Component id="gridControlObs" alignment="0" pref="278" max="32767" attributes="2"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -717,7 +717,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="298" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="302" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -752,9 +752,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanel16" min="-2" max="-2" attributes="1"/>
-                          <EmptySpace pref="174" max="32767" attributes="0"/>
+                          <EmptySpace pref="178" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="gridControlNot" alignment="0" pref="274" max="32767" attributes="2"/>
+                      <Component id="gridControlNot" alignment="0" pref="278" max="32767" attributes="2"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -885,7 +885,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="298" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="302" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -922,7 +922,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jPanel11" alignment="0" min="-2" max="-2" attributes="1"/>
-                              <Component id="gridControlDoc" alignment="0" pref="263" max="32767" attributes="1"/>
+                              <Component id="gridControlDoc" alignment="0" pref="267" max="32767" attributes="1"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -1040,6 +1040,320 @@
                     </Component>
                   </SubComponents>
                 </Container>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel2">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Partidas">
+                <Property name="tabTitle" type="java.lang.String" value="Partidas"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="587" max="32767" attributes="0"/>
+                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="10" pref="10" max="10" attributes="0"/>
+                                  <Component id="gridPartidas" pref="567" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="302" max="32767" attributes="0"/>
+                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="gridPartidas" pref="218" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JPanel" name="jPanel3">
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="reloadButton2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="exportButton1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="navigatorBar1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="filterButton1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="261" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace pref="13" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="filterButton1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="navigatorBar1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="exportButton1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="reloadButton2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="org.openswing.swing.client.ReloadButton" name="reloadButton2">
+                </Component>
+                <Component class="org.openswing.swing.client.ExportButton" name="exportButton1">
+                </Component>
+                <Component class="org.openswing.swing.client.NavigatorBar" name="navigatorBar1">
+                </Component>
+                <Component class="org.openswing.swing.client.FilterButton" name="filterButton1">
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="org.openswing.swing.client.GridControl" name="gridPartidas">
+              <Properties>
+                <Property name="exportButton" type="org.openswing.swing.client.ExportButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="exportButton1"/>
+                </Property>
+                <Property name="filterButton" type="org.openswing.swing.client.FilterButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="filterButton1"/>
+                </Property>
+                <Property name="functionId" type="java.lang.String" value="partidaGrid"/>
+                <Property name="insertRowsOnTop" type="boolean" value="false"/>
+                <Property name="maxSortedColumns" type="int" value="3"/>
+                <Property name="navBar" type="org.openswing.swing.client.NavigatorBar" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="navigatorBar1"/>
+                </Property>
+                <Property name="reloadButton" type="org.openswing.swing.client.ReloadButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="reloadButton2"/>
+                </Property>
+                <Property name="searchAdditionalRows" type="boolean" value="true"/>
+                <Property name="valueObjectClassName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="SumaPartida.class.getName()" type="code"/>
+                </Property>
+              </Properties>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+              <SubComponents>
+                <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn4">
+                  <Properties>
+                    <Property name="columnFilterable" type="boolean" value="true"/>
+                    <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;partidaPresupuestaria.nombre&quot;" type="code"/>
+                    </Property>
+                    <Property name="columnSortable" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn5">
+                  <Properties>
+                    <Property name="columnFilterable" type="boolean" value="true"/>
+                    <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;partidaPresupuestaria.numero&quot;" type="code"/>
+                    </Property>
+                    <Property name="columnSortable" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn2">
+                  <Properties>
+                    <Property name="columnFilterable" type="boolean" value="true"/>
+                    <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;cantidadDetalles&quot;" type="code"/>
+                    </Property>
+                    <Property name="columnSortable" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn3">
+                  <Properties>
+                    <Property name="columnFilterable" type="boolean" value="true"/>
+                    <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;cantidadFacturas&quot;" type="code"/>
+                    </Property>
+                    <Property name="columnSortable" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn9">
+                  <Properties>
+                    <Property name="columnFilterable" type="boolean" value="true"/>
+                    <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;montoRetencionTM&quot;" type="code"/>
+                    </Property>
+                    <Property name="columnSortable" type="boolean" value="true"/>
+                    <Property name="decimals" type="int" value="2"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn10">
+                  <Properties>
+                    <Property name="columnFilterable" type="boolean" value="true"/>
+                    <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;baseIslr&quot;" type="code"/>
+                    </Property>
+                    <Property name="columnSortable" type="boolean" value="true"/>
+                    <Property name="decimals" type="int" value="2"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn11">
+                  <Properties>
+                    <Property name="columnFilterable" type="boolean" value="true"/>
+                    <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;montoRetencionIslr&quot;" type="code"/>
+                    </Property>
+                    <Property name="columnSortable" type="boolean" value="true"/>
+                    <Property name="decimals" type="int" value="2"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn12">
+                  <Properties>
+                    <Property name="columnFilterable" type="boolean" value="true"/>
+                    <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;baseIva&quot;" type="code"/>
+                    </Property>
+                    <Property name="columnSortable" type="boolean" value="true"/>
+                    <Property name="decimals" type="int" value="2"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn13">
+                  <Properties>
+                    <Property name="columnFilterable" type="boolean" value="true"/>
+                    <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;montoIva&quot;" type="code"/>
+                    </Property>
+                    <Property name="columnSortable" type="boolean" value="true"/>
+                    <Property name="decimals" type="int" value="2"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn14">
+                  <Properties>
+                    <Property name="columnFilterable" type="boolean" value="true"/>
+                    <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;montoRetencionIva&quot;" type="code"/>
+                    </Property>
+                    <Property name="columnSortable" type="boolean" value="true"/>
+                    <Property name="decimals" type="int" value="2"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn15">
+                  <Properties>
+                    <Property name="columnFilterable" type="boolean" value="true"/>
+                    <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;montoRetencionProntoPago&quot;" type="code"/>
+                    </Property>
+                    <Property name="columnSortable" type="boolean" value="true"/>
+                    <Property name="decimals" type="int" value="2"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn16">
+                  <Properties>
+                    <Property name="columnFilterable" type="boolean" value="true"/>
+                    <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;montoRetencionDeducible&quot;" type="code"/>
+                    </Property>
+                    <Property name="columnSortable" type="boolean" value="true"/>
+                    <Property name="decimals" type="int" value="2"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn17">
+                  <Properties>
+                    <Property name="columnFilterable" type="boolean" value="true"/>
+                    <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;gastosClinicos&quot;" type="code"/>
+                    </Property>
+                    <Property name="columnSortable" type="boolean" value="true"/>
+                    <Property name="decimals" type="int" value="2"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn18">
+                  <Properties>
+                    <Property name="columnFilterable" type="boolean" value="true"/>
+                    <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;honorariosMedicos&quot;" type="code"/>
+                    </Property>
+                    <Property name="columnSortable" type="boolean" value="true"/>
+                    <Property name="decimals" type="int" value="2"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn19">
+                  <Properties>
+                    <Property name="columnFilterable" type="boolean" value="true"/>
+                    <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;montoNoAmparado&quot;" type="code"/>
+                    </Property>
+                    <Property name="columnSortable" type="boolean" value="true"/>
+                    <Property name="decimals" type="int" value="2"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn20">
+                  <Properties>
+                    <Property name="columnFilterable" type="boolean" value="true"/>
+                    <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;montoAmparado&quot;" type="code"/>
+                    </Property>
+                    <Property name="columnSortable" type="boolean" value="true"/>
+                    <Property name="decimals" type="int" value="2"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn21">
+                  <Properties>
+                    <Property name="columnFilterable" type="boolean" value="true"/>
+                    <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;totalFacturado&quot;" type="code"/>
+                    </Property>
+                    <Property name="columnSortable" type="boolean" value="true"/>
+                    <Property name="decimals" type="int" value="2"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn22">
+                  <Properties>
+                    <Property name="columnFilterable" type="boolean" value="true"/>
+                    <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;totalLiquidado&quot;" type="code"/>
+                    </Property>
+                    <Property name="columnSortable" type="boolean" value="true"/>
+                    <Property name="decimals" type="int" value="2"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn23">
+                  <Properties>
+                    <Property name="columnFilterable" type="boolean" value="true"/>
+                    <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;totalRetenido&quot;" type="code"/>
+                    </Property>
+                    <Property name="columnSortable" type="boolean" value="true"/>
+                    <Property name="decimals" type="int" value="2"/>
+                  </Properties>
+                </Component>
+                <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn24">
+                  <Properties>
+                    <Property name="columnFilterable" type="boolean" value="true"/>
+                    <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;totalACancelar&quot;" type="code"/>
+                    </Property>
+                    <Property name="columnSortable" type="boolean" value="true"/>
+                    <Property name="decimals" type="int" value="2"/>
+                  </Properties>
+                </Component>
               </SubComponents>
             </Container>
           </SubComponents>

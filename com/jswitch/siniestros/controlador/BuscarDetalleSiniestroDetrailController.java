@@ -5,18 +5,16 @@ import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.siniestros.controlador.detalle.DetalleSiniestroDetailFrameController;
-import com.jswitch.siniestros.modelo.maestra.Siniestro;
+import com.jswitch.siniestros.controlador.detalle.DetalleSiniestroGridFrameController;
+import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.siniestros.modelo.utilitario.BuscarSiniestro;
-import com.jswitch.siniestros.vista.SiniestroDetailFrame;
 import com.jswitch.siniestros.vista.detalle.DetalleSiniestroDetailFrame;
-import com.jswitch.vistasbd.ListaDiagnostico;
-import java.util.ArrayList;
+import com.jswitch.siniestros.vista.detalle.DetalleSiniestroGridFrame;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.classic.Session;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.message.receive.java.Response;
-import org.openswing.swing.message.receive.java.VOListResponse;
 import org.openswing.swing.message.receive.java.VOResponse;
 import org.openswing.swing.message.receive.java.ValueObject;
 
@@ -24,9 +22,9 @@ import org.openswing.swing.message.receive.java.ValueObject;
  * Buscador de Siniestros
  * @author Luis Adrian Gonzalez Benavides
  */
-public class BuscarSiniestroDetrailController extends DefaultDetailFrameController {
+public class BuscarDetalleSiniestroDetrailController extends DefaultDetailFrameController {
 
-    public BuscarSiniestroDetrailController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio) {
+    public BuscarDetalleSiniestroDetrailController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio) {
         super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
     }
 
@@ -39,9 +37,9 @@ public class BuscarSiniestroDetrailController extends DefaultDetailFrameControll
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
         BuscarSiniestro bs = (BuscarSiniestro) newPersistentObject;
         Session s = HibernateUtil.getSessionFactory().openSession();
-        boolean Snum = false, Sayo = false, Smes = false,
-                Anombre = false, Arif = false, Tnombre = false,
-                Trif = false, diag = false;
+        boolean Snum = false, Sayo = false, Smes = false, Pnombre = false,
+                Prif = false, Anombre = false, Arif = false, Tnombre = false,
+                Trif = false;
         String where = "";
         String and = "";
         //<editor-fold defaultstate="collapsed" desc="Siniestro">
@@ -59,6 +57,20 @@ public class BuscarSiniestroDetrailController extends DefaultDetailFrameControll
         if (bs.getSiniestro().getMes() != null) {
             where += and + " siniestro.mes=:mes";
             Smes = true;
+            and = " AND ";
+        }
+        //</editor-fold>
+        //<editor-fold defaultstate="collapsed" desc="PersonaPago">
+        if (bs.getPersonaPago().getRif().getRif() != null
+                && !bs.getPersonaPago().getRif().getRif().trim().isEmpty()) {
+            where += and + " personaPago.rif.rif like :Prif";
+            Prif = true;
+            and = " AND ";
+        }
+        if (bs.getPersonaPago().getNombreLargo() != null
+                && !bs.getPersonaPago().getNombreLargo().trim().isEmpty()) {
+            where += and + " personaPago.nombreLargo like :Pnom";
+            Pnombre = true;
             and = " AND ";
         }
         //</editor-fold>
@@ -90,14 +102,8 @@ public class BuscarSiniestroDetrailController extends DefaultDetailFrameControll
             and = " AND ";
         }
         //</editor-fold>
-        //<editor-fold defaultstate="collapsed" desc="Diagnostico">
-        if (bs.getDiagnostico().getId() != null) {
-            where += and + " diagnosticoSiniestro.diagnostico.id=:di";
-            diag = true;
-        }
-        //</editor-fold>
         try {
-            String sql = "FROM " + ListaDiagnostico.class.getName() + " C ";
+            String sql = "FROM " + bs.getTipoDetalleSiniestro().getClase() + " C ";
             sql = where.trim().isEmpty() ? sql : (sql + "WHERE " + where);
             Query q = s.createQuery(sql);
             //<editor-fold defaultstate="collapsed" desc="siniestro">
@@ -109,6 +115,14 @@ public class BuscarSiniestroDetrailController extends DefaultDetailFrameControll
             }
             if (Smes) {
                 q = q.setInteger("mes", bs.getSiniestro().getMes());
+            }
+            //</editor-fold>
+            //<editor-fold defaultstate="collapsed" desc="Persona Pago">
+            if (Pnombre) {
+                q = q.setString("Pnom", "%" + bs.getPersonaPago().getNombreLargo() + "%");
+            }
+            if (Prif) {
+                q = q.setString("Prif", "%" + bs.getPersonaPago().getRif().getRif() + "%");
             }
             //</editor-fold>
             //<editor-fold defaultstate="collapsed" desc="Asegurado">
@@ -127,22 +141,20 @@ public class BuscarSiniestroDetrailController extends DefaultDetailFrameControll
                 q = q.setString("Trif", "%" + bs.getPersonaTit().getRif().getRif() + "%");
             }
             //</editor-fold>
-            //<editor-fold defaultstate="collapsed" desc="diagnostico">
-            if (diag) {
-                q = q.setLong("di", bs.getDiagnostico().getId());
-            }
-            //</editor-fold>
             List list = q.list();
             if (list != null) {
                 if (list.size() > 1) {
-                    List<Siniestro> sin = new ArrayList<Siniestro>(0);
-                    for (Object object : list) {
-                        sin.add(((ListaDiagnostico) object).getSiniestro());
-                    }
-                    new SiniestroGridFrameController(new VOListResponse(sin, false, sin.size()));
+                    new DetalleSiniestroGridFrameController(
+                            DetalleSiniestroGridFrame.class.getName(),
+                            DetalleSiniestroDetailFrame.class.getName(),
+                            bs.getTipoDetalleSiniestro().getClase(),
+                            "Detalle Siniestro", list);
                 } else if (!list.isEmpty()) {
-                    Siniestro d = ((ListaDiagnostico) list.get(0)).getSiniestro();
-                    new SiniestroDetailFrameController(SiniestroDetailFrame.class.getName(), null, d, false);
+                    DetalleSiniestro d = (DetalleSiniestro) list.get(0);
+                    new DetalleSiniestroDetailFrameController(
+                            DetalleSiniestroDetailFrame.class.getName(),
+                            null,
+                            d, true, d.getClass());
                 }
             }
         } catch (Exception e) {

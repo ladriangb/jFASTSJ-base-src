@@ -18,9 +18,9 @@ import org.openswing.swing.message.receive.java.ValueObject;
 
 /**
  *
- * @author adrian
+ * @author Luis Adrian Gonzalez Benavides
  */
-public class SiniestroGridFrameController extends DefaultGridFrameController {
+public class SiniestroGridFrameController extends DefaultGridFrameController  {
 
     Response res;
 
