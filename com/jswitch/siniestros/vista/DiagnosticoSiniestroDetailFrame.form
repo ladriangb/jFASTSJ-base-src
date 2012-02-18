@@ -228,6 +228,9 @@
                   <Connection code="&quot;diagnostico.nombre&quot;" type="code"/>
                 </Property>
                 <Property name="enableCodBox" type="boolean" value="false"/>
+                <Property name="enabledOnEdit" type="boolean" value="false"/>
+                <Property name="enabledOnInsert" type="boolean" value="false"/>
+                <Property name="lookupButtonVisible" type="boolean" value="false"/>
                 <Property name="required" type="boolean" value="true"/>
               </Properties>
             </Component>

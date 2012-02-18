@@ -100,7 +100,6 @@ public class CertificadoNuevoDetailFrame extends DefaultDetailFrame {
         labelControl2.setLabel("asegurado.persona.nombre");
 
         textControl1.setAttributeName("titular.codigoEmpleado");
-        textControl1.setRequired(true);
 
         labelControl3.setLabel("titular.codigoEmpleado");
 
@@ -113,10 +112,12 @@ public class CertificadoNuevoDetailFrame extends DefaultDetailFrame {
         codLookupControl3.setAttributeName("titular.tipoContrato.nombre");
         codLookupControl3.setControllerMethodName("getTipoContrato");
         codLookupControl3.setMaxCharacters(30);
+        codLookupControl3.setRequired(true);
 
         codLookupControl2.setAttributeName("titular.departamento.nombre");
         codLookupControl2.setControllerMethodName("getDepartamento");
         codLookupControl2.setMaxCharacters(30);
+        codLookupControl2.setRequired(true);
 
         labelControl6.setLabel("titular.tipoContato");
 
@@ -139,12 +140,16 @@ public class CertificadoNuevoDetailFrame extends DefaultDetailFrame {
         codLookupControl4.setAttributeName("asegurado.plan.nombre");
         codLookupControl4.setControllerMethodName("getPlan");
         codLookupControl4.setMaxCharacters(30);
+        codLookupControl4.setRequired(true);
 
         codLookupControl5.setAttributeName("asegurado.plazoEspera.nombre");
         codLookupControl5.setControllerMethodName("getPlazoEspera");
         codLookupControl5.setMaxCharacters(30);
+        codLookupControl5.setRequired(true);
 
         labelControl1.setLabel("titular.fechaInduccion");
+
+        dateControl3.setRequired(true);
 
         labelControl10.setLabel("poliza.numero");
 
@@ -244,7 +249,7 @@ public class CertificadoNuevoDetailFrame extends DefaultDetailFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelControl7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(codLookupControl5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {codLookupControl1, codLookupControl2, codLookupControl3, codLookupControl4, codLookupControl5, codLookupControl6, dateControl1, dateControl2, dateControl3, labelControl1, labelControl10, labelControl2, labelControl3, labelControl4, labelControl5, labelControl6, labelControl7, labelControl8, labelControl9, textControl1});
@@ -267,7 +272,7 @@ public class CertificadoNuevoDetailFrame extends DefaultDetailFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(form1, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+                .addComponent(form1, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents

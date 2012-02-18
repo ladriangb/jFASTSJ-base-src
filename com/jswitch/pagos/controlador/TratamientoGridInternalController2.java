@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.jswitch.pagos.controlador;
 
 import com.jswitch.base.controlador.logger.LoggerUtil;

@@ -33,9 +33,12 @@ public class BeneficiarioGridFrame extends DefaultGridFrame {
         textColumn5 = new org.openswing.swing.table.columns.client.TextColumn();
         integerColumn2 = new org.openswing.swing.table.columns.client.IntegerColumn();
         decimalColumn1 = new org.openswing.swing.table.columns.client.DecimalColumn();
-        checkBoxColumn2 = new org.openswing.swing.table.columns.client.CheckBoxColumn();
+        textColumn3 = new org.openswing.swing.table.columns.client.TextColumn();
+        textColumn6 = new org.openswing.swing.table.columns.client.TextColumn();
+        auditoria = new org.openswing.swing.table.columns.client.CheckBoxColumn();
         textColumn9 = new org.openswing.swing.table.columns.client.TextColumn();
         dateTimeColumn2 = new org.openswing.swing.table.columns.client.DateTimeColumn();
+        textColumn4 = new org.openswing.swing.table.columns.client.TextColumn();
 
         setTitle("Beneficiarios");
         setPreferredSize(new java.awt.Dimension(700, 540));
@@ -107,13 +110,27 @@ public class BeneficiarioGridFrame extends DefaultGridFrame {
         decimalColumn1.setColumnName("indemnizacion");
         decimalColumn1.setColumnRequired(false);
         decimalColumn1.setColumnSortable(true);
+        decimalColumn1.setDecimals(2);
         gridData.getColumnContainer().add(decimalColumn1);
 
-        checkBoxColumn2.setColumnFilterable(true);
-        checkBoxColumn2.setColumnName("auditoria.activo");
-        checkBoxColumn2.setColumnRequired(false);
-        checkBoxColumn2.setColumnSortable(true);
-        gridData.getColumnContainer().add(checkBoxColumn2);
+        textColumn3.setColumnFilterable(true);
+        textColumn3.setColumnName("certificado.titular.persona.rif.rif");
+        textColumn3.setColumnRequired(false);
+        textColumn3.setColumnSortable(true);
+        textColumn3.setMaxCharacters(1024);
+        gridData.getColumnContainer().add(textColumn3);
+
+        textColumn6.setColumnFilterable(true);
+        textColumn6.setColumnName("certificado.titular.persona.nombreLargo");
+        textColumn6.setColumnRequired(false);
+        textColumn6.setColumnSortable(true);
+        gridData.getColumnContainer().add(textColumn6);
+
+        auditoria.setColumnFilterable(true);
+        auditoria.setColumnName("auditoria.activo");
+        auditoria.setColumnRequired(false);
+        auditoria.setColumnSortable(true);
+        gridData.getColumnContainer().add(auditoria);
 
         textColumn9.setColumnFilterable(true);
         textColumn9.setColumnName("auditoria.usuarioInsert");
@@ -126,6 +143,13 @@ public class BeneficiarioGridFrame extends DefaultGridFrame {
         dateTimeColumn2.setColumnRequired(false);
         dateTimeColumn2.setColumnSortable(true);
         gridData.getColumnContainer().add(dateTimeColumn2);
+
+        textColumn4.setColumnFilterable(true);
+        textColumn4.setColumnName("certificado.poliza.numero");
+        textColumn4.setColumnRequired(false);
+        textColumn4.setColumnSortable(true);
+        textColumn4.setMaxCharacters(1024);
+        gridData.getColumnContainer().add(textColumn4);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -180,7 +204,7 @@ public class BeneficiarioGridFrame extends DefaultGridFrame {
         return gridData;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private org.openswing.swing.table.columns.client.CheckBoxColumn checkBoxColumn2;
+    private org.openswing.swing.table.columns.client.CheckBoxColumn auditoria;
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn2;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn1;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn5;
@@ -192,7 +216,10 @@ public class BeneficiarioGridFrame extends DefaultGridFrame {
     private org.openswing.swing.client.NavigatorBar navigatorBar1;
     private org.openswing.swing.client.ReloadButton reloadButton1;
     private org.openswing.swing.table.columns.client.TextColumn textColumn2;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn3;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn4;
     private org.openswing.swing.table.columns.client.TextColumn textColumn5;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn6;
     private org.openswing.swing.table.columns.client.TextColumn textColumn9;
     // End of variables declaration//GEN-END:variables
 }

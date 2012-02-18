@@ -212,7 +212,11 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
 
             if (d.getEtapaSiniestro().getId().compareTo(
                     es.getId()) == 0) {
+                if (d.getSumaDetalle().getTotalLiquidado() <= 0d) {
+                    return new ErrorResponse("No se puede Liquidar\nNo hay monto Liquidado");
+                }
                 d.setFechaLiquidado(new Date());
+
             }
         } catch (Exception e) {
             LoggerUtil.error(this.getClass(), "logicade negocios", e);

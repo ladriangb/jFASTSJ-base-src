@@ -138,6 +138,9 @@ public class DiagnosticoSiniestroDetailFrame extends DefaultDetailFrame {
 
         codLookupControl1.setAttributeName("diagnostico.nombre");
         codLookupControl1.setEnableCodBox(false);
+        codLookupControl1.setEnabledOnEdit(false);
+        codLookupControl1.setEnabledOnInsert(false);
+        codLookupControl1.setLookupButtonVisible(false);
         codLookupControl1.setRequired(true);
 
         labelControl4.setLabel("especialidad.nombre");

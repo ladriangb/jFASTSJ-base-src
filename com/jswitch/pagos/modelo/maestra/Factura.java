@@ -139,13 +139,13 @@ public class Factura extends BeanVO implements Serializable, Auditable {
      */
     @Column
     @BusinessKey
-    private Double porcentajeRetencionIsrl;
+    private Double porcentajeRetencionIslr;
     /**
      * monto de retencion ISLR
      */
     @Column
     @BusinessKey
-    private Double montoRetencionIsrl;
+    private Double montoRetencionIslr;
     /**
      * porcentaje de iva para la fecha de facturacion
      */
@@ -257,7 +257,7 @@ public class Factura extends BeanVO implements Serializable, Auditable {
         montoNoAmparado = 0d;
         montoRetencionDeducible = 0d;
         montoRetencionIva = 0d;
-        montoRetencionIsrl = 0d;
+        montoRetencionIslr = 0d;
         montoRetencionTM = 0d;
         montoAmparado = 0d;
         gastosClinicos = 0d;
@@ -277,7 +277,7 @@ public class Factura extends BeanVO implements Serializable, Auditable {
 
         porcentajeRetencionIva = 0d;
         porcentajeRetencionTM = 0d;
-        porcentajeRetencionIsrl = 0d;
+        porcentajeRetencionIslr = 0d;
         porcentajeRetencionProntoPago = 0d;
     }
 
@@ -412,10 +412,10 @@ public class Factura extends BeanVO implements Serializable, Auditable {
 
     /**
      * monto de retencion ISLR
-     * @return the montoRetencionIsrl
+     * @return the montoRetencionIslr
      */
-    public Double getMontoRetencionIsrl() {
-        return montoRetencionIsrl;
+    public Double getMontoRetencionIslr() {
+        return montoRetencionIslr;
     }
 
     /**
@@ -469,10 +469,10 @@ public class Factura extends BeanVO implements Serializable, Auditable {
 
     /**
      * porcentaje de retencion Islr
-     * @return the porcentajeRetencionIsrl
+     * @return the porcentajeRetencionIslr
      */
-    public Double getPorcentajeRetencionIsrl() {
-        return porcentajeRetencionIsrl;
+    public Double getPorcentajeRetencionIslr() {
+        return porcentajeRetencionIslr;
     }
 
     /**
@@ -680,10 +680,10 @@ public class Factura extends BeanVO implements Serializable, Auditable {
 
     /**
      * monto de retencion ISLR
-     * @param montoRetencionIsrl the montoRetencionIsrl to set
+     * @param montoRetencionIslr the montoRetencionIslr to set
      */
-    public void setMontoRetencionIsrl(Double montoRetencionIsrl) {
-        this.montoRetencionIsrl = montoRetencionIsrl;
+    public void setMontoRetencionIslr(Double montoRetencionIslr) {
+        this.montoRetencionIslr = montoRetencionIslr;
     }
 
     /**
@@ -737,10 +737,10 @@ public class Factura extends BeanVO implements Serializable, Auditable {
 
     /**
      * porcentaje de retencion Islr
-     * @param porcentajeRetencionIsrl the porcentajeRetencionIsrl to set
+     * @param porcentajeRetencionIslr the porcentajeRetencionIslr to set
      */
-    public void setPorcentajeRetencionIsrl(Double porcentajeRetencionIsrl) {
-        this.porcentajeRetencionIsrl = porcentajeRetencionIsrl;
+    public void setPorcentajeRetencionIslr(Double porcentajeRetencionIslr) {
+        this.porcentajeRetencionIslr = porcentajeRetencionIslr;
     }
 
     /**

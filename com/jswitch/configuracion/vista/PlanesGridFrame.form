@@ -38,7 +38,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" pref="364" max="32767" attributes="0"/>
+              <Component id="jTabbedPane1" pref="368" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -133,8 +133,8 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
             <Property name="columns" type="int" value="2"/>
-            <Property name="rows" type="int" value="3"/>
             <Property name="horizontalGap" type="int" value="2"/>
+            <Property name="rows" type="int" value="3"/>
             <Property name="verticalGap" type="int" value="2"/>
           </Layout>
           <SubComponents>
@@ -161,8 +161,8 @@
         <Container class="javax.swing.JPanel" name="jPanel2">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Cobertura Amparada">
-                <Property name="tabTitle" type="java.lang.String" value="Cobertura Amparada"/>
+              <JTabbedPaneConstraints tabName="Suma Amparada">
+                <Property name="tabTitle" type="java.lang.String" value="Suma Amparada"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -181,9 +181,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel8" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="236" max="32767" attributes="0"/>
+                      <EmptySpace pref="240" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="gridControl1" alignment="1" pref="336" max="32767" attributes="0"/>
+                  <Component id="gridControl1" alignment="1" pref="340" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -236,6 +236,7 @@
                     <Property name="columnSortable" type="boolean" value="true"/>
                     <Property name="editableOnEdit" type="boolean" value="true"/>
                     <Property name="editableOnInsert" type="boolean" value="true"/>
+                    <Property name="upperCase" type="boolean" value="true"/>
                   </Properties>
                 </Component>
                 <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn1">
@@ -266,8 +267,8 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                 <Property name="columns" type="int" value="2"/>
-                <Property name="rows" type="int" value="3"/>
                 <Property name="horizontalGap" type="int" value="2"/>
+                <Property name="rows" type="int" value="3"/>
                 <Property name="verticalGap" type="int" value="2"/>
               </Layout>
               <SubComponents>
@@ -312,7 +313,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel9" min="-2" pref="49" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="gridControl2" pref="276" max="32767" attributes="0"/>
+                      <Component id="gridControl2" pref="280" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -498,9 +499,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel10" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="236" max="32767" attributes="0"/>
+                      <EmptySpace pref="240" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="gridControl3" alignment="1" pref="336" max="32767" attributes="0"/>
+                  <Component id="gridControl3" alignment="1" pref="340" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -595,8 +596,8 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                 <Property name="columns" type="int" value="2"/>
-                <Property name="rows" type="int" value="3"/>
                 <Property name="horizontalGap" type="int" value="2"/>
+                <Property name="rows" type="int" value="3"/>
                 <Property name="verticalGap" type="int" value="2"/>
               </Layout>
               <SubComponents>

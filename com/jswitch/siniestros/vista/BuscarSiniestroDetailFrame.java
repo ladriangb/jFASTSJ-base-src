@@ -2,7 +2,7 @@ package com.jswitch.siniestros.vista;
 
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.vista.util.DefaultDetailFrame;
-import com.jswitch.fas.modelo.Dominios;
+import com.jswitch.configuracion.controlador.DiagnosticoLookupController;
 import com.jswitch.siniestros.modelo.utilitario.BuscarSiniestro;
 import org.openswing.swing.form.client.Form;
 import org.openswing.swing.form.client.FormController;
@@ -30,16 +30,10 @@ public class BuscarSiniestroDetailFrame extends DefaultDetailFrame {
         jPanel2 = new javax.swing.JPanel();
         textControl7 = new org.openswing.swing.client.TextControl();
         labelControl8 = new org.openswing.swing.client.LabelControl();
-        comboBoxControl4 = new org.openswing.swing.client.ComboBoxControl();
         labelControl7 = new org.openswing.swing.client.LabelControl();
         labelControl6 = new org.openswing.swing.client.LabelControl();
-        labelControl1 = new org.openswing.swing.client.LabelControl();
-        labelControl2 = new org.openswing.swing.client.LabelControl();
-        labelControl4 = new org.openswing.swing.client.LabelControl();
-        textControl4 = new org.openswing.swing.client.TextControl();
         labelControl3 = new org.openswing.swing.client.LabelControl();
         labelControl5 = new org.openswing.swing.client.LabelControl();
-        textControl1 = new org.openswing.swing.client.TextControl();
         textControl6 = new org.openswing.swing.client.TextControl();
         textControl3 = new org.openswing.swing.client.TextControl();
         textControl5 = new org.openswing.swing.client.TextControl();
@@ -48,6 +42,8 @@ public class BuscarSiniestroDetailFrame extends DefaultDetailFrame {
         numericControl1 = new org.openswing.swing.client.NumericControl();
         labelControl10 = new org.openswing.swing.client.LabelControl();
         numericControl2 = new org.openswing.swing.client.NumericControl();
+        labelControl11 = new org.openswing.swing.client.LabelControl();
+        codLookupControl1 = new org.openswing.swing.client.CodLookupControl();
 
         setTitle("Buscar Siniestro");
 
@@ -84,33 +80,13 @@ public class BuscarSiniestroDetailFrame extends DefaultDetailFrame {
 
         labelControl8.setLabel("siniestro.numero");
 
-        comboBoxControl4.setAttributeName("tipoDetalleSiniestro");
-        comboBoxControl4.setDomainId(Dominios.TipoDetalleSiniestro().getDomainId());
-        comboBoxControl4.setRequired(true);
+        labelControl7.setLabel("titular.nombre");
 
-        labelControl7.setLabel("asegurado.nombre");
-
-        labelControl6.setLabel("asegurado.rif");
-
-        labelControl1.setLabel("tipoDetalleSiniestro");
-
-        labelControl2.setLabel("personaPago.rif");
-
-        labelControl4.setLabel("personaPago.nombre");
-
-        textControl4.setAttributeName("personaPago.nombreLargo");
-        textControl4.setToolTipText("Nombre de la Persona");
-        textControl4.setTrimText(true);
-        textControl4.setUpperCase(true);
+        labelControl6.setLabel("titular.rif");
 
         labelControl3.setLabel("asegurado.rif");
 
         labelControl5.setLabel("asegurado.nombre");
-
-        textControl1.setAttributeName("personaPago.rif.rif");
-        textControl1.setToolTipText("Cedula de la Persona o RIF");
-        textControl1.setTrimText(true);
-        textControl1.setUpperCase(true);
 
         textControl6.setAttributeName("personaTit.nombreLargo");
         textControl6.setToolTipText("Nombre de la Persona");
@@ -140,6 +116,10 @@ public class BuscarSiniestroDetailFrame extends DefaultDetailFrame {
 
         numericControl2.setAttributeName("siniestro.mes");
 
+        labelControl11.setLabel("diagnostico.nombre");
+
+        codLookupControl1.setAttributeName("diagnostico.nombre");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -148,58 +128,46 @@ public class BuscarSiniestroDetailFrame extends DefaultDetailFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(labelControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboBoxControl4, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(labelControl8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textControl7, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE))
+                        .addComponent(textControl7, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(labelControl9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(numericControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE))
+                        .addComponent(numericControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(labelControl10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(numericControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(labelControl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(labelControl4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textControl4, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE))
+                        .addComponent(numericControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(labelControl3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE))
+                        .addComponent(textControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(labelControl5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textControl5, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE))
+                        .addComponent(textControl5, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(labelControl6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textControl3, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE))
+                        .addComponent(textControl3, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(labelControl7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textControl6, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)))
+                        .addComponent(textControl6, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(labelControl11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(codLookupControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {labelControl1, labelControl10, labelControl2, labelControl3, labelControl4, labelControl5, labelControl6, labelControl7, labelControl8, labelControl9});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {labelControl10, labelControl11, labelControl3, labelControl5, labelControl6, labelControl7, labelControl8, labelControl9});
 
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(labelControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comboBoxControl4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelControl8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textControl7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -211,14 +179,6 @@ public class BuscarSiniestroDetailFrame extends DefaultDetailFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelControl10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(numericControl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(labelControl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(textControl4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelControl4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelControl3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -235,10 +195,14 @@ public class BuscarSiniestroDetailFrame extends DefaultDetailFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(textControl6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelControl7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labelControl11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(codLookupControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {comboBoxControl4, labelControl1, labelControl10, labelControl2, labelControl3, labelControl4, labelControl5, labelControl6, labelControl7, labelControl8, labelControl9, numericControl1, numericControl2, textControl1, textControl2, textControl3, textControl4, textControl5, textControl6});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {labelControl10, labelControl11, labelControl3, labelControl5, labelControl6, labelControl7, labelControl8, labelControl9, numericControl1, numericControl2, textControl2, textControl3, textControl5, textControl6});
 
         form1.add(jPanel2);
 
@@ -258,7 +222,7 @@ public class BuscarSiniestroDetailFrame extends DefaultDetailFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(form1, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+                .addComponent(form1, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -277,6 +241,10 @@ public class BuscarSiniestroDetailFrame extends DefaultDetailFrame {
     @Override
     public void inicializar(FormController formController, boolean addToMDIFrame) {
         initComponents();
+        DiagnosticoLookupController lookupDiagnostico = new DiagnosticoLookupController();
+        lookupDiagnostico.addLookup2ParentLink("diagnostico");
+        codLookupControl1.setLookupController(lookupDiagnostico);
+
         this.getRootPane().setDefaultButton(jButton1);
         form1.setCreateInnerVO(false);
         form1.setFormController(formController);
@@ -332,17 +300,15 @@ public class BuscarSiniestroDetailFrame extends DefaultDetailFrame {
     private void setEnableGridInternalButtons(boolean enabled) {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private org.openswing.swing.client.ComboBoxControl comboBoxControl4;
+    private org.openswing.swing.client.CodLookupControl codLookupControl1;
     private org.openswing.swing.form.client.Form form1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private org.openswing.swing.client.LabelControl labelControl1;
     private org.openswing.swing.client.LabelControl labelControl10;
-    private org.openswing.swing.client.LabelControl labelControl2;
+    private org.openswing.swing.client.LabelControl labelControl11;
     private org.openswing.swing.client.LabelControl labelControl3;
-    private org.openswing.swing.client.LabelControl labelControl4;
     private org.openswing.swing.client.LabelControl labelControl5;
     private org.openswing.swing.client.LabelControl labelControl6;
     private org.openswing.swing.client.LabelControl labelControl7;
@@ -351,10 +317,8 @@ public class BuscarSiniestroDetailFrame extends DefaultDetailFrame {
     private org.openswing.swing.client.NumericControl numericControl1;
     private org.openswing.swing.client.NumericControl numericControl2;
     private org.openswing.swing.client.SaveButton saveButton1;
-    private org.openswing.swing.client.TextControl textControl1;
     private org.openswing.swing.client.TextControl textControl2;
     private org.openswing.swing.client.TextControl textControl3;
-    private org.openswing.swing.client.TextControl textControl4;
     private org.openswing.swing.client.TextControl textControl5;
     private org.openswing.swing.client.TextControl textControl6;
     private org.openswing.swing.client.TextControl textControl7;

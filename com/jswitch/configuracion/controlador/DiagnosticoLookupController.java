@@ -15,7 +15,6 @@ import javax.swing.tree.DefaultTreeModel;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.hibernate.type.BooleanType;
-import org.hibernate.type.LongType;
 import org.hibernate.type.Type;
 import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;

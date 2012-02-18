@@ -129,7 +129,7 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
     @Override
     public Response logicaNegocio(ValueObject persistentObject) {
         Factura factura = (Factura) persistentObject;
-        factura.setPorcentajeRetencionIsrl(
+        factura.setPorcentajeRetencionIslr(
                 factura.getTipoConceptoSeniat().getPorcentajeRetencionIslr());
         Date fF = factura.getFechaFactura();
         Date fR = factura.getFechaRecepcion();
@@ -234,7 +234,7 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
 
     public Factura updateFactura(Factura fac) {
         Factura factura = fac;
-        Double islr = factura.getPorcentajeRetencionIsrl();
+        Double islr = factura.getPorcentajeRetencionIslr();
         Double montoNoAmparado = 0d;
         Double montoAmparado = 0d;
         Double baseIva = 0d;
@@ -274,8 +274,8 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
                 factura.getMontoIva() * factura.getPorcentajeRetencionIva());
 
         factura.setBaseIslr(baseIslr);
-        factura.setMontoRetencionIsrl(baseIslr * islr);
-        factura.setPorcentajeRetencionIsrl(islr);
+        factura.setMontoRetencionIslr(baseIslr * islr);
+        factura.setPorcentajeRetencionIslr(islr);
 
         factura.setGastosClinicos(gastosClinicos);
         factura.setHonorariosMedicos(honorariosMedicos);
