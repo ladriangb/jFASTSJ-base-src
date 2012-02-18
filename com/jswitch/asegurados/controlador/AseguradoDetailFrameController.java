@@ -92,6 +92,7 @@ public class AseguradoDetailFrameController extends DefaultDetailFrameController
         Hibernate.initialize(aseg.getNotasTecnicas());
         Hibernate.initialize(aseg.getObservaciones());
         Hibernate.initialize(aseg.getDocumentos());
+        Hibernate.initialize(aseg.getRevisiones());
         s.close();
         beanVO = aseg;
         return new VOResponse(beanVO);

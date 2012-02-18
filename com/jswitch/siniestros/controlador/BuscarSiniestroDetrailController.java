@@ -4,14 +4,13 @@ import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
-import com.jswitch.siniestros.controlador.detalle.DetalleSiniestroDetailFrameController;
 import com.jswitch.siniestros.modelo.maestra.Siniestro;
 import com.jswitch.siniestros.modelo.utilitario.BuscarSiniestro;
 import com.jswitch.siniestros.vista.SiniestroDetailFrame;
-import com.jswitch.siniestros.vista.detalle.DetalleSiniestroDetailFrame;
 import com.jswitch.vistasbd.ListaDiagnostico;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import org.hibernate.Query;
 import org.hibernate.classic.Session;
 import org.openswing.swing.client.GridControl;
@@ -143,7 +142,11 @@ public class BuscarSiniestroDetrailController extends DefaultDetailFrameControll
                 } else if (!list.isEmpty()) {
                     Siniestro d = ((ListaDiagnostico) list.get(0)).getSiniestro();
                     new SiniestroDetailFrameController(SiniestroDetailFrame.class.getName(), null, d, false);
+                } else {
+                    JOptionPane.showMessageDialog(vista, "No se encuentran registros");
                 }
+            } else {
+                JOptionPane.showMessageDialog(vista, "No se encuentran registros");
             }
         } catch (Exception e) {
             LoggerUtil.error(this.getClass(), "insertRecord", e);

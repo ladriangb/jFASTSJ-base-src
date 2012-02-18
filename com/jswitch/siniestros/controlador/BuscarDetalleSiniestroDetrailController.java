@@ -11,6 +11,7 @@ import com.jswitch.siniestros.modelo.utilitario.BuscarSiniestro;
 import com.jswitch.siniestros.vista.detalle.DetalleSiniestroDetailFrame;
 import com.jswitch.siniestros.vista.detalle.DetalleSiniestroGridFrame;
 import java.util.List;
+import javax.swing.JOptionPane;
 import org.hibernate.Query;
 import org.hibernate.classic.Session;
 import org.openswing.swing.client.GridControl;
@@ -155,7 +156,11 @@ public class BuscarDetalleSiniestroDetrailController extends DefaultDetailFrameC
                             DetalleSiniestroDetailFrame.class.getName(),
                             null,
                             d, true, d.getClass());
+                } else {
+                    JOptionPane.showMessageDialog(vista, "No se encuentran registros");
                 }
+            } else {
+                JOptionPane.showMessageDialog(vista, "No se encuentran registros");
             }
         } catch (Exception e) {
             LoggerUtil.error(this.getClass(), "insertRecord", e);

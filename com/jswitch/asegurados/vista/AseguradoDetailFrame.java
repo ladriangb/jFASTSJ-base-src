@@ -3,6 +3,7 @@ package com.jswitch.asegurados.vista;
 import com.jswitch.asegurados.controlador.AseguradoDetailFrameController;
 import com.jswitch.asegurados.modelo.dominio.Parentesco;
 import com.jswitch.asegurados.modelo.maestra.Asegurado;
+import com.jswitch.asegurados.modelo.transaccional.Revision;
 import com.jswitch.base.controlador.documentosAnexos.TipoDocumentoLookupController;
 import com.jswitch.base.controlador.util.DefaultDocumentosAnexosGridController;
 import com.jswitch.base.controlador.util.DefaultGridInternalController;
@@ -22,6 +23,7 @@ import com.jswitch.persona.controlador.PersonaLookupControllerPorNombre;
 import com.jswitch.persona.controlador.PersonasDetailController;
 import com.jswitch.persona.modelo.maestra.Rif;
 import com.jswitch.persona.vista.RifDialog;
+import com.jswitch.siniestros.controlador.PersonaTipoLookupController;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.form.client.Form;
 import org.openswing.swing.form.client.FormController;
@@ -37,7 +39,7 @@ public class AseguradoDetailFrame extends DefaultDetailFrame {
     protected DefaultDocumentosAnexosGridController controllerDocumentosAnexosX;
     protected DefaultGridInternalController controllerObservaciones;
     protected DefaultGridInternalController controllerNotasTecnicas;
-
+protected DefaultGridInternalController controllerRevisiones;
     public AseguradoDetailFrame() {
     }
 
@@ -120,6 +122,18 @@ public class AseguradoDetailFrame extends DefaultDetailFrame {
         saveButtonDoc = new org.openswing.swing.client.SaveButton();
         reloadButtonDoc = new org.openswing.swing.client.ReloadButton();
         filterButtonDoc = new org.openswing.swing.client.FilterButton();
+        reviciones = new javax.swing.JPanel();
+        jPanelNot1 = new javax.swing.JPanel();
+        gridControlNot1 = new org.openswing.swing.client.GridControl();
+        decimalColumnNot1 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        textColumnNot4 = new org.openswing.swing.table.columns.client.TextColumn();
+        codLookupColumn1 = new org.openswing.swing.table.columns.client.CodLookupColumn();
+        textColumnNot5 = new org.openswing.swing.table.columns.client.TextColumn();
+        dateTimeColumn3 = new org.openswing.swing.table.columns.client.DateTimeColumn();
+        jPanel16 = new javax.swing.JPanel();
+        insertButtonNot1 = new org.openswing.swing.client.InsertButton();
+        saveButtonNot1 = new org.openswing.swing.client.SaveButton();
+        reloadButtonNot1 = new org.openswing.swing.client.ReloadButton();
 
         setTitle("Asegurado");
 
@@ -354,7 +368,7 @@ public class AseguradoDetailFrame extends DefaultDetailFrame {
                     .addComponent(dateControl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(checkBoxControl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {codLookupControl1, codLookupControl2, codLookupControl3, codLookupControl4, codLookupControl5, dateControl1, dateControl2, labelControl1, labelControl11, labelControl12, labelControl13, labelControl2, labelControl3, labelControl4, labelControl5, labelControl6, labelControl7, labelControl8, numericControl1, numericControl5, numericControl6, numericControl7});
@@ -429,8 +443,8 @@ public class AseguradoDetailFrame extends DefaultDetailFrame {
             jPanelObsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelObsLayout.createSequentialGroup()
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(229, Short.MAX_VALUE))
-            .addComponent(gridControlObs, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
+                .addContainerGap(237, Short.MAX_VALUE))
+            .addComponent(gridControlObs, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout observacionesLayout = new javax.swing.GroupLayout(observaciones);
@@ -446,7 +460,7 @@ public class AseguradoDetailFrame extends DefaultDetailFrame {
         );
         observacionesLayout.setVerticalGroup(
             observacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 353, Short.MAX_VALUE)
+            .addGap(0, 361, Short.MAX_VALUE)
             .addGroup(observacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(observacionesLayout.createSequentialGroup()
                     .addContainerGap()
@@ -518,8 +532,8 @@ public class AseguradoDetailFrame extends DefaultDetailFrame {
             jPanelNotLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelNotLayout.createSequentialGroup()
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(229, Short.MAX_VALUE))
-            .addComponent(gridControlNot, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
+                .addContainerGap(237, Short.MAX_VALUE))
+            .addComponent(gridControlNot, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout notasTecnicasLayout = new javax.swing.GroupLayout(notasTecnicas);
@@ -535,7 +549,7 @@ public class AseguradoDetailFrame extends DefaultDetailFrame {
         );
         notasTecnicasLayout.setVerticalGroup(
             notasTecnicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 353, Short.MAX_VALUE)
+            .addGap(0, 361, Short.MAX_VALUE)
             .addGroup(notasTecnicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(notasTecnicasLayout.createSequentialGroup()
                     .addContainerGap()
@@ -611,7 +625,7 @@ public class AseguradoDetailFrame extends DefaultDetailFrame {
             .addGroup(jPanelDocLayout.createSequentialGroup()
                 .addGroup(jPanelDocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(gridControlDoc, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE))
+                    .addComponent(gridControlDoc, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -628,7 +642,7 @@ public class AseguradoDetailFrame extends DefaultDetailFrame {
         );
         DocAnexosLayout.setVerticalGroup(
             DocAnexosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 353, Short.MAX_VALUE)
+            .addGap(0, 361, Short.MAX_VALUE)
             .addGroup(DocAnexosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(DocAnexosLayout.createSequentialGroup()
                     .addContainerGap()
@@ -637,6 +651,86 @@ public class AseguradoDetailFrame extends DefaultDetailFrame {
         );
 
         jTabbedPane1.addTab("Documentos Anexos", DocAnexos);
+
+        jPanelNot1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        gridControlNot1.setInsertButton(insertButtonNot1);
+        gridControlNot1.setMaxNumberOfRowsOnInsert(4);
+        gridControlNot1.setReloadButton(reloadButtonNot1);
+        gridControlNot1.setSaveButton(saveButtonNot1);
+        gridControlNot1.setValueObjectClassName(Revision.class.getName());
+        gridControlNot1.setVisibleStatusPanel(false);
+
+        decimalColumnNot1.setColumnName("id");
+        decimalColumnNot1.setColumnRequired(false);
+        decimalColumnNot1.setColumnVisible(false);
+        decimalColumnNot1.setPreferredWidth(40);
+        gridControlNot1.getColumnContainer().add(decimalColumnNot1);
+
+        textColumnNot4.setColumnName("personaBuscadora.rif.rif");
+        textColumnNot4.setColumnRequired(false);
+        textColumnNot4.setMaxCharacters(1024);
+        gridControlNot1.getColumnContainer().add(textColumnNot4);
+
+        codLookupColumn1.setColumnName("personaBuscadora.nombreLargo");
+        codLookupColumn1.setEditableOnEdit(true);
+        codLookupColumn1.setEditableOnInsert(true);
+        codLookupColumn1.setPreferredWidth(200);
+        gridControlNot1.getColumnContainer().add(codLookupColumn1);
+
+        textColumnNot5.setColumnName("auditoria.usuarioInsert");
+        textColumnNot5.setColumnRequired(false);
+        gridControlNot1.getColumnContainer().add(textColumnNot5);
+
+        dateTimeColumn3.setColumnName("auditoria.fechaInsert");
+        dateTimeColumn3.setColumnRequired(false);
+        dateTimeColumn3.setSortVersus(org.openswing.swing.util.java.Consts.DESC_SORTED);
+        gridControlNot1.getColumnContainer().add(dateTimeColumn3);
+
+        jPanel16.setLayout(new java.awt.GridLayout(3, 2, 2, 2));
+        jPanel16.add(insertButtonNot1);
+        jPanel16.add(saveButtonNot1);
+        jPanel16.add(reloadButtonNot1);
+
+        javax.swing.GroupLayout jPanelNot1Layout = new javax.swing.GroupLayout(jPanelNot1);
+        jPanelNot1.setLayout(jPanelNot1Layout);
+        jPanelNot1Layout.setHorizontalGroup(
+            jPanelNot1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelNot1Layout.createSequentialGroup()
+                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(gridControlNot1, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE))
+        );
+        jPanelNot1Layout.setVerticalGroup(
+            jPanelNot1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelNot1Layout.createSequentialGroup()
+                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(237, Short.MAX_VALUE))
+            .addComponent(gridControlNot1, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout revicionesLayout = new javax.swing.GroupLayout(reviciones);
+        reviciones.setLayout(revicionesLayout);
+        revicionesLayout.setHorizontalGroup(
+            revicionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 603, Short.MAX_VALUE)
+            .addGroup(revicionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(revicionesLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jPanelNot1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+        revicionesLayout.setVerticalGroup(
+            revicionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 361, Short.MAX_VALUE)
+            .addGroup(revicionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(revicionesLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jPanelNot1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+
+        jTabbedPane1.addTab("Reviciones", reviciones);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -654,7 +748,7 @@ public class AseguradoDetailFrame extends DefaultDetailFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -686,6 +780,11 @@ public class AseguradoDetailFrame extends DefaultDetailFrame {
                 new DefaultGridInternalController(Asegurado.class.getName(), "getObservaciones", gridControlObs);
         gridControlObs.setGridDataLocator(controllerObservaciones);
         gridControlObs.setController(controllerObservaciones);
+
+        controllerRevisiones =
+                new DefaultGridInternalController(Asegurado.class.getName(), "getRevisiones", gridControlNot1);
+        gridControlNot1.setGridDataLocator(controllerRevisiones);
+        gridControlNot1.setController(controllerRevisiones);
 
         controllerNotasTecnicas =
                 new DefaultGridInternalController(Asegurado.class.getName(), "getNotasTecnicas", gridControlNot);
@@ -728,6 +827,13 @@ public class AseguradoDetailFrame extends DefaultDetailFrame {
         lookupPlan.addLookup2ParentLink("plan");
         codLookupControl4.setLookupController(lookupPlan);
 
+        String[] tipoPersonaPago = tipoPersonaPago = new String[]{"CLI", "MED", "LAB"};
+
+        PersonaTipoLookupController lookupBuscador = new PersonaTipoLookupController(tipoPersonaPago);
+        lookupBuscador.addLookup2ParentLink("personaBuscadora");
+        codLookupColumn1.setLookupController(lookupBuscador);
+
+
         form1.setCreateInnerVO(false);
         form1.setFormController(formController);
         if (addToMDIFrame) {
@@ -760,7 +866,7 @@ public class AseguradoDetailFrame extends DefaultDetailFrame {
         controllerDocumentosAnexosX.setBeanVO(beanVO, id);
         controllerObservaciones.setBeanVO(beanVO);
         controllerNotasTecnicas.setBeanVO(beanVO);
-
+        controllerRevisiones.setBeanVO(beanVO);
         reloadGridsData();
     }
 
@@ -790,6 +896,7 @@ public class AseguradoDetailFrame extends DefaultDetailFrame {
     private javax.swing.JPanel DocAnexos;
     private org.openswing.swing.table.columns.client.ButtonColumn buttonColumnDoc;
     private org.openswing.swing.client.CheckBoxControl checkBoxControl2;
+    private org.openswing.swing.table.columns.client.CodLookupColumn codLookupColumn1;
     private org.openswing.swing.table.columns.client.CodLookupColumn codLookupColumnDoc;
     private org.openswing.swing.client.CodLookupControl codLookupControl1;
     private org.openswing.swing.client.CodLookupControl codLookupControl2;
@@ -801,9 +908,11 @@ public class AseguradoDetailFrame extends DefaultDetailFrame {
     private org.openswing.swing.client.DateControl dateControl2;
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn1;
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn2;
+    private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn3;
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumnObs1;
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumnObs2;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumnNot;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumnNot1;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumnObs;
     private org.openswing.swing.client.DeleteButton deleteButtonDoc;
     private org.openswing.swing.client.DeleteButton deleteButtonObs;
@@ -814,9 +923,11 @@ public class AseguradoDetailFrame extends DefaultDetailFrame {
     private org.openswing.swing.form.client.Form form1;
     private org.openswing.swing.client.GridControl gridControlDoc;
     private org.openswing.swing.client.GridControl gridControlNot;
+    private org.openswing.swing.client.GridControl gridControlNot1;
     private org.openswing.swing.client.GridControl gridControlObs;
     private org.openswing.swing.client.InsertButton insertButtonDoc;
     private org.openswing.swing.client.InsertButton insertButtonNot;
+    private org.openswing.swing.client.InsertButton insertButtonNot1;
     private org.openswing.swing.client.InsertButton insertButtonObs;
     private org.openswing.swing.table.columns.client.IntegerColumn integerColumnDoc;
     private javax.swing.JButton jButton1;
@@ -825,9 +936,11 @@ public class AseguradoDetailFrame extends DefaultDetailFrame {
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelDoc;
     private javax.swing.JPanel jPanelNot;
+    private javax.swing.JPanel jPanelNot1;
     private javax.swing.JPanel jPanelObs;
     private javax.swing.JTabbedPane jTabbedPane1;
     private org.openswing.swing.client.LabelControl labelControl1;
@@ -850,15 +963,20 @@ public class AseguradoDetailFrame extends DefaultDetailFrame {
     private org.openswing.swing.client.ReloadButton reloadButton1;
     private org.openswing.swing.client.ReloadButton reloadButtonDoc;
     private org.openswing.swing.client.ReloadButton reloadButtonNot;
+    private org.openswing.swing.client.ReloadButton reloadButtonNot1;
     private org.openswing.swing.client.ReloadButton reloadButtonObs;
+    private javax.swing.JPanel reviciones;
     private org.openswing.swing.client.SaveButton saveButton1;
     private org.openswing.swing.client.SaveButton saveButtonDoc;
     private org.openswing.swing.client.SaveButton saveButtonNot;
+    private org.openswing.swing.client.SaveButton saveButtonNot1;
     private org.openswing.swing.client.SaveButton saveButtonObs;
     private org.openswing.swing.table.columns.client.TextColumn textColumnDoc;
     private org.openswing.swing.table.columns.client.TextColumn textColumnNot1;
     private org.openswing.swing.table.columns.client.TextColumn textColumnNot2;
     private org.openswing.swing.table.columns.client.TextColumn textColumnNot3;
+    private org.openswing.swing.table.columns.client.TextColumn textColumnNot4;
+    private org.openswing.swing.table.columns.client.TextColumn textColumnNot5;
     private org.openswing.swing.table.columns.client.TextColumn textColumnObs1;
     private org.openswing.swing.table.columns.client.TextColumn textColumnObs2;
     private org.openswing.swing.table.columns.client.TextColumn textColumnObs3;
