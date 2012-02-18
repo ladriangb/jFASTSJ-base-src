@@ -118,6 +118,11 @@ public class PersonaTipoLookupController extends DefaultLookupController {
         }
 
         @Override
+        public Response validateCode(String code) {
+            return new VOResponse();
+        }
+        
+        @Override
         public Response getTreeModel(JTree tree) {
             Session s = null;
             try {

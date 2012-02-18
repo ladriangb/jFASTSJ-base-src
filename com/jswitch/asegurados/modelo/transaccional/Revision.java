@@ -40,6 +40,12 @@ public class Revision extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private Persona personaBuscadora;
     /**
+     * Detalle de porque
+     */
+    @Column
+    @BusinessKey
+    private String detalle;
+    /**
      * Version
      */
     @Version
@@ -61,6 +67,14 @@ public class Revision extends BeanVO implements Serializable, Auditable {
      */
     public AuditoriaBasica getAuditoria() {
         return auditoria;
+    }
+
+    /**
+     * Detalle de porque
+     * @return the detalle
+     */
+    public String getDetalle() {
+        return detalle;
     }
 
     /**
@@ -93,6 +107,14 @@ public class Revision extends BeanVO implements Serializable, Auditable {
      */
     public void setAuditoria(AuditoriaBasica auditoria) {
         this.auditoria = auditoria;
+    }
+
+    /**
+     * Detalle de porque
+     * @param detalle the detalle to set
+     */
+    public void setDetalle(String detalle) {
+        this.detalle = detalle;
     }
 
     /**
