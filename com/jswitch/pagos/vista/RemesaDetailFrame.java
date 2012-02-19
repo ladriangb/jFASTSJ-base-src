@@ -45,7 +45,7 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
     protected DefaultGridInternalController controllerObservaciones;
     protected DefaultGridInternalController controllerNotasTecnicas;
     final JDialog d = new EsperaDialog(null, false);
-    private Reporte reporteDetail = new Reporte(CategoriaReporte.REMESA, 0, "REM-D001", "FONDO AUTOADMINISTRADO DE SALUD", "", "FROM " + Remesa.class.getName(), "Carta", false, false, true, false);
+    private Reporte reporteDetail = new Reporte(CategoriaReporte.REMESAS, 0, "REM-D001", "FONDO AUTOADMINISTRADO DE SALUD", "", "FROM " + Remesa.class.getName(), "Carta", false, false, true, false);
 
     public RemesaDetailFrame() {
     }

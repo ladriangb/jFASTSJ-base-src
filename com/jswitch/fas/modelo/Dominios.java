@@ -20,14 +20,8 @@ public class Dominios {
     public static Hashtable getDominios() {
         Hashtable domains = new Hashtable();
         domains.put(
-                Dominios.CategoriaReporte().getDomainId(),
-                Dominios.CategoriaReporte());
-        domains.put(
                 Dominios.TipoBusqueda().getDomainId(),
                 Dominios.TipoBusqueda());
-        domains.put(
-                Dominios.CategoriaSiniestro().getDomainId(),
-                Dominios.CategoriaSiniestro());
         domains.put(
                 Dominios.EstatusPago().getDomainId(),
                 Dominios.EstatusPago());
@@ -67,36 +61,6 @@ public class Dominios {
     public static Domain TipoBusqueda() {
         Domain dominio = new Domain("TipoBusqueda");
         TipoBusqueda o[] = TipoBusqueda.values();
-        for (int i = 0; i
-                < o.length; i++) {
-            dominio.addDomainPair(o[i], o[i].toString());
-        }
-        return dominio;
-    }
-
-    public static enum CategoriaReporte {
-
-        PERSONAS, POLIZAS, RECIBOS, ASEGURADOS, SINIESTROS, PAGOS, AUDITORIAS
-    }
-
-    public static Domain CategoriaReporte() {
-        Domain dominio = new Domain("CategoriaReporte");
-        CategoriaReporte o[] = CategoriaReporte.values();
-        for (int i = 0; i
-                < o.length; i++) {
-            dominio.addDomainPair(o[i], o[i].toString());
-        }
-        return dominio;
-    }
-
-    public static enum CategoriaSiniestro {
-
-        EMERGENCIA, CARTA_AVAL, REEMBOLSO, APS
-    }
-
-    public static Domain CategoriaSiniestro() {
-        Domain dominio = new Domain("CategoriaSiniestro");
-        CategoriaSiniestro o[] = CategoriaSiniestro.values();
         for (int i = 0; i
                 < o.length; i++) {
             dominio.addDomainPair(o[i], o[i].toString());
