@@ -86,7 +86,7 @@ public class Siniestro extends BeanVO implements Serializable, Auditable {
     @Column
     @Enumerated(EnumType.STRING)
     @BusinessKey
-    private EstadoSiniestro estatusSiniestro;
+    private EstadoSiniestro estadoSiniestro;
     /**
      * certificado 
      */
@@ -135,7 +135,7 @@ public class Siniestro extends BeanVO implements Serializable, Auditable {
     private AuditoriaBasica auditoria;
 
     public Siniestro() {
-        estatusSiniestro = EstadoSiniestro.ABIERTO;
+        estadoSiniestro = EstadoSiniestro.ABIERTO;
         fechaCreacion= new Date();
     }
 
@@ -188,11 +188,11 @@ public class Siniestro extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     * Estatus en el que se encuentra el siniestro ABIERTO, CERRADO
+     * Estatdo en el que se encuentra el siniestro ABIERTO, CERRADO
      * @return the estatusSiniestro
      */
-    public EstadoSiniestro getEstatusSiniestro() {
-        return estatusSiniestro;
+    public EstadoSiniestro getEstadoSiniestro() {
+        return estadoSiniestro;
     }
 
     /**
@@ -308,11 +308,11 @@ public class Siniestro extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     * Estatus en el que se encuentra el siniestro ABIERTO, CERRADO
-     * @param estatusSiniestro the estatusSiniestro to set
+     * Estatdo en el que se encuentra el siniestro ABIERTO, CERRADO
+     * @param estadoSiniestro the estadoSiniestro to set
      */
-    public void setEstatusSiniestro(EstadoSiniestro estatusSiniestro) {
-        this.estatusSiniestro = estatusSiniestro;
+    public void setEstatusSiniestro(EstadoSiniestro estadoSiniestro) {
+        this.estadoSiniestro = estadoSiniestro;
     }
 
     /**

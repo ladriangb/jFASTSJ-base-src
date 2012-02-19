@@ -166,7 +166,7 @@
               <Properties>
                 <Property name="columnFilterable" type="boolean" value="true"/>
                 <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="&quot;estatusSiniestro&quot;" type="code"/>
+                  <Connection code="&quot;estadoSiniestro&quot;" type="code"/>
                 </Property>
                 <Property name="columnRequired" type="boolean" value="false"/>
                 <Property name="columnSortable" type="boolean" value="true"/>

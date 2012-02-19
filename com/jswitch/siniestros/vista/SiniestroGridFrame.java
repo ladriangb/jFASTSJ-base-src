@@ -93,7 +93,7 @@ public class SiniestroGridFrame extends DefaultGridFrame {
         gridData.getColumnContainer().add(decimalColumn1);
 
         comboColumn1.setColumnFilterable(true);
-        comboColumn1.setColumnName("estatusSiniestro");
+        comboColumn1.setColumnName("estadoSiniestro");
         comboColumn1.setColumnRequired(false);
         comboColumn1.setColumnSortable(true);
         comboColumn1.setDomainId(Dominios.EstadoSiniestro().getDomainId());

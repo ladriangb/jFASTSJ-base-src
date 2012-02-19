@@ -175,7 +175,7 @@ public class SiniestroDetailFrameController extends DefaultDetailFrameController
             //<editor-fold defaultstate="collapsed" desc="Cambiar Estado">
             if (vista.getMainPanel().getMode() == Consts.READONLY) {
                 Siniestro ss = ((Siniestro) beanVO);
-                switch (((Siniestro) beanVO).getEstatusSiniestro()) {
+                switch (((Siniestro) beanVO).getEstadoSiniestro()) {
                     case ABIERTO:
                         int op = JOptionPane.showConfirmDialog(MDIFrame.getInstance(),
                                 "Si Cierra el siniestro necesitara privilegios de Super usuario para poder abrirlo nuevamente. Desea Cerralo?",
@@ -184,13 +184,13 @@ public class SiniestroDetailFrameController extends DefaultDetailFrameController
                                 JOptionPane.INFORMATION_MESSAGE);
                         if (op == JOptionPane.YES_OPTION) {
                             ss.setEstatusSiniestro(Dominios.EstadoSiniestro.CERRADO);
-                            ((SiniestroDetailFrame) vista).validarEstadoSiniestro(ss.getEstatusSiniestro());
+                            ((SiniestroDetailFrame) vista).validarEstadoSiniestro(ss.getEstadoSiniestro());
                         }
                         break;
                     case CERRADO:
                         if (SuperusuarioLoginDialog.VerificarSuperusuario()) {
                             ss.setEstatusSiniestro(Dominios.EstadoSiniestro.ABIERTO);
-                            ((SiniestroDetailFrame) vista).validarEstadoSiniestro(ss.getEstatusSiniestro());
+                            ((SiniestroDetailFrame) vista).validarEstadoSiniestro(ss.getEstadoSiniestro());
                         } else {
                             return;
                         }

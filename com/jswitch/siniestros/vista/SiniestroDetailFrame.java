@@ -693,7 +693,7 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void validarEstado(Siniestro sini) {
-        switch (sini.getEstatusSiniestro()) {
+        switch (sini.getEstadoSiniestro()) {
             case ABIERTO:
                 jButton1.setVisible(true);
                 jButton1.setBackground(Color.GREEN);
@@ -795,7 +795,7 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
         //controllerDocumentos.setBeanVO(beanVO, id);
         validarEstado((Siniestro) beanVO);
         if (beanVO != null) {
-            validarEstadoSiniestro(((Siniestro) beanVO).getEstatusSiniestro());
+            validarEstadoSiniestro(((Siniestro) beanVO).getEstadoSiniestro());
         }
         reloadGridsData();
     }
