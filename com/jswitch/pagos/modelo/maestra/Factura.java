@@ -109,25 +109,11 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private Double valorUT;
     /**
-     * tipo de consepto
-     * para saber q porcentaje de ISLR aplica
-     */
-    @ManyToOne()
-    @BusinessKey
-    private TimbreMunicipal timbreMunicipal;
-    /**
      * RetencionTM Timbre Municipal
      */
     @Column
     @BusinessKey
     private Double porcentajeRetencionTM;
-    /**
-     * RetencionTM Timbre Municipal
-     * 
-     */
-    @Column
-    @BusinessKey
-    private Double montoRetencionTM;
     /**
      * base para el ISLR
      */
@@ -258,7 +244,6 @@ public class Factura extends BeanVO implements Serializable, Auditable {
         montoRetencionDeducible = 0d;
         montoRetencionIva = 0d;
         montoRetencionIslr = 0d;
-        montoRetencionTM = 0d;
         montoAmparado = 0d;
         gastosClinicos = 0d;
         honorariosMedicos = 0d;
@@ -427,14 +412,6 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     * RetencionTM Timbre Municipal
-     * @return the montoRetencionTM
-     */
-    public Double getMontoRetencionTM() {
-        return montoRetencionTM;
-    }
-
-    /**
      * numero de control de la factura
      * si no existe coloque N/A
      * @return the numeroControl
@@ -505,15 +482,6 @@ public class Factura extends BeanVO implements Serializable, Auditable {
      */
     public SumaFactura getSumaFactura() {
         return sumaFactura;
-    }
-
-    /**
-     * tipo de consepto
-     * para saber q porcentaje de ISLR aplica
-     * @return the timbreMunicipal
-     */
-    public TimbreMunicipal getTimbreMunicipal() {
-        return timbreMunicipal;
     }
 
     /**
@@ -695,14 +663,6 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     * RetencionTM Timbre Municipal
-     * @param montoRetencionTM the montoRetencionTM to set
-     */
-    public void setMontoRetencionTM(Double montoRetencionTM) {
-        this.montoRetencionTM = montoRetencionTM;
-    }
-
-    /**
      * numero de control de la factura
      * si no existe coloque N/A
      * @param numeroControl the numeroControl to set
@@ -778,15 +738,6 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     /**
      * tipo de consepto
      * para saber q porcentaje de ISLR aplica
-     * @param timbreMunicipal the timbreMunicipal to set
-     */
-    public void setTimbreMunicipal(TimbreMunicipal timbreMunicipal) {
-        this.timbreMunicipal = timbreMunicipal;
-    }
-
-    /**
-     * tipo de consepto
-     * para saber q porcentaje de ISLR aplica
      * @param tipoConceptoSeniat the tipoConceptoSeniat to set
      */
     public void setTipoConceptoSeniat(ConceptoSENIAT tipoConceptoSeniat) {
@@ -817,5 +768,4 @@ public class Factura extends BeanVO implements Serializable, Auditable {
         this.valorUT = valorUT;
     }
 
-   
 }

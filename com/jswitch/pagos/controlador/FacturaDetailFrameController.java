@@ -15,6 +15,8 @@ import com.jswitch.pagos.modelo.transaccional.DesgloseCobertura;
 import com.jswitch.pagos.modelo.transaccional.DesgloseSumaAsegurada;
 import com.jswitch.pagos.vista.FacturaDetailFrame;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import org.hibernate.Hibernate;
@@ -204,33 +206,6 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
         return deducible;
     }
 
-    private Factura calcularTimbreMunicipal(Factura factura) {
-        int cant = (int) (factura.getTotalLiquidado() / factura.getValorUT());
-        TimbreMunicipal tm = null;
-        Session s = null;
-        try {
-            s = HibernateUtil.getSessionFactory().openSession();
-            tm = (TimbreMunicipal) s.get(TimbreMunicipal.class, factura.getTimbreMunicipal().getId());
-            Hibernate.initialize(tm.getRangoValor());
-
-        } catch (Exception ex) {
-            LoggerUtil.error(this.getClass(), "getDeducible", ex);
-        } finally {
-            s.close();
-        }
-        if (tm != null) {
-            for (RangoValor rangoValor : tm.getRangoValor()) {
-                if (cant >= rangoValor.getMinValue() && cant <= rangoValor.getMaxValue()) {
-                    factura.setPorcentajeRetencionTM(rangoValor.getMonto());
-                    factura.setMontoRetencionTM(factura.getTotalLiquidado() * rangoValor.getMonto());
-                    return factura;
-                }
-            }
-        }
-        factura.setPorcentajeRetencionTM(0d);
-        factura.setMontoRetencionTM(0d);
-        return factura;
-    }
 
     public Factura updateFactura(Factura fac) {
         Factura factura = fac;
@@ -242,7 +217,6 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
         Double gastosClinicos = 0d;
         Double honorariosMedicos = 0d;
         Double iva = factura.getPorcentajeIva();
-        factura = calcularTimbreMunicipal(factura);
         for (DesgloseCobertura dc : factura.getDesgloseCobertura()) {
             if (dc.getAuditoria().getActivo()) {
                 Cobertura c = dc.getCobertura();
@@ -269,18 +243,32 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
         factura.setMontoAmparado(montoAmparado);
 
         factura.setBaseIva(baseIva);
-        factura.setMontoIva(baseIva * iva);
+        factura.setMontoIva(round2(baseIva * iva));
         factura.setMontoRetencionIva(
                 factura.getMontoIva() * factura.getPorcentajeRetencionIva());
 
         factura.setBaseIslr(baseIslr);
-        factura.setMontoRetencionIslr(baseIslr * islr);
+        factura.setMontoRetencionIslr(round2(baseIslr * islr));
         factura.setPorcentajeRetencionIslr(islr);
 
         factura.setGastosClinicos(gastosClinicos);
         factura.setHonorariosMedicos(honorariosMedicos);
         
-        factura.setTotalLiquidado((baseIva * iva) + montoAmparado);
+        factura.setTotalLiquidado(round2((baseIva * iva) + montoAmparado));
         return factura;
     }
+    /**
+     * Para el numero dado retorna con dos decimales redondeando
+     * 
+     * @param number numero a ser redondiado
+     * @return numero redondiado
+     */
+     public Double round2(Double number) {
+        DecimalFormat formatter = new DecimalFormat("#0.00");
+        DecimalFormatSymbols s = formatter.getDecimalFormatSymbols();
+        s.setDecimalSeparator('.');
+        formatter.setDecimalFormatSymbols(s);
+        return Double.parseDouble(formatter.format(number));
+    }
+    
 }

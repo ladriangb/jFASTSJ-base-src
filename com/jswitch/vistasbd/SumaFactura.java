@@ -53,6 +53,13 @@ public class SumaFactura extends BeanVO implements Serializable {
     @Column
     @BusinessKey
     private Double montoRetencionProntoPago;
+    /**
+     * monto que la empresa 
+     * para registrados en la factura
+     */
+    @Column
+    @BusinessKey
+    private Double montoRetencionTM;
     
 
     public SumaFactura() {
@@ -80,6 +87,15 @@ public class SumaFactura extends BeanVO implements Serializable {
      */
     public Double getMontoRetencionProntoPago() {
         return montoRetencionProntoPago;
+    }
+
+    /**
+     * monto que la empresa
+     * para registrados en la factura
+     * @return the montoRetencionTM
+     */
+    public Double getMontoRetencionTM() {
+        return montoRetencionTM;
     }
 
     /**
@@ -120,6 +136,15 @@ public class SumaFactura extends BeanVO implements Serializable {
      */
     public void setMontoRetencionProntoPago(Double montoRetencionProntoPago) {
         this.montoRetencionProntoPago = montoRetencionProntoPago;
+    }
+
+    /**
+     * monto que la empresa
+     * para registrados en la factura
+     * @param montoRetencionTM the montoRetencionTM to set
+     */
+    public void setMontoRetencionTM(Double montoRetencionTM) {
+        this.montoRetencionTM = montoRetencionTM;
     }
 
     /**
