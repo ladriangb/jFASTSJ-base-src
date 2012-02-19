@@ -4,6 +4,7 @@ import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.configuracion.modelo.dominio.patologias.Diagnostico;
 import com.jswitch.fas.modelo.Dominios.TipoDetalleSiniestro;
 import com.jswitch.persona.modelo.maestra.Persona;
+import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
 import com.jswitch.siniestros.modelo.maestra.Siniestro;
 
 /**
@@ -32,7 +33,10 @@ public class BuscarSiniestro extends BeanVO {
      * Siniestro al que Pertenece
      */
     private Siniestro siniestro;
-
+    /**
+     * Etapa en la que se encuentra el siniestro
+     */
+    private EtapaSiniestro etapaSiniestro;
     /**
      * Diagnostico
      */
@@ -46,6 +50,14 @@ public class BuscarSiniestro extends BeanVO {
      */
     public Diagnostico getDiagnostico() {
         return diagnostico;
+    }
+
+    /**
+     * Etapa en la que se encuentra el siniestro
+     * @return the etapaSiniestro
+     */
+    public EtapaSiniestro getEtapaSiniestro() {
+        return etapaSiniestro;
     }
 
     /**
@@ -97,6 +109,14 @@ public class BuscarSiniestro extends BeanVO {
     }
 
     /**
+     * Etapa en la que se encuentra el siniestro
+     * @param etapaSiniestro the etapaSiniestro to set
+     */
+    public void setEtapaSiniestro(EtapaSiniestro etapaSiniestro) {
+        this.etapaSiniestro = etapaSiniestro;
+    }
+
+    /**
      * Persona asegurado q sufrio el siniestro
      * @param personaAseg the personaAseg to set
      */
@@ -135,5 +155,6 @@ public class BuscarSiniestro extends BeanVO {
     public void setTipoDetalleSiniestro(TipoDetalleSiniestro tipoDetalleSiniestro) {
         this.tipoDetalleSiniestro = tipoDetalleSiniestro;
     }
+
     
 }

@@ -40,7 +40,7 @@ public class BuscarDetalleSiniestroDetrailController extends DefaultDetailFrameC
         Session s = HibernateUtil.getSessionFactory().openSession();
         boolean Snum = false, Sayo = false, Smes = false, Pnombre = false,
                 Prif = false, Anombre = false, Arif = false, Tnombre = false,
-                Trif = false;
+                Trif = false,eta=false;
         String where = "";
         String and = "";
         //<editor-fold defaultstate="collapsed" desc="Siniestro">
@@ -103,6 +103,12 @@ public class BuscarDetalleSiniestroDetrailController extends DefaultDetailFrameC
             and = " AND ";
         }
         //</editor-fold>
+        //<editor-fold defaultstate="collapsed" desc="Etapa Siniestro">
+        if (bs.getEtapaSiniestro().getId() != null) {
+            where += and + " etapaSiniestro.id=:di";
+            eta = true;
+        }
+        //</editor-fold>
         try {
             String sql = "FROM " + bs.getTipoDetalleSiniestro().getClase() + " C ";
             sql = where.trim().isEmpty() ? sql : (sql + "WHERE " + where);
@@ -140,6 +146,11 @@ public class BuscarDetalleSiniestroDetrailController extends DefaultDetailFrameC
             }
             if (Trif) {
                 q = q.setString("Trif", "%" + bs.getPersonaTit().getRif().getRif() + "%");
+            }
+            //</editor-fold>
+            //<editor-fold defaultstate="collapsed" desc="diagnostico">
+            if (eta) {
+                q = q.setLong("di", bs.getEtapaSiniestro().getId());
             }
             //</editor-fold>
             List list = q.list();
