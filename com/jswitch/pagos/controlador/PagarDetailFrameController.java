@@ -1,9 +1,11 @@
 package com.jswitch.pagos.controlador;
 
+import com.jswitch.base.controlador.General;
 import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.configuracion.modelo.maestra.ConfiguracionProntoPago;
+import com.jswitch.configuracion.modelo.maestra.TimbreMunicipal;
 import com.jswitch.configuracion.modelo.transaccional.RangoValor;
 import com.jswitch.fas.modelo.Dominios.EstatusPago;
 import com.jswitch.pagos.modelo.maestra.Factura;
@@ -12,6 +14,8 @@ import com.jswitch.pagos.modelo.maestra.Remesa;
 import com.jswitch.pagos.modelo.utilitario.Pagar;
 import com.jswitch.pagos.vista.PagarDetailFrame;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -28,6 +32,9 @@ import org.openswing.swing.message.receive.java.ValueObject;
  */
 public class PagarDetailFrameController extends DefaultDetailFrameController {
 
+    /**
+     * panel a pagar 
+     */
     private Form mainPane;
 
     public PagarDetailFrameController(Form mainPane) {
@@ -79,10 +86,21 @@ public class PagarDetailFrameController extends DefaultDetailFrameController {
         return new VOResponse(newPersistentObject);
     }
 
+    /**
+     * Para pagar una orden de pago espesifica
+     * @param ordenDePago a ser pagado
+     * @param pagar parametros de pago
+     * @param s session de conexion a Base de Datos
+     * @return Respuesta en la creacion del pago
+     */
     private Response pagar(OrdenDePago ordenDePago, Pagar pagar, Session s) {
         ordenDePago.setFechaPagado(pagar.getFechaDePago());
         ordenDePago.setReferencia(pagar.getReferencia());
         ordenDePago.setEstatusPago(EstatusPago.PAGADO);
+        Double tm = timbreACancelar(ordenDePago, pagar, s);
+        tm = round2(ordenDePago.getSumaOrden().getTotalACancelar() * tm);
+
+        
         s.update(ordenDePago);
         List<DetalleSiniestro> list = s.createQuery("FROM " + DetalleSiniestro.class.getName() + " C "
                 + "WHERE C.ordenDePago.id=?").setLong(0, ordenDePago.getId()).list();
@@ -94,6 +112,7 @@ public class PagarDetailFrameController extends DefaultDetailFrameController {
                     + "WHERE C.detalleSiniestro.id=?").setLong(0, detalleSiniestro.getId()).list();
             for (Factura factura : lis2) {
                 factura.setFechaPagado(pagar.getFechaDePago());
+                factura.setValorUT(General.parametros.get("ut").getValorDouble());
                 int cant = diferenciaEnDias(factura.getFechaFactura(), factura.getFechaPagado());
                 switch (pagar.getTipoDescuentoProntoPago()) {
                     case POR_CONVENIO:
@@ -128,6 +147,13 @@ public class PagarDetailFrameController extends DefaultDetailFrameController {
         return new VOResponse();
     }
 
+    /**
+     * 
+     * numero de días transcurridos entre entre una fecha y otra
+     * @param date1 fecha inicial
+     * @param date2 fecha final
+     * @return numero de dias entre una fecha y otra
+     */
     public int diferenciaEnDias(Date date1, Date date2) {
         java.util.GregorianCalendar dateA = (java.util.GregorianCalendar) Calendar.getInstance();
         java.util.GregorianCalendar dateB = (java.util.GregorianCalendar) Calendar.getInstance();
@@ -136,5 +162,41 @@ public class PagarDetailFrameController extends DefaultDetailFrameController {
         long difms = Math.abs(dateB.getTimeInMillis() - dateA.getTimeInMillis());
         int difd = (int) (difms / 1000 / 60 / 60 / 24);
         return difd;
+    }
+
+    /**
+     * calcular el timbre municipal a cancelar por orden de pago
+     * @param ordenDePago
+     * @param pagar
+     * @return timbre municipal a cancelar 
+     */
+    private Double timbreACancelar(OrdenDePago ordenDePago, Pagar pagar, Session s) {
+        int totalUT = (int) (ordenDePago.getSumaOrden().getTotalACancelar()
+                / General.parametros.get("ut").getValorDouble());
+
+        TimbreMunicipal tm = pagar.getTimbreMunicipal();
+        List<RangoValor> list = s.createQuery("FROM "
+                + RangoValor.class.getName() + " R WHERE R.timbreMunicipal.id=?").
+                setLong(0, tm.getId()).list();
+        for (RangoValor rangoValor : list) {
+            if (totalUT >= rangoValor.getMinValue()
+                    && totalUT <= rangoValor.getMaxValue()) {
+                return rangoValor.getMonto();
+            }
+        }
+        return 0d;
+    }
+
+    /**
+     * Para el numero dado retorna con dos decimales redondeando
+     * @param number numero a ser redondiado
+     * @return numero redondiado
+     */
+    private Double round2(Double number) {
+        DecimalFormat formatter = new DecimalFormat("#0.00");
+        DecimalFormatSymbols s = formatter.getDecimalFormatSymbols();
+        s.setDecimalSeparator('.');
+        formatter.setDecimalFormatSymbols(s);
+        return Double.parseDouble(formatter.format(number));
     }
 }

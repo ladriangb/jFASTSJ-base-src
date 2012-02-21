@@ -2180,7 +2180,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
             persona = codLookupControl17;
             negociador = codLookupControl20;
             tipoSiniestro = codLookupControl18;
-            etapaSiniestro = codLookupControl9;
+            etapaSiniestro = codLookupControl19;
             siniestro = codLookupControl28;
         } else if (tipoDetalle.equals(Emergencia.class)) {
             persona = codLookupControl14;
@@ -2223,7 +2223,7 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         }
         if (etapaSiniestro != null) {
             etapaSiniestro.setLookupController(estadoController);
-            etapaSiniestro.setControllerMethodName("getEtapaSiniestro");
+//            etapaSiniestro.setControllerMethodName("getEtapaSiniestro");
         }
         if (siniestro != null) {
 

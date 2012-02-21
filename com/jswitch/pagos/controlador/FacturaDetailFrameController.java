@@ -263,7 +263,7 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
      * @param number numero a ser redondiado
      * @return numero redondiado
      */
-     public Double round2(Double number) {
+     private  Double round2(Double number) {
         DecimalFormat formatter = new DecimalFormat("#0.00");
         DecimalFormatSymbols s = formatter.getDecimalFormatSymbols();
         s.setDecimalSeparator('.');

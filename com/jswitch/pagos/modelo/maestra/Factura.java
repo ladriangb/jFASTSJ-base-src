@@ -253,12 +253,6 @@ public class Factura extends BeanVO implements Serializable, Auditable {
         } else {
             porcentajeIva = 0d;
         }
-        if (General.parametros != null && General.parametros.get("ut") != null) {
-            valorUT = General.parametros.get("ut").getValorDouble();
-        } else {
-            valorUT = 0d;
-        }
-
         porcentajeRetencionIva = 0d;
         porcentajeRetencionTM = 0d;
         porcentajeRetencionIslr = 0d;

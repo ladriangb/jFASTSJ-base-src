@@ -183,13 +183,13 @@ public class SiniestroDetailFrameController extends DefaultDetailFrameController
                                 JOptionPane.YES_NO_OPTION,
                                 JOptionPane.INFORMATION_MESSAGE);
                         if (op == JOptionPane.YES_OPTION) {
-                            ss.setEstatusSiniestro(Dominios.EstadoSiniestro.CERRADO);
+                            ss.setEstadoSiniestro(Dominios.EstadoSiniestro.CERRADO);
                             ((SiniestroDetailFrame) vista).validarEstadoSiniestro(ss.getEstadoSiniestro());
                         }
                         break;
                     case CERRADO:
                         if (SuperusuarioLoginDialog.VerificarSuperusuario()) {
-                            ss.setEstatusSiniestro(Dominios.EstadoSiniestro.ABIERTO);
+                            ss.setEstadoSiniestro(Dominios.EstadoSiniestro.ABIERTO);
                             ((SiniestroDetailFrame) vista).validarEstadoSiniestro(ss.getEstadoSiniestro());
                         } else {
                             return;

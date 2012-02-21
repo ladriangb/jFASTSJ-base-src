@@ -831,10 +831,6 @@ public class FacturaDetailFrame extends DefaultDetailFrame {
         gridControl5.setGridDataLocator(desgloseSumaAsegurada);
         gridControl5.setController(desgloseSumaAsegurada);
         
-//        TimbreMunicipalLookupController tm= new TimbreMunicipalLookupController();
-//        tm.addLookup2ParentLink("timbreMunicipal");
-//        codLookupTM.setLookupController(tm);
-
         desgloseCobertura =
                 new DesgloseCoberturaGridInternalController(Factura.class.getName(), "getDesgloseCobertura", gridControl6, this);
         gridControl6.setGridDataLocator(desgloseCobertura);

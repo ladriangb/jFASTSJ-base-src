@@ -311,7 +311,7 @@ public class Siniestro extends BeanVO implements Serializable, Auditable {
      * Estatdo en el que se encuentra el siniestro ABIERTO, CERRADO
      * @param estadoSiniestro the estadoSiniestro to set
      */
-    public void setEstatusSiniestro(EstadoSiniestro estadoSiniestro) {
+    public void setEstadoSiniestro(EstadoSiniestro estadoSiniestro) {
         this.estadoSiniestro = estadoSiniestro;
     }
 

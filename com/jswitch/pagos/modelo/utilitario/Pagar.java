@@ -1,13 +1,10 @@
 package com.jswitch.pagos.modelo.utilitario;
 
 import com.jswitch.base.modelo.util.bean.BeanVO;
+import com.jswitch.configuracion.modelo.maestra.TimbreMunicipal;
 import com.jswitch.fas.modelo.Dominios.TipoDescuentoProntoPago;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.Past;
 
 /**
  * Clase util para saber quien esta pagando 
@@ -39,6 +36,10 @@ public class Pagar extends BeanVO {
      * porcentaje Descuento
      */
     private Double porcentajeDescuento;
+    /**
+     * Timbre municipal con el q se pagara
+     */
+    private TimbreMunicipal timbreMunicipal;
 
     public Pagar() {
         tipoDescuentoProntoPago = TipoDescuentoProntoPago.POR_CONVENIO;
@@ -87,6 +88,14 @@ public class Pagar extends BeanVO {
     }
 
     /**
+     * Timbre municipal con el q se pagara
+     * @return the timbreMunicipal
+     */
+    public TimbreMunicipal getTimbreMunicipal() {
+        return timbreMunicipal;
+    }
+
+    /**
      * Tipo Descuento  ProntoPago
      * @return the tipoDescuentoProntoPago
      */
@@ -132,6 +141,14 @@ public class Pagar extends BeanVO {
      */
     public void setReferencia(String referencia) {
         this.referencia = referencia;
+    }
+
+    /**
+     * Timbre municipal con el q se pagara
+     * @param timbreMunicipal the timbreMunicipal to set
+     */
+    public void setTimbreMunicipal(TimbreMunicipal timbreMunicipal) {
+        this.timbreMunicipal = timbreMunicipal;
     }
 
     /**

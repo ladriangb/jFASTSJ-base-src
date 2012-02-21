@@ -89,7 +89,7 @@ public class PlanesGridFrameController extends DefaultGridFrameController implem
                     Reembolso.class.getSimpleName(),
                     Vida.class.getSimpleName()};
                 for (String o : clases) {
-                    ConfiguracionSiniestro cs = new ConfiguracionSiniestro(o, Double.POSITIVE_INFINITY, 0d, plan, ab);
+                    ConfiguracionSiniestro cs = new ConfiguracionSiniestro(o, 0d, Double.POSITIVE_INFINITY, plan, ab);
                     s.save(cs);
                     plan.getConfiguracionSiniestros().add(cs);
                 }

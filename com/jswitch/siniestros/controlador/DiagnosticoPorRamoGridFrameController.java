@@ -3,6 +3,7 @@ package com.jswitch.siniestros.controlador;
 import com.jswitch.base.controlador.util.DefaultGridFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.configuracion.modelo.dominio.patologias.Diagnostico;
+import com.jswitch.configuracion.modelo.transaccional.SumaAsegurada;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.siniestros.vista.DiagnosticoPorRamoGridFrame;
 import com.jswitch.siniestros.vista.detalle.DetalleSiniestroDetailFrame;
@@ -49,8 +50,12 @@ public class DiagnosticoPorRamoGridFrameController extends DefaultGridFrameContr
         VOListResponse response = null;
         try {
             s = HibernateUtil.getSessionFactory().openSession();
-            List k = s.createQuery("FROM " + Diagnostico.class.getName() + " D "
-                    + "WHERE D.especialidad.ramo.id=?").setLong(0, detalleSiniestro.getRamo().getId()).list();
+            List k = s.createQuery("SELECT D.diagnostico FROM " + SumaAsegurada.class.getName() + " D "
+                    + "WHERE D.plan.id=? "
+                    + "AND D.diagnostico.especialidad.ramo.id=?").
+                    setLong(0, detalleSiniestro.getSiniestro().getAsegurado().getPlan().getId()).
+                    setLong(1, detalleSiniestro.getRamo().getId()).
+                    list();
             response = new VOListResponse(k, false, k.size());
         } catch (Exception ex) {
         } finally {
