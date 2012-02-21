@@ -18,6 +18,7 @@ import com.jswitch.siniestros.modelo.dominio.TipoSiniestro;
 import com.jswitch.persona.modelo.dominio.TipoPersona;
 import com.jswitch.reporte.modelo.Reporte;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
+import com.jswitch.vistasbd.SumaDesgloseCobertura;
 import com.jswitch.vistasbd.SumaDetalle;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -173,6 +174,12 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      */
     @Transient
     private transient Boolean selected;
+    /**
+     * lista de facturas de pagos
+     */
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "detalleSiniestro")
+    @BusinessKey(exclude = Method.ALL)
+    private Set<SumaDesgloseCobertura> sumaDesgloseCoberturas = new HashSet<SumaDesgloseCobertura>();
     /**
      * lista de facturas de pagos
      */
