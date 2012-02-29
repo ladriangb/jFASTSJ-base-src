@@ -9,7 +9,9 @@ import com.jswitch.siniestros.modelo.utilitario.BuscarSiniestro;
 import com.jswitch.siniestros.vista.SiniestroDetailFrame;
 import com.jswitch.vistasbd.ListaDiagnostico;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.swing.JOptionPane;
 import org.hibernate.Query;
 import org.hibernate.classic.Session;
@@ -134,11 +136,12 @@ public class BuscarSiniestroDetrailController extends DefaultDetailFrameControll
             List list = q.list();
             if (list != null) {
                 if (list.size() > 1) {
-                    List<Siniestro> sin = new ArrayList<Siniestro>(0);
+                    Set <Siniestro> sin = new HashSet<Siniestro>(0);
                     for (Object object : list) {
                         sin.add(((ListaDiagnostico) object).getSiniestro());
                     }
-                    new SiniestroGridFrameController(new VOListResponse(sin, false, sin.size()));
+                    List<Siniestro> lista = new ArrayList<Siniestro>(sin);
+                    new SiniestroGridFrameController(new VOListResponse(lista, false, lista.size()));
                 } else if (!list.isEmpty()) {
                     Siniestro d = ((ListaDiagnostico) list.get(0)).getSiniestro();
                     new SiniestroDetailFrameController(SiniestroDetailFrame.class.getName(), null, d, false);

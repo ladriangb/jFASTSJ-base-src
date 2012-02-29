@@ -86,14 +86,13 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     /**
      * suma de valores por factura
      */
-    @OneToOne(mappedBy="detalleSiniestro")
+    @OneToOne(mappedBy = "detalleSiniestro")
     private SumaDetalle sumaDetalle;
     /**
      * siniestro q contiene el detalle
      */
     @ManyToOne
     private Siniestro siniestro;
-
     /**
      * tipo de enfermedad
      */
@@ -331,6 +330,14 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     }
 
     /**
+     * Orden de pago a la que esta
+     * @return the ordenDePago
+     */
+    public OrdenDePago getOrdenDePago() {
+        return ordenDePago;
+    }
+
+    /**
      * lista de facturas de pagos
      * @return the pagos
      */
@@ -383,9 +390,6 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      * @return the selected
      */
     public Boolean getSelected() {
-        if (selected == null) {
-            selected = Boolean.FALSE;
-        }
         return selected;
     }
 
@@ -395,6 +399,22 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      */
     public Siniestro getSiniestro() {
         return siniestro;
+    }
+
+    /**
+     * lista de facturas de pagos
+     * @return the sumaDesgloseCoberturas
+     */
+    public Set<SumaDesgloseCobertura> getSumaDesgloseCoberturas() {
+        return sumaDesgloseCoberturas;
+    }
+
+    /**
+     * suma de valores por factura
+     * @return the sumaDetalle
+     */
+    public SumaDetalle getSumaDetalle() {
+        return sumaDetalle;
     }
 
     /**
@@ -535,6 +555,14 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     }
 
     /**
+     * Orden de pago a la que esta
+     * @param ordenDePago the ordenDePago to set
+     */
+    public void setOrdenDePago(OrdenDePago ordenDePago) {
+        this.ordenDePago = ordenDePago;
+    }
+
+    /**
      * lista de facturas de pagos
      * @param pagos the pagos to set
      */
@@ -599,6 +627,22 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     }
 
     /**
+     * lista de facturas de pagos
+     * @param sumaDesgloseCoberturas the sumaDesgloseCoberturas to set
+     */
+    public void setSumaDesgloseCoberturas(Set<SumaDesgloseCobertura> sumaDesgloseCoberturas) {
+        this.sumaDesgloseCoberturas = sumaDesgloseCoberturas;
+    }
+
+    /**
+     * suma de valores por factura
+     * @param sumaDetalle the sumaDetalle to set
+     */
+    public void setSumaDetalle(SumaDetalle sumaDetalle) {
+        this.sumaDetalle = sumaDetalle;
+    }
+
+    /**
      * tipo de detalle si es
      * EMERGENCIA, CARTA_AVAL, REEMBOLSO, FUNERARIO, VIDA ...
      * @param tipoDetalle the tipoDetalle to set
@@ -639,35 +683,4 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
         this.tratamientoEfectuado = tratamientoEfectuado;
     }
 
-     /**
-     * suma de valores por factura
-     * @return the sumaDetalle
-     */
-    public SumaDetalle getSumaDetalle() {
-        return sumaDetalle;
-    }
-
-    /**
-     * suma de valores por factura
-     * @param sumaDetalle the sumaDetalle to set
-     */
-    public void setSumaDetalle(SumaDetalle sumaDetalle) {
-        this.sumaDetalle = sumaDetalle;
-    }
-
-    /**
-     * Orden de pago a la que esta
-     * @return the ordenDePago
-     */
-    public OrdenDePago getOrdenDePago() {
-        return ordenDePago;
-    }
-
-    /**
-     * Orden de pago a la que esta
-     * @param ordenDePago the ordenDePago to set
-     */
-    public void setOrdenDePago(OrdenDePago ordenDePago) {
-        this.ordenDePago = ordenDePago;
-    }
 }

@@ -98,8 +98,8 @@ public class PagarDetailFrameController extends DefaultDetailFrameController {
         ordenDePago.setReferencia(pagar.getReferencia());
         ordenDePago.setEstatusPago(EstatusPago.PAGADO);
         Double tm = timbreACancelar(ordenDePago, pagar, s);
-        tm = round2(ordenDePago.getSumaOrden().getTotalACancelar() * tm);
-
+        Double tm2 = round2(ordenDePago.getSumaOrden().getTotalACancelar() * tm);
+        System.out.println(tm2);
         
         s.update(ordenDePago);
         List<DetalleSiniestro> list = s.createQuery("FROM " + DetalleSiniestro.class.getName() + " C "
@@ -113,6 +113,7 @@ public class PagarDetailFrameController extends DefaultDetailFrameController {
             for (Factura factura : lis2) {
                 factura.setFechaPagado(pagar.getFechaDePago());
                 factura.setValorUT(General.parametros.get("ut").getValorDouble());
+                factura.setPorcentajeRetencionTM(tm);
                 int cant = diferenciaEnDias(factura.getFechaFactura(), factura.getFechaPagado());
                 switch (pagar.getTipoDescuentoProntoPago()) {
                     case POR_CONVENIO:
