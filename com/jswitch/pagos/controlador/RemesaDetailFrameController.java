@@ -11,8 +11,6 @@ import com.jswitch.pagos.modelo.maestra.OrdenDePago;
 import com.jswitch.pagos.modelo.maestra.Remesa;
 import com.jswitch.pagos.modelo.transaccional.lote.Transaccion;
 import com.jswitch.pagos.vista.RemesaDetailFrame;
-import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
-import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import javax.swing.filechooser.FileFilter;
@@ -20,9 +18,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -87,37 +82,7 @@ public class RemesaDetailFrameController
     @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
         Remesa remesa = (Remesa) newPersistentObject;
-        if (remesa.getAutoSearch()) {
-            Session s = null;
-            try {
-                s = HibernateUtil.getSessionFactory().openSession();
-                String sql = null;
-                if (remesa.getTipoDetalleSiniestro().equals(TipoDetalleSiniestro.Todos)) {
-                    sql = "FROM "
-                            + OrdenDePago.class.getName() + " C WHERE "
-                            + "C.estatusPago=? AND C.codigoSIGECOF is not null";
-                } else {
-                    sql = "FROM "
-                            + OrdenDePago.class.getName() + " C WHERE "
-                            + "C.estatusPago=? AND C.codigoSIGECOF is not null AND "
-                            + "C.tipoDetalleSiniestro=?";
-                }
-                Query q = s.createQuery(sql);
-                List ordenes = null;
-                if (remesa.getTipoDetalleSiniestro().equals(TipoDetalleSiniestro.Todos)) {
-                    ordenes = q.setString(0, EstatusPago.PENDIENTE.toString()).list();
-                } else {
-                    ordenes = q.setString(0, EstatusPago.PENDIENTE.toString()).
-                            setString(1, remesa.getTipoDetalleSiniestro().toString()).list();
-                }
-                for (Object objeto : ordenes) {
-                    remesa.getOrdenDePagos().add(
-                            (OrdenDePago) objeto);
-                }
-            } finally {
-                s.close();
-            }
-        }
+
         Response response = super.insertRecord(newPersistentObject);
         return response;
 
@@ -146,9 +111,37 @@ public class RemesaDetailFrameController
         Remesa remesa = (Remesa) persistentObject;
         remesa.setNumRefLot(seq.intValue());
         remesa.setRefLot(nf.format(seq));
-        for (OrdenDePago ordenDePago : remesa.getOrdenDePagos()) {
-            ordenDePago.setEstatusPago(EstatusPago.SELECCIONADO);
-            s.update(ordenDePago);
+        if (remesa.getAutoSearch()) {
+            try {
+                String sql = null;
+
+                if (remesa.getTipoDetalleSiniestro().equals(TipoDetalleSiniestro.Todos)) {
+                    sql = "SELECT C.id FROM "
+                            + OrdenDePago.class.getName() + " C WHERE "
+                            + "C.estatusPago=:Sep AND C.codigoSIGECOF is not null";
+                } else {
+                    sql = "SELECT C.id FROM "
+                            + OrdenDePago.class.getName() + " C WHERE "
+                            + "C.estatusPago=:Sep AND C.codigoSIGECOF is not null AND "
+                            + "C.tipoDetalleSiniestro=:Stds";
+                }
+                Query q = s.createQuery(sql);
+                List<Long> op = null;
+                if (remesa.getTipoDetalleSiniestro().equals(TipoDetalleSiniestro.Todos)) {
+                    op = q.setString("Sep", EstatusPago.PENDIENTE.toString()).list();
+                } else {
+                    op = q.setString("Sep", EstatusPago.PENDIENTE.toString()).
+                            setString("Stds", remesa.getTipoDetalleSiniestro().toString()).list();
+                }
+                s.createQuery("UPDATE " + OrdenDePago.class.getName()
+                        + " SET estatusPago=:es, remesa=:re WHERE"
+                        + " id in (:op)").setString("es", EstatusPago.SELECCIONADO.toString()).
+                        setEntity("re", remesa).setParameterList("op", op).executeUpdate();
+
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
         return new VOResponse(remesa);
     }
@@ -242,7 +235,6 @@ public class RemesaDetailFrameController
                     General.empresa.getNombre(), JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
             if (res == JOptionPane.YES_OPTION) {
                 anular();
-                vista.getMainPanel().getReloadButton().doClick();
             }
         }
     }
@@ -258,18 +250,16 @@ public class RemesaDetailFrameController
         try {
             s = HibernateUtil.getSessionFactory().openSession();
             s.beginTransaction();
+            s.createQuery("UPDATE " + OrdenDePago.class.getName()
+                    + " D SET D.estatusPago=:es, D.ordenDePago=null WHERE D in(:ds)").
+                    setString("es", EstatusPago.PENDIENTE.toString()).
+                    setParameterList("ds", remesa.getOrdenDePagos()).executeUpdate();
             s.update(remesa);
-            List<OrdenDePago> l = s.createQuery("FROM " + OrdenDePago.class.getName() + " C "
-                    + "WHERE C.remesa.id=?").setLong(0, remesa.getId()).list();
-            for (OrdenDePago ordenDePago : l) {
-                ordenDePago.setEstatusPago(EstatusPago.PENDIENTE);
-                ordenDePago.setRemesa(null);
-                s.update(ordenDePago);
-            }
 
             s.getTransaction().commit();
         } finally {
             s.close();
+            vista.getMainPanel().getReloadButton().doClick();
         }
     }
 

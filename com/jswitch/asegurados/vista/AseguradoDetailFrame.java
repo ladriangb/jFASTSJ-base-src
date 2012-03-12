@@ -23,7 +23,9 @@ import com.jswitch.persona.controlador.PersonaLookupControllerPorNombre;
 import com.jswitch.persona.controlador.PersonasDetailController;
 import com.jswitch.persona.modelo.maestra.Rif;
 import com.jswitch.persona.vista.RifDialog;
+import com.jswitch.reporte.modelo.Reporte;
 import com.jswitch.siniestros.controlador.PersonaTipoLookupController;
+import com.jswitch.siniestros.controlador.detalle.reportes.ReporteGridInternalController;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.form.client.Form;
 import org.openswing.swing.form.client.FormController;
@@ -39,7 +41,9 @@ public class AseguradoDetailFrame extends DefaultDetailFrame {
     protected DefaultDocumentosAnexosGridController controllerDocumentosAnexosX;
     protected DefaultGridInternalController controllerObservaciones;
     protected DefaultGridInternalController controllerNotasTecnicas;
-protected DefaultGridInternalController controllerRevisiones;
+    protected DefaultGridInternalController controllerRevisiones;
+    private ReporteGridInternalController controllerReportes;
+
     public AseguradoDetailFrame() {
     }
 
@@ -135,6 +139,9 @@ protected DefaultGridInternalController controllerRevisiones;
         insertButtonNot1 = new org.openswing.swing.client.InsertButton();
         saveButtonNot1 = new org.openswing.swing.client.SaveButton();
         reloadButtonNot1 = new org.openswing.swing.client.ReloadButton();
+        Reportes = new javax.swing.JPanel();
+        gridReportes = new org.openswing.swing.client.GridControl();
+        textColumn12 = new org.openswing.swing.table.columns.client.TextColumn();
 
         setTitle("Asegurado");
 
@@ -369,7 +376,7 @@ protected DefaultGridInternalController controllerRevisiones;
                     .addComponent(dateControl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(checkBoxControl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {codLookupControl1, codLookupControl2, codLookupControl3, codLookupControl4, codLookupControl5, dateControl1, dateControl2, labelControl1, labelControl11, labelControl12, labelControl13, labelControl2, labelControl3, labelControl4, labelControl5, labelControl6, labelControl7, labelControl8, numericControl1, numericControl5, numericControl6, numericControl7});
@@ -444,8 +451,8 @@ protected DefaultGridInternalController controllerRevisiones;
             jPanelObsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelObsLayout.createSequentialGroup()
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(241, Short.MAX_VALUE))
-            .addComponent(gridControlObs, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
+                .addContainerGap(245, Short.MAX_VALUE))
+            .addComponent(gridControlObs, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout observacionesLayout = new javax.swing.GroupLayout(observaciones);
@@ -461,7 +468,7 @@ protected DefaultGridInternalController controllerRevisiones;
         );
         observacionesLayout.setVerticalGroup(
             observacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 365, Short.MAX_VALUE)
+            .addGap(0, 369, Short.MAX_VALUE)
             .addGroup(observacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(observacionesLayout.createSequentialGroup()
                     .addContainerGap()
@@ -533,8 +540,8 @@ protected DefaultGridInternalController controllerRevisiones;
             jPanelNotLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelNotLayout.createSequentialGroup()
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(241, Short.MAX_VALUE))
-            .addComponent(gridControlNot, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
+                .addContainerGap(245, Short.MAX_VALUE))
+            .addComponent(gridControlNot, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout notasTecnicasLayout = new javax.swing.GroupLayout(notasTecnicas);
@@ -550,7 +557,7 @@ protected DefaultGridInternalController controllerRevisiones;
         );
         notasTecnicasLayout.setVerticalGroup(
             notasTecnicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 365, Short.MAX_VALUE)
+            .addGap(0, 369, Short.MAX_VALUE)
             .addGroup(notasTecnicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(notasTecnicasLayout.createSequentialGroup()
                     .addContainerGap()
@@ -626,7 +633,7 @@ protected DefaultGridInternalController controllerRevisiones;
             .addGroup(jPanelDocLayout.createSequentialGroup()
                 .addGroup(jPanelDocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(gridControlDoc, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE))
+                    .addComponent(gridControlDoc, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -643,7 +650,7 @@ protected DefaultGridInternalController controllerRevisiones;
         );
         DocAnexosLayout.setVerticalGroup(
             DocAnexosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 365, Short.MAX_VALUE)
+            .addGap(0, 369, Short.MAX_VALUE)
             .addGroup(DocAnexosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(DocAnexosLayout.createSequentialGroup()
                     .addContainerGap()
@@ -711,8 +718,8 @@ protected DefaultGridInternalController controllerRevisiones;
             jPanelNot1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelNot1Layout.createSequentialGroup()
                 .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(241, Short.MAX_VALUE))
-            .addComponent(gridControlNot1, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
+                .addContainerGap(245, Short.MAX_VALUE))
+            .addComponent(gridControlNot1, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout revicionesLayout = new javax.swing.GroupLayout(reviciones);
@@ -728,7 +735,7 @@ protected DefaultGridInternalController controllerRevisiones;
         );
         revicionesLayout.setVerticalGroup(
             revicionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 365, Short.MAX_VALUE)
+            .addGap(0, 369, Short.MAX_VALUE)
             .addGroup(revicionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(revicionesLayout.createSequentialGroup()
                     .addContainerGap()
@@ -737,6 +744,39 @@ protected DefaultGridInternalController controllerRevisiones;
         );
 
         jTabbedPane1.addTab("Reviciones", reviciones);
+
+        gridReportes.setValueObjectClassName(Reporte.class.getName());
+        gridReportes.setVisibleStatusPanel(false);
+
+        textColumn12.setColumnName("titulo");
+        textColumn12.setEditableOnEdit(true);
+        textColumn12.setEditableOnInsert(true);
+        textColumn12.setMaxCharacters(1024);
+        textColumn12.setPreferredWidth(400);
+        gridReportes.getColumnContainer().add(textColumn12);
+
+        javax.swing.GroupLayout ReportesLayout = new javax.swing.GroupLayout(Reportes);
+        Reportes.setLayout(ReportesLayout);
+        ReportesLayout.setHorizontalGroup(
+            ReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 603, Short.MAX_VALUE)
+            .addGroup(ReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(ReportesLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(gridReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+        ReportesLayout.setVerticalGroup(
+            ReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 369, Short.MAX_VALUE)
+            .addGroup(ReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(ReportesLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(gridReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+
+        jTabbedPane1.addTab("Reportes", Reportes);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -754,7 +794,7 @@ protected DefaultGridInternalController controllerRevisiones;
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -838,6 +878,10 @@ protected DefaultGridInternalController controllerRevisiones;
         PersonaTipoLookupController lookupBuscador = new PersonaTipoLookupController(tipoPersonaPago);
         lookupBuscador.addLookup2ParentLink("personaBuscadora");
         codLookupColumn1.setLookupController(lookupBuscador);
+        controllerReportes =
+                new ReporteGridInternalController(Asegurado.class.getName(), "getReportes", gridReportes);
+        gridReportes.setGridDataLocator(controllerReportes);
+        gridReportes.setController(controllerReportes);
 
 
         form1.setCreateInnerVO(false);
@@ -869,6 +913,7 @@ protected DefaultGridInternalController controllerRevisiones;
         if (beanVO != null) {
             id = ((Asegurado) beanVO).getId();
         }
+        controllerReportes.setBeanVO(beanVO);
         controllerDocumentosAnexosX.setBeanVO(beanVO, id);
         controllerObservaciones.setBeanVO(beanVO);
         controllerNotasTecnicas.setBeanVO(beanVO);
@@ -900,6 +945,7 @@ protected DefaultGridInternalController controllerRevisiones;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel DocAnexos;
+    private javax.swing.JPanel Reportes;
     private org.openswing.swing.table.columns.client.ButtonColumn buttonColumnDoc;
     private org.openswing.swing.client.CheckBoxControl checkBoxControl2;
     private org.openswing.swing.table.columns.client.CodLookupColumn codLookupColumn1;
@@ -931,6 +977,7 @@ protected DefaultGridInternalController controllerRevisiones;
     private org.openswing.swing.client.GridControl gridControlNot;
     private org.openswing.swing.client.GridControl gridControlNot1;
     private org.openswing.swing.client.GridControl gridControlObs;
+    private org.openswing.swing.client.GridControl gridReportes;
     private org.openswing.swing.client.InsertButton insertButtonDoc;
     private org.openswing.swing.client.InsertButton insertButtonNot;
     private org.openswing.swing.client.InsertButton insertButtonNot1;
@@ -977,6 +1024,7 @@ protected DefaultGridInternalController controllerRevisiones;
     private org.openswing.swing.client.SaveButton saveButtonNot;
     private org.openswing.swing.client.SaveButton saveButtonNot1;
     private org.openswing.swing.client.SaveButton saveButtonObs;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn12;
     private org.openswing.swing.table.columns.client.TextColumn textColumnDoc;
     private org.openswing.swing.table.columns.client.TextColumn textColumnNot1;
     private org.openswing.swing.table.columns.client.TextColumn textColumnNot2;

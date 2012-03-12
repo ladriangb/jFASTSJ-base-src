@@ -25,10 +25,8 @@ public class SumaDesgloseCobertura extends BeanVO implements Serializable {
      * Pk autogenerado
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
-    @BusinessKey(include = Method.TO_STRING)
-    private Long id;
+    private String id;
     /**
      * Detalle al que pertenece la factura
      */
@@ -81,7 +79,7 @@ public class SumaDesgloseCobertura extends BeanVO implements Serializable {
      * Pk autogenerado
      * @return the id
      */
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
@@ -129,7 +127,7 @@ public class SumaDesgloseCobertura extends BeanVO implements Serializable {
      * Pk autogenerado
      * @param id the id to set
      */
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

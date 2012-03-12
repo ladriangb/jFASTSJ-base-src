@@ -35,8 +35,6 @@ public class BuscaDetallesGridFrame extends DefaultGridFrame {
         textColumn6 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn7 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn3 = new org.openswing.swing.table.columns.client.TextColumn();
-        decimalColumn2 = new org.openswing.swing.table.columns.client.DecimalColumn();
-        decimalColumn3 = new org.openswing.swing.table.columns.client.DecimalColumn();
         dateColumn1 = new org.openswing.swing.table.columns.client.DateColumn();
         textColumn4 = new org.openswing.swing.table.columns.client.TextColumn();
         dateColumn2 = new org.openswing.swing.table.columns.client.DateColumn();
@@ -121,16 +119,6 @@ public class BuscaDetallesGridFrame extends DefaultGridFrame {
         textColumn3.setColumnName("tipoDetalle");
         textColumn3.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn3);
-
-        decimalColumn2.setColumnFilterable(true);
-        decimalColumn2.setColumnName("montoLiquidado");
-        decimalColumn2.setColumnSortable(true);
-        gridData.getColumnContainer().add(decimalColumn2);
-
-        decimalColumn3.setColumnFilterable(true);
-        decimalColumn3.setColumnName("montoFacturado");
-        decimalColumn3.setColumnSortable(true);
-        gridData.getColumnContainer().add(decimalColumn3);
 
         dateColumn1.setColumnFilterable(true);
         dateColumn1.setColumnName("fechaLiquidado");
@@ -218,8 +206,6 @@ public class BuscaDetallesGridFrame extends DefaultGridFrame {
     private org.openswing.swing.table.columns.client.DateColumn dateColumn2;
     private org.openswing.swing.table.columns.client.DateColumn dateColumn3;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn1;
-    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn2;
-    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn3;
     private org.openswing.swing.client.EditButton editButton1;
     private org.openswing.swing.client.FilterButton filterButton1;
     private org.openswing.swing.client.GridControl gridData;

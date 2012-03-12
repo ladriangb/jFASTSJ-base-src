@@ -107,11 +107,9 @@ public class RangoValorGridInternalController extends DefaultGridInternalControl
                 }
                 if (clase.equals(TimbreMunicipal.class)) {
                     ((RangoValor) o).setTimbreMunicipal((TimbreMunicipal) super.beanVO);
-                    ((RangoValor) o).setMontoPorcentual(Boolean.TRUE);
                 }
                 if (clase.equals(ConfiguracionProntoPago.class)) {
                     ((RangoValor) o).setProntoPago((ConfiguracionProntoPago) super.beanVO);
-                    ((RangoValor) o).setMontoPorcentual(Boolean.FALSE);
                 }
                 //s.update(super.beanVO);
                 s.save(o);

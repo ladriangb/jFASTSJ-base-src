@@ -93,9 +93,6 @@
               <Dimension value="[33, 33]"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -183,7 +180,7 @@
                       <Component id="labelControl4" linkSize="19" min="-2" max="-2" attributes="0"/>
                       <Component id="currencyControl1" linkSize="19" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="23" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -201,7 +198,7 @@
           <Properties>
             <Property name="currencySymbol" type="java.lang.String" value="%"/>
             <Property name="currencySymbolOnLeft" type="boolean" value="false"/>
-            <Property name="decimals" type="int" value="2"/>
+            <Property name="decimals" type="int" value="4"/>
             <Property name="hideZeroDigits" type="boolean" value="true"/>
           </Properties>
         </Component>
@@ -263,6 +260,7 @@
             <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;etapaSiniestro.nombre&quot;" type="code"/>
             </Property>
+            <Property name="maxCharacters" type="int" value="25"/>
             <Property name="required" type="boolean" value="true"/>
             <Property name="toolTipText" type="java.lang.String" value="Etapa en la que quedaran todos los Detalle Siniestro Asociados al pago"/>
           </Properties>
@@ -272,6 +270,7 @@
             <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;timbreMunicipal.zipCode&quot;" type="code"/>
             </Property>
+            <Property name="maxCharacters" type="int" value="25"/>
             <Property name="required" type="boolean" value="true"/>
             <Property name="toolTipText" type="java.lang.String" value="Etapa en la que quedaran todos los Detalle Siniestro Asociados al pago"/>
           </Properties>

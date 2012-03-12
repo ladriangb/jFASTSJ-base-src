@@ -9,6 +9,8 @@ import com.jswitch.pagos.modelo.maestra.Factura;
 import com.jswitch.pagos.modelo.transaccional.DesgloseCobertura;
 import com.jswitch.pagos.modelo.transaccional.DesgloseSumaAsegurada;
 import com.jswitch.pagos.vista.FacturaDetailFrame;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -133,8 +135,8 @@ public class DesgloseCoberturaGridInternalController extends DefaultGridInternal
                         ? 0 : (desgloseCobertura.getMontoFacturado() * factura.getPorcentajeIva());
             }
         }
-        Double totalLiquidado = ((baseIva) + amparado);
-        if (facturado > factura.getTotalFacturado()) {
+        Double totalLiquidado = round2((baseIva) + amparado);
+        if (round2((baseIva) + facturado) > factura.getTotalFacturado()) {
             return "Valor Supera a La Factura";
         }
         Double liquidado = 0d;
@@ -189,5 +191,19 @@ public class DesgloseCoberturaGridInternalController extends DefaultGridInternal
             s.close();
         }
         vista.getMainPanel().getReloadButton().doClick();
+    }
+    
+    /**
+     * Para el numero dado retorna con dos decimales redondeando
+     * 
+     * @param number numero a ser redondiado
+     * @return numero redondiado
+     */
+     private  Double round2(Double number) {
+        DecimalFormat formatter = new DecimalFormat("#0.00");
+        DecimalFormatSymbols s = formatter.getDecimalFormatSymbols();
+        s.setDecimalSeparator('.');
+        formatter.setDecimalFormatSymbols(s);
+        return Double.parseDouble(formatter.format(number));
     }
 }

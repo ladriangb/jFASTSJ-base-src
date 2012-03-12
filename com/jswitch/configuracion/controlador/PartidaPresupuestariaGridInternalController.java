@@ -4,9 +4,10 @@ import com.jswitch.base.controlador.General;
 import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.controlador.util.DefaultGridInternalController;
 import com.jswitch.base.modelo.HibernateUtil;
-import com.jswitch.configuracion.modelo.transaccional.SumaAmparada;
-import com.jswitch.pagos.modelo.maestra.OrdenDePago;
+import com.jswitch.base.modelo.entidades.auditoria.Auditable;
+import com.jswitch.pagos.modelo.maestra.Remesa;
 import com.jswitch.vistasbd.SumaPartida;
+import com.jswitch.vistasbd.SumaPartidaRemesa;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -41,8 +42,14 @@ public class PartidaPresupuestariaGridInternalController extends DefaultGridInte
         if (beanVO != null) {
             Session s = null;
             try {
-                String sql = "FROM " + SumaPartida.class.getName() + " C "
-                        + " WHERE C.ordenDePago.id=?";
+                String sql = "";
+                if (beanVO instanceof Remesa) {
+                    sql = "FROM " + SumaPartidaRemesa.class.getName() + " C "
+                            + " WHERE C.remesa.id=?";
+                } else {
+                    sql = "FROM " + SumaPartida.class.getName() + " C "
+                            + " WHERE C.ordenDePago.id=?";
+                }
 
                 SessionFactory sf = HibernateUtil.getSessionFactory();
                 s = sf.openSession();
@@ -55,7 +62,7 @@ public class PartidaPresupuestariaGridInternalController extends DefaultGridInte
                         currentSortedVersusColumns,
                         valueObjectType,
                         sql,
-                        new Object[]{((OrdenDePago) beanVO).getId()},
+                        new Object[]{((Auditable) beanVO).getId()},
                         new Type[]{new LongType()},
                         "C",
                         sf,
@@ -68,7 +75,11 @@ public class PartidaPresupuestariaGridInternalController extends DefaultGridInte
                 s.close();
             }
         } else {
-            al = new ArrayList<SumaAmparada>(0);
+            if (beanVO instanceof Remesa) {
+                al = new ArrayList<SumaPartidaRemesa>(0);
+            } else {
+                al = new ArrayList<SumaPartida>(0);
+            }
         }
         return new VOListResponse(al, false, al.size());
     }

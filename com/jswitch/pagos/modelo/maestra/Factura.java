@@ -87,6 +87,15 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     @Past
     @BusinessKey
     private Date fechaRecepcion;
+        /**
+     * fecha en la que se recibio la factura
+     */
+    @Column
+    @Temporal(value = TemporalType.DATE)
+    @Past
+    @BusinessKey
+    private Date fechaRebicion;
+
      /**
      * fecha en la que se recibio la factura
      */
@@ -139,6 +148,13 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     private Double porcentajeIva;
     /**
      * total de base para el IVA
+     * 
+     * 200  10
+     * 10*100/200
+     * 1000/200
+     * 5
+     * 10/200
+     * 
      */
     @Column
     @BusinessKey
@@ -259,6 +275,7 @@ public class Factura extends BeanVO implements Serializable, Auditable {
         porcentajeRetencionProntoPago = 0d;
     }
 
+    
     /**
      * auditoria Bitacora
      * @return the auditoria
@@ -321,6 +338,14 @@ public class Factura extends BeanVO implements Serializable, Auditable {
      */
     public Date getFechaPagado() {
         return fechaPagado;
+    }
+
+    /**
+     * fecha en la que se recibio la factura
+     * @return the fechaRebicion
+     */
+    public Date getFechaRebicion() {
+        return fechaRebicion;
     }
 
     /**
@@ -572,6 +597,14 @@ public class Factura extends BeanVO implements Serializable, Auditable {
      */
     public void setFechaPagado(Date fechaPagado) {
         this.fechaPagado = fechaPagado;
+    }
+
+    /**
+     * fecha en la que se recibio la factura
+     * @param fechaRebicion the fechaRebicion to set
+     */
+    public void setFechaRebicion(Date fechaRebicion) {
+        this.fechaRebicion = fechaRebicion;
     }
 
     /**

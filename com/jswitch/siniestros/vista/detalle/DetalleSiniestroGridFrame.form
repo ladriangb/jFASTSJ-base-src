@@ -119,7 +119,6 @@
                 </Property>
                 <Property name="columnRequired" type="boolean" value="false"/>
                 <Property name="columnSortable" type="boolean" value="true"/>
-                <Property name="grouping" type="boolean" value="false"/>
                 <Property name="preferredWidth" type="int" value="40"/>
               </Properties>
             </Component>

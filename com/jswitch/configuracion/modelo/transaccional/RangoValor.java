@@ -80,7 +80,9 @@ public class RangoValor extends BeanVO implements Serializable, Auditable {
     private AuditoriaBasica auditoria;
 
     public RangoValor() {
-        montoPorcentual = Boolean.FALSE;
+        montoPorcentual = Boolean.TRUE;
+        maxValue = Double.POSITIVE_INFINITY;
+        minValue = 0d;
     }
 
     /**
@@ -226,5 +228,4 @@ public class RangoValor extends BeanVO implements Serializable, Auditable {
     public void setProntoPago(ConfiguracionProntoPago prontoPago) {
         this.prontoPago = prontoPago;
     }
-    
 }

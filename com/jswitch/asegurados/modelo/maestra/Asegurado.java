@@ -14,6 +14,7 @@ import com.jswitch.base.modelo.util.ehts.BusinessKey;
 import com.jswitch.base.modelo.util.ehts.Method;
 import com.jswitch.certificados.modelo.maestra.Certificado;
 import com.jswitch.persona.modelo.maestra.PersonaNatural;
+import com.jswitch.reporte.modelo.Reporte;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -164,6 +165,11 @@ public class Asegurado extends BeanVO implements Serializable, Auditable {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @BusinessKey(exclude = Method.ALL)
     private Set<Documento> documentos = new HashSet<Documento>(0);
+    /**
+     * reportes especificos
+     */
+    @Transient
+    private transient Set<Reporte> reportes = new HashSet<Reporte>(0);
 
     public Asegurado() {
         primaAporte = 0d;
@@ -324,6 +330,16 @@ public class Asegurado extends BeanVO implements Serializable, Auditable {
     }
 
     /**
+     * reportes especificos
+     * @return the reportes
+     */
+    public Set<Reporte> getReportes() {
+//        if(reportes.isEmptya())
+//            reportes.add()
+        return reportes;
+    }
+
+    /**
      * revisiones a esa persona por parte de otra persona generalmente clinicas
      * @return the revisiones
      */
@@ -481,6 +497,14 @@ public class Asegurado extends BeanVO implements Serializable, Auditable {
      */
     public void setProRataAporte(Double proRataAporte) {
         this.proRataAporte = proRataAporte;
+    }
+
+    /**
+     * reportes especificos
+     * @param reportes the reportes to set
+     */
+    public void setReportes(Set<Reporte> reportes) {
+        this.reportes = reportes;
     }
 
     /**

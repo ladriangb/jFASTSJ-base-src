@@ -9,9 +9,11 @@ import com.jswitch.base.modelo.entidades.auditoria.Auditable;
 import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.vista.util.DefaultDetailFrame;
+import com.jswitch.base.vista.util.SuperusuarioLoginDialog;
 import com.jswitch.configuracion.controlador.TratamientoLookupController;
 import com.jswitch.configuracion.modelo.dominio.patologias.Diagnostico;
 import com.jswitch.configuracion.modelo.dominio.patologias.Tratamiento;
+import com.jswitch.configuracion.modelo.transaccional.ConfiguracionSiniestro;
 import com.jswitch.configuracion.modelo.transaccional.SumaAsegurada;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.siniestros.modelo.maestra.DiagnosticoSiniestro;
@@ -19,6 +21,7 @@ import com.jswitch.siniestros.vista.DiagnosticoSiniestroDetailFrame;
 import com.jswitch.vistasbd.Agotamiento;
 import java.awt.event.ActionEvent;
 import java.util.Date;
+import java.util.Set;
 import org.hibernate.Hibernate;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
@@ -71,6 +74,12 @@ public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFram
             AgotamientoActual agotamiento = getAgotamiento(diagnostico,
                     detalleSin.getSiniestro().getAsegurado());
 
+
+            Double d = (getDisponiblePorTipoDetalle(detalleSin));
+            vista.getMainPanel().getVOModel().setValue("disponiblePorTipoDetalle", d);
+            vista.getMainPanel().pull("disponiblePorTipoDetalle");
+
+
             vista.getMainPanel().getVOModel().setValue("totalUtilizado", agotamiento.agotamiento.getMontoPagado());
             vista.getMainPanel().pull("totalUtilizado");
 
@@ -97,6 +106,7 @@ public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFram
         detalleSin.getDiagnosticoSiniestros().add(sin);
         AgotamientoActual agotamiento = getAgotamiento(sin.getDiagnostico(),
                 detalleSin.getSiniestro().getAsegurado());
+        sin.setDisponiblePorTipoDetalle(getDisponiblePorTipoDetalle(detalleSin));
         sin.setTotalUtilizado(agotamiento.agotamiento.getMontoPagado());
         sin.setTotalReservado(agotamiento.agotamiento.getMontoPendiente());
         sin.setTotalDisponible(
@@ -147,7 +157,7 @@ public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFram
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
         DiagnosticoSiniestro ds = (DiagnosticoSiniestro) newPersistentObject;
         ds.setDetalleSiniestro(detalleSin);
-       // detalleSin.getDiagnosticoSiniestros().add(ds);
+        // detalleSin.getDiagnosticoSiniestros().add(ds);
         Response res = super.insertRecord(ds);
         if (res instanceof VOResponse) {
             ((DiagnosticoSiniestroDetailFrame) vista).getjButton1().setEnabled(true);
@@ -157,17 +167,19 @@ public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFram
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
         if (e.getSource().equals(((DiagnosticoSiniestroDetailFrame) vista).getjButton1())) {
-            new MantenimientoDiagnosticoDetailFrameController(vista,
-                    false, (DiagnosticoSiniestro) vista.getMainPanel().getVOModel().getValueObject(), detalleSin);
-            vista.dispose();
-            return;
+            if (SuperusuarioLoginDialog.VerificarSuperusuario()) {
+                new MantenimientoDiagnosticoDetailFrameController(vista,
+                        false, (DiagnosticoSiniestro) vista.getMainPanel().getVOModel().getValueObject(), detalleSin);
+                vista.dispose();
+                return;
+            }
+        } else {
+            TratamientoLookupController t = new TratamientoLookupController(((DiagnosticoSiniestro) getBeanVO()).getDiagnostico());
+            t.addLookup2ParentLink("tratamiento");
+            t.openLookupFrame(vista, new TratamientoLookupParent());
+            vista.reloadGridsData();
         }
-        TratamientoLookupController t = new TratamientoLookupController(((DiagnosticoSiniestro) getBeanVO()).getDiagnostico());
-        t.addLookup2ParentLink("tratamiento");
-        t.openLookupFrame(vista, new TratamientoLookupParent());
-        vista.reloadGridsData();
     }
 
     @Override
@@ -175,6 +187,11 @@ public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFram
         DiagnosticoSiniestro d = ((DiagnosticoSiniestro) persistentObject);
         if (d.getMontoPendiente() > d.getTotalDisponible()) {
             return new ErrorResponse("Exeso de Cobertura");
+        }
+        Double max = getConfiguracionSiniestro(d);
+        if (d.getMontoPendiente() + d.getDisponiblePorTipoDetalle() > max) {
+            return new ErrorResponse("Supera el limite maximo para: " + d.getDetalleSiniestro().getTipoDetalle()
+                    + "\ntiene libres: " + (max - d.getDisponiblePorTipoDetalle()));
         }
         return new VOResponse(persistentObject);
     }
@@ -187,6 +204,59 @@ public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFram
     @Override
     public void afterReloadData() {
         frame.getMainPanel().getReloadButton().doClick();
+
+
+    }
+
+    /**
+     * dice cuanto falta por consumir al tope por tipo de detalle de siniestro
+     * @param  detalleSin Detalle de siniestro
+     */
+    private Double getDisponiblePorTipoDetalle(DetalleSiniestro detalleSin) {
+        Session s = null;
+        Double disp = 0d;
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+            disp = (Double) s.createQuery("SELECT SUM(montoPendiente+montoPagado) FROM "
+                    + DiagnosticoSiniestro.class.getName()
+                    + " WHERE detalleSiniestro.siniestro.ayo=:ayo AND "
+                    + "detalleSiniestro.siniestro.asegurado.id=:aseg AND "
+                    + "detalleSiniestro.tipoDetalle=:tipoDet").
+                    setInteger("ayo", detalleSin.getSiniestro().getAyo()).
+                    setLong("aseg", detalleSin.getSiniestro().getAsegurado().getId()).
+                    setString("tipoDet", detalleSin.getTipoDetalle()).
+                    uniqueResult();
+
+        } catch (Exception ex) {
+//            ex.printStackTrace();
+        } finally {
+            s.close();
+        }
+
+        return disp;
+    }
+
+    private Double getConfiguracionSiniestro(DiagnosticoSiniestro d) {
+        Session s = null;
+        ConfiguracionSiniestro c = null;
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+            c = (ConfiguracionSiniestro) s.createQuery("FROM "
+                    + ConfiguracionSiniestro.class.getName()
+                    + " WHERE  plan.id=:plan AND tipoDetalle=:td").
+                    setLong("plan", detalleSin.getSiniestro().getAsegurado().getPlan().getId()).
+                    setString("td", d.getDetalleSiniestro().getTipoDetalle()).
+                    uniqueResult();
+
+        } catch (Exception ex) {
+//            ex.printStackTrace();
+        } finally {
+            s.close();
+        }
+        if (c != null) {
+            return c.getMontoTope();
+        }
+        return Double.POSITIVE_INFINITY;
     }
 
     private class TratamientoLookupParent implements LookupParent {
@@ -257,7 +327,9 @@ public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFram
                     setLong("aseg", asegurado.getId()).
                     setLong("diag", diagnostico.getId()).
                     uniqueResult();
-            if (agotamiento == null) {
+
+            if (agotamiento
+                    == null) {
                 agotamiento = new Agotamiento(0d, 0d);
             }
             montoAmparado = (Double) s.createQuery("SELECT C.sumaAmparada.monto FROM "

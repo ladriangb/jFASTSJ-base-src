@@ -115,7 +115,7 @@ public class Dominios {
 
     public static enum TipoPago {
 
-        TRANSFERENCIA_SWIFT,
+        PAGO_SIGECOF, TRANSFERENCIA_SWIFT,
         ABONO_EN_CUENTA_BANCO_DE_VENEZUELA,
         CHEQUE_DE_GERENCIA
     }
@@ -207,6 +207,7 @@ public class Dominios {
     }
 
     public static enum TipoDescuentoProntoPago {
+
         POR_CONVENIO, POR_PORCENTAJE_DESCUENTO, POR_MONTO_DESCUENTO
     }
 

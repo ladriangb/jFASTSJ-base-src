@@ -3,8 +3,8 @@ package com.jswitch.vistasbd;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.modelo.util.ehts.BusinessKey;
 import com.jswitch.base.modelo.util.ehts.Method;
+import com.jswitch.configuracion.modelo.dominio.patologias.Diagnostico;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
-import com.jswitch.siniestros.modelo.maestra.DiagnosticoSiniestro;
 import com.jswitch.siniestros.modelo.maestra.Siniestro;
 import java.io.Serializable;
 import javax.persistence.Column;
@@ -41,7 +41,7 @@ public class ListaDiagnostico extends BeanVO implements Serializable {
      */
     @ManyToOne
     @BusinessKey
-    private DiagnosticoSiniestro diagnosticoSiniestro;
+    private Diagnostico diagnostico;
     /**
      * Partida Presupuestaria 
      */
@@ -62,10 +62,10 @@ public class ListaDiagnostico extends BeanVO implements Serializable {
 
     /**
      * Diagnostico afectado
-     * @return the diagnosticoSiniestro
+     * @return the diagnostico
      */
-    public DiagnosticoSiniestro getDiagnosticoSiniestro() {
-        return diagnosticoSiniestro;
+    public Diagnostico getDiagnostico() {
+        return diagnostico;
     }
 
     /**
@@ -94,10 +94,10 @@ public class ListaDiagnostico extends BeanVO implements Serializable {
 
     /**
      * Diagnostico afectado
-     * @param diagnosticoSiniestro the diagnosticoSiniestro to set
+     * @param diagnostico the diagnostico to set
      */
-    public void setDiagnosticoSiniestro(DiagnosticoSiniestro diagnosticoSiniestro) {
-        this.diagnosticoSiniestro = diagnosticoSiniestro;
+    public void setDiagnostico(Diagnostico diagnostico) {
+        this.diagnostico = diagnostico;
     }
 
     /**
@@ -115,5 +115,5 @@ public class ListaDiagnostico extends BeanVO implements Serializable {
     public void setSiniestro(Siniestro siniestro) {
         this.siniestro = siniestro;
     }
-    
+
 }

@@ -1049,7 +1049,6 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
                 editButton1.setVisible(true);
                 saveButton1.setVisible(true);
                 gridControl5.setDeleteButton(deleteButton7);
-                gridControl5.setInsertButton(insertButton7);
                 gridControlDoc.setEditButton(editButtonDoc);
                 gridControlDoc.setDeleteButton(deleteButtonDoc);
                 gridControlDoc.setInsertButton(insertButtonDoc);

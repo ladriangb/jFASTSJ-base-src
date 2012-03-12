@@ -93,7 +93,7 @@ public class BuscarSiniestroDetrailController extends DefaultDetailFrameControll
         //</editor-fold>
         //<editor-fold defaultstate="collapsed" desc="Diagnostico">
         if (bs.getDiagnostico().getId() != null) {
-            where += and + " diagnosticoSiniestro.diagnostico.id=:di";
+            where += and + " diagnostico.id=:di";
             diag = true;
         }
         //</editor-fold>

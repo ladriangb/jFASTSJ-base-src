@@ -12,8 +12,8 @@ import com.jswitch.pagos.vista.OrdenDePagoDetailFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
-import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.hibernate.type.StringType;
@@ -46,7 +46,7 @@ public class BuscarOrdenDePagoGridFrameController extends DefaultGridFrameContro
         super(BuscaOrdenDePagoGridFrame.class.getName(),
                 OrdenDePagoDetailFrame.class.getName(), OrdenDePago.class.getName(), null);
         this.remesa = remesa;
-        this.controller=controller;
+        this.controller = controller;
     }
 
     @Override
@@ -113,22 +113,20 @@ public class BuscarOrdenDePagoGridFrameController extends DefaultGridFrameContro
             try {
                 s = HibernateUtil.getSessionFactory().openSession();
                 s.beginTransaction();
-                for (int i = 0; i < model.getRowCount(); i++) {
-                    OrdenDePago orden = (OrdenDePago) s.get(
-                            OrdenDePago.class,
-                            ((OrdenDePago) model.getObjectForRow(i)).getId());
-                    if (((OrdenDePago) model.getObjectForRow(i)).getSelected()) {
-                        Hibernate.initialize(orden.getNotasTecnicas());
-                        Hibernate.initialize(orden.getObservaciones());
-                        Hibernate.initialize(orden.getDocumentos());
-                        Hibernate.initialize(orden.getDetalleSiniestros());
-                        orden.setEstatusPago(EstatusPago.SELECCIONADO);
-                        orden.setRemesa(remesa);
-                        s.update(orden);
-                        remesa.getOrdenDePagos().add(orden);
+                Remesa rem = (Remesa) s.get(Remesa.class, remesa.getId());
+                List lista = model.getChangedRows();
+                if (lista == null || lista.isEmpty()) {
+                    for (Object object : model.getDataVector()) {
+                        if (((OrdenDePago) object).getSelected()) {
+                            lista.add(object);
+                        }
                     }
                 }
-                s.update(remesa);
+                s.createQuery("UPDATE " + OrdenDePago.class.getName()
+                        + " D SET D.estatusPago=:es, D.remesa=:rem WHERE D in(:ds)").
+                        setString("es", EstatusPago.SELECCIONADO.toString()).setEntity("rem", rem).
+                        setParameterList("ds", lista).executeUpdate();
+
                 s.getTransaction().commit();
                 gridFrame.dispose();
             } catch (Exception ex) {

@@ -58,8 +58,8 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
      * Numero de la Orden de Pago
      */
     @Column
-    @Pattern(regexp = "[0-9][0-9]?-[0-9][0-9][0-9][0-9]-[0-9]+",
-    message = "Numero de Orden debe ser formato mes-año-numero Consecutivo")
+//    @Pattern(regexp = "[0-9][0-9]?-[0-9][0-9][0-9][0-9]-[0-9]+",
+//    message = "Numero de Orden debe ser formato mes-año-numero Consecutivo")
     private String numeroOrden;
     /**
      * referencia del pago
@@ -70,8 +70,8 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
      * Codigo del Sistema SIGECOF O KERSUS
      */
     @Column
-    @Pattern(regexp = "[0-9][0-9]?-[0-9][0-9][0-9][0-9]-[0-9]+",
-    message = "Codigo SIGECOF Invalido")
+//    @Pattern(regexp = "[0-9][0-9]?-[0-9][0-9][0-9][0-9]-[0-9]+",
+//    message = "Codigo SIGECOF Invalido")
     private String codigoSIGECOF;
     /**
      * suma de valores detalles
@@ -158,6 +158,7 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
 
     public OrdenDePago() {
         tipoDetalleSiniestro = TipoDetalleSiniestro.Todos;
+       estatusPago=Dominios.EstatusPago.PENDIENTE;
     }
 
     /**

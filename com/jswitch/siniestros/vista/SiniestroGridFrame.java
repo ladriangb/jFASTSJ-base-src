@@ -87,7 +87,6 @@ public class SiniestroGridFrame extends DefaultGridFrame {
         decimalColumn1.setColumnName("id");
         decimalColumn1.setColumnRequired(false);
         decimalColumn1.setColumnSortable(true);
-        decimalColumn1.setGrouping(false);
         decimalColumn1.setPreferredWidth(40);
         decimalColumn1.setSortVersus(org.openswing.swing.util.java.Consts.DESC_SORTED);
         gridData.getColumnContainer().add(decimalColumn1);
@@ -185,11 +184,11 @@ public class SiniestroGridFrame extends DefaultGridFrame {
         textColumn6.setPreferredWidth(200);
         gridControl1.getColumnContainer().add(textColumn6);
 
-        textColumn7.setColumnName("diagnosticoSiniestro.diagnostico.nombre");
+        textColumn7.setColumnName("diagnostico.nombre");
         textColumn7.setPreferredWidth(200);
         gridControl1.getColumnContainer().add(textColumn7);
 
-        textColumn8.setColumnName("diagnosticoSiniestro.diagnostico.especialidad.nombre");
+        textColumn8.setColumnName("diagnostico.especialidad.nombre");
         textColumn8.setPreferredWidth(200);
         gridControl1.getColumnContainer().add(textColumn8);
 

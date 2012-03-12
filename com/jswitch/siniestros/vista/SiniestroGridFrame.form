@@ -157,7 +157,6 @@
                 </Property>
                 <Property name="columnRequired" type="boolean" value="false"/>
                 <Property name="columnSortable" type="boolean" value="true"/>
-                <Property name="grouping" type="boolean" value="false"/>
                 <Property name="preferredWidth" type="int" value="40"/>
                 <Property name="sortVersus" type="java.lang.String" value="DESC"/>
               </Properties>
@@ -296,7 +295,7 @@
         <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn7">
           <Properties>
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="&quot;diagnosticoSiniestro.diagnostico.nombre&quot;" type="code"/>
+              <Connection code="&quot;diagnostico.nombre&quot;" type="code"/>
             </Property>
             <Property name="preferredWidth" type="int" value="200"/>
           </Properties>
@@ -304,7 +303,7 @@
         <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn8">
           <Properties>
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="&quot;diagnosticoSiniestro.diagnostico.especialidad.nombre&quot;" type="code"/>
+              <Connection code="&quot;diagnostico.especialidad.nombre&quot;" type="code"/>
             </Property>
             <Property name="preferredWidth" type="int" value="200"/>
           </Properties>

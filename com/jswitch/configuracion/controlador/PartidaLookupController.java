@@ -99,12 +99,12 @@ public class PartidaLookupController extends DefaultLookupController {
             Session s = null;
             try {
                 String sql = "FROM " + PartidaPresupuestaria.class.getName()
-                        + " C WHERE  C.auditoria.activo=? and UPPER(nombre) like ?";
+                        + " C WHERE  C.auditoria.activo=? and UPPER(C.nombre) like ?";
                 SessionFactory sf = HibernateUtil.getSessionFactory();
                 s = sf.openSession();
                 List l = s.createQuery(sql).setBoolean(0, Boolean.TRUE).setString(1, "%" + code + "%").list();
-                int i = 0;
-                if (l != null) {
+                
+                if (l == null || l.isEmpty()) {
                     return new VOListResponse();
                 }
                 return new VOListResponse(l, false, l.size());

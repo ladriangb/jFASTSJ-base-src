@@ -20,6 +20,7 @@ import com.jswitch.siniestros.modelo.maestra.Siniestro;
 import com.jswitch.siniestros.modelo.maestra.detalle.Vida;
 import com.jswitch.siniestros.modelo.utilitario.DetalleVida;
 import com.jswitch.siniestros.vista.detalle.DetalleVidaNuevoDetailFrame;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -45,7 +46,7 @@ public class DetalleVidaNuevoDetrailController extends DefaultDetailFrameControl
         this.siniestro = siniestro;
 
         ((DetalleVidaNuevoDetailFrame) vista).setPlanToLookup(siniestro.getAsegurado().getPlan());
-        if (!siniestro.getCertificado().getTitular().getAuditoria().getActivo() 
+        if (!siniestro.getCertificado().getTitular().getAuditoria().getActivo()
                 || !siniestro.getAsegurado().getAuditoria().getActivo() || !checkRamo("VIDA")) {
             JOptionPane.showMessageDialog(gridControl,
                     ClientSettings.getInstance().getResources().getResource("No se Permite Realizar el Siniestro a Este Asegurado"),
@@ -69,6 +70,9 @@ public class DetalleVidaNuevoDetrailController extends DefaultDetailFrameControl
         for (int i = 0; i < beneficiarios.size(); i++) {
             Beneficiario beneficiario = beneficiarios.get(i);
             Vida vida = new Vida();
+            DecimalFormat nf = new DecimalFormat("00");
+            vida.setNumero(nf.format(siniestro.getDetalleSiniestro().size() + 1));
+
             vida.setPersonaPago(beneficiario.getPersona());
             vida.setTipoDetalle("Vida");
             vida.setFechaDefuncion(detalleVida.getFechaDefuncion());

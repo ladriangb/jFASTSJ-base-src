@@ -46,7 +46,7 @@ public class ProntoPagoGridFrame extends DefaultGridFrame {
         decimalColumnNot1 = new org.openswing.swing.table.columns.client.DecimalColumn();
         decimalColumn1 = new org.openswing.swing.table.columns.client.DecimalColumn();
         decimalColumn2 = new org.openswing.swing.table.columns.client.DecimalColumn();
-        decimalColumn3 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        currencyColumn1 = new org.openswing.swing.table.columns.client.CurrencyColumn();
         textColumn3 = new org.openswing.swing.table.columns.client.TextColumn();
         jPanel8 = new javax.swing.JPanel();
         insertButton4 = new org.openswing.swing.client.InsertButton();
@@ -144,13 +144,15 @@ public class ProntoPagoGridFrame extends DefaultGridFrame {
         decimalColumn2.setEditableOnInsert(true);
         gridControl1.getColumnContainer().add(decimalColumn2);
 
-        decimalColumn3.setColumnFilterable(true);
-        decimalColumn3.setColumnName("monto");
-        decimalColumn3.setColumnSortable(true);
-        decimalColumn3.setDecimals(2);
-        decimalColumn3.setEditableOnEdit(true);
-        decimalColumn3.setEditableOnInsert(true);
-        gridControl1.getColumnContainer().add(decimalColumn3);
+        currencyColumn1.setColumnFilterable(true);
+        currencyColumn1.setColumnName("monto");
+        currencyColumn1.setColumnSortable(true);
+        currencyColumn1.setCurrencySymbol("%");
+        currencyColumn1.setDecimals(4);
+        currencyColumn1.setEditableOnEdit(true);
+        currencyColumn1.setEditableOnInsert(true);
+        currencyColumn1.setHideZeroDigits(true);
+        gridControl1.getColumnContainer().add(currencyColumn1);
 
         textColumn3.setColumnFilterable(true);
         textColumn3.setColumnName("prontoPago.persona.nombreCorto");
@@ -179,8 +181,8 @@ public class ProntoPagoGridFrame extends DefaultGridFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(244, Short.MAX_VALUE))
-            .addComponent(gridControl1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
+                .addContainerGap(248, Short.MAX_VALUE))
+            .addComponent(gridControl1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Rangos", jPanel2);
@@ -202,7 +204,7 @@ public class ProntoPagoGridFrame extends DefaultGridFrame {
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -255,9 +257,9 @@ public class ProntoPagoGridFrame extends DefaultGridFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.openswing.swing.table.columns.client.CodLookupColumn codLookupColumn1;
+    private org.openswing.swing.table.columns.client.CurrencyColumn currencyColumn1;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn1;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn2;
-    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn3;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumnNot;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumnNot1;
     private org.openswing.swing.client.DeleteButton deleteButton3;

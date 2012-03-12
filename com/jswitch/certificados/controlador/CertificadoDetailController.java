@@ -63,6 +63,7 @@ public class CertificadoDetailController extends DefaultDetailFrameController {
             Hibernate.initialize(p.getDocumentos());
             Hibernate.initialize(p.getObservaciones());
             Hibernate.initialize(p.getNotasTecnicas());
+            Hibernate.initialize(p.getTitular().getDocumentos());
             s.close();
             beanVO = p;
         }

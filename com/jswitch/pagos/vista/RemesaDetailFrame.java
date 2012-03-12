@@ -10,6 +10,7 @@ import com.jswitch.base.modelo.entidades.NotaTecnica;
 import com.jswitch.base.modelo.entidades.Observacion;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.vista.util.DefaultDetailFrame;
+import com.jswitch.configuracion.controlador.PartidaPresupuestariaGridInternalController;
 import com.jswitch.fas.modelo.Dominios;
 import com.jswitch.fas.modelo.Dominios.EstatusPago;
 import com.jswitch.pagos.controlador.OrdenesDePagoGridInternalController;
@@ -22,6 +23,7 @@ import com.jswitch.reporte.controlador.ReporteController;
 import com.jswitch.reporte.modelo.ParametroReporte;
 import com.jswitch.reporte.modelo.Reporte;
 import com.jswitch.reporte.vista.EsperaDialog;
+import com.jswitch.vistasbd.SumaPartidaRemesa;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +46,7 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
     protected DefaultDocumentosAnexosGridController controllerDocumentosAnexosX;
     protected DefaultGridInternalController controllerObservaciones;
     protected DefaultGridInternalController controllerNotasTecnicas;
+    private PartidaPresupuestariaGridInternalController partidaPresupuestaria;
     final JDialog d = new EsperaDialog(null, false);
     private Reporte reporteDetail = new Reporte(CategoriaReporte.REMESAS, 0, "REM-D001", "FONDO AUTOADMINISTRADO DE SALUD", "", "FROM " + Remesa.class.getName(), "Carta", false, false, true, false);
 
@@ -116,6 +119,7 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
         insertButton7 = new org.openswing.swing.client.InsertButton();
         deleteButton7 = new org.openswing.swing.client.DeleteButton();
         reloadButton7 = new org.openswing.swing.client.ReloadButton();
+        navigatorBar2 = new org.openswing.swing.client.NavigatorBar();
         observaciones = new javax.swing.JPanel();
         jPanelObs = new javax.swing.JPanel();
         gridControlObs = new org.openswing.swing.client.GridControl();
@@ -159,6 +163,33 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
         saveButtonDoc = new org.openswing.swing.client.SaveButton();
         reloadButtonDoc = new org.openswing.swing.client.ReloadButton();
         filterButtonDoc = new org.openswing.swing.client.FilterButton();
+        Partidas = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        reloadButton2 = new org.openswing.swing.client.ReloadButton();
+        exportButton2 = new org.openswing.swing.client.ExportButton();
+        navigatorBar1 = new org.openswing.swing.client.NavigatorBar();
+        filterButton1 = new org.openswing.swing.client.FilterButton();
+        gridPartidas = new org.openswing.swing.client.GridControl();
+        textColumn4 = new org.openswing.swing.table.columns.client.TextColumn();
+        textColumn5 = new org.openswing.swing.table.columns.client.TextColumn();
+        decimalColumn2 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        decimalColumn3 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        decimalColumn9 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        decimalColumn10 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        decimalColumn11 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        decimalColumn12 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        decimalColumn13 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        decimalColumn14 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        decimalColumn15 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        decimalColumn16 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        decimalColumn17 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        decimalColumn18 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        decimalColumn19 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        decimalColumn20 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        decimalColumn21 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        decimalColumn22 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        decimalColumn23 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        decimalColumn24 = new org.openswing.swing.table.columns.client.DecimalColumn();
         jPanel2 = new javax.swing.JPanel();
 
         setTitle("Remesa");
@@ -191,7 +222,7 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
                 .addComponent(reloadButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(exportButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 368, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 254, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -264,8 +295,8 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
                             .addComponent(labelControl15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textControl3, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
-                            .addComponent(textControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)))
+                            .addComponent(textControl3, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                            .addComponent(textControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(labelControl6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -340,19 +371,19 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(labelControl7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboBoxControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE))
+                        .addComponent(comboBoxControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(labelControl11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboBoxControl3, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE))
+                        .addComponent(comboBoxControl3, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelControl4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(labelControl14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboBoxControl4, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
-                            .addComponent(comboBoxControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE))))
+                            .addComponent(comboBoxControl4, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                            .addComponent(comboBoxControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE))))
                 .addContainerGap())
         );
 
@@ -412,7 +443,7 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 364, Short.MAX_VALUE)
+            .addGap(0, 307, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
                     .addContainerGap()
@@ -423,10 +454,10 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
                         .addComponent(labelControl9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(dateControl4, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                        .addComponent(dateControl3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                        .addComponent(dateControl1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                        .addComponent(dateControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE))
+                        .addComponent(dateControl4, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                        .addComponent(dateControl3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                        .addComponent(dateControl1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                        .addComponent(dateControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE))
                     .addContainerGap()))
         );
 
@@ -491,19 +522,19 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(labelControl13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(codLookupControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE))
+                        .addComponent(codLookupControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(labelControl10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE))
+                        .addComponent(textControl1, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelControl8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(labelControl12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(numericControl4, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
-                            .addComponent(numericControl3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE))))
+                            .addComponent(numericControl4, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                            .addComponent(numericControl3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE))))
                 .addContainerGap())
         );
 
@@ -542,7 +573,7 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, form1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(form1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -553,7 +584,7 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Detalle", form1);
@@ -561,65 +592,97 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
         jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         gridControl5.setDeleteButton(deleteButton7);
+        gridControl5.setNavBar(navigatorBar2);
         gridControl5.setReloadButton(reloadButton7);
         gridControl5.setValueObjectClassName(OrdenDePago.class.getName());
 
+        decimalColumn5.setColumnFilterable(true);
         decimalColumn5.setColumnName("id");
         decimalColumn5.setColumnRequired(false);
-        decimalColumn5.setGrouping(false);
+        decimalColumn5.setColumnSortable(true);
         decimalColumn5.setPreferredWidth(40);
         gridControl5.getColumnContainer().add(decimalColumn5);
 
+        textColumn1.setColumnFilterable(true);
         textColumn1.setColumnName("personaPago.nombreLargo");
+        textColumn1.setColumnRequired(false);
+        textColumn1.setColumnSortable(true);
         gridControl5.getColumnContainer().add(textColumn1);
 
+        currencyColumn1.setColumnFilterable(true);
         currencyColumn1.setColumnName("sumaOrden.totalACancelar");
+        currencyColumn1.setColumnRequired(false);
+        currencyColumn1.setColumnSortable(true);
         currencyColumn1.setCurrencySymbol("VEF");
         gridControl5.getColumnContainer().add(currencyColumn1);
 
+        checkBoxColumn2.setColumnFilterable(true);
         checkBoxColumn2.setColumnName("auditoria.activo");
         checkBoxColumn2.setColumnRequired(false);
-        checkBoxColumn2.setEditableOnEdit(true);
+        checkBoxColumn2.setColumnSortable(true);
         gridControl5.getColumnContainer().add(checkBoxColumn2);
 
+        textColumn9.setColumnFilterable(true);
         textColumn9.setColumnName("auditoria.usuarioInsert");
         textColumn9.setColumnRequired(false);
+        textColumn9.setColumnSortable(true);
         gridControl5.getColumnContainer().add(textColumn9);
 
+        dateTimeColumn2.setColumnFilterable(true);
         dateTimeColumn2.setColumnName("auditoria.fechaInsert");
         dateTimeColumn2.setColumnRequired(false);
+        dateTimeColumn2.setColumnSortable(true);
         gridControl5.getColumnContainer().add(dateTimeColumn2);
 
+        textColumn11.setColumnFilterable(true);
         textColumn11.setColumnName("auditoria.usuarioUpdate");
         textColumn11.setColumnRequired(false);
+        textColumn11.setColumnSortable(true);
         gridControl5.getColumnContainer().add(textColumn11);
 
+        dateTimeColumn4.setColumnFilterable(true);
         dateTimeColumn4.setColumnName("auditoria.fechaUpdate");
         dateTimeColumn4.setColumnRequired(false);
+        dateTimeColumn4.setColumnSortable(true);
         gridControl5.getColumnContainer().add(dateTimeColumn4);
 
-        jPanel15.setLayout(new java.awt.GridLayout(3, 2, 2, 2));
-
         insertButton7.setButtonId("insetDetail");
-        jPanel15.add(insertButton7);
-        jPanel15.add(deleteButton7);
-        jPanel15.add(reloadButton7);
+
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addComponent(insertButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(reloadButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(deleteButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(navigatorBar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(316, Short.MAX_VALUE))
+        );
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(insertButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(reloadButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(deleteButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(navigatorBar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel14Layout.createSequentialGroup()
-                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(gridControl5, javax.swing.GroupLayout.DEFAULT_SIZE, 692, Short.MAX_VALUE))
+            .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(gridControl5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE)
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(gridControl5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE))
+                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(gridControl5, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -638,7 +701,6 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
 
         decimalColumnObs.setColumnName("id");
         decimalColumnObs.setColumnRequired(false);
-        decimalColumnObs.setGrouping(false);
         decimalColumnObs.setPreferredWidth(40);
         gridControlObs.getColumnContainer().add(decimalColumnObs);
 
@@ -685,7 +747,7 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
             .addGroup(jPanelObsLayout.createSequentialGroup()
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(gridControlObs, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE)
+                .addComponent(gridControlObs, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanelObsLayout.setVerticalGroup(
@@ -695,7 +757,7 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
                     .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelObsLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(gridControlObs, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)))
+                        .addComponent(gridControlObs, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -703,7 +765,7 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
         observaciones.setLayout(observacionesLayout);
         observacionesLayout.setHorizontalGroup(
             observacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 748, Short.MAX_VALUE)
+            .addGap(0, 634, Short.MAX_VALUE)
             .addGroup(observacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, observacionesLayout.createSequentialGroup()
                     .addContainerGap()
@@ -712,7 +774,7 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
         );
         observacionesLayout.setVerticalGroup(
             observacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 325, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
             .addGroup(observacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, observacionesLayout.createSequentialGroup()
                     .addContainerGap()
@@ -733,7 +795,6 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
 
         decimalColumnNot.setColumnName("id");
         decimalColumnNot.setColumnRequired(false);
-        decimalColumnNot.setGrouping(false);
         decimalColumnNot.setPreferredWidth(40);
         gridControlNot.getColumnContainer().add(decimalColumnNot);
 
@@ -778,21 +839,21 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
             .addGroup(jPanelNotLayout.createSequentialGroup()
                 .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(gridControlNot, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE))
+                .addComponent(gridControlNot, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE))
         );
         jPanelNotLayout.setVerticalGroup(
             jPanelNotLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelNotLayout.createSequentialGroup()
                 .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(201, Short.MAX_VALUE))
-            .addComponent(gridControlNot, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+                .addContainerGap(176, Short.MAX_VALUE))
+            .addComponent(gridControlNot, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout notasTecnicasLayout = new javax.swing.GroupLayout(notasTecnicas);
         notasTecnicas.setLayout(notasTecnicasLayout);
         notasTecnicasLayout.setHorizontalGroup(
             notasTecnicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 748, Short.MAX_VALUE)
+            .addGap(0, 634, Short.MAX_VALUE)
             .addGroup(notasTecnicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(notasTecnicasLayout.createSequentialGroup()
                     .addContainerGap()
@@ -801,7 +862,7 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
         );
         notasTecnicasLayout.setVerticalGroup(
             notasTecnicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 325, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
             .addGroup(notasTecnicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(notasTecnicasLayout.createSequentialGroup()
                     .addContainerGap()
@@ -833,7 +894,6 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
 
         decimalColumnNot1.setColumnName("id");
         decimalColumnNot1.setColumnRequired(false);
-        decimalColumnNot1.setGrouping(false);
         decimalColumnNot1.setPreferredWidth(40);
         gridControlDoc.getColumnContainer().add(decimalColumnNot1);
 
@@ -870,7 +930,7 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
             .addGroup(jPanelDocLayout.createSequentialGroup()
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(gridControlDoc, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE)
+                .addComponent(gridControlDoc, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanelDocLayout.setVerticalGroup(
@@ -878,7 +938,7 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
             .addGroup(jPanelDocLayout.createSequentialGroup()
                 .addGroup(jPanelDocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(gridControlDoc, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE))
+                    .addComponent(gridControlDoc, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -886,7 +946,7 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
         DocAnexos.setLayout(DocAnexosLayout);
         DocAnexosLayout.setHorizontalGroup(
             DocAnexosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 748, Short.MAX_VALUE)
+            .addGap(0, 634, Short.MAX_VALUE)
             .addGroup(DocAnexosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(DocAnexosLayout.createSequentialGroup()
                     .addContainerGap()
@@ -895,7 +955,7 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
         );
         DocAnexosLayout.setVerticalGroup(
             DocAnexosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 325, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
             .addGroup(DocAnexosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(DocAnexosLayout.createSequentialGroup()
                     .addContainerGap()
@@ -905,15 +965,197 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
 
         jTabbedPane1.addTab("Documentos Anexos", DocAnexos);
 
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(reloadButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(exportButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(navigatorBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(filterButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(298, Short.MAX_VALUE))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addContainerGap(13, Short.MAX_VALUE)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(filterButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(navigatorBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(exportButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(reloadButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        gridPartidas.setExportButton(exportButton2);
+        gridPartidas.setFilterButton(filterButton1);
+        gridPartidas.setFunctionId("partidaRemesaGrid");
+        gridPartidas.setInsertRowsOnTop(false);
+        gridPartidas.setMaxSortedColumns(3);
+        gridPartidas.setNavBar(navigatorBar1);
+        gridPartidas.setReloadButton(reloadButton2);
+        gridPartidas.setSearchAdditionalRows(true);
+        gridPartidas.setValueObjectClassName(SumaPartidaRemesa.class.getName());
+
+        textColumn4.setColumnFilterable(true);
+        textColumn4.setColumnName("partidaPresupuestaria.nombre");
+        textColumn4.setColumnSortable(true);
+        gridPartidas.getColumnContainer().add(textColumn4);
+
+        textColumn5.setColumnFilterable(true);
+        textColumn5.setColumnName("partidaPresupuestaria.numero");
+        textColumn5.setColumnSortable(true);
+        gridPartidas.getColumnContainer().add(textColumn5);
+
+        decimalColumn2.setColumnFilterable(true);
+        decimalColumn2.setColumnName("cantidadDetalles");
+        decimalColumn2.setColumnSortable(true);
+        gridPartidas.getColumnContainer().add(decimalColumn2);
+
+        decimalColumn3.setColumnFilterable(true);
+        decimalColumn3.setColumnName("cantidadFacturas");
+        decimalColumn3.setColumnSortable(true);
+        gridPartidas.getColumnContainer().add(decimalColumn3);
+
+        decimalColumn9.setColumnFilterable(true);
+        decimalColumn9.setColumnName("montoRetencionTM");
+        decimalColumn9.setColumnSortable(true);
+        decimalColumn9.setDecimals(2);
+        gridPartidas.getColumnContainer().add(decimalColumn9);
+
+        decimalColumn10.setColumnFilterable(true);
+        decimalColumn10.setColumnName("baseIslr");
+        decimalColumn10.setColumnSortable(true);
+        decimalColumn10.setDecimals(2);
+        gridPartidas.getColumnContainer().add(decimalColumn10);
+
+        decimalColumn11.setColumnFilterable(true);
+        decimalColumn11.setColumnName("montoRetencionIslr");
+        decimalColumn11.setColumnSortable(true);
+        decimalColumn11.setDecimals(2);
+        gridPartidas.getColumnContainer().add(decimalColumn11);
+
+        decimalColumn12.setColumnFilterable(true);
+        decimalColumn12.setColumnName("baseIva");
+        decimalColumn12.setColumnSortable(true);
+        decimalColumn12.setDecimals(2);
+        gridPartidas.getColumnContainer().add(decimalColumn12);
+
+        decimalColumn13.setColumnFilterable(true);
+        decimalColumn13.setColumnName("montoIva");
+        decimalColumn13.setColumnSortable(true);
+        decimalColumn13.setDecimals(2);
+        gridPartidas.getColumnContainer().add(decimalColumn13);
+
+        decimalColumn14.setColumnFilterable(true);
+        decimalColumn14.setColumnName("montoRetencionIva");
+        decimalColumn14.setColumnSortable(true);
+        decimalColumn14.setDecimals(2);
+        gridPartidas.getColumnContainer().add(decimalColumn14);
+
+        decimalColumn15.setColumnFilterable(true);
+        decimalColumn15.setColumnName("montoRetencionProntoPago");
+        decimalColumn15.setColumnSortable(true);
+        decimalColumn15.setDecimals(2);
+        gridPartidas.getColumnContainer().add(decimalColumn15);
+
+        decimalColumn16.setColumnFilterable(true);
+        decimalColumn16.setColumnName("montoRetencionDeducible");
+        decimalColumn16.setColumnSortable(true);
+        decimalColumn16.setDecimals(2);
+        gridPartidas.getColumnContainer().add(decimalColumn16);
+
+        decimalColumn17.setColumnFilterable(true);
+        decimalColumn17.setColumnName("gastosClinicos");
+        decimalColumn17.setColumnSortable(true);
+        decimalColumn17.setDecimals(2);
+        gridPartidas.getColumnContainer().add(decimalColumn17);
+
+        decimalColumn18.setColumnFilterable(true);
+        decimalColumn18.setColumnName("honorariosMedicos");
+        decimalColumn18.setColumnSortable(true);
+        decimalColumn18.setDecimals(2);
+        gridPartidas.getColumnContainer().add(decimalColumn18);
+
+        decimalColumn19.setColumnFilterable(true);
+        decimalColumn19.setColumnName("montoNoAmparado");
+        decimalColumn19.setColumnSortable(true);
+        decimalColumn19.setDecimals(2);
+        gridPartidas.getColumnContainer().add(decimalColumn19);
+
+        decimalColumn20.setColumnFilterable(true);
+        decimalColumn20.setColumnName("montoAmparado");
+        decimalColumn20.setColumnSortable(true);
+        decimalColumn20.setDecimals(2);
+        gridPartidas.getColumnContainer().add(decimalColumn20);
+
+        decimalColumn21.setColumnFilterable(true);
+        decimalColumn21.setColumnName("totalFacturado");
+        decimalColumn21.setColumnSortable(true);
+        decimalColumn21.setDecimals(2);
+        gridPartidas.getColumnContainer().add(decimalColumn21);
+
+        decimalColumn22.setColumnFilterable(true);
+        decimalColumn22.setColumnName("totalLiquidado");
+        decimalColumn22.setColumnSortable(true);
+        decimalColumn22.setDecimals(2);
+        gridPartidas.getColumnContainer().add(decimalColumn22);
+
+        decimalColumn23.setColumnFilterable(true);
+        decimalColumn23.setColumnName("totalRetenido");
+        decimalColumn23.setColumnSortable(true);
+        decimalColumn23.setDecimals(2);
+        gridPartidas.getColumnContainer().add(decimalColumn23);
+
+        decimalColumn24.setColumnFilterable(true);
+        decimalColumn24.setColumnName("totalACancelar");
+        decimalColumn24.setColumnSortable(true);
+        decimalColumn24.setDecimals(2);
+        gridPartidas.getColumnContainer().add(decimalColumn24);
+
+        javax.swing.GroupLayout PartidasLayout = new javax.swing.GroupLayout(Partidas);
+        Partidas.setLayout(PartidasLayout);
+        PartidasLayout.setHorizontalGroup(
+            PartidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 634, Short.MAX_VALUE)
+            .addGroup(PartidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PartidasLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(PartidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(PartidasLayout.createSequentialGroup()
+                            .addGap(10, 10, 10)
+                            .addComponent(gridPartidas, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE)))
+                    .addContainerGap()))
+        );
+        PartidasLayout.setVerticalGroup(
+            PartidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(PartidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PartidasLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(gridPartidas, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+
+        jTabbedPane1.addTab("Partidas", Partidas);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 748, Short.MAX_VALUE)
+            .addGap(0, 634, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 325, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Reportes", jPanel2);
@@ -925,7 +1167,7 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -934,7 +1176,7 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -1010,6 +1252,10 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         gridControlNot.setGridDataLocator(controllerNotasTecnicas);
         gridControlNot.setController(controllerNotasTecnicas);
         //</editor-fold>
+        partidaPresupuestaria =
+                new PartidaPresupuestariaGridInternalController(gridPartidas);
+        gridPartidas.setGridDataLocator(partidaPresupuestaria);
+        gridPartidas.setController(partidaPresupuestaria);
 
         ordenDePagos =
                 new OrdenesDePagoGridInternalController(Remesa.class.getName(),
@@ -1071,6 +1317,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         controllerDocumentosAnexosX.setBeanVO(beanVO, id);
         controllerObservaciones.setBeanVO(beanVO);
         controllerNotasTecnicas.setBeanVO(beanVO);
+        partidaPresupuestaria.setBeanVO(beanVO);
 
         reloadGridsData();
     }
@@ -1121,7 +1368,6 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 editButton1.setVisible(true);
                 saveButton1.setVisible(true);
                 gridControl5.setDeleteButton(deleteButton7);
-                gridControl5.setInsertButton(insertButton7);
                 gridControlDoc.setEditButton(editButtonDoc);
                 gridControlDoc.setDeleteButton(deleteButtonDoc);
                 gridControlDoc.setInsertButton(insertButtonDoc);
@@ -1144,6 +1390,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel DocAnexos;
+    private javax.swing.JPanel Partidas;
     private org.openswing.swing.table.columns.client.ButtonColumn buttonColumnDoc;
     private javax.swing.ButtonGroup buttonGroup1;
     private org.openswing.swing.table.columns.client.CheckBoxColumn checkBoxColumn2;
@@ -1166,7 +1413,25 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn4;
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumnObs1;
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumnObs2;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn10;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn11;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn12;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn13;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn14;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn15;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn16;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn17;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn18;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn19;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn2;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn20;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn21;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn22;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn23;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn24;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn3;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn5;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn9;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumnNot;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumnNot1;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumnObs;
@@ -1177,12 +1442,15 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private org.openswing.swing.client.EditButton editButtonDoc;
     private org.openswing.swing.client.EditButton editButtonObs;
     private org.openswing.swing.client.ExportButton exportButton1;
+    private org.openswing.swing.client.ExportButton exportButton2;
+    private org.openswing.swing.client.FilterButton filterButton1;
     private org.openswing.swing.client.FilterButton filterButtonDoc;
     private org.openswing.swing.form.client.Form form1;
     private org.openswing.swing.client.GridControl gridControl5;
     private org.openswing.swing.client.GridControl gridControlDoc;
     private org.openswing.swing.client.GridControl gridControlNot;
     private org.openswing.swing.client.GridControl gridControlObs;
+    private org.openswing.swing.client.GridControl gridPartidas;
     private org.openswing.swing.client.InsertButton insertButton7;
     private org.openswing.swing.client.InsertButton insertButtonDoc;
     private org.openswing.swing.client.InsertButton insertButtonNot;
@@ -1191,6 +1459,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
@@ -1222,12 +1491,15 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private org.openswing.swing.client.LabelControl labelControl7;
     private org.openswing.swing.client.LabelControl labelControl8;
     private org.openswing.swing.client.LabelControl labelControl9;
+    private org.openswing.swing.client.NavigatorBar navigatorBar1;
+    private org.openswing.swing.client.NavigatorBar navigatorBar2;
     private javax.swing.JPanel notasTecnicas;
     private org.openswing.swing.client.NumericControl numericControl2;
     private org.openswing.swing.client.NumericControl numericControl3;
     private org.openswing.swing.client.NumericControl numericControl4;
     private javax.swing.JPanel observaciones;
     private org.openswing.swing.client.ReloadButton reloadButton1;
+    private org.openswing.swing.client.ReloadButton reloadButton2;
     private org.openswing.swing.client.ReloadButton reloadButton7;
     private org.openswing.swing.client.ReloadButton reloadButtonDoc;
     private org.openswing.swing.client.ReloadButton reloadButtonNot;
@@ -1238,6 +1510,8 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private org.openswing.swing.client.SaveButton saveButtonObs;
     private org.openswing.swing.table.columns.client.TextColumn textColumn1;
     private org.openswing.swing.table.columns.client.TextColumn textColumn11;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn4;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn5;
     private org.openswing.swing.table.columns.client.TextColumn textColumn9;
     private org.openswing.swing.table.columns.client.TextColumn textColumnDoc;
     private org.openswing.swing.table.columns.client.TextColumn textColumnNot1;

@@ -3,6 +3,7 @@ package com.jswitch.certificados.modelo.maestra;
 import com.jswitch.asegurados.modelo.maestra.Beneficiario;
 import com.jswitch.asegurados.modelo.maestra.Titular;
 import com.jswitch.asegurados.modelo.maestra.Asegurado;
+import com.jswitch.base.modelo.Dominios;
 import com.jswitch.base.modelo.entidades.Documento;
 import com.jswitch.base.modelo.entidades.NotaTecnica;
 import com.jswitch.base.modelo.entidades.Observacion;
@@ -12,6 +13,7 @@ import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.modelo.util.ehts.BusinessKey;
 import com.jswitch.base.modelo.util.ehts.Method;
 import com.jswitch.polizas.modelo.maestra.Poliza;
+import com.jswitch.reporte.modelo.Reporte;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,6 +33,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.persistence.Transient;
 import javax.persistence.Version;
 
 /**
@@ -55,7 +58,7 @@ public class Certificado extends BeanVO implements Serializable, Auditable {
     @ManyToOne()
     private Titular titular;
     /**
-    */
+     */
     @ManyToOne
     @BusinessKey
     private Poliza poliza;
@@ -95,8 +98,7 @@ public class Certificado extends BeanVO implements Serializable, Auditable {
     @Embedded
     @BusinessKey
     private AuditoriaBasica auditoria;
-
-        /**
+    /**
      */
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @BusinessKey(exclude = Method.ALL)
@@ -112,104 +114,226 @@ public class Certificado extends BeanVO implements Serializable, Auditable {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @BusinessKey(exclude = Method.ALL)
     private Set<Documento> documentos = new HashSet<Documento>(0);
+    /**
+     * reportes especificos
+     */
+    @Transient
+    private transient Set<Reporte> reportes = new HashSet<Reporte>(0);
 
-    
     public Certificado() {
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Integer getOptLock() {
-        return optLock;
-    }
-
-    public void setOptLock(Integer optLock) {
-        this.optLock = optLock;
-    }
-
-    public AuditoriaBasica getAuditoria() {
-        return auditoria;
-    }
-
-    public void setAuditoria(AuditoriaBasica auditoria) {
-        this.auditoria = auditoria;
-    }
-
+    /**
+     * HCM
+     * @return the asegurados
+     */
     public Set<Asegurado> getAsegurados() {
         return asegurados;
     }
 
-    public void setAsegurados(Set<Asegurado> asegurados) {
-        this.asegurados = asegurados;
+    /**
+     *
+     * @return the auditoria
+     */
+    public AuditoriaBasica getAuditoria() {
+        return auditoria;
     }
 
+    /**
+     * Vida
+     * @return the beneficiarios
+     */
     public Set<Beneficiario> getBeneficiarios() {
         return beneficiarios;
     }
 
-    public void setBeneficiarios(Set<Beneficiario> beneficiarios) {
-        this.beneficiarios = beneficiarios;
-    }
-
-    public Titular getTitular() {
-        return titular;
-    }
-
-    public void setTitular(Titular titular) {
-        this.titular = titular;
-    }
-
-    public Date getFechaPrimaHCM() {
-        return fechaPrimaHCM;
-    }
-
-    public void setFechaPrimaHCM(Date fechaPrimaHCM) {
-        this.fechaPrimaHCM = fechaPrimaHCM;
-    }
-
-    public Date getFechaPrimaVida() {
-        return fechaPrimaVida;
-    }
-
-    public void setFechaPrimaVida(Date fechaPrimaVida) {
-        this.fechaPrimaVida = fechaPrimaVida;
-    }
-
+    /**
+     * Coleccion de documentos anexos
+     * @return the documentos
+     */
     public Set<Documento> getDocumentos() {
         return documentos;
     }
 
-    public void setDocumentos(Set<Documento> documentos) {
-        this.documentos = documentos;
+    /**
+     *
+     * @return the fechaPrimaHCM
+     */
+    public Date getFechaPrimaHCM() {
+        return fechaPrimaHCM;
     }
 
+    /**
+     *
+     * @return the fechaPrimaVida
+     */
+    public Date getFechaPrimaVida() {
+        return fechaPrimaVida;
+    }
+
+    /**
+     * Pk autogenerado
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     *
+     * @return the notasTecnicas
+     */
     public List<NotaTecnica> getNotasTecnicas() {
         return notasTecnicas;
     }
 
-    public void setNotasTecnicas(List<NotaTecnica> notasTecnicas) {
-        this.notasTecnicas = notasTecnicas;
-    }
-
+    /**
+     *
+     * @return the observaciones
+     */
     public List<Observacion> getObservaciones() {
         return observaciones;
     }
 
-    public void setObservaciones(List<Observacion> observaciones) {
-        this.observaciones = observaciones;
+    /**
+     *
+     * @return the optLock
+     */
+    public Integer getOptLock() {
+        return optLock;
     }
 
+    /**
+     *
+     * @return the poliza
+     */
     public Poliza getPoliza() {
         return poliza;
     }
 
+    /**
+     * reportes especificos
+     * @return the reportes
+     */
+    public Set<Reporte> getReportes() {
+        if (reportes.isEmpty()) {
+            reportes.add(new Reporte(Dominios.CategoriaReporte.CERTIFICADOS, 0,
+                    "CERTIFICADO", "CERTIFICADO DE ASEGURADOS", "LISTA DE CERTIFICIADO DE ASEGURADOS",
+                    null,
+                    "Carta 8½ x 11 Vertical", false, true, true, false));
+        }
+        return reportes;
+    }
+
+    /**
+     *
+     * @return the titular
+     */
+    public Titular getTitular() {
+        return titular;
+    }
+
+    /**
+     * HCM
+     * @param asegurados the asegurados to set
+     */
+    public void setAsegurados(Set<Asegurado> asegurados) {
+        this.asegurados = asegurados;
+    }
+
+    /**
+     *
+     * @param auditoria the auditoria to set
+     */
+    public void setAuditoria(AuditoriaBasica auditoria) {
+        this.auditoria = auditoria;
+    }
+
+    /**
+     * Vida
+     * @param beneficiarios the beneficiarios to set
+     */
+    public void setBeneficiarios(Set<Beneficiario> beneficiarios) {
+        this.beneficiarios = beneficiarios;
+    }
+
+    /**
+     * Coleccion de documentos anexos
+     * @param documentos the documentos to set
+     */
+    public void setDocumentos(Set<Documento> documentos) {
+        this.documentos = documentos;
+    }
+
+    /**
+     *
+     * @param fechaPrimaHCM the fechaPrimaHCM to set
+     */
+    public void setFechaPrimaHCM(Date fechaPrimaHCM) {
+        this.fechaPrimaHCM = fechaPrimaHCM;
+    }
+
+    /**
+     *
+     * @param fechaPrimaVida the fechaPrimaVida to set
+     */
+    public void setFechaPrimaVida(Date fechaPrimaVida) {
+        this.fechaPrimaVida = fechaPrimaVida;
+    }
+
+    /**
+     * Pk autogenerado
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     *
+     * @param notasTecnicas the notasTecnicas to set
+     */
+    public void setNotasTecnicas(List<NotaTecnica> notasTecnicas) {
+        this.notasTecnicas = notasTecnicas;
+    }
+
+    /**
+     *
+     * @param observaciones the observaciones to set
+     */
+    public void setObservaciones(List<Observacion> observaciones) {
+        this.observaciones = observaciones;
+    }
+
+    /**
+     *
+     * @param optLock the optLock to set
+     */
+    public void setOptLock(Integer optLock) {
+        this.optLock = optLock;
+    }
+
+    /**
+     *
+     * @param poliza the poliza to set
+     */
     public void setPoliza(Poliza poliza) {
         this.poliza = poliza;
+    }
+
+    /**
+     * reportes especificos
+     * @param reportes the reportes to set
+     */
+    public void setReportes(Set<Reporte> reportes) {
+        this.reportes = reportes;
+    }
+
+    /**
+     *
+     * @param titular the titular to set
+     */
+    public void setTitular(Titular titular) {
+        this.titular = titular;
     }
 }

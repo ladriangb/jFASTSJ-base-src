@@ -2,9 +2,9 @@ package com.jswitch.siniestros.controlador.detalle.reportes;
 
 import com.jswitch.base.controlador.General;
 import com.jswitch.base.controlador.util.DefaultGridInternalController;
+import com.jswitch.base.modelo.entidades.auditoria.Auditable;
 import com.jswitch.reporte.controlador.ReporteController;
 import com.jswitch.reporte.modelo.Reporte;
-import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -31,11 +31,19 @@ public class ReporteGridInternalController extends DefaultGridInternalController
 
     @Override
     public void doubleClick(int rowNumber, ValueObject persistentObject) {
-        if (beanVO != null && ((DetalleSiniestro) beanVO).getId() != null) {
+        if (beanVO != null && ((Auditable) beanVO).getId() != null) {
             Reporte reporte = (Reporte) persistentObject;
 
             String rutaReporte = General.empresa.getRutaReportes() + "/" + reporte.getFile() + ".jasper";
             Map parameters = new HashMap();
+            parameters.put("reporteSQL", reporte.getBaseSQL());
+            parameters.put("draco", ReporteController.getIcon("draco_Report"));
+            parameters.put("usuario", General.usuario.getUserName());
+            parameters.put("oficina", General.oficina.getNombre());
+            parameters.put("responsable", General.oficina.getResponsable());
+
+
+
             parameters.put(JRParameter.REPORT_LOCALE, Locale.getDefault());
             parameters.put(JRParameter.REPORT_RESOURCE_BUNDLE, java.util.ResourceBundle.getBundle("Spanish"));
             parameters.put("datosSistema",
@@ -48,12 +56,12 @@ public class ReporteGridInternalController extends DefaultGridInternalController
 //            parameters.put("reporteParametros", parametrosFiltro);
             parameters.put("usuario", General.usuario.getUserName());
 
-                parameters.put("empresaNombre", General.empresa.getNombre());
-                parameters.put("empresaRif", General.empresa.getRif2());
-                parameters.put("empresaTelefono", General.empresa.getTelefonos());
-                parameters.put("empresaLogo", ReporteController.getIcon(null));
-                parameters.put("empresaObservacion", "");
-            
+            parameters.put("empresaNombre", General.empresa.getNombre());
+            parameters.put("empresaRif", General.empresa.getRif2());
+            parameters.put("empresaTelefono", General.empresa.getTelefonos());
+            parameters.put("empresaLogo", ReporteController.getIcon(null));
+            parameters.put("empresaObservacion", "");
+
             Collection c = new ArrayList(1);
             c.add(beanVO);
             try {

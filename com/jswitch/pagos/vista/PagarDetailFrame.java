@@ -8,6 +8,7 @@ import com.jswitch.fas.modelo.Dominios.TipoDescuentoProntoPago;
 import com.jswitch.pagos.controlador.EtapasPagadasLookupController;
 import com.jswitch.pagos.modelo.utilitario.Pagar;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
+import java.awt.event.ActionListener;
 import org.openswing.swing.form.client.Form;
 import org.openswing.swing.form.client.FormController;
 import org.openswing.swing.mdi.client.MDIFrame;
@@ -56,11 +57,6 @@ public class PagarDetailFrame extends DefaultDetailFrame {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/money.png"))); // NOI18N
         jButton1.setPreferredSize(new java.awt.Dimension(33, 33));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -87,7 +83,7 @@ public class PagarDetailFrame extends DefaultDetailFrame {
 
         currencyControl1.setCurrencySymbol("%");
         currencyControl1.setCurrencySymbolOnLeft(false);
-        currencyControl1.setDecimals(2);
+        currencyControl1.setDecimals(4);
         currencyControl1.setHideZeroDigits(true);
 
         labelControl11.setLabel("fechaDePago");
@@ -115,10 +111,12 @@ public class PagarDetailFrame extends DefaultDetailFrame {
         labelControl14.setLabel("TipoDescuentoProntoPago");
 
         codLookupControl1.setAttributeName("etapaSiniestro.nombre");
+        codLookupControl1.setMaxCharacters(25);
         codLookupControl1.setRequired(true);
         codLookupControl1.setToolTipText("Etapa en la que quedaran todos los Detalle Siniestro Asociados al pago");
 
         codLookupTM.setAttributeName("timbreMunicipal.zipCode");
+        codLookupTM.setMaxCharacters(25);
         codLookupTM.setRequired(true);
         codLookupTM.setToolTipText("Etapa en la que quedaran todos los Detalle Siniestro Asociados al pago");
 
@@ -188,7 +186,7 @@ public class PagarDetailFrame extends DefaultDetailFrame {
                 .addGroup(form1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelControl4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(currencyControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         form1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {codLookupControl1, comboBoxControl2, currencyControl1, dateControl3, labelControl10, labelControl11, labelControl12, labelControl14, labelControl2, labelControl4, textControl2});
@@ -214,11 +212,6 @@ public class PagarDetailFrame extends DefaultDetailFrame {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        saveButton1.doClick();
-        getMainPanel().setMode(Consts.EDIT);
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         dispose();
@@ -270,7 +263,7 @@ public class PagarDetailFrame extends DefaultDetailFrame {
         form1.getVOModel().setCreateInnerVO(true);
         currencyControl1.setVisible(false);
         labelControl4.setVisible(false);
-
+        jButton1.addActionListener((ActionListener)formController);
 
         if (addToMDIFrame) {
             pack();

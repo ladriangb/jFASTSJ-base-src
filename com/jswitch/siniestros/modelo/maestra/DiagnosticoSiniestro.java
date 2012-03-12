@@ -77,6 +77,11 @@ public class DiagnosticoSiniestro extends BeanVO implements Serializable, Audita
      * total que se ha utilizado
      */
     @Transient
+    private transient Double disponiblePorTipoDetalle;
+    /**
+     * total que se ha utilizado
+     */
+    @Transient
     private transient Double totalUtilizado;
     /**
      * tratamiento general escrito por el medico
@@ -137,6 +142,14 @@ public class DiagnosticoSiniestro extends BeanVO implements Serializable, Audita
      */
     public Diagnostico getDiagnostico() {
         return diagnostico;
+    }
+
+    /**
+     * total que se ha utilizado
+     * @return the disponiblePorTipoDetalle
+     */
+    public Double getDisponiblePorTipoDetalle() {
+        return disponiblePorTipoDetalle;
     }
 
     /**
@@ -236,6 +249,14 @@ public class DiagnosticoSiniestro extends BeanVO implements Serializable, Audita
     }
 
     /**
+     * total que se ha utilizado
+     * @param disponiblePorTipoDetalle the disponiblePorTipoDetalle to set
+     */
+    public void setDisponiblePorTipoDetalle(Double disponiblePorTipoDetalle) {
+        this.disponiblePorTipoDetalle = disponiblePorTipoDetalle;
+    }
+
+    /**
      * Pk autogenerado
      * @param id the id to set
      */
@@ -306,5 +327,4 @@ public class DiagnosticoSiniestro extends BeanVO implements Serializable, Audita
     public void setTratamientos(Set<Tratamiento> tratamientos) {
         this.tratamientos = tratamientos;
     }
-
 }

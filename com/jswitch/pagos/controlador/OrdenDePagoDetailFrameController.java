@@ -96,25 +96,7 @@ public class OrdenDePagoDetailFrameController
 
     @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
-        OrdenDePago p = (OrdenDePago) newPersistentObject;
-        p.setEstatusPago(EstatusPago.PENDIENTE);
-        if (p.getAutoSearch()) {
-            Session s = null;
-            try {
-                s = HibernateUtil.getSessionFactory().openSession();
-                List l = s.createQuery("FROM "
-                        + p.getTipoDetalleSiniestro().getClase() + " C WHERE "
-                        + "C.personaPago.id=? AND C.etapaSiniestro.idPropio=?").
-                        setLong(0, p.getPersonaPago().getId()).
-                        setString(1, "LIQ").list();
-                for (Object detalleSiniestro : l) {
-                    p.getDetalleSiniestros().add(
-                            (DetalleSiniestro) detalleSiniestro);
-                }
-            } finally {
-                s.close();
-            }
-        }
+ 
         return super.insertRecord(newPersistentObject);
     }
 
@@ -133,7 +115,7 @@ public class OrdenDePagoDetailFrameController
         }
         Calendar c = Calendar.getInstance();
         DecimalFormat nf = new DecimalFormat("00000");
-        SimpleDateFormat df = new SimpleDateFormat("MM-yyyy");
+        SimpleDateFormat df = new SimpleDateFormat("yyMM");
         OrdenDePago ordenDePago = (OrdenDePago) persistentObject;
 
         ordenDePago.setNumeroOrden(df.format(c.getTime()) + "-" + nf.format(seq));
@@ -146,11 +128,25 @@ public class OrdenDePagoDetailFrameController
                 + EtapaSiniestro.class.getName() + " C WHERE "
                 + "idPropio=?").setString(0, "ORD_PAG").uniqueResult();
 
-        for (DetalleSiniestro detalleSiniestro : ordenDePago.getDetalleSiniestros()) {
-            detalleSiniestro.setEtapaSiniestro(etS);
-            detalleSiniestro.setOrdenDePago(ordenDePago);
-            s.update(detalleSiniestro);
+
+        if (ordenDePago.getAutoSearch()) {
+            try {
+                List l = s.createQuery("SELECT C.id FROM "
+                        + ordenDePago.getTipoDetalleSiniestro().getClase() + " C WHERE "
+                        + "C.personaPago.id=? AND C.etapaSiniestro.idPropio=?").
+                        setLong(0, ordenDePago.getPersonaPago().getId()).
+                        setString(1, "LIQ").list();
+                
+                s.createQuery("UPDATE " + DetalleSiniestro.class.getName()
+                        + " SET etapaSiniestro=:es, ordenDePago=:re WHERE"
+                        + " id in (:op)").setEntity("es", etS).
+                        setEntity("re", ordenDePago).setParameterList("op", l).executeUpdate();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+
         return new VOResponse(ordenDePago);
     }
 
@@ -187,15 +183,19 @@ public class OrdenDePagoDetailFrameController
                         + EtapaSiniestro.class.getName() + " C WHERE "
                         + "idPropio=?").setString(0, "LIQ").uniqueResult();
             }
-            for (DetalleSiniestro detalleSiniestro : pago.getDetalleSiniestros()) {
-                detalleSiniestro.setEtapaSiniestro(etS);
-                detalleSiniestro.setOrdenDePago(null);
-                s.update(detalleSiniestro);
-            }
+
+            s.createQuery("UPDATE " + DetalleSiniestro.class.getName()
+                    + " D SET D.etapaSiniestro=:es, D.ordenDePago=null WHERE D in(:ds)").
+                    setEntity("es", etS).
+                    setParameterList("ds", pago.getDetalleSiniestros()).executeUpdate();
+
             s.update(pago);
             s.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         } finally {
             s.close();
+            vista.getMainPanel().getReloadButton().doClick();
         }
     }
 

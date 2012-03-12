@@ -39,5 +39,5 @@ public class OrdenDePagoGridFrameController extends DefaultGridFrameController {
     public void doubleClick(int rowNumber, ValueObject persistentObject) {
         new OrdenDePagoDetailFrameController(detailFramePath, null,
                 (BeanVO) persistentObject, Boolean.TRUE);
-    }
+    }    
 }

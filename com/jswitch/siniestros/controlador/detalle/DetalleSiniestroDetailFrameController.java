@@ -8,7 +8,6 @@ import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.configuracion.modelo.dominio.Ramo;
 import com.jswitch.configuracion.modelo.maestra.Plan;
 import com.jswitch.pagos.controlador.FacturaDetailFrameController;
-import com.jswitch.pagos.modelo.maestra.Factura;
 import com.jswitch.pagos.vista.FacturaDetailFrame;
 import com.jswitch.persona.modelo.dominio.TipoPersona;
 import com.jswitch.siniestros.controlador.DiagnosticoPorRamoGridFrameController;
@@ -24,6 +23,7 @@ import com.jswitch.siniestros.modelo.maestra.detalle.Reembolso;
 import com.jswitch.siniestros.modelo.maestra.detalle.Vida;
 import com.jswitch.siniestros.vista.detalle.DetalleSiniestroDetailFrame;
 import java.awt.event.ActionEvent;
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -134,7 +134,8 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
         String className = newPersistentObject.getClass().getName();
         className = className.substring(1 + className.lastIndexOf("."));
         ((DetalleSiniestro) newPersistentObject).setTipoDetalle(className);
-
+        DecimalFormat nf = new DecimalFormat("00");
+        ((DetalleSiniestro) newPersistentObject).setNumero(nf.format(siniestro.getDetalleSiniestro().size()+1));
         Session s = null;
         try {
             vista.saveGridsData();
@@ -153,7 +154,6 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
 
             if (newPersistentObject instanceof Emergencia) {
                 ((Emergencia) newPersistentObject).setClave(siniestro.getNumero());
-
             }
 
             if (newPersistentObject instanceof Reembolso) {

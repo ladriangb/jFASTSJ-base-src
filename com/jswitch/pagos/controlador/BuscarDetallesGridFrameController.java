@@ -12,8 +12,9 @@ import com.jswitch.siniestros.vista.detalle.DetalleSiniestroDetailFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
-import org.hibernate.Hibernate;
+import java.util.Vector;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.hibernate.type.LongType;
@@ -95,22 +96,17 @@ public class BuscarDetallesGridFrameController extends DefaultGridFrameControlle
                 EtapaSiniestro es = (EtapaSiniestro) s.createQuery("FROM "
                         + EtapaSiniestro.class.getName() + " C WHERE "
                         + "idPropio=?").setString(0, "ORD_PAG").uniqueResult();
-                for (int i = 0; i < model.getRowCount(); i++) {
-                    DetalleSiniestro detalleSin = (DetalleSiniestro) s.get(
-                            DetalleSiniestro.class,
-                            ((DetalleSiniestro) model.getObjectForRow(i)).getId());
+                OrdenDePago p = (OrdenDePago) s.get(OrdenDePago.class, ordenDePago.getId());
 
-                    if (((DetalleSiniestro) model.getObjectForRow(i)).getSelected()) {
-                        Hibernate.initialize(detalleSin.getNotasTecnicas());
-                        Hibernate.initialize(detalleSin.getObservaciones());
-                        Hibernate.initialize(detalleSin.getPagos());
-                        Hibernate.initialize(detalleSin.getDiagnosticoSiniestros());
-                        Hibernate.initialize(detalleSin.getDocumentos());
-                        detalleSin.setEtapaSiniestro(es);
-                        detalleSin.setOrdenDePago(ordenDePago);
-                        s.update(detalleSin);
-                    }
+                List lista = model.getChangedRows();
+                if (lista == null || lista.isEmpty()) {
+                    lista = getSubList(model.getDataVector());
                 }
+                s.createQuery("UPDATE " + DetalleSiniestro.class.getName()
+                        + " D SET D.etapaSiniestro=:es, D.ordenDePago=:ord WHERE D in(:ds)").
+                        setEntity("es", es).setEntity("ord", p).
+                        setParameterList("ds", lista).executeUpdate();
+
                 s.getTransaction().commit();
                 gridFrame.dispose();
 
@@ -121,5 +117,15 @@ public class BuscarDetallesGridFrameController extends DefaultGridFrameControlle
                 controller.getVista().getMainPanel().getReloadButton().doClick();
             }
         }
+    }
+
+    private List getSubList(Vector dataVector) {
+        List l = new ArrayList(0);
+        for (Object object : dataVector) {
+            if (((DetalleSiniestro) object).getSelected()) {
+                l.add(object);
+            }
+        }
+        return l;
     }
 }
