@@ -90,7 +90,6 @@ public class RemesaDetailFrameController
 
     @Override
     public Response logicaNegocio(ValueObject persistentObject) {
-        Session s = null;
         Remesa remesa = (Remesa) persistentObject;
         if (remesa.getCuentaBancaria() != null) {
             remesa.setTipoCuenta(remesa.getCuentaBancaria().getTipoCuenta());
