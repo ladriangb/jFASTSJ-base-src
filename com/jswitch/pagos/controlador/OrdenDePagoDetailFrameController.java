@@ -84,7 +84,7 @@ public class OrdenDePagoDetailFrameController
     public Response loadData(Class valueObjectClass) {
         Session s = HibernateUtil.getSessionFactory().openSession();
         OrdenDePago sin = (OrdenDePago) s.get(OrdenDePago.class, ((OrdenDePago) beanVO).getId());
-        Hibernate.initialize(sin.getDetalleSiniestros());
+        Hibernate.initialize(sin.getRemesa());
         Hibernate.initialize(sin.getObservaciones());
         Hibernate.initialize(sin.getDocumentos());
         Hibernate.initialize(sin.getNotasTecnicas());
@@ -96,7 +96,7 @@ public class OrdenDePagoDetailFrameController
 
     @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
- 
+
         return super.insertRecord(newPersistentObject);
     }
 
@@ -136,7 +136,7 @@ public class OrdenDePagoDetailFrameController
                         + "C.personaPago.id=? AND C.etapaSiniestro.idPropio=?").
                         setLong(0, ordenDePago.getPersonaPago().getId()).
                         setString(1, "LIQ").list();
-                
+
                 s.createQuery("UPDATE " + DetalleSiniestro.class.getName()
                         + " SET etapaSiniestro=:es, ordenDePago=:re WHERE"
                         + " id in (:op)").setEntity("es", etS).
@@ -155,8 +155,8 @@ public class OrdenDePagoDetailFrameController
         if (e.getSource() instanceof InsertButton) {
             OrdenDePago ordenDePago = (OrdenDePago) beanVO;
             new BuscarDetallesGridFrameController(this, ordenDePago);
-        } else if (((JButton) e.getSource()).getText().equalsIgnoreCase("PAGAR")) {
-            new PagarDetailFrameController(vista.getMainPanel());
+        } else if (((JButton) e.getSource()).getText().equalsIgnoreCase("Liquidar")) {
+            new LiquidarPagoDetailFrameController(vista.getMainPanel());
         } else {
             int res = JOptionPane.showConfirmDialog(vista, "Esta a punto de Anular la \"Orden de Pago\"\nEsta acción no se puede revertir\n¿Desea Continuar? ",
                     General.empresa.getNombre(), JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
@@ -185,9 +185,9 @@ public class OrdenDePagoDetailFrameController
             }
 
             s.createQuery("UPDATE " + DetalleSiniestro.class.getName()
-                    + " D SET D.etapaSiniestro=:es, D.ordenDePago=null WHERE D in(:ds)").
+                    + " D SET D.etapaSiniestro=:es, D.ordenDePago=null WHERE D.ordenDePago.id=:ds").
                     setEntity("es", etS).
-                    setParameterList("ds", pago.getDetalleSiniestros()).executeUpdate();
+                    setLong("ds", pago.getId()).executeUpdate();
 
             s.update(pago);
             s.getTransaction().commit();

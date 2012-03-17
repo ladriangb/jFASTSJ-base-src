@@ -1,5 +1,7 @@
 package com.jswitch.siniestros.modelo.maestra;
 
+import com.jswitch.asegurados.modelo.dominio.TipoContrato;
+import com.jswitch.base.modelo.Dominios;
 import com.jswitch.pagos.modelo.maestra.Factura;
 import com.jswitch.base.modelo.entidades.Documento;
 import com.jswitch.base.modelo.entidades.NotaTecnica;
@@ -59,6 +61,22 @@ import javax.validation.constraints.Past;
 public class DetalleSiniestro extends BeanVO implements Serializable, Auditable {
 
     /**
+     * reportes Generales
+     * @return the reportesGenerales
+     */
+    public static Set<Reporte> getReportesGenerales() {
+        return reportesGenerales;
+    }
+
+    /**
+     * reportes Generales
+     * @param aReportesGenerales the reportesGenerales to set
+     */
+    public static void setReportesGenerales(Set<Reporte> aReportesGenerales) {
+        reportesGenerales = aReportesGenerales;
+    }
+
+    /**
      * Pk autogenerado
      */
     @Id
@@ -76,6 +94,11 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      */
     @ManyToOne()
     private TipoPersona tipoPersona;
+    /**
+     * emplado, contratado, funcionario, jubilado, incapacitado, aprendis ince
+     */
+    @ManyToOne()
+    private TipoContrato tipoContrato;
     /**
      * persona a realizar el pago
      */
@@ -160,6 +183,13 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     @ManyToOne
     private EtapaSiniestro etapaSiniestro;
     /**
+     * Fecha en que se hace el la orden de pago
+     */
+    @Column
+    @Temporal(value = TemporalType.DATE)
+    @BusinessKey
+    private Date fechaAprobado;
+    /**
      * fecha en q se paga  el siniestro
      */
     @Column
@@ -220,6 +250,11 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     @Transient
     private transient Set<Reporte> reportes;
     /**
+     * reportes Generales
+     */
+    @Transient
+    private static transient Set<Reporte> reportesGenerales = new HashSet<Reporte>(0);
+    /**
      * vesion
      */
     @Version
@@ -276,6 +311,14 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      */
     public EtapaSiniestro getEtapaSiniestro() {
         return etapaSiniestro;
+    }
+
+    /**
+     * Fecha en que se hace el la orden de pago
+     * @return the fechaAprobado
+     */
+    public Date getFechaAprobado() {
+        return fechaAprobado;
     }
 
     /**
@@ -431,6 +474,14 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     }
 
     /**
+     * emplado, contratado, funcionario, jubilado, incapacitado, aprendis ince
+     * @return the tipoContrato
+     */
+    public TipoContrato getTipoContrato() {
+        return tipoContrato;
+    }
+
+    /**
      * tipo de detalle si es
      * EMERGENCIA, CARTA_AVAL, REEMBOLSO, FUNERARIO, VIDA ...
      * @return the tipoDetalle
@@ -509,6 +560,14 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      */
     public void setEtapaSiniestro(EtapaSiniestro etapaSiniestro) {
         this.etapaSiniestro = etapaSiniestro;
+    }
+
+    /**
+     * Fecha en que se hace el la orden de pago
+     * @param fechaAprobado the fechaAprobado to set
+     */
+    public void setFechaAprobado(Date fechaAprobado) {
+        this.fechaAprobado = fechaAprobado;
     }
 
     /**
@@ -661,6 +720,14 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      */
     public void setSumaDetalle(SumaDetalle sumaDetalle) {
         this.sumaDetalle = sumaDetalle;
+    }
+
+    /**
+     * emplado, contratado, funcionario, jubilado, incapacitado, aprendis ince
+     * @param tipoContrato the tipoContrato to set
+     */
+    public void setTipoContrato(TipoContrato tipoContrato) {
+        this.tipoContrato = tipoContrato;
     }
 
     /**

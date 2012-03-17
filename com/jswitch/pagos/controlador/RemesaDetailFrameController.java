@@ -69,7 +69,7 @@ public class RemesaDetailFrameController
     public Response loadData(Class valueObjectClass) {
         Session s = HibernateUtil.getSessionFactory().openSession();
         Remesa remesa = (Remesa) s.get(Remesa.class, ((Remesa) beanVO).getId());
-        Hibernate.initialize(remesa.getOrdenDePagos());
+//        Hibernate.initialize(remesa.getOrdenDePagos());
         Hibernate.initialize(remesa.getObservaciones());
         Hibernate.initialize(remesa.getDocumentos());
         Hibernate.initialize(remesa.getNotasTecnicas());
@@ -128,9 +128,9 @@ public class RemesaDetailFrameController
                 Query q = s.createQuery(sql);
                 List<Long> op = null;
                 if (remesa.getTipoDetalleSiniestro().equals(TipoDetalleSiniestro.Todos)) {
-                    op = q.setString("Sep", EstatusPago.PENDIENTE.toString()).list();
+                    op = q.setString("Sep", EstatusPago.EN_ADMINISTRACION.toString()).list();
                 } else {
-                    op = q.setString("Sep", EstatusPago.PENDIENTE.toString()).
+                    op = q.setString("Sep", EstatusPago.EN_ADMINISTRACION.toString()).
                             setString("Stds", remesa.getTipoDetalleSiniestro().toString()).list();
                 }
                 s.createQuery("UPDATE " + OrdenDePago.class.getName()
@@ -251,12 +251,15 @@ public class RemesaDetailFrameController
             s = HibernateUtil.getSessionFactory().openSession();
             s.beginTransaction();
             s.createQuery("UPDATE " + OrdenDePago.class.getName()
-                    + " D SET D.estatusPago=:es, D.ordenDePago=null WHERE D in(:ds)").
+                    + " D SET D.estatusPago=:es, D.remesa=null WHERE D.remesa.id=:ds").
                     setString("es", EstatusPago.PENDIENTE.toString()).
-                    setParameterList("ds", remesa.getOrdenDePagos()).executeUpdate();
+                    setLong("ds", remesa.getId()).executeUpdate();
             s.update(remesa);
 
             s.getTransaction().commit();
+        }catch (Exception ex) {
+         ex.printStackTrace();   
+        
         } finally {
             s.close();
             vista.getMainPanel().getReloadButton().doClick();

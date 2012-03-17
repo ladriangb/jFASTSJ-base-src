@@ -59,9 +59,7 @@
                   <Component id="exportButton1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="navigatorBar1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="filterButton1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="330" max="32767" attributes="0"/>
+                  <EmptySpace pref="368" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -70,7 +68,6 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="filterButton1" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="navigatorBar1" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="saveButton1" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="exportButton1" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -88,8 +85,6 @@
         </Component>
         <Component class="org.openswing.swing.client.NavigatorBar" name="navigatorBar1">
         </Component>
-        <Component class="org.openswing.swing.client.FilterButton" name="filterButton1">
-        </Component>
         <Component class="org.openswing.swing.client.SaveButton" name="saveButton1">
         </Component>
       </SubComponents>
@@ -100,7 +95,7 @@
           <ComponentRef name="exportButton1"/>
         </Property>
         <Property name="filterButton" type="org.openswing.swing.client.FilterButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="filterButton1"/>
+          <ComponentRef name="default"/>
         </Property>
         <Property name="insertRowsOnTop" type="boolean" value="false"/>
         <Property name="navBar" type="org.openswing.swing.client.NavigatorBar" editor="org.netbeans.modules.form.ComponentChooserEditor">

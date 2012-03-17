@@ -1,5 +1,6 @@
 package com.jswitch.vistasbd;
 
+import com.jswitch.asegurados.modelo.dominio.TipoContrato;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.modelo.util.ehts.BusinessKey;
 import com.jswitch.base.modelo.util.ehts.Method;
@@ -41,7 +42,12 @@ public class SumaPartida extends BeanVO implements Serializable {
     @ManyToOne
     @BusinessKey
     private PartidaPresupuestaria partidaPresupuestaria;
-    
+    /**
+     * Tipo de contrato del titular de los siniestros
+     */
+    @ManyToOne
+    @BusinessKey
+    private TipoContrato tipoContrato;
     /**
      * Cantidad de Detalles Siniestros en la orden de pago
      */
@@ -52,6 +58,26 @@ public class SumaPartida extends BeanVO implements Serializable {
      */
     @Column
     private Integer cantidadFacturas;
+    /**
+     * Cantidad de Siniestros de Titulares
+     */
+    @Column
+    private Integer numeroSiniestrosTitular;
+    /**
+     * Cantidad de Siniestros de Famililiares asegurados
+     */
+    @Column
+    private Integer numeroSiniestrosFamiliar;
+    /**
+     * Suma de todos los montos a pagar a Titulares
+     */
+    @Column
+    private Double montoTitulares;
+    /**
+     * Suma de todos los montos a pagar a Beneficiarios
+     */
+    @Column
+    private Double montoFamiliares;
     /**
      * RetencionTM Timbre Municipal
      * 
@@ -220,6 +246,14 @@ public class SumaPartida extends BeanVO implements Serializable {
     }
 
     /**
+     * Suma de todos los montos a pagar a Beneficiarios
+     * @return the montoFamiliares
+     */
+    public Double getMontoFamiliares() {
+        return montoFamiliares;
+    }
+
+    /**
      * total IVA
      * @return the montoIva
      */
@@ -276,6 +310,30 @@ public class SumaPartida extends BeanVO implements Serializable {
     }
 
     /**
+     * Suma de todos los montos a pagar a Titulares
+     * @return the montoTitulares
+     */
+    public Double getMontoTitulares() {
+        return montoTitulares;
+    }
+
+    /**
+     * Cantidad de Siniestros de Famililiares asegurados
+     * @return the numeroSiniestrosFamiliar
+     */
+    public Integer getNumeroSiniestrosFamiliar() {
+        return numeroSiniestrosFamiliar;
+    }
+
+    /**
+     * Cantidad de Siniestros de Titulares
+     * @return the numeroSiniestrosTitular
+     */
+    public Integer getNumeroSiniestrosTitular() {
+        return numeroSiniestrosTitular;
+    }
+
+    /**
      * Detalle al que pertenece la factura
      * @return the ordenDePago
      */
@@ -289,6 +347,14 @@ public class SumaPartida extends BeanVO implements Serializable {
      */
     public PartidaPresupuestaria getPartidaPresupuestaria() {
         return partidaPresupuestaria;
+    }
+
+    /**
+     * Tipo de contrato del titular de los siniestros
+     * @return the tipoContrato
+     */
+    public TipoContrato getTipoContrato() {
+        return tipoContrato;
     }
 
     /**
@@ -389,6 +455,14 @@ public class SumaPartida extends BeanVO implements Serializable {
     }
 
     /**
+     * Suma de todos los montos a pagar a Beneficiarios
+     * @param montoFamiliares the montoFamiliares to set
+     */
+    public void setMontoFamiliares(Double montoFamiliares) {
+        this.montoFamiliares = montoFamiliares;
+    }
+
+    /**
      * total IVA
      * @param montoIva the montoIva to set
      */
@@ -445,6 +519,30 @@ public class SumaPartida extends BeanVO implements Serializable {
     }
 
     /**
+     * Suma de todos los montos a pagar a Titulares
+     * @param montoTitulares the montoTitulares to set
+     */
+    public void setMontoTitulares(Double montoTitulares) {
+        this.montoTitulares = montoTitulares;
+    }
+
+    /**
+     * Cantidad de Siniestros de Famililiares asegurados
+     * @param numeroSiniestrosFamiliar the numeroSiniestrosFamiliar to set
+     */
+    public void setNumeroSiniestrosFamiliar(Integer numeroSiniestrosFamiliar) {
+        this.numeroSiniestrosFamiliar = numeroSiniestrosFamiliar;
+    }
+
+    /**
+     * Cantidad de Siniestros de Titulares
+     * @param numeroSiniestrosTitular the numeroSiniestrosTitular to set
+     */
+    public void setNumeroSiniestrosTitular(Integer numeroSiniestrosTitular) {
+        this.numeroSiniestrosTitular = numeroSiniestrosTitular;
+    }
+
+    /**
      * Detalle al que pertenece la factura
      * @param ordenDePago the ordenDePago to set
      */
@@ -458,6 +556,14 @@ public class SumaPartida extends BeanVO implements Serializable {
      */
     public void setPartidaPresupuestaria(PartidaPresupuestaria partidaPresupuestaria) {
         this.partidaPresupuestaria = partidaPresupuestaria;
+    }
+
+    /**
+     * Partida Presupuestaria
+     * @param tipoContrato the tipoContrato to set
+     */
+    public void setTipoContrato(TipoContrato tipoContrato) {
+        this.tipoContrato = tipoContrato;
     }
 
     /**
@@ -491,6 +597,4 @@ public class SumaPartida extends BeanVO implements Serializable {
     public void setTotalRetenido(Double totalRetenido) {
         this.totalRetenido = totalRetenido;
     }
-
-    
 }

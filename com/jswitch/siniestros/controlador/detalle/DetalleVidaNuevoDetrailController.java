@@ -78,6 +78,7 @@ public class DetalleVidaNuevoDetrailController extends DefaultDetailFrameControl
             vida.setFechaDefuncion(detalleVida.getFechaDefuncion());
             vida.setTipoSiniestro(detalleVida.getTipoSiniestro());
             vida.setSiniestro(siniestro);
+            vida.setTipoContrato(siniestro.getCertificado().getTitular().getTipoContrato());
             s = HibernateUtil.getSessionFactory().openSession();
             Query q = s.createQuery("FROM " + EtapaSiniestro.class.getName() + " C"
                     + " WHERE C.idPropio='VIDA'");

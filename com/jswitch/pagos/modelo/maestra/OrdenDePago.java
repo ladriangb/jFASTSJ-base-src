@@ -11,6 +11,7 @@ import com.jswitch.base.modelo.util.ehts.Method;
 import com.jswitch.fas.modelo.Dominios;
 import com.jswitch.fas.modelo.Dominios.TipoDetalleSiniestro;
 import com.jswitch.persona.modelo.maestra.Persona;
+import com.jswitch.persona.modelo.transac.CuentaBancariaPersona;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.vistasbd.SumaOrden;
 import java.io.Serializable;
@@ -37,7 +38,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.persistence.Version;
-import javax.validation.constraints.Pattern;
 
 /**
  * @author Personal
@@ -67,7 +67,7 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     @Column
     private String referencia;
     /**
-     * Codigo del Sistema SIGECOF O KERSUS
+     * Codigo del Sistema SIGECOF O KERSULS
      */
     @Column
 //    @Pattern(regexp = "[0-9][0-9]?-[0-9][0-9][0-9][0-9]-[0-9]+",
@@ -81,8 +81,13 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     /**
      * Remesa a la cual esta vinculado el pago
      */
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
     private Remesa remesa;
+    /**
+     * Remesa a la cual esta vinculado el pago
+     */
+    @ManyToOne
+    private CuentaBancariaPersona   cuentaBancaria;
     /**
      * persona ala cual se le realizara el pago
      */
@@ -95,6 +100,13 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     @Temporal(value = TemporalType.DATE)
     @BusinessKey
     private Date fechaPagado;
+    /**
+     * Fecha en que se hace el la orden de pago
+     */
+    @Column
+    @Temporal(value = TemporalType.DATE)
+    @BusinessKey
+    private Date fechaAprobado;
     /**
      * Estado en el que se encuentra el pago
      */
@@ -158,7 +170,7 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
 
     public OrdenDePago() {
         tipoDetalleSiniestro = TipoDetalleSiniestro.Todos;
-       estatusPago=Dominios.EstatusPago.PENDIENTE;
+        estatusPago = Dominios.EstatusPago.PENDIENTE;
     }
 
     /**
@@ -178,11 +190,19 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     * Codigo del Sistema SIGECOF O KERSUS
+     * Codigo del Sistema SIGECOF O KERSULS
      * @return the codigoSIGECOF
      */
     public String getCodigoSIGECOF() {
         return codigoSIGECOF;
+    }
+
+    /**
+     * Remesa a la cual esta vinculado el pago
+     * @return the cuentaBancaria
+     */
+    public CuentaBancariaPersona getCuentaBancaria() {
+        return cuentaBancaria;
     }
 
     /**
@@ -207,6 +227,14 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
      */
     public Dominios.EstatusPago getEstatusPago() {
         return estatusPago;
+    }
+
+    /**
+     * Fecha en que se hace el la orden de pago
+     * @return the fechaAprobado
+     */
+    public Date getFechaAprobado() {
+        return fechaAprobado;
     }
 
     /**
@@ -322,11 +350,19 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     }
 
     /**
-     * Codigo del Sistema SIGECOF O KERSUS
+     * Codigo del Sistema SIGECOF O KERSULS
      * @param codigoSIGECOF the codigoSIGECOF to set
      */
     public void setCodigoSIGECOF(String codigoSIGECOF) {
         this.codigoSIGECOF = codigoSIGECOF;
+    }
+
+    /**
+     * Remesa a la cual esta vinculado el pago
+     * @param cuentaBancaria the cuentaBancaria to set
+     */
+    public void setCuentaBancaria(CuentaBancariaPersona cuentaBancaria) {
+        this.cuentaBancaria = cuentaBancaria;
     }
 
     /**
@@ -354,8 +390,16 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     }
 
     /**
+     * Fecha en que se hace el la orden de pago
+     * @param fechaAprobado the fechaAprobado to set
+     */
+    public void setFechaAprobado(Date fechaAprobado) {
+        this.fechaAprobado = fechaAprobado;
+    }
+
+    /**
      * Fecha en que se hace el pago
-     * @param fechaPagado the fechaPago to set
+     * @param fechaPagado the fechaPagado to set
      */
     public void setFechaPagado(Date fechaPagado) {
         this.fechaPagado = fechaPagado;
@@ -448,4 +492,5 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     public void setTipoDetalleSiniestro(Dominios.TipoDetalleSiniestro tipoDetalleSiniestro) {
         this.tipoDetalleSiniestro = tipoDetalleSiniestro;
     }
+
 }

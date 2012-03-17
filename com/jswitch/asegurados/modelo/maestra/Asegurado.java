@@ -2,6 +2,7 @@ package com.jswitch.asegurados.modelo.maestra;
 
 import com.jswitch.asegurados.modelo.dominio.Parentesco;
 import com.jswitch.asegurados.modelo.transaccional.Revision;
+import com.jswitch.base.modelo.Dominios;
 import com.jswitch.base.modelo.entidades.Documento;
 import com.jswitch.base.modelo.entidades.NotaTecnica;
 import com.jswitch.base.modelo.entidades.Observacion;
@@ -334,8 +335,23 @@ public class Asegurado extends BeanVO implements Serializable, Auditable {
      * @return the reportes
      */
     public Set<Reporte> getReportes() {
-//        if(reportes.isEmptya())
-//            reportes.add()
+        if (reportes.isEmpty()) {
+            reportes.add(new Reporte(Dominios.CategoriaReporte.ASEGURADOS, 0,
+                    "ASE_SOL_REM_O_CARTAAVAL_D001",
+                    "SOLICITUD DE REEMBOLSO Y/O CARTA AVAL",
+                    "Solicitud de reembolso y/o Carta Aval",
+                    "FROM " + Asegurado.class.getName() + " as P "
+                    + "WHERE P.id=26460", "Carta 8½ x 11 Vertical",
+                    false, false, false, false));
+
+            reportes.add(new Reporte(Dominios.CategoriaReporte.ASEGURADOS, 0, "ASE_PLANILLA_INCLUSION_D001",
+                    "PLANILLA DE INCLUSION",
+                    "Planilla de Inclusion",
+                    "FROM " + Asegurado.class.getName() + " as P "
+                    + "WHERE P.id=26460", "Carta 8½ x 11 Vertical",
+                    false, false, false, false));
+
+        }
         return reportes;
     }
 
@@ -514,5 +530,4 @@ public class Asegurado extends BeanVO implements Serializable, Auditable {
     public void setRevisiones(List<Revision> revisiones) {
         this.revisiones = revisiones;
     }
-
 }

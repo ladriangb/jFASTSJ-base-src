@@ -85,6 +85,7 @@ import com.jswitch.configuracion.vista.ProntoPagoGridFrame;
 import com.jswitch.configuracion.vista.RamosCoberturasGridFrame;
 import com.jswitch.configuracion.vista.TimbreMunicipalGridFrame;
 import com.jswitch.configuracion.vista.patologias.PatologiasGridFrame;
+import com.jswitch.pagos.controlador.BuscarPagosDetailFrameController;
 import com.jswitch.pagos.controlador.OrdenDePagoDetailFrameController;
 import com.jswitch.pagos.controlador.OrdenDePagoGridFrameController;
 import com.jswitch.pagos.controlador.RemesaDetailFrameController;
@@ -117,6 +118,7 @@ import com.jswitch.rol.vista.RolOptionFrame;
 import com.jswitch.pagos.modelo.dominio.ConceptoSENIAT;
 import com.jswitch.pagos.modelo.maestra.OrdenDePago;
 import com.jswitch.pagos.modelo.maestra.Remesa;
+import com.jswitch.pagos.vista.BuscarRemesaDetailFrame;
 import com.jswitch.pagos.vista.ConceptoSENIATGridFrame;
 import com.jswitch.pagos.vista.OrdenDePagoDetailFrame;
 import com.jswitch.pagos.vista.OrdenDePagoGridFrame;
@@ -276,7 +278,7 @@ public class MenuPrincipal implements ClientFacade {
     public void getPartidaPresupuestaria() {
         new DefaultAllGridFrameController(CodigoAreaGridFrame.class.getName(), null, PartidaPresupuestaria.class.getName(), "Partidas Presupuestaria");
     }
-    
+
     public void getCodigoArea() {
         new DefaultAllGridFrameController(CodigoAreaGridFrame.class.getName(), null, TipoCodigoArea.class.getName(), "Codigos de Area");
     }
@@ -557,7 +559,8 @@ public class MenuPrincipal implements ClientFacade {
     public void getBuscarDetalleSin() {
         new BuscarDetalleSiniestroDetrailController(BuscarDetalleSiniestroDetailFrame.class.getName(), null, null, true);
     }
-        public void getBuscarSin() {
+
+    public void getBuscarSin() {
         new BuscarSiniestroDetrailController(BuscarSiniestroDetailFrame.class.getName(), null, null, false);
     }
     // </editor-fold>
@@ -593,6 +596,14 @@ public class MenuPrincipal implements ClientFacade {
     public void getNewRemesa() {
         new RemesaDetailFrameController(RemesaDetailFrame.class.getName(),
                 null, null, true);
+    }
+
+    public void getRemesas() {
+        new BuscarPagosDetailFrameController(Remesa.class);
+    }
+
+    public void getOrdenesDePago() {
+        new BuscarPagosDetailFrameController(OrdenDePago.class);
     }
 
     public void getGridRemesa() {

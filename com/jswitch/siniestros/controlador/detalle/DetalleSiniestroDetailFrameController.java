@@ -99,6 +99,7 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
         Hibernate.initialize(sin.getPagos());
         Hibernate.initialize(sin.getDiagnosticoSiniestros());
         Hibernate.initialize(sin.getDocumentos());
+        Hibernate.initialize(sin.getSumaDesgloseCoberturas());
         s.close();
         checkStatus();
         beanVO = sin;
@@ -135,7 +136,7 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
         className = className.substring(1 + className.lastIndexOf("."));
         ((DetalleSiniestro) newPersistentObject).setTipoDetalle(className);
         DecimalFormat nf = new DecimalFormat("00");
-        ((DetalleSiniestro) newPersistentObject).setNumero(nf.format(siniestro.getDetalleSiniestro().size()+1));
+        ((DetalleSiniestro) newPersistentObject).setNumero(nf.format(siniestro.getDetalleSiniestro().size() + 1));
         Session s = null;
         try {
             vista.saveGridsData();
@@ -145,6 +146,8 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
 
             EtapaSiniestro et = (EtapaSiniestro) q.uniqueResult();
             ((DetalleSiniestro) newPersistentObject).setEtapaSiniestro(et);
+            ((DetalleSiniestro) newPersistentObject).setTipoContrato(
+                    siniestro.getCertificado().getTitular().getTipoContrato());
             String idPropio = (newPersistentObject instanceof Vida) ? "VIDA"
                     : (newPersistentObject instanceof Funerario) ? "FUNE" : "HCM";
             q = s.createQuery("FROM " + Ramo.class.getName() + " C"
@@ -171,7 +174,7 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
             }
 
             ((DetalleSiniestro) newPersistentObject).setSiniestro(siniestro);
-            siniestro.getDetalleSiniestro().add((DetalleSiniestro) newPersistentObject);
+//            siniestro.getDetalleSiniestro().add((DetalleSiniestro) newPersistentObject);
             return super.insertRecord((newPersistentObject));
         } catch (Exception ex) {
             return new ErrorResponse(LoggerUtil.isInvalidStateException(this.getClass(), "insertRecord", ex));
@@ -212,10 +215,19 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
 
             if (d.getEtapaSiniestro().getId().compareTo(
                     es.getId()) == 0) {
+
                 if (d.getSumaDetalle().getTotalLiquidado() <= 0d) {
                     return new ErrorResponse("No se puede Liquidar\nNo hay monto Liquidado");
                 }
                 d.setFechaLiquidado(new Date());
+                if (d.getFechaVencimiento() != null
+                        && d.getFechaVencimiento().before(d.getFechaLiquidado())) {
+                    int i = JOptionPane.showConfirmDialog(vista, "Esta a punto de Liquidar un Siniestro Vencido\n¿desea continuar?", "", JOptionPane.YES_NO_OPTION,
+                            JOptionPane.INFORMATION_MESSAGE);
+                    if (i != JOptionPane.YES_OPTION) {
+                        return new ErrorResponse("Operacion Cancelada por el Usuario");
+                    }
+                }
 
             }
         } catch (Exception e) {

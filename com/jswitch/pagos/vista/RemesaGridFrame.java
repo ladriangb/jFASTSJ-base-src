@@ -26,15 +26,14 @@ public class RemesaGridFrame extends DefaultGridFrame {
         reloadButton1 = new org.openswing.swing.client.ReloadButton();
         exportButton1 = new org.openswing.swing.client.ExportButton();
         navigatorBar1 = new org.openswing.swing.client.NavigatorBar();
-        filterButton1 = new org.openswing.swing.client.FilterButton();
         gridData = new org.openswing.swing.client.GridControl();
         decimalColumn1 = new org.openswing.swing.table.columns.client.DecimalColumn();
         comboColumn1 = new org.openswing.swing.table.columns.client.ComboColumn();
         textColumn3 = new org.openswing.swing.table.columns.client.TextColumn();
-        textColumn1 = new org.openswing.swing.table.columns.client.TextColumn();
-        textColumn2 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn7 = new org.openswing.swing.table.columns.client.TextColumn();
         comboColumn3 = new org.openswing.swing.table.columns.client.ComboColumn();
+        textColumn1 = new org.openswing.swing.table.columns.client.TextColumn();
+        textColumn2 = new org.openswing.swing.table.columns.client.TextColumn();
         comboColumn2 = new org.openswing.swing.table.columns.client.ComboColumn();
         textColumn10 = new org.openswing.swing.table.columns.client.TextColumn();
         integerColumn1 = new org.openswing.swing.table.columns.client.IntegerColumn();
@@ -85,16 +84,13 @@ public class RemesaGridFrame extends DefaultGridFrame {
                 .addComponent(exportButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(navigatorBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(filterButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(368, Short.MAX_VALUE))
+                .addContainerGap(406, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(13, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(filterButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(navigatorBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(exportButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(reloadButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -102,7 +98,6 @@ public class RemesaGridFrame extends DefaultGridFrame {
         );
 
         gridData.setExportButton(exportButton1);
-        gridData.setFilterButton(filterButton1);
         gridData.setFunctionId("RemesaGrid");
         gridData.setInsertRowsOnTop(false);
         gridData.setMaxSortedColumns(3);
@@ -115,7 +110,6 @@ public class RemesaGridFrame extends DefaultGridFrame {
         decimalColumn1.setColumnName("id");
         decimalColumn1.setColumnRequired(false);
         decimalColumn1.setColumnSortable(true);
-        decimalColumn1.setGrouping(false);
         decimalColumn1.setPreferredWidth(40);
         decimalColumn1.setSortVersus(org.openswing.swing.util.java.Consts.DESC_SORTED);
         gridData.getColumnContainer().add(decimalColumn1);
@@ -133,18 +127,6 @@ public class RemesaGridFrame extends DefaultGridFrame {
         textColumn3.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn3);
 
-        textColumn1.setColumnFilterable(true);
-        textColumn1.setColumnName("numeroCuentaDebitar");
-        textColumn1.setColumnRequired(false);
-        textColumn1.setColumnSortable(true);
-        gridData.getColumnContainer().add(textColumn1);
-
-        textColumn2.setColumnFilterable(true);
-        textColumn2.setColumnName("tipoCuenta.nombre");
-        textColumn2.setColumnRequired(false);
-        textColumn2.setColumnSortable(true);
-        gridData.getColumnContainer().add(textColumn2);
-
         textColumn7.setColumnFilterable(true);
         textColumn7.setColumnName("detalle");
         textColumn7.setColumnRequired(false);
@@ -157,6 +139,18 @@ public class RemesaGridFrame extends DefaultGridFrame {
         comboColumn3.setColumnSortable(true);
         comboColumn3.setDomainId(Dominios.TipoPago().getDomainId());
         gridData.getColumnContainer().add(comboColumn3);
+
+        textColumn1.setColumnFilterable(true);
+        textColumn1.setColumnName("numeroCuentaDebitar");
+        textColumn1.setColumnRequired(false);
+        textColumn1.setColumnSortable(true);
+        gridData.getColumnContainer().add(textColumn1);
+
+        textColumn2.setColumnFilterable(true);
+        textColumn2.setColumnName("tipoCuenta.nombre");
+        textColumn2.setColumnRequired(false);
+        textColumn2.setColumnSortable(true);
+        gridData.getColumnContainer().add(textColumn2);
 
         comboColumn2.setColumnFilterable(true);
         comboColumn2.setColumnName("duracionCheque");
@@ -476,7 +470,6 @@ public class RemesaGridFrame extends DefaultGridFrame {
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn8;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn9;
     private org.openswing.swing.client.ExportButton exportButton1;
-    private org.openswing.swing.client.FilterButton filterButton1;
     private org.openswing.swing.client.GridControl gridData;
     private org.openswing.swing.table.columns.client.IntegerColumn integerColumn1;
     private org.openswing.swing.table.columns.client.IntegerColumn integerColumn2;

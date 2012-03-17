@@ -57,9 +57,7 @@
                   <Component id="exportButton1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="navigatorBar1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="filterButton1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="368" max="32767" attributes="0"/>
+                  <EmptySpace pref="406" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -68,7 +66,6 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace pref="13" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="filterButton1" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="navigatorBar1" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="exportButton1" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="reloadButton1" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -85,17 +82,12 @@
         </Component>
         <Component class="org.openswing.swing.client.NavigatorBar" name="navigatorBar1">
         </Component>
-        <Component class="org.openswing.swing.client.FilterButton" name="filterButton1">
-        </Component>
       </SubComponents>
     </Container>
     <Container class="org.openswing.swing.client.GridControl" name="gridData">
       <Properties>
         <Property name="exportButton" type="org.openswing.swing.client.ExportButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="exportButton1"/>
-        </Property>
-        <Property name="filterButton" type="org.openswing.swing.client.FilterButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="filterButton1"/>
         </Property>
         <Property name="functionId" type="java.lang.String" value="RemesaGrid"/>
         <Property name="insertRowsOnTop" type="boolean" value="false"/>
@@ -122,7 +114,6 @@
             </Property>
             <Property name="columnRequired" type="boolean" value="false"/>
             <Property name="columnSortable" type="boolean" value="true"/>
-            <Property name="grouping" type="boolean" value="false"/>
             <Property name="preferredWidth" type="int" value="40"/>
             <Property name="sortVersus" type="java.lang.String" value="DESC"/>
           </Properties>
@@ -150,26 +141,6 @@
             <Property name="columnSortable" type="boolean" value="true"/>
           </Properties>
         </Component>
-        <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn1">
-          <Properties>
-            <Property name="columnFilterable" type="boolean" value="true"/>
-            <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="&quot;numeroCuentaDebitar&quot;" type="code"/>
-            </Property>
-            <Property name="columnRequired" type="boolean" value="false"/>
-            <Property name="columnSortable" type="boolean" value="true"/>
-          </Properties>
-        </Component>
-        <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn2">
-          <Properties>
-            <Property name="columnFilterable" type="boolean" value="true"/>
-            <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="&quot;tipoCuenta.nombre&quot;" type="code"/>
-            </Property>
-            <Property name="columnRequired" type="boolean" value="false"/>
-            <Property name="columnSortable" type="boolean" value="true"/>
-          </Properties>
-        </Component>
         <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn7">
           <Properties>
             <Property name="columnFilterable" type="boolean" value="true"/>
@@ -191,6 +162,26 @@
             <Property name="domainId" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="Dominios.TipoPago().getDomainId()" type="code"/>
             </Property>
+          </Properties>
+        </Component>
+        <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn1">
+          <Properties>
+            <Property name="columnFilterable" type="boolean" value="true"/>
+            <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;numeroCuentaDebitar&quot;" type="code"/>
+            </Property>
+            <Property name="columnRequired" type="boolean" value="false"/>
+            <Property name="columnSortable" type="boolean" value="true"/>
+          </Properties>
+        </Component>
+        <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn2">
+          <Properties>
+            <Property name="columnFilterable" type="boolean" value="true"/>
+            <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;tipoCuenta.nombre&quot;" type="code"/>
+            </Property>
+            <Property name="columnRequired" type="boolean" value="false"/>
+            <Property name="columnSortable" type="boolean" value="true"/>
           </Properties>
         </Component>
         <Component class="org.openswing.swing.table.columns.client.ComboColumn" name="comboColumn2">

@@ -70,7 +70,7 @@ public class Dominios {
 
     public static enum EstatusPago {
 
-        PENDIENTE, SELECCIONADO, PAGADO, ANULADO
+        PENDIENTE, SELECCIONADO, EN_ADMINISTRACION, PAGADO, ANULADO
     }
 
     public static Domain EstatusPago() {
@@ -84,7 +84,6 @@ public class Dominios {
     }
 
     public static enum TipoTramiteSiniestro {
-
         MEDICO, QUIRURGICO
     }
 

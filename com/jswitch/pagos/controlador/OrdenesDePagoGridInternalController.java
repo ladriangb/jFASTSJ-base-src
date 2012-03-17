@@ -89,11 +89,8 @@ public class OrdenesDePagoGridInternalController extends DefaultGridInternalCont
             for (Object object : persistentObjects) {
                 Long l = ((OrdenDePago) object).getId();
                 OrdenDePago ordenDePago = (OrdenDePago) s.get(OrdenDePago.class, l);
-                Hibernate.initialize(ordenDePago.getNotasTecnicas());
-                Hibernate.initialize(ordenDePago.getObservaciones());
-                Hibernate.initialize(ordenDePago.getDocumentos());
-                Hibernate.initialize(ordenDePago.getDetalleSiniestros());
-                ordenDePago.setEstatusPago(EstatusPago.PENDIENTE);
+                Hibernate.initialize(ordenDePago.getRemesa());
+                ordenDePago.setEstatusPago(EstatusPago.EN_ADMINISTRACION);
                 ordenDePago.setRemesa(null);
                 s.save(ordenDePago);
             }

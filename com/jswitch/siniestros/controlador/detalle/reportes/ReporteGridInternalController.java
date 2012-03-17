@@ -2,6 +2,7 @@ package com.jswitch.siniestros.controlador.detalle.reportes;
 
 import com.jswitch.base.controlador.General;
 import com.jswitch.base.controlador.util.DefaultGridInternalController;
+import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.entidades.auditoria.Auditable;
 import com.jswitch.reporte.controlador.ReporteController;
 import com.jswitch.reporte.modelo.Reporte;
@@ -16,8 +17,11 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JasperViewer;
+import org.hibernate.classic.Session;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.message.receive.java.ValueObject;
+
+
 
 /**
  *
@@ -63,13 +67,42 @@ public class ReporteGridInternalController extends DefaultGridInternalController
             parameters.put("empresaObservacion", "");
 
             Collection c = new ArrayList(1);
-            c.add(beanVO);
-            try {
-                JasperPrint jasperPrint = JasperFillManager.fillReport(rutaReporte, parameters, new JRBeanCollectionDataSource(c));
-                JasperViewer.viewReport(jasperPrint, false);
-            } catch (JRException ex) {
-                ex.printStackTrace();
+            JasperPrint jasperPrint = null;
+            if (reporte.getEnviarData()) {
+                c.add(beanVO);
+                try {
+                    jasperPrint = JasperFillManager.fillReport(rutaReporte, parameters, new JRBeanCollectionDataSource(c));
+                } catch (JRException ex) {
+                    ex.printStackTrace();
+                }
+            } else if (!reporte.getEnviarData()) {
+                Auditable entidad = (Auditable) beanVO;
+                Session s = HibernateUtil.getSessionFactory().openSession();
+                try {
+                    c.add(s.createQuery("FROM " + beanVO.getClass().getName()
+                            + " P WHERE P.id=:id").
+                            setLong("id", entidad.getId()).
+                            uniqueResult());
+                    jasperPrint = JasperFillManager.fillReport(rutaReporte, parameters, new JRBeanCollectionDataSource(c));
+                } catch (JRException ex) {
+                    ex.printStackTrace();
+                } finally {
+                    s.close();
+                }
             }
+            if (jasperPrint != null) {
+                JasperViewer.viewReport(jasperPrint, false);
+            }
+            
+//            Collection c = new ArrayList(1);
+//            c.add(beanVO);
+//            try {
+//                JasperPrint jasperPrint = JasperFillManager.fillReport(rutaReporte, parameters, new JRBeanCollectionDataSource(c));
+//                JasperViewer.viewReport(jasperPrint, false);
+//            } catch (JRException ex) {
+//                ex.printStackTrace();
+//            }
+            
         }
     }
 }

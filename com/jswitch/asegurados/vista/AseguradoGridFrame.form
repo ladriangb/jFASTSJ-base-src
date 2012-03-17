@@ -57,9 +57,7 @@
                   <Component id="exportButton1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="navigatorBar1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="filterButton1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="368" max="32767" attributes="0"/>
+                  <EmptySpace pref="406" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -71,7 +69,6 @@
                       <Component id="reloadButton1" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="exportButton1" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="navigatorBar1" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="filterButton1" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -84,8 +81,6 @@
         </Component>
         <Component class="org.openswing.swing.client.NavigatorBar" name="navigatorBar1">
         </Component>
-        <Component class="org.openswing.swing.client.FilterButton" name="filterButton1">
-        </Component>
       </SubComponents>
     </Container>
     <Container class="org.openswing.swing.client.GridControl" name="gridData">
@@ -94,7 +89,7 @@
           <ComponentRef name="exportButton1"/>
         </Property>
         <Property name="filterButton" type="org.openswing.swing.client.FilterButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="filterButton1"/>
+          <ComponentRef name="default"/>
         </Property>
         <Property name="functionId" type="java.lang.String" value="VehiculosGrid"/>
         <Property name="insertRowsOnTop" type="boolean" value="false"/>

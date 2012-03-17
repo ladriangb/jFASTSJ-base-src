@@ -35,6 +35,7 @@ public class EstatusSiniestro extends BeanVO implements Serializable, Auditable 
      *
      */
     @Column
+    @BusinessKey
     private String nombre;
     /**
      */

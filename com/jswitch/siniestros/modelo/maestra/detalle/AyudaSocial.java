@@ -35,9 +35,9 @@ public class AyudaSocial extends DetalleSiniestro {
      */
     @Transient
     protected static transient Set<Reporte> reportes = new HashSet<Reporte>(0);
-    
+
     public AyudaSocial() {
-        this.fechaEmision = new Date();        
+        this.fechaEmision = new Date();
     }
 
     public Date getFechaEmision() {
@@ -50,10 +50,7 @@ public class AyudaSocial extends DetalleSiniestro {
 
     public Set<Reporte> getReportes() {
         if (reportes.isEmpty()) {
-            reportes.add(new Reporte(Dominios.CategoriaReporte.PERSONAS, 0, 
-                    "SINI_D_AyudaSocial_001", "SINI_D_AyudaSocial_001",
-                    "SINI_D_AyudaSocial_001", null, "Carta 8½ x 11 Vertical",
-                    false,false,false,false));
+            reportes.addAll(getReportesGenerales());
         }
         return reportes;
     }

@@ -56,7 +56,7 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     /**
      * Calcula y totaliza
      */
-    @OneToOne(mappedBy="factura")
+    @OneToOne(mappedBy = "factura")
     private SumaFactura sumaFactura;
     /**
      * identificador de la factura
@@ -87,7 +87,7 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     @Past
     @BusinessKey
     private Date fechaRecepcion;
-        /**
+    /**
      * fecha en la que se recibio la factura
      */
     @Column
@@ -95,8 +95,14 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     @Past
     @BusinessKey
     private Date fechaRebicion;
-
-     /**
+    /**
+     * Fecha en que se hace el la orden de pago
+     */
+    @Column
+    @Temporal(value = TemporalType.DATE)
+    @BusinessKey
+    private Date fechaAprobado;
+    /**
      * fecha en la que se recibio la factura
      */
     @Column
@@ -235,7 +241,7 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     /**
      * Coleccion de desglose de pagos por cobertura espesifica
      */
-    @OneToMany(fetch = FetchType.LAZY,mappedBy="factura")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "factura")
     @BusinessKey(exclude = Method.ALL)
     private Set<DesgloseCobertura> desgloseCobertura = new HashSet<DesgloseCobertura>();
     /**
@@ -275,7 +281,6 @@ public class Factura extends BeanVO implements Serializable, Auditable {
         porcentajeRetencionProntoPago = 0d;
     }
 
-    
     /**
      * auditoria Bitacora
      * @return the auditoria
@@ -793,5 +798,4 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     public void setValorUT(Double valorUT) {
         this.valorUT = valorUT;
     }
-
 }

@@ -70,12 +70,12 @@ public class BuscarOrdenDePagoGridFrameController extends DefaultGridFrameContro
 
             if (remesa.getTipoDetalleSiniestro().equals(TipoDetalleSiniestro.Todos)) {
                 ob = new Object[]{
-                    EstatusPago.PENDIENTE.toString()};
+                    EstatusPago.EN_ADMINISTRACION.toString()};
                 ty = new Type[]{new StringType()};
             } else {
                 sql += "AND (C.tipoDetalleSiniestro=?)";
                 ob = new Object[]{
-                    EstatusPago.PENDIENTE.toString(),
+                    EstatusPago.EN_ADMINISTRACION.toString(),
                     remesa.getTipoDetalleSiniestro().toString()};
                 ty = new Type[]{new StringType(), new StringType()};
             }

@@ -128,6 +128,14 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private String refLot;
     /**
+     *Identificacion del lote del pago.
+     * Valor asignado por la Empresa
+     * Ej. 00002100
+     */
+    @Column
+    @BusinessKey
+    private String numeroRemesa;
+    /**
      * Tipo de Pago
      * Valor:
      * 40 – Proveedores
@@ -437,6 +445,16 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     }
 
     /**
+     * Identificacion del lote del pago.
+     * Valor asignado por la Empresa
+     * Ej. 00002100
+     * @return the numeroRemesa
+     */
+    public String getNumeroRemesa() {
+        return numeroRemesa;
+    }
+
+    /**
      * coleccion de Observaciones Generales
      * @return the observaciones
      */
@@ -688,6 +706,16 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     }
 
     /**
+     * Identificacion del lote del pago.
+     * Valor asignado por la Empresa
+     * Ej. 00002100
+     * @param numeroRemesa the numeroRemesa to set
+     */
+    public void setNumeroRemesa(String numeroRemesa) {
+        this.numeroRemesa = numeroRemesa;
+    }
+
+    /**
      * coleccion de Observaciones Generales
      * @param observaciones the observaciones to set
      */
@@ -763,4 +791,5 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
         this.tipoPago = tipoPago;
     }
 
+   
 }

@@ -60,7 +60,7 @@ public class ReportesUtil {
             s = HibernateUtil.getSessionFactory().openSession();
             doc = s.createQuery("SELECT D FROM "
                     + object.getClass().getName() + " C "
-                    + " JOIN C.documentos ").list();
+                    + " JOIN C.documentos D WHERE  C.id =?").setLong(0, object.getId()).list();
             s.close();
         } catch (Exception exception) {
             exception.printStackTrace();
