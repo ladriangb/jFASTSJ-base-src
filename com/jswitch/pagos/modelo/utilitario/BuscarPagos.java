@@ -58,8 +58,6 @@ public class BuscarPagos extends BeanVO {
     private TipoPago tipoPago;
 
     public BuscarPagos() {
-        estatusPago = null;
-        tipoPago = null;
     }
 
     /**

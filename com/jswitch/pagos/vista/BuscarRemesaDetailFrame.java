@@ -82,6 +82,7 @@ public class BuscarRemesaDetailFrame extends DefaultDetailFrame {
 
         labelControl4.setLabel("EstatusPago");
 
+        comboBoxControl1.setAttributeName("estatusPago");
         comboBoxControl1.setDomainId(Dominios.EstatusPago().getDomainId());
 
         labelControl5.setLabel("tipoPago");
@@ -148,7 +149,7 @@ public class BuscarRemesaDetailFrame extends DefaultDetailFrame {
                 .addGroup(form1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelControl3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textControl3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         form1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {comboBoxControl1, comboBoxControl2, dateControl4, labelControl13, labelControl2, labelControl3, labelControl4, labelControl5, textControl2, textControl3});

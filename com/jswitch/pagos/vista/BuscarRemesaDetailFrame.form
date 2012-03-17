@@ -170,7 +170,7 @@
                       <Component id="labelControl3" linkSize="19" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="textControl3" linkSize="19" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="22" max="32767" attributes="0"/>
+                  <EmptySpace pref="26" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -207,6 +207,9 @@
         </Component>
         <Component class="org.openswing.swing.client.ComboBoxControl" name="comboBoxControl1">
           <Properties>
+            <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;estatusPago&quot;" type="code"/>
+            </Property>
             <Property name="domainId" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="Dominios.EstatusPago().getDomainId()" type="code"/>
             </Property>

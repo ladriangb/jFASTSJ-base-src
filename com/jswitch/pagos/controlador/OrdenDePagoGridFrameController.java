@@ -40,6 +40,10 @@ public class OrdenDePagoGridFrameController extends DefaultGridFrameController {
         super(gridFramePath, detailFramePath, claseModeloFullPath, titulo);
     }
 
+    /**
+     * 
+     * @param bp 
+     */
     OrdenDePagoGridFrameController(BuscarPagos bp) {
         super(OrdenDePagoGridFrame.class.getName(), OrdenDePagoDetailFrame.class.getName(), OrdenDePago.class.getName(), "Ordenes de Pago");
         this.bp = bp;
@@ -72,14 +76,14 @@ public class OrdenDePagoGridFrameController extends DefaultGridFrameController {
         ArrayList<Type> ty = new ArrayList<Type>(0);
         String where = "";
         String and = "";
-       if (bp.getRif() != null
+        if (bp.getRif() != null
                 && !bp.getRif().trim().isEmpty()) {
             where += and + " C.personaPago.rif.rif like ?";
             and = " AND ";
             ob.add("%" + bp.getRif() + "%");
             ty.add(new StringType());
         }
-       if (bp.getNombreLargo() != null
+        if (bp.getNombreLargo() != null
                 && !bp.getNombreLargo().trim().isEmpty()) {
             where += and + " C.personaPago.nombreLargo like ?";
             and = " AND ";
@@ -93,7 +97,7 @@ public class OrdenDePagoGridFrameController extends DefaultGridFrameController {
             ob.add("%" + bp.getNumerdoDeOrden() + "%");
             ty.add(new StringType());
         }
-       if (bp.getCodigoSIGECOF() != null
+        if (bp.getCodigoSIGECOF() != null
                 && !bp.getCodigoSIGECOF().trim().isEmpty()) {
             where += and + " C.codigoSIGECOF like ?";
             and = " AND ";
@@ -119,7 +123,7 @@ public class OrdenDePagoGridFrameController extends DefaultGridFrameController {
             ty.add(new DateType());
         }
         try {
-            String sql = "FROM " + Remesa.class + " C ";
+            String sql = "FROM " + OrdenDePago.class.getName() + " C ";
             sql = where.trim().isEmpty() ? sql : (sql + "WHERE " + where);
 
             SessionFactory sf = HibernateUtil.getSessionFactory();

@@ -85,15 +85,15 @@ public class RemesaGridFrameController extends DefaultGridFrameController {
             ty.add(new StringType());
         }
         if (bp.getTipoPago() != null) {
-            where += and + " C.tipoPago like ?";
+            where += and + " C.tipoPago = ?";
             and = " AND ";
-            ob.add("%" + bp.getTipoPago().toString() + "%");
+            ob.add(bp.getTipoPago().toString() );
             ty.add(new StringType());
         }
         if (bp.getEstatusPago() != null) {
-            where += and + " C.estatusPago like ?";
+            where += and + " C.estatusPago = ?";
             and = " AND ";
-            ob.add("%" + bp.getEstatusPago() + "%");
+            ob.add(bp.getEstatusPago().toString());
             ty.add(new StringType());
         }
         if (bp.getFechaPagado() != null) {
@@ -103,7 +103,7 @@ public class RemesaGridFrameController extends DefaultGridFrameController {
             ty.add(new DateType());
         }
         try {
-            String sql = "FROM " + Remesa.class + " C ";
+            String sql = "FROM " + Remesa.class.getName() + " C ";
             sql = where.trim().isEmpty() ? sql : (sql + "WHERE " + where);
 
             SessionFactory sf = HibernateUtil.getSessionFactory();
