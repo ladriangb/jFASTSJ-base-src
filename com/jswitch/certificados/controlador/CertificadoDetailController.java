@@ -1,5 +1,6 @@
 package com.jswitch.certificados.controlador;
 
+import com.jswitch.asegurados.modelo.maestra.Asegurado;
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
@@ -47,6 +48,14 @@ public class CertificadoDetailController extends DefaultDetailFrameController {
     public CertificadoDetailController(
             String detailFramePath, GridControl gridControl, BeanVO beanVO, boolean aplicarLogicaNegocio) {
         super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
+        if (beanVO == null) {
+            ((CertificadoDetailFrame) vista).setVisiblePaneles(false);
+        }
+    }
+
+    public CertificadoDetailController(
+            String detailFramePath, GridControl gridControl, boolean aplicarLogicaNegocio, Asegurado aseg) {
+        super(detailFramePath, gridControl, aseg != null ? aseg.getCertificado() : null, aplicarLogicaNegocio);
         if (beanVO == null) {
             ((CertificadoDetailFrame) vista).setVisiblePaneles(false);
         }

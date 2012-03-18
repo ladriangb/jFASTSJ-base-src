@@ -436,6 +436,10 @@ public class MenuPrincipal implements ClientFacade {
     public void getNuevoCertificado() {
         new CertificadoDetailController(CertificadoDetailFrame.class.getName(), null, null, true);
     }
+    
+    public void  getFindCertificado(){
+      new BuscarAseguradoDialog("BUSCAR CERTIFICADO").setVisible(true);
+    }
 // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Configuracion">

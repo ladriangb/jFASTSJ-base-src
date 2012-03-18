@@ -61,22 +61,6 @@ import javax.validation.constraints.Past;
 public class DetalleSiniestro extends BeanVO implements Serializable, Auditable {
 
     /**
-     * reportes Generales
-     * @return the reportesGenerales
-     */
-    public static Set<Reporte> getReportesGenerales() {
-        return reportesGenerales;
-    }
-
-    /**
-     * reportes Generales
-     * @param aReportesGenerales the reportesGenerales to set
-     */
-    public static void setReportesGenerales(Set<Reporte> aReportesGenerales) {
-        reportesGenerales = aReportesGenerales;
-    }
-
-    /**
      * Pk autogenerado
      */
     @Id
@@ -327,6 +311,28 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
      */
     public Date getFechaLiquidado() {
         return fechaLiquidado;
+    }
+
+    /**
+     * reportes Generales
+     * @return the reportesGenerales
+     */
+    public static Set<Reporte> getReportesGenerales() {
+        if (reportesGenerales.isEmpty()) {
+            reportesGenerales.add(new Reporte(Dominios.CategoriaReporte.SINIESTROS, 0,
+                    "LIQ_SINI_D001", "LIQUIDACION DE SINIESTRO",
+                    "Liquidacion de todos los SINIESTROS", null, "Carta 8½ x 11 Vertical",
+                    false, false, false, false));
+        }
+        return reportesGenerales;
+    }
+
+    /**
+     * reportes Generales
+     * @param aReportesGenerales the reportesGenerales to set
+     */
+    public static void setReportesGenerales(Set<Reporte> aReportesGenerales) {
+        reportesGenerales = aReportesGenerales;
     }
 
     /**
@@ -770,5 +776,4 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     public void setTratamientoEfectuado(TratamientoEfectuado tratamientoEfectuado) {
         this.tratamientoEfectuado = tratamientoEfectuado;
     }
-
 }

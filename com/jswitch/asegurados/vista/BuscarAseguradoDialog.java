@@ -4,6 +4,8 @@ import com.jswitch.asegurados.controlador.AseguradoDetailFrameController;
 import com.jswitch.asegurados.controlador.AseguradosGridInternalControllerWithData;
 import com.jswitch.asegurados.modelo.maestra.Asegurado;
 import com.jswitch.asegurados.modelo.utilitario.BuscarAsegurado;
+import com.jswitch.certificados.controlador.CertificadoDetailController;
+import com.jswitch.certificados.vista.CertificadoDetailFrame;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import com.jswitch.fas.modelo.Dominios.TipoBusqueda;
@@ -53,6 +55,8 @@ public class BuscarAseguradoDialog extends InternalFrame {
         if (getTitle().compareTo("Asignar Asegurado a Siniestro") == 0) {
             new SiniestroDetailFrameController(SiniestroDetailFrame.class.getName(), null, true, asegurado);
             this.dispose();
+        } else if (getTitle().equals(("BUSCAR CERTIFICADO"))) {
+            new CertificadoDetailController(CertificadoDetailFrame.class.getName(), null, false,asegurado);
         } else {
             new AseguradoDetailFrameController(AseguradoDetailFrame.class.getName(), null, asegurado, false);
         }
