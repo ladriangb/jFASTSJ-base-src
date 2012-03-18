@@ -4,10 +4,12 @@ import com.jswitch.base.controlador.General;
 import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
+import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.fas.modelo.Dominios.EstatusPago;
 import com.jswitch.pagos.modelo.maestra.OrdenDePago;
 import com.jswitch.pagos.vista.OrdenDePagoDetailFrame;
+import com.jswitch.persona.modelo.transac.CuentaBancariaPersona;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import java.awt.event.ActionEvent;
@@ -15,6 +17,7 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -96,8 +99,42 @@ public class OrdenDePagoDetailFrameController
 
     @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
-
+        CuentaBancariaPersona cu = ((OrdenDePago) newPersistentObject).getCuentaBancaria();
+        CuentaBancariaPersona c = null;
+        if (cu != null) {
+            c = new CuentaBancariaPersona(cu.getNumero(), cu.getObservacion(), cu.getBanco(), cu.getTipoCuenta(),
+                    new AuditoriaBasica(new Date(), General.usuario.getUserName(), Boolean.TRUE));
+        }
+        ((OrdenDePago) newPersistentObject).setCuentaBancaria(c);
         return super.insertRecord(newPersistentObject);
+    }
+
+    @Override
+    public Response updateRecord(ValueObject oldPersistentObject, ValueObject persistentObject) throws Exception {
+        CuentaBancariaPersona nu = ((OrdenDePago) persistentObject).getCuentaBancaria();
+        CuentaBancariaPersona vi = ((OrdenDePago) oldPersistentObject).getCuentaBancaria();;
+        if (nu != null && vi != null && !nu.equals(vi)) {
+            AuditoriaBasica a = vi.getAuditoria();
+            if (a != null) {
+                a.setUsuarioUpdate(General.usuario.getUserName());
+                a.setFechaUpdate(new Date());
+            }
+            vi.setBanco(nu.getBanco());
+            vi.setDomicilio(nu.getDomicilio());
+            vi.setNumero(nu.getNumero());
+            vi.setTipoCuenta(nu.getTipoCuenta());
+            vi.setObservacion(nu.getObservacion());
+        }
+        if (nu != null && vi == null) {
+            vi = new CuentaBancariaPersona(nu.getNumero(), nu.getObservacion(), nu.getBanco(), nu.getTipoCuenta(),
+                    new AuditoriaBasica(new Date(), General.usuario.getUserName(), Boolean.TRUE));
+        }
+        ((OrdenDePago) persistentObject).setCuentaBancaria(vi);
+        Response res = super.updateRecord(oldPersistentObject, persistentObject);
+        if (nu == null && vi != null) {
+            super.deleteRecord(vi);
+        }
+        return res;
     }
 
     @Override
