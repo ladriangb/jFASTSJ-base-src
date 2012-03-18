@@ -129,7 +129,7 @@ public class RemesaDetailFrameController
                 if (remesa.getTipoDetalleSiniestro().equals(TipoDetalleSiniestro.Todos)) {
                     op = q.setString("Sep", EstatusPago.EN_ADMINISTRACION.toString()).list();
                 } else {
-                    op = q.setString("Sep", EstatusPago.EN_ADMINISTRACION.toString()).
+                    op =    q.setString("Sep", EstatusPago.EN_ADMINISTRACION.toString()).
                             setString("Stds", remesa.getTipoDetalleSiniestro().toString()).list();
                 }
                 s.createQuery("UPDATE " + OrdenDePago.class.getName()

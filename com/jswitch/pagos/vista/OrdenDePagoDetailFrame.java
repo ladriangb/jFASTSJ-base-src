@@ -1121,9 +1121,9 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
 
     private void setEnableGridInternalButtons(boolean enabled) {
         jPanel15.setVisible(enabled);
-        jPanelDoc.setVisible(enabled);
-        jPanelNot.setVisible(enabled);
-        jPanelObs.setVisible(enabled);
+        jPanel13.setVisible(enabled);
+        jPanel16.setVisible(enabled);
+        jPanel11.setVisible(enabled);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel DocAnexos;
