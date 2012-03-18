@@ -12,9 +12,11 @@ import com.jswitch.configuracion.modelo.transaccional.SumaAsegurada;
 import com.jswitch.configuracion.modelo.maestra.Plan;
 import com.jswitch.configuracion.modelo.transaccional.ConfiguracionSiniestro;
 import com.jswitch.configuracion.modelo.transaccional.SumaAmparada;
+import java.awt.event.ActionListener;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.mdi.client.MDIFrame;
 import org.openswing.swing.table.client.GridController;
+import org.openswing.swing.table.columns.client.CodLookupColumn;
 import org.openswing.swing.table.java.GridDataLocator;
 
 /**
@@ -22,16 +24,17 @@ import org.openswing.swing.table.java.GridDataLocator;
  * @author adrian
  */
 public class PlanesGridFrame extends DefaultGridFrame {
-
+    
+    private BeanVO plan;
     private DefaultGridInternalController controllerSumaAsegurada;
     private DefaultGridInternalController controllerSumaAmparada;
     private DefaultGridInternalController controllerConfiguracionSiniestros;
     private DiagnosticoLookupController lookupDiagnostico;
     private SumaAmparadaPorPlanLookupController lookupSumaAmparada;
-
+    
     public PlanesGridFrame() {
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -77,6 +80,7 @@ public class PlanesGridFrame extends DefaultGridFrame {
         reloadButton5 = new org.openswing.swing.client.ReloadButton();
         exportButton5 = new org.openswing.swing.client.ExportButton();
         navigatorBar1 = new org.openswing.swing.client.NavigatorBar();
+        jButton2 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         gridControl3 = new org.openswing.swing.client.GridControl();
         decimalColumnNot3 = new org.openswing.swing.table.columns.client.DecimalColumn();
@@ -205,8 +209,8 @@ public class PlanesGridFrame extends DefaultGridFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(240, Short.MAX_VALUE))
-            .addComponent(gridControl1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
+                .addContainerGap(244, Short.MAX_VALUE))
+            .addComponent(gridControl1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Suma Amparada", jPanel2);
@@ -258,6 +262,10 @@ public class PlanesGridFrame extends DefaultGridFrame {
         textColumn7.setColumnSortable(true);
         gridControl2.getColumnContainer().add(textColumn7);
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/StartupWizard.png"))); // NOI18N
+        jButton2.setToolTipText("Crea los detalles Automaticamente");
+        jButton2.setPreferredSize(new java.awt.Dimension(33, 33));
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
@@ -277,13 +285,16 @@ public class PlanesGridFrame extends DefaultGridFrame {
                 .addComponent(reloadButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(exportButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(110, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(exportButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(reloadButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(insertButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -291,7 +302,7 @@ public class PlanesGridFrame extends DefaultGridFrame {
                     .addComponent(editButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deleteButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(navigatorBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(6, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -309,7 +320,7 @@ public class PlanesGridFrame extends DefaultGridFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(gridControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE))
+                .addComponent(gridControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Suma Asegurada", jPanel4);
@@ -380,8 +391,8 @@ public class PlanesGridFrame extends DefaultGridFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(240, Short.MAX_VALUE))
-            .addComponent(gridControl3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
+                .addContainerGap(244, Short.MAX_VALUE))
+            .addComponent(gridControl3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Configuracion Tipo Detalle de Siniestro", jPanel5);
@@ -403,47 +414,47 @@ public class PlanesGridFrame extends DefaultGridFrame {
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
     @Override
     public void inicializar(GridDataLocator gridDataLocator, GridController gridController, String valueObjectClassName, String titulo, boolean addToMDIFrame) {
         initComponents();
-
+        
         gridData.setGridDataLocator(gridDataLocator);
         gridData.setController(gridController);
-
-
+        
+        jButton2.addActionListener((ActionListener) gridDataLocator);
         lookupDiagnostico = new DiagnosticoLookupController();
         lookupDiagnostico.addLookup2ParentLink("diagnostico");
         codLookupColumn2.setLookupController(lookupDiagnostico);
-
+        
         lookupSumaAmparada = new SumaAmparadaPorPlanLookupController();
         lookupSumaAmparada.addLookup2ParentLink("sumaAmparada");
         codLookupColumn1.setLookupController(lookupSumaAmparada);
-
-
+        
+        
         controllerSumaAsegurada =
                 new SumaAseguradaPlanGridInternalController(
                 Plan.class.getName(),
                 "getSumasAseguradas", gridControl2);
         gridControl2.setGridDataLocator(controllerSumaAsegurada);
         gridControl2.setController(controllerSumaAsegurada);
-
+        
         controllerConfiguracionSiniestros =
                 new ConfiguracionSiniestroPlanGridInternalController(
                 Plan.class.getName(),
                 "getConfiguracionSiniestros", gridControl3);
         gridControl3.setGridDataLocator(controllerConfiguracionSiniestros);
         gridControl3.setController(controllerConfiguracionSiniestros);
-
+        
         controllerSumaAmparada = new SumaAmparadaPlanGridInternalController(
                 Plan.class.getName(), "getSumaAmparadas", gridControl1);
         gridControl1.setGridDataLocator(controllerSumaAmparada);
         gridControl1.setController(controllerSumaAmparada);
-
+        
         if (addToMDIFrame) {
             pack();
         } else {
@@ -451,33 +462,42 @@ public class PlanesGridFrame extends DefaultGridFrame {
         }
         MDIFrame.add(this);
     }
-
+    
     @Override
     public void reloadGridsData() {
         gridControl1.reloadData();
         gridControl2.reloadData();
         gridControl3.reloadData();
     }
-
+    
     @Override
     public void clearGridsData() {
         gridControl1.clearData();
         gridControl2.clearData();
         gridControl3.clearData();
     }
-
+    
     @Override
     public void setOwnerVO(final BeanVO beanVO) {
         lookupSumaAmparada.setPlan((Plan) beanVO);
         controllerSumaAsegurada.setBeanVO(beanVO);
         controllerSumaAmparada.setBeanVO(beanVO);
         controllerConfiguracionSiniestros.setBeanVO(beanVO);
+        plan = beanVO;
         reloadGridsData();
     }
-
+    
     @Override
     public GridControl getGridControl() {
         return gridData;
+    }
+    
+    public CodLookupColumn getCodLookupColumn1() {
+        return codLookupColumn1;
+    }
+    
+    public Plan getPlan() {
+        return (Plan) plan;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.openswing.swing.table.columns.client.CodLookupColumn codLookupColumn1;
@@ -509,6 +529,7 @@ public class PlanesGridFrame extends DefaultGridFrame {
     private org.openswing.swing.client.InsertButton insertButton4;
     private org.openswing.swing.client.InsertButton insertButton5;
     private org.openswing.swing.client.InsertButton insertButton6;
+    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

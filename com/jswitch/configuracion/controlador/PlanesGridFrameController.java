@@ -1,14 +1,20 @@
 package com.jswitch.configuracion.controlador;
 
 import com.jswitch.base.controlador.General;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Map;
 import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.controlador.util.DefaultGridFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.entidades.auditoria.AuditoriaBasica;
+import com.jswitch.base.vista.util.ProgressDialog;
+import com.jswitch.configuracion.modelo.dominio.patologias.Diagnostico;
 import com.jswitch.configuracion.modelo.maestra.Plan;
 import com.jswitch.configuracion.modelo.transaccional.ConfiguracionSiniestro;
+import com.jswitch.configuracion.modelo.transaccional.SumaAmparada;
+import com.jswitch.configuracion.modelo.transaccional.SumaAsegurada;
+import com.jswitch.configuracion.vista.PlanesGridFrame;
 import com.jswitch.siniestros.modelo.maestra.detalle.APS;
 import com.jswitch.siniestros.modelo.maestra.detalle.AyudaSocial;
 import com.jswitch.siniestros.modelo.maestra.detalle.CartaAval;
@@ -16,7 +22,10 @@ import com.jswitch.siniestros.modelo.maestra.detalle.Emergencia;
 import com.jswitch.siniestros.modelo.maestra.detalle.Funerario;
 import com.jswitch.siniestros.modelo.maestra.detalle.Reembolso;
 import com.jswitch.siniestros.modelo.maestra.detalle.Vida;
+import java.awt.event.ActionListener;
 import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
@@ -31,15 +40,15 @@ import org.openswing.swing.util.server.HibernateUtils;
  * @author Orlando Becerra
  * @author Adrian Gonzalez
  */
-public class PlanesGridFrameController extends DefaultGridFrameController implements GridDataLocator {
-
+public class PlanesGridFrameController extends DefaultGridFrameController implements GridDataLocator, ActionListener {
+    
     public PlanesGridFrameController() {
     }
-
+    
     public PlanesGridFrameController(String gridFramePath, String detailFramePath, String claseModeloFullPath, String titulo) {
         super(gridFramePath, detailFramePath, claseModeloFullPath, titulo);
     }
-
+    
     @Override
     public Response loadData(int action, int startIndex, Map filteredColumns,
             ArrayList currentSortedColumns, ArrayList currentSortedVersusColumns, Class valueObjectType, Map otherGridParams) {
@@ -70,7 +79,7 @@ public class PlanesGridFrameController extends DefaultGridFrameController implem
             s.close();
         }
     }
-
+    
     @Override
     public Response insertRecords(int[] rowNumbers, ArrayList newValueObjects) throws Exception {
         Response res = super.insertRecords(rowNumbers, newValueObjects);
@@ -102,5 +111,57 @@ public class PlanesGridFrameController extends DefaultGridFrameController implem
             }
         }
         return res;
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        final Plan plan = ((PlanesGridFrame) gridFrame).getPlan();
+        if (plan != null) {
+            new Thread(new Runnable() {
+                
+                @Override
+                public void run() {
+                    Session s = null;
+                    try {
+                        s = HibernateUtil.getSessionFactory().openSession();
+                        
+                        Long lon = (Long) s.createQuery("SELECT COUNT(D) FROM " + SumaAsegurada.class.getName() + " as D WHERE D.plan.id=? ").setLong(0, plan.getId()).uniqueResult();
+                        if (lon > 0) {
+                            JOptionPane.showMessageDialog(gridFrame, "Ya Existen Diagnosticos Asociados \nDebe Ser un plan Nuevo", "Agregar Diagnostocos", JOptionPane.INFORMATION_MESSAGE);
+                            return;
+                        }
+                        Transaction t = s.beginTransaction();
+                        AuditoriaBasica ab = new AuditoriaBasica(new Date(), General.usuario.getUserName(), true);
+                        SumaAmparada sa = new SumaAmparada();
+                        sa.setAuditoria(ab);
+                        sa.setMonto(0d);
+                        sa.setNombre("AUTO_CREADA");
+                        sa.setPlan(plan);
+                        s.save(sa);
+                        final List<Diagnostico> diag = s.createQuery("FROM " + Diagnostico.class.getName() + " as D ").
+                                list();
+                        ProgressDialog pr = new ProgressDialog("Agregando Diagnosticos", "Diagnosticos  numero: ", diag.size());
+                        int v = 0;
+                        for (Diagnostico diagnostico : diag) {
+                            v++;
+                            pr.setValue(v);
+                            SumaAsegurada ob = new SumaAsegurada();
+                            ob.setPlan(plan);
+                            ob.setSumaAmparada(sa);
+                            ob.setAuditoria(ab);
+                            ob.setDiagnostico(diagnostico);
+                            s.save(ob);
+                        }
+                        pr.setEventoActual("Guardando Registros Creados");
+                        t.commit();
+                        pr.dispose();
+                    } catch (Exception ex) {
+                        LoggerUtil.error(this.getClass(), "insertRecord", ex);
+                    } finally {
+                        s.close();
+                    }
+                }
+            }).start();
+        }
     }
 }

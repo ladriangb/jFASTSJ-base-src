@@ -38,7 +38,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" pref="368" max="32767" attributes="0"/>
+              <Component id="jTabbedPane1" pref="372" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -181,9 +181,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel8" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="240" max="32767" attributes="0"/>
+                      <EmptySpace pref="244" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="gridControl1" alignment="1" pref="340" max="32767" attributes="0"/>
+                  <Component id="gridControl1" alignment="1" pref="344" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -313,7 +313,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel9" min="-2" pref="49" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="gridControl2" pref="280" max="32767" attributes="0"/>
+                      <Component id="gridControl2" pref="284" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -435,15 +435,18 @@
                           <Component id="reloadButton5" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="exportButton5" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="149" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="110" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jButton2" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="exportButton5" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="reloadButton5" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="insertButton5" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -452,7 +455,7 @@
                               <Component id="deleteButton5" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="navigatorBar1" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="6" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -471,6 +474,17 @@
                 <Component class="org.openswing.swing.client.ExportButton" name="exportButton5">
                 </Component>
                 <Component class="org.openswing.swing.client.NavigatorBar" name="navigatorBar1">
+                </Component>
+                <Component class="javax.swing.JButton" name="jButton2">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/images/StartupWizard.png"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" value="Crea los detalles Automaticamente"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[33, 33]"/>
+                    </Property>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
@@ -499,9 +513,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel10" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="240" max="32767" attributes="0"/>
+                      <EmptySpace pref="244" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="gridControl3" alignment="1" pref="340" max="32767" attributes="0"/>
+                  <Component id="gridControl3" alignment="1" pref="344" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>

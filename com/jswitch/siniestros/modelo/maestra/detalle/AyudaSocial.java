@@ -1,6 +1,5 @@
 package com.jswitch.siniestros.modelo.maestra.detalle;
 
-import com.jswitch.base.modelo.Dominios;
 import com.jswitch.base.modelo.util.ehts.BusinessKey;
 import com.jswitch.reporte.modelo.Reporte;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
@@ -12,7 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-import javax.validation.constraints.Future;
 import javax.validation.constraints.Past;
 
 /**

@@ -2,7 +2,6 @@ package com.jswitch.siniestros.modelo.maestra.detalle;
 
 import com.jswitch.base.controlador.General;
 import com.jswitch.base.modelo.Dominios;
-import com.jswitch.base.modelo.entidades.defaultData.ConfiguracionesGenerales;
 import com.jswitch.base.modelo.util.ehts.BusinessKey;
 import com.jswitch.reporte.modelo.Reporte;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
