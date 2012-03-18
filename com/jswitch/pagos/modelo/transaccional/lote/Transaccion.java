@@ -127,25 +127,9 @@ public class Transaccion {
 
         for (OrdenDePago ordenDePago : remesa.getOrdenDePagos()) {
             //<editor-fold defaultstate="collapsed" desc="download">
-            Session s = null;
             Persona personaPago = null;
             CuentaBancariaPersona bancariaPersona = null;
-            try {
-                s = HibernateUtil.getSessionFactory().openSession();
-                personaPago = (Persona) s.get(Persona.class,
-                        ordenDePago.getPersonaPago().getId());
-                Hibernate.initialize(personaPago.getCuentasBancarias());
-                for (CuentaBancariaPersona cuentaBancariaPersona : personaPago.getCuentasBancarias()) {
-                    if (cuentaBancariaPersona.getDomicilio()) {
-                        bancariaPersona = cuentaBancariaPersona;
-                        break;
-                    }
-                }
-            } catch (Exception ex) {
-                bancariaPersona = null;
-            } finally {
-                s.close();
-            }
+            bancariaPersona = ordenDePago.getCuentaBancaria();
             //</editor-fold>
             if (bancariaPersona != null) {
                 //<editor-fold defaultstate="collapsed" desc="Body">
