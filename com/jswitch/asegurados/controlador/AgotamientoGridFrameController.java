@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
+import org.hibernate.transform.AliasedTupleSRT;
 import org.hibernate.type.Type;
 import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
@@ -36,12 +37,16 @@ public class AgotamientoGridFrameController extends DefaultGridFrameController {
     public Response loadData(int action, int startIndex, Map filteredColumns, ArrayList currentSortedColumns, ArrayList currentSortedVersusColumns, Class valueObjectType, Map otherGridParams) {
         Session s = null;
         try {
-            String sql = "FROM " + claseModeloFullPath + " C";
+            String tableName = "C";
+            String select = gridFrame.getGridControl().getVOListTableModel().
+                    createSelect("C", AliasedTupleSRT.SEPARATOR);
+            select +=", asegurado.id as asegurado_id";
+            String sql = select + " FROM " + claseModeloFullPath + " " + tableName + " ";
+            
             SessionFactory sf = HibernateUtil.getSessionFactory();
             s = sf.openSession();
-//            List l = s.createQuery(sql).list();
-//            Response res = new VOListResponse(l, false, l.size());
             Response res = HibernateUtils.getBlockFromQuery(
+                    new AliasedTupleSRT(Class.forName(claseModeloFullPath)),
                     action,
                     startIndex,
                     General.licencia.getBlockSize(),
@@ -52,21 +57,9 @@ public class AgotamientoGridFrameController extends DefaultGridFrameController {
                     sql,
                     new Object[0],
                     new Type[0],
-                    "C",
+                    tableName,
                     sf,
                     s);
-
-            //           Response res = HibernateUtils.getAllFromQuery(
-//                    filteredColumns,
-//                    currentSortedColumns,
-//                    currentSortedVersusColumns,
-//                    valueObjectType,
-//                    sql,
-//                    new Object[0],
-//                    new Type[0],
-//                    "C",
-//                    sf,
-//                    s);
             return res;
         } catch (Exception ex) {
             LoggerUtil.error(this.getClass(), "loadData", ex);

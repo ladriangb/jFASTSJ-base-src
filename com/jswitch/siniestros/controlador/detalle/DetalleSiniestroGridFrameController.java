@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
+import org.hibernate.transform.AliasedTupleSRT;
+import org.hibernate.transform.ResultTransformer;
 import org.hibernate.type.IntegerType;
 import org.hibernate.type.LongType;
 import org.hibernate.type.StringType;
@@ -162,7 +164,10 @@ public class DetalleSiniestroGridFrameController extends DefaultGridFrameControl
         }
         //</editor-fold>
         try {
-            String sql = "FROM " + bs.getTipoDetalleSiniestro().getClase() + " C ";
+            String select = gridFrame.getGridControl().getVOListTableModel().
+                    createSelect("C", AliasedTupleSRT.SEPARATOR);
+            select += ", C.etapaSiniestro.idPropio as etapaSiniestro_idPropio ";
+            String sql = select + " FROM " + bs.getTipoDetalleSiniestro().getClase() + " C ";
             sql = where.trim().isEmpty() ? sql : (sql + "WHERE " + where);
             ArrayList<Object> ob = new ArrayList<Object>(0);
             ArrayList<Type> ty = new ArrayList<Type>(0);
@@ -216,10 +221,13 @@ public class DetalleSiniestroGridFrameController extends DefaultGridFrameControl
                 ob.add(bs.getEtapaSiniestro().getId());
             }
             //</editor-fold>
-            
+
             SessionFactory sf = HibernateUtil.getSessionFactory();
             s = sf.openSession();
+            ResultTransformer resultTransformer = new AliasedTupleSRT(
+                    Class.forName(bs.getTipoDetalleSiniestro().getClase()));
             Response res = HibernateUtils.getBlockFromQuery(
+                    resultTransformer,
                     action,
                     startIndex,
                     General.licencia.getBlockSize(),

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
+import org.hibernate.transform.AliasedTupleSRT;
 import org.hibernate.type.DateType;
 import org.hibernate.type.StringType;
 import org.hibernate.type.Type;
@@ -87,7 +88,7 @@ public class RemesaGridFrameController extends DefaultGridFrameController {
         if (bp.getTipoPago() != null) {
             where += and + " C.tipoPago = ?";
             and = " AND ";
-            ob.add(bp.getTipoPago().toString() );
+            ob.add(bp.getTipoPago().toString());
             ty.add(new StringType());
         }
         if (bp.getEstatusPago() != null) {
@@ -103,12 +104,16 @@ public class RemesaGridFrameController extends DefaultGridFrameController {
             ty.add(new DateType());
         }
         try {
-            String sql = "FROM " + Remesa.class.getName() + " C ";
+            String select = gridFrame.getGridControl().getVOListTableModel().
+                    createSelect("C", AliasedTupleSRT.SEPARATOR);
+
+            String sql = select + " FROM " + Remesa.class.getName() + " C ";
             sql = where.trim().isEmpty() ? sql : (sql + "WHERE " + where);
 
             SessionFactory sf = HibernateUtil.getSessionFactory();
             s = sf.openSession();
             Response res = HibernateUtils.getBlockFromQuery(
+                    new AliasedTupleSRT(Remesa.class),
                     action,
                     startIndex,
                     General.licencia.getBlockSize(),

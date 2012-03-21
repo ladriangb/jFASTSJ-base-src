@@ -14,6 +14,7 @@ import com.jswitch.siniestros.vista.SiniestroDetailFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+import org.openswing.swing.client.GridControl;
 import org.openswing.swing.form.client.FormController;
 import org.openswing.swing.mdi.client.InternalFrame;
 import org.openswing.swing.mdi.client.MDIFrame;
@@ -56,10 +57,14 @@ public class BuscarAseguradoDialog extends InternalFrame {
             new SiniestroDetailFrameController(SiniestroDetailFrame.class.getName(), null, true, asegurado);
             this.dispose();
         } else if (getTitle().equals(("BUSCAR CERTIFICADO"))) {
-            new CertificadoDetailController(CertificadoDetailFrame.class.getName(), null, false,asegurado);
+            new CertificadoDetailController(CertificadoDetailFrame.class.getName(), null, false, asegurado);
         } else {
             new AseguradoDetailFrameController(AseguradoDetailFrame.class.getName(), null, asegurado, false);
         }
+    }
+
+    public GridControl getGridControl() {
+        return gridControl4;
     }
 
     @SuppressWarnings("unchecked")

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
+import org.hibernate.transform.AliasedTupleSRT;
 import org.hibernate.type.DateType;
 import org.hibernate.type.LongType;
 import org.hibernate.type.StringType;
@@ -123,12 +124,15 @@ public class OrdenDePagoGridFrameController extends DefaultGridFrameController {
             ty.add(new DateType());
         }
         try {
-            String sql = "FROM " + OrdenDePago.class.getName() + " C ";
+            String select = gridFrame.getGridControl().getVOListTableModel().
+                    createSelect("C", AliasedTupleSRT.SEPARATOR);
+            String sql = select + " FROM " + OrdenDePago.class.getName() + " C ";
             sql = where.trim().isEmpty() ? sql : (sql + "WHERE " + where);
 
             SessionFactory sf = HibernateUtil.getSessionFactory();
             s = sf.openSession();
             Response res = HibernateUtils.getBlockFromQuery(
+                    new AliasedTupleSRT(OrdenDePago.class),
                     action,
                     startIndex,
                     General.licencia.getBlockSize(),

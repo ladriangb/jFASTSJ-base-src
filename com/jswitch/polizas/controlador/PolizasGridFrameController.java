@@ -27,8 +27,5 @@ public class PolizasGridFrameController extends DefaultGridFrameController{
     }
 
 
-
-
-
 }
 

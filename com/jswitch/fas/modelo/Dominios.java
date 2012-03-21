@@ -45,6 +45,9 @@ public class Dominios {
                 Dominios.TipoDetalleSiniestro().getDomainId(),
                 Dominios.TipoDetalleSiniestro());
         domains.put(
+                Dominios.TipoDetalleSiniestro2().getDomainId(),
+                Dominios.TipoDetalleSiniestro2());
+        domains.put(
                 Dominios.EstadoSiniestro().getDomainId(),
                 Dominios.EstadoSiniestro());
         domains.put(
@@ -84,6 +87,7 @@ public class Dominios {
     }
 
     public static enum TipoTramiteSiniestro {
+
         MEDICO, QUIRURGICO
     }
 
@@ -193,6 +197,18 @@ public class Dominios {
         public String getClase() {
             return clase;
         }
+    }
+
+    public static Domain TipoDetalleSiniestro2() {
+        Domain dominio = new Domain("TipoDetalleSiniestro2");
+        TipoDetalleSiniestro o[] = TipoDetalleSiniestro.values();
+        for (int i = 0; i
+                < o.length; i++) {
+            if (!o[i].equals(TipoDetalleSiniestro.Todos)) {
+                dominio.addDomainPair(o[i], o[i].toString());
+            }
+        }
+        return dominio;
     }
 
     public static Domain TipoDetalleSiniestro() {

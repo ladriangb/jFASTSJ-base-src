@@ -15,6 +15,8 @@ import java.awt.Panel;
 import java.awt.Toolkit;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import net.sf.jasperreports.engine.util.JRLoader;
 import org.hibernate.classic.Session;
@@ -25,8 +27,17 @@ import org.hibernate.classic.Session;
  */
 public class ReportesUtil {
 
+    /**
+     * direccion donde se guardan los documentos adjuntos 
+     * o ubicacion del servidor de archivos
+     */
     private static String server = General.empresa.getRutaDocDigitales();
 
+    /**
+     * obtiene la imagen de nombre de tipo documento FOTO para un objeto especifico
+     * @param object
+     * @return 
+     */
     public static Image getImageFOTO(Auditable object) {
         Image i = null;
         Sexo sexo = Sexo.MASCULINO;
@@ -51,6 +62,12 @@ public class ReportesUtil {
         return i;
     }
 
+    /**
+     * Retorna la imagen del documento especifico para la clase especifica
+     * @param object
+     * @param tipoDocumento
+     * @return 
+     */
     public static Image getImage(Auditable object, String tipoDocumento) {
         String path = server + "\\" + object.getClass().getSimpleName() + "\\" + object.getId() + "\\";
         Image i = null;
@@ -87,5 +104,21 @@ public class ReportesUtil {
             }
         }
         return i;
+    }
+
+    /***
+     * Retorna la diferencia en dias entre dos fechas
+     * @param date1
+     * @param date2
+     * @return 
+     */
+    public static int diferenciaEnDias(Date date1, Date date2) {
+        java.util.GregorianCalendar dateA = (java.util.GregorianCalendar) Calendar.getInstance();
+        java.util.GregorianCalendar dateB = (java.util.GregorianCalendar) Calendar.getInstance();
+        dateA.setTime(date1);
+        dateB.setTime(date2);
+        long difms = dateB.getTimeInMillis() - dateA.getTimeInMillis();
+        int difd = (int) (difms / 1000 / 60 / 60 / 24);
+        return difd;
     }
 }

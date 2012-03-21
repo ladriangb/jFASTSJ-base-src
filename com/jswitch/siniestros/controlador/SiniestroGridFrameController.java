@@ -1,4 +1,3 @@
-
 package com.jswitch.siniestros.controlador;
 
 import com.jswitch.base.controlador.General;
@@ -17,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
+import org.hibernate.transform.AliasedTupleSRT;
 import org.hibernate.type.IntegerType;
 import org.hibernate.type.LongType;
 import org.hibernate.type.StringType;
@@ -169,8 +169,10 @@ public class SiniestroGridFrameController extends DefaultGridFrameController {
             ArrayList<Type> ty = new ArrayList<Type>(0);
 
             try {
-                
-                sql2 = "SELECT DISTINCT C FROM " + Siniestro.class.getName() + " C "
+                String select = gridFrame.getGridControl().getVOListTableModel().
+                        createSelect("C", AliasedTupleSRT.SEPARATOR);
+                select = select.replaceAll("SELECT", "SELECT DISTINCT ");
+                sql2 = select + " FROM " + Siniestro.class.getName() + " C "
                         + " JOIN C.detalleSiniestro as DE JOIN DE.diagnosticoSiniestros as DI ";
                 sql2 = where.trim().isEmpty() ? sql2 : (sql2 + "WHERE " + where);
                 //<editor-fold defaultstate="collapsed" desc="siniestro">
@@ -217,8 +219,9 @@ public class SiniestroGridFrameController extends DefaultGridFrameController {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-            
+
             Response res = HibernateUtils.getBlockFromQuery(
+                    new AliasedTupleSRT(Siniestro.class),
                     action,
                     startIndex,
                     General.licencia.getBlockSize(),

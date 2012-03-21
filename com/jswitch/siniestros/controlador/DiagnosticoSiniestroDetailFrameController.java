@@ -232,7 +232,9 @@ public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFram
         } finally {
             s.close();
         }
-
+        if (disp == null) {
+            disp = Double.POSITIVE_INFINITY;
+        }
         return disp;
     }
 

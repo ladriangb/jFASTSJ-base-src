@@ -9,6 +9,7 @@ import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.vista.util.SuperusuarioLoginDialog;
 import com.jswitch.fas.modelo.Dominios;
+import com.jswitch.fas.utils.ReportesUtil;
 import com.jswitch.siniestros.controlador.detalle.DetalleVidaNuevoDetrailController;
 import com.jswitch.siniestros.modelo.maestra.Siniestro;
 import com.jswitch.siniestros.modelo.maestra.detalle.Vida;
@@ -85,10 +86,10 @@ public class SiniestroDetailFrameController extends DefaultDetailFrameController
     @Override
     public Response logicaNegocio(ValueObject persistentObject) {
         Siniestro siniestro = (Siniestro) persistentObject;
-        if (diferenciaEnDias(new Date(), siniestro.getFechaCreacion()) < 0) {
+        if (ReportesUtil.diferenciaEnDias(new Date(), siniestro.getFechaCreacion()) < 0) {
             if (!SuperusuarioLoginDialog.VerificarSuperusuario()) {
                 return new ErrorResponse("Usuario no Verificado");
-            } 
+            }
         }
         return new VOResponse(persistentObject);
     }
@@ -214,15 +215,5 @@ public class SiniestroDetailFrameController extends DefaultDetailFrameController
             }
             //</editor-fold>
         }
-    }
-
-    public int diferenciaEnDias(Date date1, Date date2) {
-        java.util.GregorianCalendar dateA = (java.util.GregorianCalendar) Calendar.getInstance();
-        java.util.GregorianCalendar dateB = (java.util.GregorianCalendar) Calendar.getInstance();
-        dateA.setTime(date1);
-        dateB.setTime(date2);
-        long difms = dateB.getTimeInMillis() - dateA.getTimeInMillis();
-        int difd = (int) (difms / 1000 / 60 / 60 / 24);
-        return difd;
     }
 }

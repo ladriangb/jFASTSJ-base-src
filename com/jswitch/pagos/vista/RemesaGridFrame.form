@@ -174,16 +174,6 @@
             <Property name="columnSortable" type="boolean" value="true"/>
           </Properties>
         </Component>
-        <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn2">
-          <Properties>
-            <Property name="columnFilterable" type="boolean" value="true"/>
-            <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="&quot;tipoCuenta.nombre&quot;" type="code"/>
-            </Property>
-            <Property name="columnRequired" type="boolean" value="false"/>
-            <Property name="columnSortable" type="boolean" value="true"/>
-          </Properties>
-        </Component>
         <Component class="org.openswing.swing.table.columns.client.ComboColumn" name="comboColumn2">
           <Properties>
             <Property name="columnFilterable" type="boolean" value="true"/>

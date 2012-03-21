@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
+import org.hibernate.transform.AliasedTupleSRT;
 import org.hibernate.type.LongType;
 import org.hibernate.type.Type;
 import org.openswing.swing.client.GridControl;
@@ -42,18 +43,23 @@ public class PartidaPresupuestariaGridInternalController extends DefaultGridInte
         if (beanVO != null) {
             Session s = null;
             try {
-                String sql = "";
+                String sql = miGrid.getVOListTableModel().createSelect("C",
+                        AliasedTupleSRT.SEPARATOR);
+
                 if (beanVO instanceof Remesa) {
-                    sql = "FROM " + SumaPartidaRemesa.class.getName() + " C "
+                    sql += " FROM " + SumaPartidaRemesa.class.getName() + " C "
                             + " WHERE C.remesa.id=?";
                 } else {
-                    sql = "FROM " + SumaPartida.class.getName() + " C "
+                    sql += " FROM " + SumaPartida.class.getName() + " C "
                             + " WHERE C.ordenDePago.id=?";
                 }
 
                 SessionFactory sf = HibernateUtil.getSessionFactory();
                 s = sf.openSession();
                 Response res = HibernateUtils.getBlockFromQuery(
+                        new AliasedTupleSRT(
+                        (beanVO instanceof Remesa)
+                        ? SumaPartidaRemesa.class : SumaPartida.class),
                         action,
                         startIndex,
                         General.licencia.getBlockSize(),

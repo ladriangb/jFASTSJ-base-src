@@ -67,8 +67,6 @@ public class CertificadoDetailController extends DefaultDetailFrameController {
             Session s = HibernateUtil.getSessionFactory().openSession();
             Certificado p =
                     (Certificado) s.get(Certificado.class, ((Certificado) beanVO).getId());
-            Hibernate.initialize(p.getBeneficiarios());
-            Hibernate.initialize(p.getAsegurados());
             Hibernate.initialize(p.getDocumentos());
             Hibernate.initialize(p.getObservaciones());
             Hibernate.initialize(p.getNotasTecnicas());

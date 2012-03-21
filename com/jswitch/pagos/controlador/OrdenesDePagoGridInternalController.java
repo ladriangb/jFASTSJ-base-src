@@ -4,6 +4,7 @@ import com.jswitch.base.controlador.General;
 import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.controlador.util.DefaultGridInternalController;
 import com.jswitch.base.modelo.HibernateUtil;
+import com.jswitch.base.modelo.entidades.auditoria.Auditable;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.fas.modelo.Dominios.EstatusPago;
 import com.jswitch.pagos.modelo.maestra.OrdenDePago;
@@ -14,6 +15,7 @@ import java.util.Map;
 import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
+import org.hibernate.transform.AliasedTupleSRT;
 import org.hibernate.type.LongType;
 import org.hibernate.type.Type;
 import org.openswing.swing.client.GridControl;
@@ -50,11 +52,15 @@ public class OrdenesDePagoGridInternalController extends DefaultGridInternalCont
         if (beanVO != null) {
             Session s = null;
             try {
-                String sql = "FROM " + OrdenDePago.class.getName() + " C "
-                        + "WHERE C.remesa.id=?";
+                String select = miGrid.getVOListTableModel().
+                        createSelect("C", AliasedTupleSRT.SEPARATOR);
+
+                String sql = select + " FROM " + OrdenDePago.class.getName()
+                        + " C WHERE C.remesa.id=?";
                 SessionFactory sf = HibernateUtil.getSessionFactory();
                 s = sf.openSession();
                 Response res = HibernateUtils.getBlockFromQuery(
+                        new AliasedTupleSRT(OrdenDePago.class),
                         action,
                         startIndex,
                         General.licencia.getBlockSize(),
@@ -63,7 +69,7 @@ public class OrdenesDePagoGridInternalController extends DefaultGridInternalCont
                         currentSortedVersusColumns,
                         valueObjectType,
                         sql,
-                        new Object[]{((Remesa) beanVO).getId()},
+                        new Object[]{((Auditable) beanVO).getId()},
                         new Type[]{new LongType()},
                         "C",
                         sf,

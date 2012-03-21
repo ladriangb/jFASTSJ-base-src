@@ -99,24 +99,6 @@ public class BeneficiarioDetailFrameController extends DefaultDetailFrameControl
         Response res = super.insertRecord(newPersistentObject);
 
         if (res instanceof VOResponse && familia != null) {
-            familia.getBeneficiarios().add(b);
-            if (familia instanceof Auditable) {
-                AuditoriaBasica ab = ((Auditable) familia).getAuditoria();
-                ab.setFechaUpdate(new Date());
-                ab.setUsuarioUpdate(General.usuario.getUserName());
-            }
-
-            Session s = null;
-            try {
-                s = HibernateUtil.getSessionFactory().openSession();
-                Transaction tx = s.beginTransaction();
-                s.update(familia);
-                tx.commit();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            } finally {
-                s.close();
-            }
             gridControl.reloadData();
         }
         return res;

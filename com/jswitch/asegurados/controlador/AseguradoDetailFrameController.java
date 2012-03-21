@@ -105,23 +105,6 @@ public class AseguradoDetailFrameController extends DefaultDetailFrameController
             ((Asegurado) newPersistentObject).setCertificado(familia);
             Response res = super.insertRecord(newPersistentObject);
             if (res instanceof VOResponse && familia != null) {
-                familia.getAsegurados().add((Asegurado) newPersistentObject);
-                if (familia instanceof Auditable) {
-                    AuditoriaBasica ab = ((Auditable) familia).getAuditoria();
-                    ab.setFechaUpdate(new Date());
-                    ab.setUsuarioUpdate(General.usuario.getUserName());
-                }
-                Session s = null;
-                try {
-                    s = HibernateUtil.getSessionFactory().openSession();
-                    Transaction tx = s.beginTransaction();
-                    s.update(familia);
-                    tx.commit();
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                } finally {
-                    s.close();
-                }
                 gridControl.reloadData();
             }
             return res;

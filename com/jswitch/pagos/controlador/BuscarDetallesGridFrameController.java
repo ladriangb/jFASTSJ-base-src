@@ -3,6 +3,7 @@ package com.jswitch.pagos.controlador;
 import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.controlador.util.DefaultGridFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
+import com.jswitch.fas.modelo.Dominios.TipoDetalleSiniestro;
 import com.jswitch.pagos.modelo.maestra.OrdenDePago;
 import com.jswitch.pagos.vista.BuscaDetallesGridFrame;
 import com.jswitch.persona.modelo.maestra.Persona;
@@ -54,9 +55,22 @@ public class BuscarDetallesGridFrameController extends DefaultGridFrameControlle
     public Response loadData(int action, int startIndex, Map filteredColumns, ArrayList currentSortedColumns, ArrayList currentSortedVersusColumns, Class valueObjectType, Map otherGridParams) {
         Session s = null;
         try {
+
             String sql = "FROM " + claseModeloFullPath
                     + " C WHERE C.personaPago.id=? "
                     + "AND C.etapaSiniestro.idPropio=?";
+
+            ArrayList<Object> al = new ArrayList<Object>(0);
+            ArrayList<Type> ty = new ArrayList<Type>(0);
+            al.add(personaPago.getId());
+            ty.add(new LongType());
+            al.add("LIQ");
+            ty.add(new StringType());
+            if (ordenDePago.getTipoDetalleSiniestro().equals(TipoDetalleSiniestro.Todos)) {
+                sql += " C.tipoDetalle <> ? ";
+                al.add(TipoDetalleSiniestro.Reembolso.toString());
+                ty.add(new StringType());
+            }
             SessionFactory sf = HibernateUtil.getSessionFactory();
             s = sf.openSession();
             Response res = HibernateUtils.getAllFromQuery(filteredColumns,
@@ -64,8 +78,8 @@ public class BuscarDetallesGridFrameController extends DefaultGridFrameControlle
                     currentSortedVersusColumns,
                     valueObjectType,
                     sql,
-                    new Object[]{personaPago.getId(), "LIQ"},
-                    new Type[]{new LongType(), new StringType()},
+                    al.toArray(),
+                    ty.toArray(new Type[0]),
                     "C", sf, s);
             return res;
         } catch (Exception ex) {

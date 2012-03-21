@@ -96,13 +96,14 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
         DetalleSiniestro sin = (DetalleSiniestro) s.get(DetalleSiniestro.class, ((DetalleSiniestro) beanVO).getId());
         Hibernate.initialize(sin.getNotasTecnicas());
         Hibernate.initialize(sin.getObservaciones());
-        Hibernate.initialize(sin.getPagos());
-        Hibernate.initialize(sin.getDiagnosticoSiniestros());
+//        Hibernate.initialize(sin.getPagos());
+//        Hibernate.initialize(sin.getDiagnosticoSiniestros());
         Hibernate.initialize(sin.getDocumentos());
         Hibernate.initialize(sin.getSumaDesgloseCoberturas());
-        s.close();
-        checkStatus();
+        s.close();        
         beanVO = sin;
+        checkStatus();
+        siniestro = sin.getSiniestro();
         return new VOResponse(beanVO);
     }
 

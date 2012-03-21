@@ -571,18 +571,16 @@ public class MenuPrincipal implements ClientFacade {
 
     //<editor-fold defaultstate="collapsed" desc="Pagos">
     public void getNewPago() {
-        new BuscarPersonaDialog((java.awt.Component) null,
+        new BuscarPersonaDialog(null,
                 OrdenDePagoDetailFrameController.class.getName(),
                 OrdenDePago.class.getName());
     }
 
     public void getPersonasAPagarGridFrame() {
 
-        String sql = "SELECT DISTINCT P FROM "
+        String sql = " FROM "
                 + DetalleSiniestro.class.getName()
-                + " as D,"
-                + Persona.class.getName()
-                + " as P WHERE D.etapaSiniestro.idPropio=? AND D.personaPago.id=P.id";
+                + " as P WHERE P.etapaSiniestro.idPropio=? ";
 
         new PersonaGridControllerWhitSQL(
                 Personas2GridFrame.class.getName(),

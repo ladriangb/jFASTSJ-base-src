@@ -33,7 +33,6 @@ public class RemesaGridFrame extends DefaultGridFrame {
         textColumn7 = new org.openswing.swing.table.columns.client.TextColumn();
         comboColumn3 = new org.openswing.swing.table.columns.client.ComboColumn();
         textColumn1 = new org.openswing.swing.table.columns.client.TextColumn();
-        textColumn2 = new org.openswing.swing.table.columns.client.TextColumn();
         comboColumn2 = new org.openswing.swing.table.columns.client.ComboColumn();
         textColumn10 = new org.openswing.swing.table.columns.client.TextColumn();
         integerColumn1 = new org.openswing.swing.table.columns.client.IntegerColumn();
@@ -145,12 +144,6 @@ public class RemesaGridFrame extends DefaultGridFrame {
         textColumn1.setColumnRequired(false);
         textColumn1.setColumnSortable(true);
         gridData.getColumnContainer().add(textColumn1);
-
-        textColumn2.setColumnFilterable(true);
-        textColumn2.setColumnName("tipoCuenta.nombre");
-        textColumn2.setColumnRequired(false);
-        textColumn2.setColumnSortable(true);
-        gridData.getColumnContainer().add(textColumn2);
 
         comboColumn2.setColumnFilterable(true);
         comboColumn2.setColumnName("duracionCheque");
@@ -478,7 +471,6 @@ public class RemesaGridFrame extends DefaultGridFrame {
     private org.openswing.swing.client.ReloadButton reloadButton1;
     private org.openswing.swing.table.columns.client.TextColumn textColumn1;
     private org.openswing.swing.table.columns.client.TextColumn textColumn10;
-    private org.openswing.swing.table.columns.client.TextColumn textColumn2;
     private org.openswing.swing.table.columns.client.TextColumn textColumn3;
     private org.openswing.swing.table.columns.client.TextColumn textColumn5;
     private org.openswing.swing.table.columns.client.TextColumn textColumn7;

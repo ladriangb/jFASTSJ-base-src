@@ -41,7 +41,7 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="jPanel1" min="-2" pref="51" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="form1" pref="284" max="32767" attributes="0"/>
+              <Component id="form1" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -165,6 +165,11 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="textControl6" pref="248" max="32767" attributes="0"/>
                           </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="labelControl11" linkSize="14" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="codLookupControl1" pref="248" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -223,7 +228,12 @@
                           <Component id="textControl6" linkSize="15" min="-2" max="-2" attributes="0"/>
                           <Component id="labelControl7" linkSize="15" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="19" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="labelControl11" linkSize="15" min="-2" max="-2" attributes="0"/>
+                          <Component id="codLookupControl1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -250,19 +260,19 @@
                   <Connection code="&quot;tipoDetalleSiniestro&quot;" type="code"/>
                 </Property>
                 <Property name="domainId" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="Dominios.TipoDetalleSiniestro().getDomainId()" type="code"/>
+                  <Connection code="Dominios.TipoDetalleSiniestro2().getDomainId()" type="code"/>
                 </Property>
                 <Property name="required" type="boolean" value="true"/>
               </Properties>
             </Component>
             <Component class="org.openswing.swing.client.LabelControl" name="labelControl7">
               <Properties>
-                <Property name="label" type="java.lang.String" value="asegurado.nombre"/>
+                <Property name="label" type="java.lang.String" value="titular.nombre"/>
               </Properties>
             </Component>
             <Component class="org.openswing.swing.client.LabelControl" name="labelControl6">
               <Properties>
-                <Property name="label" type="java.lang.String" value="asegurado.rif"/>
+                <Property name="label" type="java.lang.String" value="titular.rif"/>
               </Properties>
             </Component>
             <Component class="org.openswing.swing.client.LabelControl" name="labelControl1">
@@ -372,6 +382,19 @@
                 <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="&quot;siniestro.mes&quot;" type="code"/>
                 </Property>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.client.CodLookupControl" name="codLookupControl1">
+              <Properties>
+                <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;etapaSiniestro.nombre&quot;" type="code"/>
+                </Property>
+                <Property name="maxCharacters" type="int" value="255"/>
+              </Properties>
+            </Component>
+            <Component class="org.openswing.swing.client.LabelControl" name="labelControl11">
+              <Properties>
+                <Property name="label" type="java.lang.String" value="etapaSiniestro"/>
               </Properties>
             </Component>
           </SubComponents>

@@ -12,6 +12,7 @@ import java.util.Map;
 import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
+import org.hibernate.transform.AliasedTupleSRT;
 import org.hibernate.type.LongType;
 import org.hibernate.type.Type;
 import org.openswing.swing.client.GridControl;
@@ -46,15 +47,15 @@ public class FacturaGridInternalController extends DefaultGridInternalController
         if (beanVO != null) {
             Session s = null;
             try {
-                String sql = "FROM " + Factura.class.getName() + " C "
+                String select = miGrid.getVOListTableModel().createSelect("C", AliasedTupleSRT.SEPARATOR);
+                String sql = select + "FROM " + Factura.class.getName() + " C "
                         + "WHERE C.detalleSiniestro.id=?";
                 SessionFactory sf = HibernateUtil.getSessionFactory();
                 s = sf.openSession();
-                Response res = HibernateUtils.getAllFromQuery(
-                        filteredColumns,
-                        currentSortedColumns,
-                        currentSortedVersusColumns,
-                        valueObjectType,
+                
+                Response res = HibernateUtils.getBlockFromQuery(new AliasedTupleSRT(Factura.class),
+                        action, startIndex, 1000, 
+                        filteredColumns, currentSortedColumns, currentSortedVersusColumns, valueObjectType,
                         sql,
                         new Object[]{((DetalleSiniestro) beanVO).getId()},
                         new Type[]{new LongType()},

@@ -1,5 +1,6 @@
 package com.jswitch.pagos.controlador;
 
+import com.jswitch.base.controlador.General;
 import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.siniestros.controlador.detalle.DetalleSiniestroDetailFrameController;
 import com.jswitch.base.controlador.util.DefaultGridInternalController;
@@ -14,6 +15,7 @@ import java.util.Map;
 import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
+import org.hibernate.transform.AliasedTupleSRT;
 import org.hibernate.type.LongType;
 import org.hibernate.type.Type;
 import org.openswing.swing.client.GridControl;
@@ -49,11 +51,18 @@ public class DetalleSiniestroLiquidadosGridInternalController extends DefaultGri
         if (beanVO != null) {
             Session s = null;
             try {
-                String sql = "FROM " + DetalleSiniestro.class.getName() + " C "
+                String select = miGrid.getVOListTableModel().
+                        createSelect("C", AliasedTupleSRT.SEPARATOR);
+                select += ", C.etapaSiniestro.idPropio as etapaSiniestro_idPropio ";
+                String sql = select + "FROM " + DetalleSiniestro.class.getName() + " C "
                         + "WHERE C.ordenDePago.id=?";
                 SessionFactory sf = HibernateUtil.getSessionFactory();
                 s = sf.openSession();
-                Response res = HibernateUtils.getAllFromQuery(
+                Response res = HibernateUtils.getBlockFromQuery(
+                        new AliasedTupleSRT(DetalleSiniestro.class),
+                        action,
+                        startIndex,
+                        General.licencia.getBlockSize(),
                         filteredColumns,
                         currentSortedColumns,
                         currentSortedVersusColumns,
@@ -86,22 +95,19 @@ public class DetalleSiniestroLiquidadosGridInternalController extends DefaultGri
                     + EtapaSiniestro.class.getName() + " C WHERE "
                     + "idPropio=?").setString(0, "LIQ").uniqueResult();
             for (Object object : persistentObjects) {
-//                if (getSet() != null) {
-//                    getSet().remove(object);
-//                }
                 Long l = ((DetalleSiniestro) object).getId();
                 DetalleSiniestro sin = (DetalleSiniestro) s.get(DetalleSiniestro.class, l);
-                Hibernate.initialize(sin.getNotasTecnicas());
-                Hibernate.initialize(sin.getObservaciones());
-                Hibernate.initialize(sin.getPagos());
-                Hibernate.initialize(sin.getDiagnosticoSiniestros());
-                Hibernate.initialize(sin.getDocumentos());
+//                Hibernate.initialize(sin.getNotasTecnicas());
+//                Hibernate.initialize(sin.getObservaciones());
+//                Hibernate.initialize(sin.getPagos());
+//                Hibernate.initialize(sin.getDiagnosticoSiniestros());
+//                Hibernate.initialize(sin.getDocumentos());
                 sin.setEtapaSiniestro(es);
                 sin.setOrdenDePago(null);
                 s.update(sin);
             }
             s.getTransaction().commit();
-           // s.update(beanVO);
+            // s.update(beanVO);
             return new VOResponse(true);
         } catch (Exception ex) {
             LoggerUtil.error(this.getClass(), "deleteRecords", ex);
