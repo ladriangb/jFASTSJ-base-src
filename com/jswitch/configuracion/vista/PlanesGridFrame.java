@@ -24,17 +24,17 @@ import org.openswing.swing.table.java.GridDataLocator;
  * @author adrian
  */
 public class PlanesGridFrame extends DefaultGridFrame {
-    
+
     private BeanVO plan;
     private DefaultGridInternalController controllerSumaAsegurada;
     private DefaultGridInternalController controllerSumaAmparada;
     private DefaultGridInternalController controllerConfiguracionSiniestros;
     private DiagnosticoLookupController lookupDiagnostico;
     private SumaAmparadaPorPlanLookupController lookupSumaAmparada;
-    
+
     public PlanesGridFrame() {
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -209,8 +209,8 @@ public class PlanesGridFrame extends DefaultGridFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(244, Short.MAX_VALUE))
-            .addComponent(gridControl1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
+                .addContainerGap(248, Short.MAX_VALUE))
+            .addComponent(gridControl1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Suma Amparada", jPanel2);
@@ -320,7 +320,7 @@ public class PlanesGridFrame extends DefaultGridFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(gridControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE))
+                .addComponent(gridControl2, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Suma Asegurada", jPanel4);
@@ -328,7 +328,6 @@ public class PlanesGridFrame extends DefaultGridFrame {
         gridControl3.setDeleteButton(deleteButton6);
         gridControl3.setEditButton(editButton6);
         gridControl3.setExportButton(exportButton6);
-        gridControl3.setInsertButton(insertButton6);
         gridControl3.setReloadButton(reloadButton6);
         gridControl3.setSaveButton(saveButton6);
         gridControl3.setValueObjectClassName(ConfiguracionSiniestro.class.getName());
@@ -389,10 +388,10 @@ public class PlanesGridFrame extends DefaultGridFrame {
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(gridControl3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(244, Short.MAX_VALUE))
-            .addComponent(gridControl3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
+                .addContainerGap(248, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Configuracion Tipo Detalle de Siniestro", jPanel5);
@@ -414,47 +413,48 @@ public class PlanesGridFrame extends DefaultGridFrame {
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-    
+
     @Override
     public void inicializar(GridDataLocator gridDataLocator, GridController gridController, String valueObjectClassName, String titulo, boolean addToMDIFrame) {
         initComponents();
-        
+
         gridData.setGridDataLocator(gridDataLocator);
         gridData.setController(gridController);
-        
+
         jButton2.addActionListener((ActionListener) gridDataLocator);
+        insertButton6.addActionListener((ActionListener) gridDataLocator);
         lookupDiagnostico = new DiagnosticoLookupController();
         lookupDiagnostico.addLookup2ParentLink("diagnostico");
         codLookupColumn2.setLookupController(lookupDiagnostico);
-        
+
         lookupSumaAmparada = new SumaAmparadaPorPlanLookupController();
         lookupSumaAmparada.addLookup2ParentLink("sumaAmparada");
         codLookupColumn1.setLookupController(lookupSumaAmparada);
-        
-        
+
+
         controllerSumaAsegurada =
                 new SumaAseguradaPlanGridInternalController(
                 Plan.class.getName(),
                 "getSumasAseguradas", gridControl2);
         gridControl2.setGridDataLocator(controllerSumaAsegurada);
         gridControl2.setController(controllerSumaAsegurada);
-        
+
         controllerConfiguracionSiniestros =
                 new ConfiguracionSiniestroPlanGridInternalController(
                 Plan.class.getName(),
                 "getConfiguracionSiniestros", gridControl3);
         gridControl3.setGridDataLocator(controllerConfiguracionSiniestros);
         gridControl3.setController(controllerConfiguracionSiniestros);
-        
+
         controllerSumaAmparada = new SumaAmparadaPlanGridInternalController(
                 Plan.class.getName(), "getSumaAmparadas", gridControl1);
         gridControl1.setGridDataLocator(controllerSumaAmparada);
         gridControl1.setController(controllerSumaAmparada);
-        
+
         if (addToMDIFrame) {
             pack();
         } else {
@@ -462,21 +462,21 @@ public class PlanesGridFrame extends DefaultGridFrame {
         }
         MDIFrame.add(this);
     }
-    
+
     @Override
     public void reloadGridsData() {
         gridControl1.reloadData();
         gridControl2.reloadData();
         gridControl3.reloadData();
     }
-    
+
     @Override
     public void clearGridsData() {
         gridControl1.clearData();
         gridControl2.clearData();
         gridControl3.clearData();
     }
-    
+
     @Override
     public void setOwnerVO(final BeanVO beanVO) {
         lookupSumaAmparada.setPlan((Plan) beanVO);
@@ -486,16 +486,16 @@ public class PlanesGridFrame extends DefaultGridFrame {
         plan = beanVO;
         reloadGridsData();
     }
-    
+
     @Override
     public GridControl getGridControl() {
         return gridData;
     }
-    
+
     public CodLookupColumn getCodLookupColumn1() {
         return codLookupColumn1;
     }
-    
+
     public Plan getPlan() {
         return (Plan) plan;
     }

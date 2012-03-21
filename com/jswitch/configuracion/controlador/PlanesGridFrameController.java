@@ -30,6 +30,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 import org.hibernate.type.Type;
+import org.openswing.swing.client.InsertButton;
 import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
 import org.openswing.swing.table.java.GridDataLocator;
@@ -41,14 +42,14 @@ import org.openswing.swing.util.server.HibernateUtils;
  * @author Adrian Gonzalez
  */
 public class PlanesGridFrameController extends DefaultGridFrameController implements GridDataLocator, ActionListener {
-    
+
     public PlanesGridFrameController() {
     }
-    
+
     public PlanesGridFrameController(String gridFramePath, String detailFramePath, String claseModeloFullPath, String titulo) {
         super(gridFramePath, detailFramePath, claseModeloFullPath, titulo);
     }
-    
+
     @Override
     public Response loadData(int action, int startIndex, Map filteredColumns,
             ArrayList currentSortedColumns, ArrayList currentSortedVersusColumns, Class valueObjectType, Map otherGridParams) {
@@ -79,87 +80,112 @@ public class PlanesGridFrameController extends DefaultGridFrameController implem
             s.close();
         }
     }
-    
+
     @Override
     public Response insertRecords(int[] rowNumbers, ArrayList newValueObjects) throws Exception {
         Response res = super.insertRecords(rowNumbers, newValueObjects);
         for (Object object : newValueObjects) {
             Plan plan = (Plan) object;
-            Session s = null;
-            try {
-                s = HibernateUtil.getSessionFactory().openSession();
-                Transaction t = s.beginTransaction();
-                AuditoriaBasica ab = new AuditoriaBasica(new Date(), General.usuario.getUserName(), true);
-                String[] clases = {APS.class.getSimpleName(),
-                    AyudaSocial.class.getSimpleName(),
-                    CartaAval.class.getSimpleName(),
-                    Emergencia.class.getSimpleName(),
-                    Funerario.class.getSimpleName(),
-                    Reembolso.class.getSimpleName(),
-                    Vida.class.getSimpleName()};
-                for (String o : clases) {
-                    ConfiguracionSiniestro cs = new ConfiguracionSiniestro(o, 0d, Double.POSITIVE_INFINITY, plan, ab);
-                    s.save(cs);
-                    plan.getConfiguracionSiniestros().add(cs);
-                }
-                s.update(plan);
-                t.commit();
-            } catch (Exception ex) {
-                LoggerUtil.error(this.getClass(), "insertRecord", ex);
-            } finally {
-                s.close();
-            }
+            crearConfiguracionSiniestro(plan);
         }
         return res;
     }
-    
+
+    /**
+     * crea un 
+     * @param plan plan al q se le agrega la configuracion por tipo de plan
+     */
+    private void crearConfiguracionSiniestro(Plan plan) {
+        Session s = null;
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+            Long lon = (Long) s.createQuery("SELECT COUNT(D) FROM "
+                    + ConfiguracionSiniestro.class.getName() + " as D WHERE D.plan.id=? ").setLong(0, plan.getId()).uniqueResult();
+            if (lon > 0) {
+                JOptionPane.showMessageDialog(gridFrame, "Ya Existen configuracion Asociada \nDebe Ser un Plan Nuevo", "Agregar Diagnostocos", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            Transaction t = s.beginTransaction();
+            AuditoriaBasica ab = new AuditoriaBasica(new Date(), General.usuario.getUserName(), true);
+            String[] clases = {APS.class.getSimpleName(),
+                AyudaSocial.class.getSimpleName(),
+                CartaAval.class.getSimpleName(),
+                Emergencia.class.getSimpleName(),
+                Funerario.class.getSimpleName(),
+                Reembolso.class.getSimpleName(),
+                Vida.class.getSimpleName()};
+            for (String o : clases) {
+                ConfiguracionSiniestro cs = new ConfiguracionSiniestro(o, 0d, Double.POSITIVE_INFINITY, plan, ab);
+                s.save(cs);
+            }
+            t.commit();
+        } catch (Exception ex) {
+            LoggerUtil.error(this.getClass(), "insertRecord", ex);
+        } finally {
+            s.close();
+        }
+    }
+
+    /**
+     * crea las sumas aseguradas para todos los diagnosticos en el sistema
+     * @param plan 
+     */
+    private void crearSumaAseguradasMagic(Plan plan) {
+        Session s = null;
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+
+            Long lon = (Long) s.createQuery("SELECT COUNT(D) FROM " + SumaAsegurada.class.getName() + " as D WHERE D.plan.id=? ").setLong(0, plan.getId()).uniqueResult();
+            if (lon > 0) {
+                JOptionPane.showMessageDialog(gridFrame, "Ya Existen Diagnosticos Asociados \nDebe Ser un Plan Nuevo", "Agregar Diagnostocos", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            Transaction t = s.beginTransaction();
+            AuditoriaBasica ab = new AuditoriaBasica(new Date(), General.usuario.getUserName(), true);
+            SumaAmparada sa = new SumaAmparada();
+            sa.setAuditoria(ab);
+            sa.setMonto(0d);
+            sa.setNombre("AUTO_CREADA");
+            sa.setPlan(plan);
+            s.save(sa);
+            final List<Diagnostico> diag = s.createQuery("FROM " + Diagnostico.class.getName() + " as D ").
+                    list();
+            ProgressDialog pr = new ProgressDialog("Agregando Diagnosticos", "Diagnosticos  numero: ", diag.size());
+            int v = 0;
+            for (Diagnostico diagnostico : diag) {
+                v++;
+                pr.setValue(v);
+                SumaAsegurada ob = new SumaAsegurada();
+                ob.setPlan(plan);
+                ob.setSumaAmparada(sa);
+                ob.setAuditoria(ab);
+                ob.setDiagnostico(diagnostico);
+                s.save(ob);
+            }
+            pr.setEventoActual("Guardando Registros Creados");
+            t.commit();
+            pr.dispose();
+        } catch (Exception ex) {
+            LoggerUtil.error(this.getClass(), "insertRecord", ex);
+        } finally {
+            s.close();
+        }
+    }
+
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(final ActionEvent e) {
         final Plan plan = ((PlanesGridFrame) gridFrame).getPlan();
         if (plan != null) {
             new Thread(new Runnable() {
-                
+
                 @Override
                 public void run() {
-                    Session s = null;
-                    try {
-                        s = HibernateUtil.getSessionFactory().openSession();
-                        
-                        Long lon = (Long) s.createQuery("SELECT COUNT(D) FROM " + SumaAsegurada.class.getName() + " as D WHERE D.plan.id=? ").setLong(0, plan.getId()).uniqueResult();
-                        if (lon > 0) {
-                            JOptionPane.showMessageDialog(gridFrame, "Ya Existen Diagnosticos Asociados \nDebe Ser un plan Nuevo", "Agregar Diagnostocos", JOptionPane.INFORMATION_MESSAGE);
-                            return;
-                        }
-                        Transaction t = s.beginTransaction();
-                        AuditoriaBasica ab = new AuditoriaBasica(new Date(), General.usuario.getUserName(), true);
-                        SumaAmparada sa = new SumaAmparada();
-                        sa.setAuditoria(ab);
-                        sa.setMonto(0d);
-                        sa.setNombre("AUTO_CREADA");
-                        sa.setPlan(plan);
-                        s.save(sa);
-                        final List<Diagnostico> diag = s.createQuery("FROM " + Diagnostico.class.getName() + " as D ").
-                                list();
-                        ProgressDialog pr = new ProgressDialog("Agregando Diagnosticos", "Diagnosticos  numero: ", diag.size());
-                        int v = 0;
-                        for (Diagnostico diagnostico : diag) {
-                            v++;
-                            pr.setValue(v);
-                            SumaAsegurada ob = new SumaAsegurada();
-                            ob.setPlan(plan);
-                            ob.setSumaAmparada(sa);
-                            ob.setAuditoria(ab);
-                            ob.setDiagnostico(diagnostico);
-                            s.save(ob);
-                        }
-                        pr.setEventoActual("Guardando Registros Creados");
-                        t.commit();
-                        pr.dispose();
-                    } catch (Exception ex) {
-                        LoggerUtil.error(this.getClass(), "insertRecord", ex);
-                    } finally {
-                        s.close();
+                    if (e.getSource() instanceof InsertButton) {
+                        crearConfiguracionSiniestro(plan);
+                    } else {
+                        crearSumaAseguradasMagic(plan);
                     }
+                    gridFrame.reloadGridsData();
                 }
             }).start();
         }
