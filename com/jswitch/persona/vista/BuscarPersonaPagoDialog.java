@@ -1,7 +1,6 @@
 package com.jswitch.persona.vista;
 
 import com.jswitch.base.controlador.logger.LoggerUtil;
-import com.jswitch.persona.controlador.PersonaGridControllerWhitSQL;
 import com.jswitch.persona.controlador.PersonasDetailController;
 import com.jswitch.base.controlador.util.DefaultLookupControllerPorNombre;
 import com.jswitch.persona.modelo.maestra.Persona;
@@ -17,6 +16,7 @@ import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.persona.modelo.dominio.TipoPersona;
 import com.jswitch.base.modelo.utilitario.BuscarPersona;
 import com.jswitch.pagos.modelo.maestra.OrdenDePago;
+import com.jswitch.persona.controlador.PersonaPagoGridControllerWhitSQL;
 import java.lang.reflect.Method;
 import org.hibernate.Query;
 import org.hibernate.classic.Session;
@@ -35,13 +35,13 @@ import org.openswing.swing.util.java.Consts;
  *
  * @author bc
  */
-public class BuscarPersonaDialog extends InternalFrame {
+public class BuscarPersonaPagoDialog extends InternalFrame {
 
     private BuscarPersona persona;
     private String detailFramePath;
     private String modelClass;
 
-    public BuscarPersonaDialog(Component owner, String detailFramePath, String modelClass) {
+    public BuscarPersonaPagoDialog(Component owner, String detailFramePath, String modelClass) {
         
         this.detailFramePath = detailFramePath;
         this.modelClass = modelClass;
@@ -65,10 +65,6 @@ public class BuscarPersonaDialog extends InternalFrame {
             setLocation((owner.getWidth() - this.getWidth()) / 2 + (int) owner.getLocationOnScreen().getX(), (owner.getHeight() - this.getHeight()) / 2 + (int) owner.getLocationOnScreen().getY());
         }
         MDIFrame.add(this);
-    }
-
-    public BuscarPersonaDialog(Component owner) {
-        this(owner, PersonaDetailFrame.class.getName(), Persona.class.getName());
     }
 
     @SuppressWarnings("unchecked")
@@ -185,7 +181,7 @@ public class BuscarPersonaDialog extends InternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(form1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -218,7 +214,7 @@ public class BuscarPersonaDialog extends InternalFrame {
         }
 
         public void actionPerformed(ActionEvent e) {
-            persona = ((BuscarPersona) BuscarPersonaDialog.this.form1.getVOModel().getValueObject());
+            persona = ((BuscarPersona) BuscarPersonaPagoDialog.this.form1.getVOModel().getValueObject());
 
             if (textControl1.getText() != null && !textControl1.getText().isEmpty()) {
                 persona.setRif(textControl1.getText());
@@ -231,7 +227,7 @@ public class BuscarPersonaDialog extends InternalFrame {
             Session s = null;
             try {
                 String sqlCount = "SELECT count(P) FROM " + Persona.class.getName() + " as P WHERE ";
-                String sqlRec = "SELECT DISTINCT P FROM " + Persona.class.getName() + " as P WHERE ";
+                String sqlRec = " FROM " + Persona.class.getName() + " as P WHERE ";
                 String where = "";
                 String where2 = "";
                 String napa = "";
@@ -245,7 +241,7 @@ public class BuscarPersonaDialog extends InternalFrame {
 
                 if (persona.getTipoPersona() != null && persona.getTipoPersona().getIdPropio() != null) {
                     sqlCount = "SELECT count(P) FROM " + Persona.class.getName() + " as P left join P.tiposPersona as TP WHERE ";
-                    sqlRec = "SELECT DISTINCT P FROM " + Persona.class.getName() + " as P left join P.tiposPersona as TP WHERE ";
+                    sqlRec = " FROM " + Persona.class.getName() + " as P left join P.tiposPersona as TP WHERE ";
                     where += " TP.id=:idTP ";
                     where2 += " TP.id=? ";
                     napa = " AND ";
@@ -267,7 +263,7 @@ public class BuscarPersonaDialog extends InternalFrame {
                 }
 
                 if (!nl && !rif && !tp) {
-                    JOptionPane.showMessageDialog(BuscarPersonaDialog.this, "Faltan Datos!!!", "Mensaje", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(BuscarPersonaPagoDialog.this, "Faltan Datos!!!", "Mensaje", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 //
@@ -286,7 +282,7 @@ public class BuscarPersonaDialog extends InternalFrame {
 
                 Long cant = (Long) q.list().get(0);
                 if (cant == 0) {
-                    JOptionPane.showMessageDialog(BuscarPersonaDialog.this, "No existe persona", "Mensaje", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(BuscarPersonaPagoDialog.this, "No existe persona", "Mensaje", JOptionPane.ERROR_MESSAGE);
                 } else if (cant == 1) {
                     q = s.createQuery(sqlRec + where);
                     if (tp) {
@@ -342,7 +338,7 @@ public class BuscarPersonaDialog extends InternalFrame {
                     for (int i = 0; i < valueTypes.size(); i++) {
                         tt[i] = valueTypes.get(i);
                     }
-                    new PersonaGridControllerWhitSQL(
+                    new PersonaPagoGridControllerWhitSQL(
                             Personas2GridFrame.class.getName(),
                             detailFramePath,
                             Persona.class.getName(),
@@ -350,7 +346,7 @@ public class BuscarPersonaDialog extends InternalFrame {
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
-                JOptionPane.showMessageDialog(BuscarPersonaDialog.this,
+                JOptionPane.showMessageDialog(BuscarPersonaPagoDialog.this,
                         ex.getMessage(), "Mensaje", JOptionPane.ERROR_MESSAGE);
             } finally {
                 s.close();

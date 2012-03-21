@@ -29,9 +29,9 @@ import org.openswing.swing.util.server.HibernateUtils;
  *
  * @author PAPA
  */
-public class PersonaGridControllerWhitSQL extends DefaultGridControllerWhitSQL {
+public class PersonaPagoGridControllerWhitSQL extends DefaultGridControllerWhitSQL {
 
-    public PersonaGridControllerWhitSQL(String gridFramePath,
+    public PersonaPagoGridControllerWhitSQL(String gridFramePath,
             String detailFramePath, String claseModeloFullPath,
             String titulo, String sql, Object[] values, Type[] valueType) {
         super(gridFramePath, detailFramePath, claseModeloFullPath, titulo,
@@ -78,6 +78,7 @@ public class PersonaGridControllerWhitSQL extends DefaultGridControllerWhitSQL {
         try {
             SessionFactory sf = HibernateUtil.getSessionFactory();
             s = sf.openSession();
+            
             String select = gridFrame.getGridControl().getVOListTableModel().
                     createSelect("P.personaPago", AliasedTupleSRT.SEPARATOR);
             select = select.replaceAll("SELECT", "SELECT DISTINCT ");

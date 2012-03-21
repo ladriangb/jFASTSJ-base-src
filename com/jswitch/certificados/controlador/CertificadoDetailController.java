@@ -70,6 +70,7 @@ public class CertificadoDetailController extends DefaultDetailFrameController {
             Hibernate.initialize(p.getDocumentos());
             Hibernate.initialize(p.getObservaciones());
             Hibernate.initialize(p.getNotasTecnicas());
+            Hibernate.initialize(p.getAsegurados());
             s.close();
             beanVO = p;
         }
@@ -82,9 +83,9 @@ public class CertificadoDetailController extends DefaultDetailFrameController {
         Certificado c = (Certificado) newPersistentObject;
         try {
             s = HibernateUtil.getSessionFactory().openSession();
-            Query q = s.createQuery("FROM " + Certificado.class.getName()
+            Query q = s.createQuery("SELECT COUNT (C) FROM " + Certificado.class.getName()
                     + " C WHERE C.titular.persona.rif.rif=?").setString(0, c.getTitular().getPersona().getRif().getRif());
-            if (!q.list().isEmpty()) {
+            if ((Long) q.uniqueResult() > 0) {
                 return new ErrorResponse("Titular ya posee su Certificado");
             }
         } finally {

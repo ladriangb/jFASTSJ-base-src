@@ -118,16 +118,16 @@ import com.jswitch.rol.vista.RolOptionFrame;
 import com.jswitch.pagos.modelo.dominio.ConceptoSENIAT;
 import com.jswitch.pagos.modelo.maestra.OrdenDePago;
 import com.jswitch.pagos.modelo.maestra.Remesa;
-import com.jswitch.pagos.vista.BuscarRemesaDetailFrame;
 import com.jswitch.pagos.vista.ConceptoSENIATGridFrame;
 import com.jswitch.pagos.vista.OrdenDePagoDetailFrame;
 import com.jswitch.pagos.vista.OrdenDePagoGridFrame;
 import com.jswitch.pagos.vista.RemesaDetailFrame;
 import com.jswitch.pagos.vista.RemesaGridFrame;
-import com.jswitch.persona.controlador.PersonaGridControllerWhitSQL;
+import com.jswitch.persona.controlador.PersonaPagoGridControllerWhitSQL;
 import com.jswitch.persona.controlador.PersonasDetailController;
 import com.jswitch.persona.modelo.maestra.PersonaNatural;
 import com.jswitch.persona.vista.BuscarPersonaDialog;
+import com.jswitch.persona.vista.BuscarPersonaPagoDialog;
 import com.jswitch.persona.vista.RifBusquedaDialog;
 import com.jswitch.siniestros.controlador.BuscarDetalleSiniestroDetrailController;
 import com.jswitch.siniestros.controlador.BuscarSiniestroDetrailController;
@@ -284,7 +284,7 @@ public class MenuPrincipal implements ClientFacade {
     }
 
     public void getBuscarPersona() {
-        new BuscarPersonaDialog(null).setVisible(true);
+        new BuscarPersonaDialog((PersonaDetailFrame) null).setVisible(true);
     }
 // </editor-fold>
 
@@ -436,9 +436,9 @@ public class MenuPrincipal implements ClientFacade {
     public void getNuevoCertificado() {
         new CertificadoDetailController(CertificadoDetailFrame.class.getName(), null, null, true);
     }
-    
-    public void  getFindCertificado(){
-      new BuscarAseguradoDialog("BUSCAR CERTIFICADO").setVisible(true);
+
+    public void getFindCertificado() {
+        new BuscarAseguradoDialog("BUSCAR CERTIFICADO").setVisible(true);
     }
 // </editor-fold>
 
@@ -571,7 +571,7 @@ public class MenuPrincipal implements ClientFacade {
 
     //<editor-fold defaultstate="collapsed" desc="Pagos">
     public void getNewPago() {
-        new BuscarPersonaDialog(null,
+        new BuscarPersonaPagoDialog(null,
                 OrdenDePagoDetailFrameController.class.getName(),
                 OrdenDePago.class.getName());
     }
@@ -582,7 +582,7 @@ public class MenuPrincipal implements ClientFacade {
                 + DetalleSiniestro.class.getName()
                 + " as P WHERE P.etapaSiniestro.idPropio=? ";
 
-        new PersonaGridControllerWhitSQL(
+        new PersonaPagoGridControllerWhitSQL(
                 Personas2GridFrame.class.getName(),
                 OrdenDePagoDetailFrameController.class.getName(),
                 Persona.class.getName(),
