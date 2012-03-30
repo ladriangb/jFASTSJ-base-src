@@ -58,7 +58,7 @@ public class Dominios {
 
     public static enum TipoBusqueda {
 
-        TITULARES, ASEGURADOS, GRUPO_FAMILIAR
+        GRUPO_FAMILIAR, TITULARES, ASEGURADOS
     }
 
     public static Domain TipoBusqueda() {
@@ -109,7 +109,7 @@ public class Dominios {
     public static Domain TratamientoEfectuado() {
         Domain dominio = new Domain("TratamientoEfectuado");
         TratamientoEfectuado o[] = TratamientoEfectuado.values();
-        for (int i = 0; i
+        for (int i = 2; i
                 < o.length; i++) {
             dominio.addDomainPair(o[i], o[i].toString());
         }
@@ -156,7 +156,7 @@ public class Dominios {
     public static Domain TipoEnfermedad() {
         Domain dominio = new Domain("TipoEnfermedad");
         TipoEnfermedad o[] = TipoEnfermedad.values();
-        for (int i = 0; i
+        for (int i = 1; i
                 < o.length; i++) {
             dominio.addDomainPair(o[i], o[i].toString());
         }

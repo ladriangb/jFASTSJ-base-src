@@ -344,7 +344,8 @@ public class Asegurado extends BeanVO implements Serializable, Auditable {
                     + "WHERE P.id=26460", "Carta 8½ x 11 Vertical",
                     false, false, false, false));
 
-            reportes.add(new Reporte(Dominios.CategoriaReporte.ASEGURADOS, 0, "ASE_PLANILLA_INCLUSION_D001",
+            reportes.add(new Reporte(Dominios.CategoriaReporte.ASEGURADOS, 0, 
+                    "ASE_PLANILLA_INCLUSION_D001",
                     "PLANILLA DE INCLUSION",
                     "Planilla de Inclusion",
                     "FROM " + Asegurado.class.getName() + " as P "

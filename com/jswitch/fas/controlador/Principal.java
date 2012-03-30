@@ -30,6 +30,7 @@ import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.entidades.Empresa;
 import com.jswitch.base.modelo.entidades.Licencia;
 import com.jswitch.base.modelo.entidades.Usuario;
+import com.jswitch.base.modelo.entidades.auditoria.AuditLogRecord;
 import com.jswitch.base.modelo.entidades.defaultData.ConfiguracionesGenerales;
 import com.jswitch.base.modelo.entidades.defaultData.DefaultData;
 import com.jswitch.base.modelo.entidades.defaultData.DefaultPersona;
@@ -63,6 +64,8 @@ import oracle.help.Help;
 import oracle.help.library.helpset.HelpSet;
 import oracle.help.library.helpset.HelpSetParseException;
 import org.hibernate.Hibernate;
+import org.openswing.swing.permissions.java.ButtonsAuthorizations;
+import org.openswing.swing.table.permissions.database.server.DefaultDbPermissionsDescriptor;
 
 /**
  *
@@ -90,6 +93,8 @@ public class Principal implements MDIController, LoginController {
 
     public Principal() {
         ClientSettings.LOOK_AND_FEEL_CLASS_NAME = "de.muntjak.tinylookandfeel.TinyLookAndFeel";
+//        DefaultDbPermissionsDescriptor
+//        new ButtonsAuthorizations().addButtonAuthorization("ASE", false, false, false);
         //ClientSettings.TREE_BACK = "background_tree.jpg";
         //ClientSettings.BACKGROUND = "background3.png";        
         //ClientSettings.BACK_IMAGE_DISPOSITION = Consts.BACK_IMAGE_CENTERED;
@@ -549,9 +554,27 @@ public class Principal implements MDIController, LoginController {
     }
     
     public static void main(String[] args) {
-        if (args == null || args.length == 0) {
-            new Principal();
-            Principal.splah.dispose();
+//        if (args == null || args.length == 0) {
+//            new Principal();
+//            Principal.splah.dispose();
+//        }
+        
+        Session s = HibernateUtil.getSessionFactorySinIntercertor().openSession();
+        try {
+            //TODO AUDITORIA PROBLEMAS
+            //FIXME AUDITORIA PROBLEMAS
+//            s.beginTransaction();
+//            s.save(entity);
+//            System.out.println(entity.getNombres().toString());
+//            s.getTransaction().commit();
+            AuditLogRecord o = (AuditLogRecord) s.createQuery("FROM " +
+                    AuditLogRecord.class.getName() + " C WHERE C.id =?").
+                    setLong(0, 92941l).uniqueResult();
+            System.out.println(o.getNombres().toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            s.close();
         }
     }
 }

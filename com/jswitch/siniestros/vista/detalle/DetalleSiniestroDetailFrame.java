@@ -2358,8 +2358,6 @@ public class DetalleSiniestroDetailFrame extends DefaultDetailFrame {
         gridControl3.getSaveButton().doClick();
         gridControl4.getSaveButton().doClick();
         gridControl5.getSaveButton().doClick();
-        gridControl6.getSaveButton().doClick();
-        gridDiagnosticos.getSaveButton().doClick();
     }
 
     @Override

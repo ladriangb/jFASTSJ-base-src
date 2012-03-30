@@ -50,6 +50,7 @@ import javax.persistence.Transient;
 import javax.persistence.Version;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Past;
+import org.hibernate.annotations.JoinFormula;
 
 /**
  *
@@ -252,12 +253,6 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
     private AuditoriaBasica auditoria;
 
     /**
-     * crea una nueva instancia de DetalleSiniestro
-     */
-    public DetalleSiniestro() {
-    }
-
-    /**
      * persona q se encarga de la negociacion
      * @return the analistaNegociador
      */
@@ -322,6 +317,11 @@ public class DetalleSiniestro extends BeanVO implements Serializable, Auditable 
             reportesGenerales.add(new Reporte(Dominios.CategoriaReporte.SINIESTROS, 0,
                     "LIQ_SINI_D001", "LIQUIDACION DE SINIESTRO",
                     "Liquidacion de todos los SINIESTROS", null, "Carta 8½ x 11 Vertical",
+                    false, false, false, false));
+            reportesGenerales.add(
+                    new Reporte(Dominios.CategoriaReporte.SINIESTROS, 0, "SIN_NOTA_COBERTURA_D001",
+                    "NOTA DE COBERTURA",
+                    "Nota de cobertura de un siniestro", null, "Carta 8½ x 11 Vertical",
                     false, false, false, false));
         }
         return reportesGenerales;

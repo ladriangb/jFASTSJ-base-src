@@ -13,6 +13,8 @@ import com.jswitch.fas.modelo.Dominios;
 import com.jswitch.fas.modelo.Dominios.EstatusPago;
 import com.jswitch.persona.modelo.dominio.TipoCuentaBancaria;
 import com.jswitch.persona.modelo.transac.CuentaBancariaPersona;
+import com.jswitch.reporte.modelo.Reporte;
+import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.vistasbd.SumaRemesa;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -259,6 +261,11 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @BusinessKey(exclude = Method.ALL)
     private Set<Documento> documentos = new HashSet<Documento>(0);
+    /**
+     * Reportes del modulo en la vista de detalle
+     */
+    @Transient
+    private transient List<Reporte> reportes = new ArrayList<Reporte> (0);
 
     public Remesa() {
         estatusPago = EstatusPago.PENDIENTE;
@@ -791,5 +798,120 @@ public class Remesa extends BeanVO implements Serializable, Auditable {
         this.tipoPago = tipoPago;
     }
 
-   
+    /**
+     * Reportes del modulo en la vista de detalle
+     * @return the reportes
+     */
+    public List<Reporte> getReportes() {
+        if (reportes.isEmpty()) {
+            reportes.add(new Reporte(com.jswitch.base.modelo.Dominios.CategoriaReporte.REMESAS, 0, "REM-D001",
+                    "LIQUIDACION DE REMESA",
+                    "Remesa",
+                    null,
+                    "Carta 8½ x 11 Horizontal",
+                    false, false, false, false));
+            reportes.add(new Reporte(com.jswitch.base.modelo.Dominios.CategoriaReporte.REMESAS, 0, "REM-R004",
+                    "Listado de Ordenes de Pago por Remesa",
+                    "Agrupados por Remesa, Nombre de Persona a Pagar",
+                    "FROM " + OrdenDePago.class.getName() + " as P "
+                    + "WHERE P.remesa.id=" + id,
+                    "Carta 8½ x 11 Vertical",
+                    false, true, true, false));
+            reportes.add(new Reporte(com.jswitch.base.modelo.Dominios.CategoriaReporte.REMESAS, 0, "REM-R005",
+                    "REMESAS PAGADAS POR TIPO DE CLIENTE A PAGAR",
+                    "Remesas Pagadas por Tipo de Cliente a Pagar",
+                    "SELECT P.tipoPersona.nombre AS tipoPersona,"
+                    + " count(P) AS cantSiniestros,"
+                    + " sum(P.sumaDetalle.totalACancelar) AS total,"
+                    + " sum(case when P.siniestro.certificado.titular.persona.id = P.siniestro.asegurado.persona.id then P.sumaDetalle.totalACancelar else 0 end) AS montoTitular,"
+                    + " sum(case when P.siniestro.certificado.titular.persona.id = P.siniestro.asegurado.persona.id then 0.0 else P.sumaDetalle.totalACancelar end) AS montoBeneficiario,"
+                    + " sum(P.sumaDetalle.montoRetencionIslr) AS isrl "
+                    + " FROM " + DetalleSiniestro.class.getName() + " AS P"
+                    + " WHERE P.ordenDePago.remesa.id= " + id
+                    + " GROUP BY P.tipoPersona.nombre",
+                    "Carta 8½ x 11 Horizontal",
+                    false, true, true, true));
+
+            reportes.add(new Reporte(com.jswitch.base.modelo.Dominios.CategoriaReporte.REMESAS, 0, "REM-R006",
+                    "REMESAS PAGADAS POR TIPO DE SINIESTRO",
+                    "Remesas Pagadas por Tipo por Tipo Siniestro",
+                    "SELECT P.tipoSiniestro.nombre AS tipoPersona,"
+                    + " count(P) AS cantSiniestros,"
+                    + " sum(P.sumaDetalle.totalACancelar) AS total,"
+                    + " sum(case when P.siniestro.certificado.titular.persona.id = P.siniestro.asegurado.persona.id then P.sumaDetalle.totalACancelar else 0 end) AS montoTitular,"
+                    + " sum(case when P.siniestro.certificado.titular.persona.id = P.siniestro.asegurado.persona.id then 0.0 else P.sumaDetalle.totalACancelar end) AS montoBeneficiario,"
+                    + " sum(P.sumaDetalle.montoRetencionIslr) AS isrl "
+                    + " FROM " + DetalleSiniestro.class.getName() + " AS P"
+                    + " WHERE P.ordenDePago.remesa.id= " + id
+                    + " GROUP BY P.tipoSiniestro.nombre",
+                    "Carta 8½ x 11 Horizontal",
+                    false, true, true, true));
+
+            reportes.add(new Reporte(com.jswitch.base.modelo.Dominios.CategoriaReporte.REMESAS, 0, "REM-R007",
+                    "REMESAS PAGADAS POR TIPO TRAMITE",
+                    "Remesas Pagadas por Tipo de Tramite",
+                    "SELECT P.tipoDetalle AS tipoPersona,"
+                    + " count(P) AS cantSiniestros,"
+                    + " sum(P.sumaDetalle.totalACancelar) AS total,"
+                    + " sum(case when P.siniestro.certificado.titular.persona.id = P.siniestro.asegurado.persona.id then P.sumaDetalle.totalACancelar else 0 end) AS montoTitular,"
+                    + " sum(case when P.siniestro.certificado.titular.persona.id = P.siniestro.asegurado.persona.id then 0.0 else P.sumaDetalle.totalACancelar end) AS montoBeneficiario,"
+                    + " sum(P.sumaDetalle.montoRetencionIslr) AS isrl "
+                    + " FROM " + DetalleSiniestro.class.getName() + " AS P"
+                    + " WHERE P.ordenDePago.remesa.id= " + id
+                    + " GROUP BY P.tipoDetalle",
+                    "Carta 8½ x 11 Horizontal",
+                    false, true, true, true));
+             reportes.add(new Reporte(com.jswitch.base.modelo.Dominios.CategoriaReporte.REMESAS, 0, "REM-R007",
+                    "REMESAS PAGADAS POR TIPO DE CONTRATO",
+                    "Remesas Pagadas por Tipo de Contrato",
+                    "SELECT P.tipoContrato.nombre AS tipoPersona,"
+                    + " count(P) AS cantSiniestros,"
+                    + " sum(P.sumaDetalle.totalACancelar) AS total,"
+                    + " sum(case when P.siniestro.certificado.titular.persona.id = P.siniestro.asegurado.persona.id then P.sumaDetalle.totalACancelar else 0 end) AS montoTitular,"
+                    + " sum(case when P.siniestro.certificado.titular.persona.id = P.siniestro.asegurado.persona.id then 0.0 else P.sumaDetalle.totalACancelar end) AS montoBeneficiario,"
+                    + " sum(P.sumaDetalle.montoRetencionIslr) AS isrl "
+                    + " FROM " + DetalleSiniestro.class.getName() + " AS P"
+                    + " WHERE P.ordenDePago.remesa.id= " + id
+                    + " GROUP BY P.tipoContrato.nombre",
+                    "Carta 8½ x 11 Horizontal",
+                    false, true, true, true));
+             reportes.add(new Reporte(com.jswitch.base.modelo.Dominios.CategoriaReporte.REMESAS, 0, "REM-R007",
+                    "REMESAS PAGADAS POR PARTIDA PRESUPUESTARIA",
+                    "Remesas Pagadas por Partida Presupuestaria",
+                    "SELECT P.tipoContrato.partidaPresupuestaria.nombre AS tipoPersona,"
+                    + " count(P) AS cantSiniestros,"
+                    + " sum(P.sumaDetalle.totalACancelar) AS total,"
+                    + " sum(case when P.siniestro.certificado.titular.persona.id = P.siniestro.asegurado.persona.id then P.sumaDetalle.totalACancelar else 0 end) AS montoTitular,"
+                    + " sum(case when P.siniestro.certificado.titular.persona.id = P.siniestro.asegurado.persona.id then 0.0 else P.sumaDetalle.totalACancelar end) AS montoBeneficiario,"
+                    + " sum(P.sumaDetalle.montoRetencionIslr) AS isrl "
+                    + " FROM " + DetalleSiniestro.class.getName() + " AS P"
+                    + " WHERE P.ordenDePago.remesa.id= " + id
+                    + " GROUP BY P.tipoContrato.partidaPresupuestaria.nombre",
+                    "Carta 8½ x 11 Horizontal",
+                    false, true, true, true));
+             reportes.add(new Reporte(com.jswitch.base.modelo.Dominios.CategoriaReporte.REMESAS, 0, "REM-R007",
+                    "REMESAS PAGADAS POR PARENTESCO",
+                    "Remesas Pagadas por Parentesco",
+                    "SELECT P.siniestro.asegurado.parentesco.nombre AS tipoPersona,"
+                    + " count(P) AS cantSiniestros,"
+                    + " sum(P.sumaDetalle.totalACancelar) AS total,"
+                    + " sum(case when P.siniestro.certificado.titular.persona.id = P.siniestro.asegurado.persona.id then P.sumaDetalle.totalACancelar else 0 end) AS montoTitular,"
+                    + " sum(case when P.siniestro.certificado.titular.persona.id = P.siniestro.asegurado.persona.id then 0.0 else P.sumaDetalle.totalACancelar end) AS montoBeneficiario,"
+                    + " sum(P.sumaDetalle.montoRetencionIslr) AS isrl "
+                    + " FROM " + DetalleSiniestro.class.getName() + " AS P"
+                    + " WHERE P.ordenDePago.remesa.id= " + id
+                    + " GROUP BY P.siniestro.asegurado.parentesco.nombre",
+                    "Carta 8½ x 11 Horizontal",
+                    false, true, true, true));
+        }
+        return reportes;
+    }
+
+    /**
+     * Reportes del modulo en la vista de detalle
+     * @param aReportes the reportes to set
+     */
+    public void setReportes(List<Reporte> aReportes) {
+        reportes = aReportes;
+    }
 }

@@ -4,15 +4,18 @@ import com.jswitch.base.controlador.General;
 import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.siniestros.controlador.detalle.DetalleSiniestroDetailFrameController;
 import com.jswitch.base.controlador.util.DefaultGridInternalController;
+import com.jswitch.base.modelo.Dominios.TipoDetalleLiquidacion;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
+import com.jswitch.fas.modelo.Dominios.TipoDetalleSiniestro;
 import com.jswitch.pagos.modelo.maestra.OrdenDePago;
 import com.jswitch.siniestros.modelo.dominio.EtapaSiniestro;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.siniestros.vista.detalle.DetalleSiniestroDetailFrame;
 import java.util.ArrayList;
 import java.util.Map;
-import org.hibernate.Hibernate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.hibernate.transform.AliasedTupleSRT;
@@ -40,9 +43,23 @@ public class DetalleSiniestroLiquidadosGridInternalController extends DefaultGri
 
     @Override
     public void doubleClick(int rowNumber, ValueObject persistentObject) {
+
+        String p = ((DetalleSiniestro) persistentObject).getTipoDetalle();
+        if (p.equalsIgnoreCase("APS")) {
+            p = TipoDetalleSiniestro.Aps.getClase();
+        } else {
+            p = TipoDetalleSiniestro.valueOf(p).getClase();
+        }
+        Class c = null;
+        try {
+            c = Class.forName(p);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DetalleSiniestroLiquidadosGridInternalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         new DetalleSiniestroDetailFrameController(
                 DetalleSiniestroDetailFrame.class.getName(), miGrid,
-                (BeanVO) persistentObject, true, persistentObject.getClass());
+                (BeanVO) persistentObject, true,
+                c);
     }
 
     @Override

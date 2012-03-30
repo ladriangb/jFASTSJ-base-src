@@ -69,7 +69,7 @@ public class RemesaDetailFrameController
     public Response loadData(Class valueObjectClass) {
         Session s = HibernateUtil.getSessionFactory().openSession();
         Remesa remesa = (Remesa) s.get(Remesa.class, ((Remesa) beanVO).getId());
-//        Hibernate.initialize(remesa.getOrdenDePagos());
+//        Hibernate.initialize(remesa.getCuentaBancaria());
         Hibernate.initialize(remesa.getObservaciones());
         Hibernate.initialize(remesa.getDocumentos());
         Hibernate.initialize(remesa.getNotasTecnicas());

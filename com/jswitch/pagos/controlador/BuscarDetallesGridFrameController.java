@@ -67,7 +67,7 @@ public class BuscarDetallesGridFrameController extends DefaultGridFrameControlle
             al.add("LIQ");
             ty.add(new StringType());
             if (ordenDePago.getTipoDetalleSiniestro().equals(TipoDetalleSiniestro.Todos)) {
-                sql += " C.tipoDetalle <> ? ";
+                sql += " AND C.tipoDetalle <> ? ";
                 al.add(TipoDetalleSiniestro.Reembolso.toString());
                 ty.add(new StringType());
             }

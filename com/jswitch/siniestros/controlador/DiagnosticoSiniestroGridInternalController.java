@@ -41,7 +41,8 @@ public class DiagnosticoSiniestroGridInternalController extends DefaultGridInter
 
     @Override
     public void doubleClick(int rowNumber, ValueObject persistentObject) {
-        new DiagnosticoSiniestroDetailFrameController(DiagnosticoSiniestroDetailFrame.class.getName(), miGrid, (BeanVO) persistentObject, Boolean.TRUE, vista);
+        new DiagnosticoSiniestroDetailFrameController(DiagnosticoSiniestroDetailFrame.class.getName(),
+                miGrid, (BeanVO) persistentObject, Boolean.TRUE, vista);
     }
 
     public Response loadData(int action,

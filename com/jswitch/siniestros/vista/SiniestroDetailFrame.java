@@ -792,7 +792,9 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
         if (beanVO != null) {
             id = ((Siniestro) beanVO).getId();
         }
-        //controllerDocumentos.setBeanVO(beanVO, id);
+        controllerDocumentosAnexosX.setBeanVO(beanVO, id);
+        controllerObservaciones.setBeanVO(beanVO);
+        controllerNotasTecnicas.setBeanVO(beanVO);
         validarEstado((Siniestro) beanVO);
         if (beanVO != null) {
             validarEstadoSiniestro(((Siniestro) beanVO).getEstadoSiniestro());
@@ -943,7 +945,7 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
             gridData.setDeleteButton(null);
 
             insertButton1.setVisible(false);
-            
+
             jPanel13.setVisible(false);
 
             gridControlObs.setInsertButton(null);
@@ -973,10 +975,10 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
 
             saveButton1.setVisible(true);
 
-            
-            
+
+
             insertButton1.setVisible(true);
-            
+
             jPanel13.setVisible(true);
 
             gridControlObs.setInsertButton(insertButtonObs);

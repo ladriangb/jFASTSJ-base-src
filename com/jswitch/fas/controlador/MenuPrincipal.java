@@ -4,6 +4,7 @@ import com.jswitch.asegurados.controlador.AgotamientoGridFrameController;
 import com.jswitch.asegurados.controlador.AseguradoDetailFrameController;
 import com.jswitch.asegurados.controlador.AseguradoGridFrameController;
 import com.jswitch.asegurados.controlador.BeneficiarioGridFrameController;
+import com.jswitch.asegurados.controlador.RevisionesGridFrameController;
 import com.jswitch.asegurados.modelo.dominio.Departamento;
 import com.jswitch.asegurados.modelo.dominio.TipoContrato;
 import com.jswitch.certificados.vista.CertificadoDetailFrame;
@@ -48,6 +49,7 @@ import com.jswitch.asegurados.vista.AseguradoGridFrame;
 import com.jswitch.asegurados.vista.BeneficiarioDetailFrame;
 import com.jswitch.asegurados.vista.BeneficiarioGridFrame;
 import com.jswitch.asegurados.vista.BuscarAseguradoDialog;
+import com.jswitch.asegurados.vista.RevisionGridFrame;
 import com.jswitch.asegurados.vista.TipoContratoGridFrame;
 import com.jswitch.certificados.vista.CertificadosGridFrame;
 import com.jswitch.configuracion.controlador.ConfiguracionPrimaAllGridFrameController;
@@ -85,7 +87,9 @@ import com.jswitch.configuracion.vista.ProntoPagoGridFrame;
 import com.jswitch.configuracion.vista.RamosCoberturasGridFrame;
 import com.jswitch.configuracion.vista.TimbreMunicipalGridFrame;
 import com.jswitch.configuracion.vista.patologias.PatologiasGridFrame;
+import com.jswitch.pagos.controlador.BuscarFacturaSeniatDetailFrameController;
 import com.jswitch.pagos.controlador.BuscarPagosDetailFrameController;
+import com.jswitch.pagos.controlador.BuscarFacturaDetailFrameController;
 import com.jswitch.pagos.controlador.OrdenDePagoDetailFrameController;
 import com.jswitch.pagos.controlador.OrdenDePagoGridFrameController;
 import com.jswitch.pagos.controlador.RemesaDetailFrameController;
@@ -119,6 +123,8 @@ import com.jswitch.pagos.modelo.dominio.ConceptoSENIAT;
 import com.jswitch.pagos.modelo.maestra.OrdenDePago;
 import com.jswitch.pagos.modelo.maestra.Remesa;
 import com.jswitch.pagos.vista.ConceptoSENIATGridFrame;
+import com.jswitch.pagos.vista.FacturaGridFrame;
+import com.jswitch.pagos.vista.FacturaSeniatGridFrame;
 import com.jswitch.pagos.vista.OrdenDePagoDetailFrame;
 import com.jswitch.pagos.vista.OrdenDePagoGridFrame;
 import com.jswitch.pagos.vista.RemesaDetailFrame;
@@ -323,6 +329,10 @@ public class MenuPrincipal implements ClientFacade {
 
     public void getAgotamiento() {
         new AgotamientoGridFrameController(AgotamientoGridFrame.class.getName(), AseguradoDetailFrame.class.getName(), Agotamiento.class.getName(), null);
+    }
+
+    public void getRevisiones() {
+        new RevisionesGridFrameController();
     }
 
     public void getBeneficiarios() {
@@ -574,6 +584,14 @@ public class MenuPrincipal implements ClientFacade {
         new BuscarPersonaPagoDialog(null,
                 OrdenDePagoDetailFrameController.class.getName(),
                 OrdenDePago.class.getName());
+    }
+
+    public void getFacturas() {
+        new BuscarFacturaDetailFrameController();
+    }
+
+    public void getExportSeniat() {
+        new BuscarFacturaSeniatDetailFrameController(FacturaSeniatGridFrame.class.getName());
     }
 
     public void getPersonasAPagarGridFrame() {

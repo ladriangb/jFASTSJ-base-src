@@ -14,6 +14,8 @@ import java.awt.MediaTracker;
 import java.awt.Panel;
 import java.awt.Toolkit;
 import java.io.File;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -32,6 +34,29 @@ public class ReportesUtil {
      * o ubicacion del servidor de archivos
      */
     private static String server = General.empresa.getRutaDocDigitales();
+
+    /**
+     * round Double whit two decimals 
+     * @param numero 
+     * @return 
+     */
+    public static String dosDecimales(Double numero) {
+        DecimalFormat d = new DecimalFormat("#,##0.00");
+        return d.format(numero);
+    }
+
+    /**
+     * PATHER TO DATE (EEEEE dd de MMMM de YYYY)
+     * @param fecha
+     * @return 
+     */
+    public static String fechaCompleta(Date fecha) {
+        SimpleDateFormat f = new SimpleDateFormat("EEEEE dd");
+        SimpleDateFormat m = new SimpleDateFormat("MMMM");
+        SimpleDateFormat y = new SimpleDateFormat("yyyy");
+
+        return f.format(fecha) + " de " + m.format(fecha) + " de " + y.format(fecha);
+    }
 
     /**
      * obtiene la imagen de nombre de tipo documento FOTO para un objeto especifico

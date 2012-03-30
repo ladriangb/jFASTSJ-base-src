@@ -102,8 +102,9 @@ public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFram
         DiagnosticoSiniestro sin = (DiagnosticoSiniestro) s.get(DiagnosticoSiniestro.class, ((DiagnosticoSiniestro) beanVO).getId());
         Hibernate.initialize(sin.getTratamientos());
         s.close();
-        detalleSin.getDiagnosticoSiniestros().remove((DiagnosticoSiniestro) beanVO);
-        detalleSin.getDiagnosticoSiniestros().add(sin);
+//        detalleSin.getDiagnosticoSiniestros().remove((DiagnosticoSiniestro) beanVO);
+//        detalleSin.getDiagnosticoSiniestros().add(sin);
+        if(detalleSin==null)detalleSin=sin.getDetalleSiniestro();
         AgotamientoActual agotamiento = getAgotamiento(sin.getDiagnostico(),
                 detalleSin.getSiniestro().getAsegurado());
         sin.setDisponiblePorTipoDetalle(getDisponiblePorTipoDetalle(detalleSin));
@@ -233,7 +234,7 @@ public class DiagnosticoSiniestroDetailFrameController extends DefaultDetailFram
             s.close();
         }
         if (disp == null) {
-            disp = Double.POSITIVE_INFINITY;
+            disp = 0d;
         }
         return disp;
     }

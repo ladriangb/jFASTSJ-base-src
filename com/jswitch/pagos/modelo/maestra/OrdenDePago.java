@@ -12,6 +12,7 @@ import com.jswitch.fas.modelo.Dominios;
 import com.jswitch.fas.modelo.Dominios.TipoDetalleSiniestro;
 import com.jswitch.persona.modelo.maestra.Persona;
 import com.jswitch.persona.modelo.transac.CuentaBancariaPersona;
+import com.jswitch.reporte.modelo.Reporte;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.vistasbd.SumaOrden;
 import java.io.Serializable;
@@ -81,13 +82,13 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     /**
      * Remesa a la cual esta vinculado el pago
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Remesa remesa;
     /**
      * Remesa a la cual esta vinculado el pago
      */
     @ManyToOne
-    private CuentaBancariaPersona   cuentaBancaria;
+    private CuentaBancariaPersona cuentaBancaria;
     /**
      * persona ala cual se le realizara el pago
      */
@@ -167,6 +168,11 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @BusinessKey(exclude = Method.ALL)
     private Set<Documento> documentos = new HashSet<Documento>(0);
+    /**
+     * Reportes de la orden
+     */
+    @Transient
+    private transient Set<Reporte> reportes = new HashSet<Reporte>(0);
 
     public OrdenDePago() {
         tipoDetalleSiniestro = TipoDetalleSiniestro.Todos;
@@ -363,6 +369,7 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
      */
     public void setCuentaBancaria(CuentaBancariaPersona cuentaBancaria) {
         this.cuentaBancaria = cuentaBancaria;
+        org.openswing.swing.export.java.ExportToPDF14 a;
     }
 
     /**
@@ -493,4 +500,24 @@ public class OrdenDePago extends BeanVO implements Serializable, Auditable {
         this.tipoDetalleSiniestro = tipoDetalleSiniestro;
     }
 
+    /**
+     * Reportes de la orden
+     */
+    public Set<Reporte> getReportes() {
+        if (id != null) {
+            if (reportes.isEmpty()) {
+                reportes.add(new Reporte(com.jswitch.base.modelo.Dominios.CategoriaReporte.PAGOS,
+                        com.jswitch.base.modelo.Dominios.FiltroReporte.FACTURA, 0, "PAGO_D_FACTURAS_001",
+                        "FACTURAS EN LA ORDEN DE PAGO",
+                        "DESCRIP",
+                        "FROM " + Factura.class.getName() + " as P "
+                        + "WHERE P.detalleSiniestro.ordenDePago.id=" + id 
+                        + "ORDER BY P.detalleSiniestro.personaPago.id, "
+                        + "P.detalleSiniestro.siniestro.certificado.titular.tipoContrato.id ",
+                        "Carta 8½ x 11 Vertical",
+                        false, true, true, false));
+            }
+        }
+        return reportes;
+    }
 }

@@ -40,12 +40,12 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="394" max="32767" attributes="0"/>
+              <EmptySpace pref="414" max="32767" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-                  <Component id="jTabbedPane1" pref="383" max="32767" attributes="0"/>
+                  <Component id="jTabbedPane1" pref="403" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -240,7 +240,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="checkBoxControl1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="81" max="32767" attributes="0"/>
+                      <EmptySpace pref="85" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -386,8 +386,6 @@
                 <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="&quot;cuentaBancaria.numero&quot;" type="code"/>
                 </Property>
-                <Property name="enabledOnEdit" type="boolean" value="false"/>
-                <Property name="enabledOnInsert" type="boolean" value="false"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -420,7 +418,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel15" min="-2" max="-2" attributes="1"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="gridControl5" pref="282" max="32767" attributes="2"/>
+                      <Component id="gridControl5" pref="286" max="32767" attributes="2"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -601,7 +599,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="355" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="359" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -636,9 +634,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanel13" min="-2" max="-2" attributes="1"/>
-                          <EmptySpace pref="231" max="32767" attributes="0"/>
+                          <EmptySpace pref="235" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="gridControlObs" alignment="0" pref="331" max="32767" attributes="2"/>
+                      <Component id="gridControlObs" alignment="0" pref="335" max="32767" attributes="2"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -778,7 +776,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="355" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="359" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -813,9 +811,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanel16" min="-2" max="-2" attributes="1"/>
-                          <EmptySpace pref="231" max="32767" attributes="0"/>
+                          <EmptySpace pref="235" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="gridControlNot" alignment="0" pref="331" max="32767" attributes="2"/>
+                      <Component id="gridControlNot" alignment="0" pref="335" max="32767" attributes="2"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -945,7 +943,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="355" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="359" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -982,7 +980,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jPanel11" alignment="0" min="-2" max="-2" attributes="1"/>
-                              <Component id="gridControlDoc" alignment="0" pref="320" max="32767" attributes="1"/>
+                              <Component id="gridControlDoc" alignment="0" pref="324" max="32767" attributes="1"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -1133,13 +1131,13 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="355" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="359" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="gridPartidas" pref="271" max="32767" attributes="0"/>
+                          <Component id="gridPartidas" pref="275" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -1457,6 +1455,67 @@
                     </Property>
                     <Property name="columnSortable" type="boolean" value="true"/>
                     <Property name="decimals" type="int" value="2"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="Reportes">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Reportes">
+                <Property name="tabTitle" type="java.lang.String" value="Reportes"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="587" max="32767" attributes="0"/>
+                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="gridReportes" pref="567" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="359" max="32767" attributes="0"/>
+                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="gridReportes" pref="337" max="32767" attributes="2"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Container class="org.openswing.swing.client.GridControl" name="gridReportes">
+              <Properties>
+                <Property name="valueObjectClassName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="Reporte.class.getName()" type="code"/>
+                </Property>
+                <Property name="visibleStatusPanel" type="boolean" value="false"/>
+              </Properties>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+              <SubComponents>
+                <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn12">
+                  <Properties>
+                    <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="&quot;titulo&quot;" type="code"/>
+                    </Property>
+                    <Property name="editableOnEdit" type="boolean" value="true"/>
+                    <Property name="editableOnInsert" type="boolean" value="true"/>
+                    <Property name="maxCharacters" type="int" value="1024"/>
+                    <Property name="preferredWidth" type="int" value="400"/>
                   </Properties>
                 </Component>
               </SubComponents>

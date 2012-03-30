@@ -220,7 +220,7 @@ public class Certificado extends BeanVO implements Serializable, Auditable {
             reportes.add(new Reporte(Dominios.CategoriaReporte.CERTIFICADOS, 0,
                     "CERT-D001", "CERTIFICADO DE ASEGURADOS", "CERTIFICIADO CON FOTO DE TITULAR",
                     null,
-                    "Carta 8½ x 11 Vertical", false, true, true, false));
+                    "Carta 8½ x 11 Vertical", false, false, false, false));
         }
         return reportes;
     }

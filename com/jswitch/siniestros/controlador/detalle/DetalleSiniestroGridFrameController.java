@@ -167,7 +167,8 @@ public class DetalleSiniestroGridFrameController extends DefaultGridFrameControl
             String select = gridFrame.getGridControl().getVOListTableModel().
                     createSelect("C", AliasedTupleSRT.SEPARATOR);
             select += ", C.etapaSiniestro.idPropio as etapaSiniestro_idPropio ";
-            String sql = select + " FROM " + bs.getTipoDetalleSiniestro().getClase() + " C ";
+            select = select.replaceAll("C\\.sumaDetalle", "R");
+            String sql = select + " FROM " + bs.getTipoDetalleSiniestro().getClase() + " C Left JOIN C.sumaDetalle as R  ";
             sql = where.trim().isEmpty() ? sql : (sql + "WHERE " + where);
             ArrayList<Object> ob = new ArrayList<Object>(0);
             ArrayList<Type> ty = new ArrayList<Type>(0);

@@ -6,11 +6,13 @@ import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.entidades.auditoria.Auditable;
 import com.jswitch.reporte.controlador.ReporteController;
 import com.jswitch.reporte.modelo.Reporte;
+import com.jswitch.reporte.vista.EsperaDialog;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import javax.swing.JDialog;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -19,9 +21,8 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JasperViewer;
 import org.hibernate.classic.Session;
 import org.openswing.swing.client.GridControl;
+import org.openswing.swing.mdi.client.MDIFrame;
 import org.openswing.swing.message.receive.java.ValueObject;
-
-
 
 /**
  *
@@ -36,8 +37,22 @@ public class ReporteGridInternalController extends DefaultGridInternalController
     @Override
     public void doubleClick(int rowNumber, ValueObject persistentObject) {
         if (beanVO != null && ((Auditable) beanVO).getId() != null) {
-            Reporte reporte = (Reporte) persistentObject;
 
+
+            final Reporte reporte = (Reporte) persistentObject;
+            if (reporte.getHql()) {
+                final JDialog d = new EsperaDialog(MDIFrame.getInstance(), false);
+                d.setVisible(true);
+                new Thread() {
+
+                    @Override
+                    public void run() {
+                        new ReporteController().showReport(reporte, false, "Estilo3.jrtx", null);
+                        d.dispose();
+                    }
+                }.start();
+                return;
+            }
             String rutaReporte = General.empresa.getRutaReportes() + "/" + reporte.getFile() + ".jasper";
             Map parameters = new HashMap();
             parameters.put("reporteSQL", reporte.getBaseSQL());
@@ -93,7 +108,7 @@ public class ReporteGridInternalController extends DefaultGridInternalController
             if (jasperPrint != null) {
                 JasperViewer.viewReport(jasperPrint, false);
             }
-            
+
 //            Collection c = new ArrayList(1);
 //            c.add(beanVO);
 //            try {
@@ -102,7 +117,7 @@ public class ReporteGridInternalController extends DefaultGridInternalController
 //            } catch (JRException ex) {
 //                ex.printStackTrace();
 //            }
-            
+
         }
     }
 }

@@ -44,6 +44,11 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
     private HashMap<Class, String> etapaInicial;
     private Siniestro siniestro;
 
+    public DetalleSiniestroDetailFrameController(String detailFramePath,
+            GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio) {
+        this(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio, beanVO.getClass());
+    }
+
     public DetalleSiniestroDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, Boolean aplicarLogicaNegocio, Class tipoDetalle) {
         this(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio, tipoDetalle, null);
     }
@@ -100,7 +105,7 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
 //        Hibernate.initialize(sin.getDiagnosticoSiniestros());
         Hibernate.initialize(sin.getDocumentos());
         Hibernate.initialize(sin.getSumaDesgloseCoberturas());
-        s.close();        
+        s.close();
         beanVO = sin;
         checkStatus();
         siniestro = sin.getSiniestro();
@@ -137,11 +142,13 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
         className = className.substring(1 + className.lastIndexOf("."));
         ((DetalleSiniestro) newPersistentObject).setTipoDetalle(className);
         DecimalFormat nf = new DecimalFormat("00");
-        ((DetalleSiniestro) newPersistentObject).setNumero(nf.format(siniestro.getDetalleSiniestro().size() + 1));
         Session s = null;
         try {
             vista.saveGridsData();
             s = HibernateUtil.getSessionFactory().openSession();
+            Long l = (Long) s.createQuery("SELECT COUNT(P) FROM " + DetalleSiniestro.class.getName()
+                    + " P WHERE P.siniestro.id = ?").setLong(0, siniestro.getId()).uniqueResult();
+            ((DetalleSiniestro) newPersistentObject).setNumero(nf.format(l + 1));
             Query q = s.createQuery("FROM " + EtapaSiniestro.class.getName() + " C"
                     + " WHERE C.idPropio='" + etapaInicial.get(newPersistentObject.getClass()) + "'");
 

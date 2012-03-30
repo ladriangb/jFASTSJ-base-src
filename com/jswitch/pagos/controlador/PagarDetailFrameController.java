@@ -94,7 +94,7 @@ public class PagarDetailFrameController extends DefaultDetailFrameController {
                     s.createQuery("UPDATE " + DetalleSiniestro.class.getName() + " C SET "
                             + " C.fechaPagado=:fe "
                             + "WHERE id in ("
-                            + "SElECT id FROM " + Factura.class.getName() + " F "
+                            + "SElECT id FROM " + DetalleSiniestro.class.getName() + " F "
                             + " WHERE F.ordenDePago.remesa=:re"
                             + ")").
                             setEntity("re", remesa).

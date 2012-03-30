@@ -1,5 +1,6 @@
 package com.jswitch.siniestros.modelo.maestra.detalle;
 
+import com.jswitch.base.modelo.Dominios;
 import com.jswitch.base.modelo.util.ehts.BusinessKey;
 import com.jswitch.fas.utils.ReportesUtil;
 import com.jswitch.reporte.modelo.Reporte;
@@ -80,6 +81,13 @@ public class Emergencia extends DetalleSiniestro {
     public Set<Reporte> getReportes() {
         if (reportes.isEmpty()) {
             reportes.addAll(getReportesGenerales());
+            reportes.add(
+                    new Reporte(Dominios.CategoriaReporte.SINIESTROS, 0, "SINI_EMERGENCIA_D001",
+                    "EMERGECIA",
+                    "Orden de Emergencia",
+                    null,
+                    "Carta 8½ x 11 Vertical",
+                    false, false, false, false));
         }
         return reportes;
     }

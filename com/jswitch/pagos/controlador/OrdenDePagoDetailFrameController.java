@@ -25,6 +25,7 @@ import org.hibernate.Hibernate;
 import org.hibernate.classic.Session;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.client.InsertButton;
+import org.openswing.swing.form.client.Form;
 import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
 import org.openswing.swing.message.receive.java.VOResponse;
@@ -87,7 +88,7 @@ public class OrdenDePagoDetailFrameController
     public Response loadData(Class valueObjectClass) {
         Session s = HibernateUtil.getSessionFactory().openSession();
         OrdenDePago sin = (OrdenDePago) s.get(OrdenDePago.class, ((OrdenDePago) beanVO).getId());
-        Hibernate.initialize(sin.getRemesa());
+//        Hibernate.initialize(sin.getRemesa());
         Hibernate.initialize(sin.getObservaciones());
         Hibernate.initialize(sin.getDocumentos());
         Hibernate.initialize(sin.getNotasTecnicas());
@@ -95,46 +96,6 @@ public class OrdenDePagoDetailFrameController
         getVista().hideAll(sin.getEstatusPago());
         beanVO = sin;
         return new VOResponse(beanVO);
-    }
-
-    @Override
-    public Response insertRecord(ValueObject newPersistentObject) throws Exception {
-        CuentaBancariaPersona cu = ((OrdenDePago) newPersistentObject).getCuentaBancaria();
-        CuentaBancariaPersona c = null;
-        if (cu != null) {
-            c = new CuentaBancariaPersona(cu.getNumero(), cu.getObservacion(), cu.getBanco(), cu.getTipoCuenta(),
-                    new AuditoriaBasica(new Date(), General.usuario.getUserName(), Boolean.TRUE));
-        }
-        ((OrdenDePago) newPersistentObject).setCuentaBancaria(c);
-        return super.insertRecord(newPersistentObject);
-    }
-
-    @Override
-    public Response updateRecord(ValueObject oldPersistentObject, ValueObject persistentObject) throws Exception {
-        CuentaBancariaPersona nu = ((OrdenDePago) persistentObject).getCuentaBancaria();
-        CuentaBancariaPersona vi = ((OrdenDePago) oldPersistentObject).getCuentaBancaria();;
-        if (nu != null && vi != null && !nu.equals(vi)) {
-            AuditoriaBasica a = vi.getAuditoria();
-            if (a != null) {
-                a.setUsuarioUpdate(General.usuario.getUserName());
-                a.setFechaUpdate(new Date());
-            }
-            vi.setBanco(nu.getBanco());
-            vi.setDomicilio(nu.getDomicilio());
-            vi.setNumero(nu.getNumero());
-            vi.setTipoCuenta(nu.getTipoCuenta());
-            vi.setObservacion(nu.getObservacion());
-        }
-        if (nu != null && vi == null) {
-            vi = new CuentaBancariaPersona(nu.getNumero(), nu.getObservacion(), nu.getBanco(), nu.getTipoCuenta(),
-                    new AuditoriaBasica(new Date(), General.usuario.getUserName(), Boolean.TRUE));
-        }
-        ((OrdenDePago) persistentObject).setCuentaBancaria(vi);
-        Response res = super.updateRecord(oldPersistentObject, persistentObject);
-        if (nu == null && vi != null) {
-            super.deleteRecord(vi);
-        }
-        return res;
     }
 
     @Override
@@ -185,6 +146,11 @@ public class OrdenDePagoDetailFrameController
         }
 
         return new VOResponse(ordenDePago);
+    }
+
+    @Override
+    public void afterInsertData(Form form) {
+        vista.getMainPanel().getReloadButton().doClick();   
     }
 
     @Override

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import com.jswitch.base.controlador.logger.LoggerUtil;
 import com.jswitch.base.modelo.HibernateUtil;
-import com.jswitch.siniestros.modelo.maestra.Siniestro;
+import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import java.awt.Dimension;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -22,12 +22,12 @@ import org.openswing.swing.util.java.Consts;
  *
  * @author Orlando Becerra
  */
-public class SiniestroLookupController extends DefaultLookupController {
+public class DetalleSiniestroLookupController extends DefaultLookupController {
 
-    public SiniestroLookupController() {
-        this.setLookupDataLocator(new PersonaLookupDataLocator(Siniestro.class.getName()));
+    public DetalleSiniestroLookupController() {
+        this.setLookupDataLocator(new PersonaLookupDataLocator(DetalleSiniestro.class.getName()));
         this.setLookupGridController(new DefaultLookupGridController());
-        setLookupValueObjectClassName(Siniestro.class.getName());
+        setLookupValueObjectClassName(DetalleSiniestro.class.getName());
            setCodeSelectionWindow(GRID_FRAME);
         setOnInvalidCode(ON_INVALID_CODE_RESTORE_LAST_VALID_CODE);
         setAllColumnVisible(false);

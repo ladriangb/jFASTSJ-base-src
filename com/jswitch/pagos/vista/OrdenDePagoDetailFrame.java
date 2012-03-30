@@ -17,11 +17,12 @@ import com.jswitch.pagos.controlador.RemesaDetailFrameController;
 import com.jswitch.pagos.controlador.RemesaLookupController;
 import com.jswitch.pagos.modelo.maestra.OrdenDePago;
 import com.jswitch.pagos.modelo.maestra.Remesa;
-import com.jswitch.persona.controlador.CuentaBancariaEmpresaLookupController;
 import com.jswitch.persona.controlador.CuentaBancariaPorPersonaLookupController;
 import com.jswitch.persona.controlador.PersonaLookupControllerPorNombre;
 import com.jswitch.persona.controlador.PersonasDetailController;
 import com.jswitch.persona.modelo.maestra.Rif;
+import com.jswitch.reporte.modelo.Reporte;
+import com.jswitch.siniestros.controlador.detalle.reportes.ReporteGridInternalController;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.vistasbd.SumaPartida;
 import java.awt.event.ActionListener;
@@ -42,6 +43,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
     protected DefaultDocumentosAnexosGridController controllerDocumentosAnexosX;
     protected DefaultGridInternalController controllerObservaciones;
     protected DefaultGridInternalController controllerNotasTecnicas;
+    private ReporteGridInternalController controllerReportes;
 
     public OrdenDePagoDetailFrame() {
     }
@@ -169,6 +171,9 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
         decimalColumn22 = new org.openswing.swing.table.columns.client.DecimalColumn();
         decimalColumn23 = new org.openswing.swing.table.columns.client.DecimalColumn();
         decimalColumn24 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        Reportes = new javax.swing.JPanel();
+        gridReportes = new org.openswing.swing.client.GridControl();
+        textColumn12 = new org.openswing.swing.table.columns.client.TextColumn();
 
         setTitle("Orden de Pago");
 
@@ -274,8 +279,6 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
         labelControl9.setLabel("cuentaBancaria.numero");
 
         codLookupControl3.setAttributeName("cuentaBancaria.numero");
-        codLookupControl3.setEnabledOnEdit(false);
-        codLookupControl3.setEnabledOnInsert(false);
 
         javax.swing.GroupLayout form1Layout = new javax.swing.GroupLayout(form1);
         form1.setLayout(form1Layout);
@@ -359,7 +362,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
                     .addComponent(comboBoxControl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(checkBoxControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
 
         form1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {codLookupControl1, codLookupControl2, comboBoxControl1, comboBoxControl2, dateControl1, labelControl1, labelControl2, labelControl3, labelControl4, labelControl5, labelControl6, labelControl7, labelControl8, labelControl9, textControl1, textControl2, textControl3});
@@ -453,7 +456,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(gridControl5, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
+                .addComponent(gridControl5, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -524,8 +527,8 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
             jPanelObsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelObsLayout.createSequentialGroup()
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(231, Short.MAX_VALUE))
-            .addComponent(gridControlObs, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
+                .addContainerGap(235, Short.MAX_VALUE))
+            .addComponent(gridControlObs, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout observacionesLayout = new javax.swing.GroupLayout(observaciones);
@@ -541,7 +544,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
         );
         observacionesLayout.setVerticalGroup(
             observacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 355, Short.MAX_VALUE)
+            .addGap(0, 359, Short.MAX_VALUE)
             .addGroup(observacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(observacionesLayout.createSequentialGroup()
                     .addContainerGap()
@@ -612,8 +615,8 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
             jPanelNotLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelNotLayout.createSequentialGroup()
                 .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(231, Short.MAX_VALUE))
-            .addComponent(gridControlNot, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
+                .addContainerGap(235, Short.MAX_VALUE))
+            .addComponent(gridControlNot, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout notasTecnicasLayout = new javax.swing.GroupLayout(notasTecnicas);
@@ -629,7 +632,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
         );
         notasTecnicasLayout.setVerticalGroup(
             notasTecnicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 355, Short.MAX_VALUE)
+            .addGap(0, 359, Short.MAX_VALUE)
             .addGroup(notasTecnicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(notasTecnicasLayout.createSequentialGroup()
                     .addContainerGap()
@@ -705,7 +708,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
             .addGroup(jPanelDocLayout.createSequentialGroup()
                 .addGroup(jPanelDocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(gridControlDoc, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE))
+                    .addComponent(gridControlDoc, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -722,7 +725,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
         );
         DocAnexosLayout.setVerticalGroup(
             DocAnexosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 355, Short.MAX_VALUE)
+            .addGap(0, 359, Short.MAX_VALUE)
             .addGroup(DocAnexosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(DocAnexosLayout.createSequentialGroup()
                     .addContainerGap()
@@ -929,17 +932,50 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 355, Short.MAX_VALUE)
+            .addGap(0, 359, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(gridPartidas, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
+                    .addComponent(gridPartidas, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
                     .addContainerGap()))
         );
 
         jTabbedPane1.addTab("Partidas", jPanel2);
+
+        gridReportes.setValueObjectClassName(Reporte.class.getName());
+        gridReportes.setVisibleStatusPanel(false);
+
+        textColumn12.setColumnName("titulo");
+        textColumn12.setEditableOnEdit(true);
+        textColumn12.setEditableOnInsert(true);
+        textColumn12.setMaxCharacters(1024);
+        textColumn12.setPreferredWidth(400);
+        gridReportes.getColumnContainer().add(textColumn12);
+
+        javax.swing.GroupLayout ReportesLayout = new javax.swing.GroupLayout(Reportes);
+        Reportes.setLayout(ReportesLayout);
+        ReportesLayout.setHorizontalGroup(
+            ReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 587, Short.MAX_VALUE)
+            .addGroup(ReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(ReportesLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(gridReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+        ReportesLayout.setVerticalGroup(
+            ReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 359, Short.MAX_VALUE)
+            .addGroup(ReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(ReportesLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(gridReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+
+        jTabbedPane1.addTab("Reportes", Reportes);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -959,11 +995,11 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(394, Short.MAX_VALUE))
+                .addContainerGap(414, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(56, 56, 56)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
                     .addContainerGap()))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -1031,13 +1067,18 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
         codLookupControl1.setLookupController(lookupPersonas);
         codLookupControl1.setOpenDetail("personaPago", PersonasDetailController.class.getName(), new Class[]{GridControl.class, BeanVO.class, Rif.class}, new Object[]{null, null, null}, 1);
 
-        CuentaBancariaPorPersonaLookupController emp = new CuentaBancariaPorPersonaLookupController(getMainPanel());
-        emp.addLookup2ParentLink("cuentaBancaria");
-        codLookupControl3.setLookupController(emp);
+        controllerReportes =
+                new ReporteGridInternalController(OrdenDePago.class.getName(), "getReportes", gridReportes);
+        gridReportes.setGridDataLocator(controllerReportes);
+        gridReportes.setController(controllerReportes);
         //  codLookupControl1.setNewDetail("personaPago", RifDialog.class.getName(), new Class[]{Form.class, String.class, Object[].class}, new Object[]{null, null, new Object[]{"ASE"}}, 0);
         insertButton7.addActionListener((ActionListener) formController);
         jButton1.addActionListener((ActionListener) formController);
         jButton2.addActionListener((ActionListener) formController);
+        CuentaBancariaPorPersonaLookupController emp = new CuentaBancariaPorPersonaLookupController(
+                (OrdenDePagoDetailFrameController)formController);
+        emp.addLookup2ParentLink("cuentaBancaria");
+        codLookupControl3.setLookupController(emp);
         form1.setCreateInnerVO(false);
         form1.setFormController(formController);
         if (addToMDIFrame) {
@@ -1060,6 +1101,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
         gridControlDoc.getReloadButton().doClick();
         gridControlNot.getReloadButton().doClick();
         gridControlObs.getReloadButton().doClick();
+        gridReportes.reloadData();
     }
 
     @Override
@@ -1078,7 +1120,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
         controllerObservaciones.setBeanVO(beanVO);
         controllerNotasTecnicas.setBeanVO(beanVO);
         partidaPresupuestaria.setBeanVO(beanVO);
-
+        controllerReportes.setBeanVO(beanVO);
         reloadGridsData();
     }
 
@@ -1150,6 +1192,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel DocAnexos;
+    private javax.swing.JPanel Reportes;
     private org.openswing.swing.table.columns.client.ButtonColumn buttonColumnDoc;
     private org.openswing.swing.table.columns.client.CheckBoxColumn checkBoxColumn2;
     private org.openswing.swing.client.CheckBoxControl checkBoxControl1;
@@ -1209,6 +1252,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
     private org.openswing.swing.client.GridControl gridControlNot;
     private org.openswing.swing.client.GridControl gridControlObs;
     private org.openswing.swing.client.GridControl gridPartidas;
+    private org.openswing.swing.client.GridControl gridReportes;
     private org.openswing.swing.client.InsertButton insertButton7;
     private org.openswing.swing.client.InsertButton insertButtonDoc;
     private org.openswing.swing.client.InsertButton insertButtonNot;
@@ -1252,6 +1296,7 @@ public class OrdenDePagoDetailFrame extends DefaultDetailFrame {
     private org.openswing.swing.client.SaveButton saveButtonObs;
     private org.openswing.swing.table.columns.client.TextColumn textColumn1;
     private org.openswing.swing.table.columns.client.TextColumn textColumn11;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn12;
     private org.openswing.swing.table.columns.client.TextColumn textColumn2;
     private org.openswing.swing.table.columns.client.TextColumn textColumn3;
     private org.openswing.swing.table.columns.client.TextColumn textColumn4;

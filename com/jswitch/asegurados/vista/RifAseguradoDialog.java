@@ -3,7 +3,6 @@ package com.jswitch.asegurados.vista;
 import com.jswitch.certificados.vista.CertificadoDetailFrame;
 import com.jswitch.base.controlador.General;
 import com.jswitch.asegurados.controlador.AseguradoDetailFrameController;
-import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.Date;
@@ -19,6 +18,7 @@ import com.jswitch.asegurados.modelo.maestra.Titular;
 import com.jswitch.persona.controlador.PersonasDetailController;
 import com.jswitch.persona.modelo.dominio.TipoPersona;
 import com.jswitch.persona.modelo.maestra.Persona;
+import java.util.List;
 import javax.swing.JFrame;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
@@ -305,6 +305,7 @@ public class RifAseguradoDialog extends javax.swing.JDialog {
         @Override
         public Response insertRecord(ValueObject newPersistentObject) throws Exception {
             Rif rifConsulta = null;
+            Certificado cert = (Certificado) vista.getMainPanel().getVOModel().getValueObject();
             Asegurado p = null;
             Session s;
             s = HibernateUtil.getSessionFactory().openSession();
@@ -312,25 +313,29 @@ public class RifAseguradoDialog extends javax.swing.JDialog {
             Query q2 = null;
             if (idPersona == null) {
                 q = s.createQuery("FROM " + Asegurado.class.getName()
-                        + " WHERE persona.rif.rif=?").
-                        setString(0, textControl2.getText());
-
+                        + " WHERE persona.rif.rif=? and certificado.poliza.id=?").
+                        setString(0, textControl2.getText()).
+                        setLong(1, cert.getPoliza().getId());
             }
-            p = (Asegurado) q.uniqueResult();
+            List lis = q.list();
+            if (lis != null && !lis.isEmpty()) {
+                p = (Asegurado) lis.get(0);//q.uniqueResult();
+            }
             try {
                 if (p != null) {
                     rifConsulta = p.getPersona().getRif();
-                    q2 = s.createQuery("SELECT c.titular, a FROM " + Certificado.class.getName() + " c "
-                            + " JOIN c.asegurados a  WHERE a.persona.rif.rif=?").
-                            setString(0, rifConsulta.getRif());
+                    q2 = s.createQuery("SELECT c.titular,"
+                            + " a FROM " + Certificado.class.getName() + " c "
+                            + " JOIN c.asegurados a  "
+                            + "WHERE a.persona.rif.rif=? and c.poliza.id=?").
+                            setString(0, rifConsulta.getRif()).setLong(1, cert.getPoliza().getId());
 
                     Object[] l = (Object[]) q2.uniqueResult();
                     if (l != null) {
                         return new ErrorResponse("Persona ya se encuentra asegurada\n"
-                                + "en el certificado de " + ((Titular) l[0]).getPersona().getNombreLargo());
+                                + "en el certificado de "
+                                + ((Titular) l[0]).getPersona().getNombreLargo());
                     }
-
-
                 }
             } finally {
                 s.close();
@@ -373,11 +378,14 @@ public class RifAseguradoDialog extends javax.swing.JDialog {
             Titular data = null;
             try {
                 s = HibernateUtil.getSessionFactory().openSession();
-                Transaction tx = s.beginTransaction();
-                Query query = s.createQuery("From " + Titular.class.getName()
-                        + " WHERE persona.rif.rif=?").setString(0, aseg.getPersona().getRif().getRif());
+//                Transaction tx = s.beginTransaction();
+                Query query = s.createQuery("SELECT C.titular FROM "
+                        + Certificado.class.getName()
+                        + " C WHERE C.titular.persona.rif.rif=? AND C.poliza.id=?").
+                        setString(0, aseg.getPersona().getRif().getRif()).
+                        setLong(1, familia.getPoliza().getId());
                 data = (Titular) query.uniqueResult();
-                tx.commit();
+//                tx.commit();
             } catch (Exception ex) {
                 ex.printStackTrace();
             } finally {
@@ -388,7 +396,9 @@ public class RifAseguradoDialog extends javax.swing.JDialog {
                     && !data.getPersona().getRif().getRif().equals(
                     familia.getTitular().getPersona().getRif().getRif())) {
                 JOptionPane.showMessageDialog(new JFrame(), "El Asegurado seleccionado es ya un"
-                        + "Titular en \"" + General.empresa.getNombre() + "\"");
+                        + "Titular en \"" + General.empresa.getNombre()
+                        + "\"\nen la poliza: " + familia.getPoliza().getNombre()
+                        + ": " + familia.getPoliza().getNumero());
                 return false;
             }
             return true;
@@ -402,7 +412,7 @@ public class RifAseguradoDialog extends javax.swing.JDialog {
                     s = HibernateUtil.getSessionFactory().openSession();
                     Transaction tx = s.beginTransaction();
                     p.setCertificado(((Certificado) vista.getBeanVO()));
-                    s.update(vista.getBeanVO());
+//                    s.update(vista.getBeanVO());
                     s.update(p);
                     tx.commit();
                 } catch (Exception ex) {

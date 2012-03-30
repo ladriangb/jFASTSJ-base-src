@@ -173,7 +173,7 @@ public class SiniestroGridFrameController extends DefaultGridFrameController {
                         createSelect("C", AliasedTupleSRT.SEPARATOR);
                 select = select.replaceAll("SELECT", "SELECT DISTINCT ");
                 sql2 = select + " FROM " + Siniestro.class.getName() + " C "
-                        + " JOIN C.detalleSiniestro as DE JOIN DE.diagnosticoSiniestros as DI ";
+                        + " LEFT JOIN C.detalleSiniestro as DE LEFT JOIN DE.diagnosticoSiniestros as DI ";
                 sql2 = where.trim().isEmpty() ? sql2 : (sql2 + "WHERE " + where);
                 //<editor-fold defaultstate="collapsed" desc="siniestro">
                 if (Snum) {

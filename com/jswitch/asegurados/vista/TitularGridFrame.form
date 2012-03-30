@@ -88,9 +88,6 @@
         <Property name="exportButton" type="org.openswing.swing.client.ExportButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="exportButton1"/>
         </Property>
-        <Property name="filterButton" type="org.openswing.swing.client.FilterButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="default"/>
-        </Property>
         <Property name="functionId" type="java.lang.String" value="VehiculosGrid"/>
         <Property name="insertRowsOnTop" type="boolean" value="false"/>
         <Property name="navBar" type="org.openswing.swing.client.NavigatorBar" editor="org.netbeans.modules.form.ComponentChooserEditor">
@@ -132,15 +129,6 @@
             <Property name="columnFilterable" type="boolean" value="true"/>
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;persona.nombreLargo&quot;" type="code"/>
-            </Property>
-            <Property name="columnSortable" type="boolean" value="true"/>
-          </Properties>
-        </Component>
-        <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn10">
-          <Properties>
-            <Property name="columnFilterable" type="boolean" value="true"/>
-            <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="&quot;certificado.poliza.numero&quot;" type="code"/>
             </Property>
             <Property name="columnSortable" type="boolean" value="true"/>
           </Properties>

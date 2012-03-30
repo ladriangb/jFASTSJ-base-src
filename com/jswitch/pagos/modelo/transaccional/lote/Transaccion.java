@@ -98,10 +98,7 @@ public class Transaccion {
         Remesa rem = null;
         try {
             s = HibernateUtil.getSessionFactory().openSession();
-            rem = (Remesa) s.get(Remesa.class, 2702L);
-            Hibernate.initialize(rem.getDocumentos());
-            Hibernate.initialize(rem.getNotasTecnicas());
-            Hibernate.initialize(rem.getObservaciones());
+            rem = (Remesa) s.get(Remesa.class, 94834l);
             Hibernate.initialize(rem.getOrdenDePagos());
         } catch (Exception hibernateException) {
             hibernateException.printStackTrace();
@@ -110,7 +107,7 @@ public class Transaccion {
             s.close();
         }
         Transaccion n = new Transaccion(rem);
-
+        n.printReport(System.out);
     }
 
     private void initTransaccion() {
@@ -124,10 +121,22 @@ public class Transaccion {
         header.setRecordID("HEADER  ");
         header.setRif(General.empresa.getRif2());
         //</editor-fold>
+        List<OrdenDePago> ordenes = null;
+        Session s = null;
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+            ordenes = s.createQuery("FROM " + OrdenDePago.class.getName() + " O WHERE remesa.id=?").setLong(0, remesa.getId()).list();
+        } catch (Exception hibernateException) {
+            hibernateException.printStackTrace();
+            return;
+        } finally {
+            s.close();
+        }
 
-        for (OrdenDePago ordenDePago : remesa.getOrdenDePagos()) {
+
+        for (OrdenDePago ordenDePago : ordenes) {
             //<editor-fold defaultstate="collapsed" desc="download">
-            Persona personaPago = null;
+            Persona personaPago = ordenDePago.getPersonaPago();
             CuentaBancariaPersona bancariaPersona = null;
             bancariaPersona = ordenDePago.getCuentaBancaria();
             //</editor-fold>

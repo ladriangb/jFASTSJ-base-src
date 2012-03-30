@@ -38,6 +38,10 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
     private DetalleSiniestro detalleSiniestro;
     private ReloadButton reload;
 
+    public FacturaDetailFrameController(Factura factura) {
+        super(FacturaDetailFrame.class.getName(), null, (BeanVO) factura, Boolean.FALSE);
+    }
+
     public FacturaDetailFrameController(String detailFramePath, GridControl gridControl, BeanVO beanVO, DetalleSiniestro detalleSiniestro, Boolean aplicarLogicaNegocio, ReloadButton reloadButton) {
         super(detailFramePath, gridControl, beanVO, aplicarLogicaNegocio);
         this.detalleSiniestro = detalleSiniestro;
@@ -123,6 +127,12 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
         Hibernate.initialize(sin.getDesgloseCobertura());
         s.close();
         beanVO = sin;
+        if (this.detalleSiniestro == null) {
+            this.detalleSiniestro = sin.getDetalleSiniestro();
+            ((FacturaDetailFrame) vista).createDiagnostocoCodLookup(detalleSiniestro);
+            //this.reload = reload;
+            checkStatus();
+        }
         return new VOResponse(beanVO);
     }
 
@@ -204,7 +214,6 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
         return deducible;
     }
 
-
     public Factura updateFactura(Factura fac) {
         Factura factura = fac;
         Double islr = factura.getPorcentajeRetencionIslr();
@@ -251,22 +260,22 @@ public class FacturaDetailFrameController extends DefaultDetailFrameController {
 
         factura.setGastosClinicos(gastosClinicos);
         factura.setHonorariosMedicos(honorariosMedicos);
-        
+
         factura.setTotalLiquidado(round2((baseIva * iva) + montoAmparado));
         return factura;
     }
+
     /**
      * Para el numero dado retorna con dos decimales redondeando
      * 
      * @param number numero a ser redondiado
      * @return numero redondiado
      */
-     private  Double round2(Double number) {
+    private Double round2(Double number) {
         DecimalFormat formatter = new DecimalFormat("#0.00");
         DecimalFormatSymbols s = formatter.getDecimalFormatSymbols();
         s.setDecimalSeparator('.');
         formatter.setDecimalFormatSymbols(s);
         return Double.parseDouble(formatter.format(number));
     }
-    
 }

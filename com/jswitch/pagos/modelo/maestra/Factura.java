@@ -12,6 +12,7 @@ import com.jswitch.pagos.modelo.transaccional.DesgloseSumaAsegurada;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.vistasbd.SumaFactura;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -28,6 +29,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.persistence.Version;
 import javax.validation.constraints.Past;
 
@@ -233,6 +235,15 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private Double totalLiquidado;
     /**
+     * RIF DE LA EMPRESA
+     */
+    @Transient
+    private transient String rifAgente;
+    /**
+     * periodo en q se pago
+     */
+    private transient String periodo;
+    /**
      * Coleccion de gastos por diagnostico
      */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "factura")
@@ -299,6 +310,12 @@ public class Factura extends BeanVO implements Serializable, Auditable {
 
     /**
      * total de base para el IVA
+     *
+     * 200  10
+     * 10*100/200
+     * 1000/200
+     * 5
+     * 10/200
      * @return the baseIva
      */
     public Double getBaseIva() {
@@ -327,6 +344,14 @@ public class Factura extends BeanVO implements Serializable, Auditable {
      */
     public DetalleSiniestro getDetalleSiniestro() {
         return detalleSiniestro;
+    }
+
+    /**
+     * Fecha en que se hace el la orden de pago
+     * @return the fechaAprobado
+     */
+    public Date getFechaAprobado() {
+        return fechaAprobado;
     }
 
     /**
@@ -460,6 +485,18 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     }
 
     /**
+     * Periodo en q se pago
+     * @return the periodo
+     */
+    public String getPeriodo() {
+        if (periodo == null && fechaPagado != null) {
+            SimpleDateFormat df = new SimpleDateFormat("yyyyMM");
+            periodo = (df.format(fechaPagado));
+        }
+        return periodo;
+    }
+
+    /**
      * porcentaje de iva para la fecha de facturacion
      * @return the porcentajeIva
      */
@@ -497,6 +534,17 @@ public class Factura extends BeanVO implements Serializable, Auditable {
      */
     public Double getPorcentajeRetencionTM() {
         return porcentajeRetencionTM;
+    }
+
+    /**
+     * RIF DE LA EMPRESA
+     * @return the rifAgente
+     */
+    public String getRifAgente() {
+        if (rifAgente == null && General.empresa != null) {
+            rifAgente = General.empresa.getRif2();
+        }
+        return rifAgente;
     }
 
     /**
@@ -558,6 +606,12 @@ public class Factura extends BeanVO implements Serializable, Auditable {
 
     /**
      * total de base para el IVA
+     *
+     * 200  10
+     * 10*100/200
+     * 1000/200
+     * 5
+     * 10/200
      * @param baseIva the baseIva to set
      */
     public void setBaseIva(Double baseIva) {
@@ -586,6 +640,14 @@ public class Factura extends BeanVO implements Serializable, Auditable {
      */
     public void setDetalleSiniestro(DetalleSiniestro detalleSiniestro) {
         this.detalleSiniestro = detalleSiniestro;
+    }
+
+    /**
+     * Fecha en que se hace el la orden de pago
+     * @param fechaAprobado the fechaAprobado to set
+     */
+    public void setFechaAprobado(Date fechaAprobado) {
+        this.fechaAprobado = fechaAprobado;
     }
 
     /**
@@ -719,6 +781,14 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     }
 
     /**
+     * periodo de pago
+     * @param periodo the periodo to set
+     */
+    public void setPeriodo(String periodo) {
+        this.periodo = periodo;
+    }
+
+    /**
      * porcentaje de iva para la fecha de facturacion
      * @param porcentajeIva the porcentajeIva to set
      */
@@ -756,6 +826,14 @@ public class Factura extends BeanVO implements Serializable, Auditable {
      */
     public void setPorcentajeRetencionTM(Double porcentajeRetencionTM) {
         this.porcentajeRetencionTM = porcentajeRetencionTM;
+    }
+
+    /**
+     * RIF DE LA EMPRESA
+     * @param rifAgente the rifAgente to set
+     */
+    public void setRifAgente(String rifAgente) {
+        this.rifAgente = rifAgente;
     }
 
     /**
