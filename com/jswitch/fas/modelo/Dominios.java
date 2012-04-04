@@ -57,7 +57,6 @@ public class Dominios {
     }
 
     public static enum TipoBusqueda {
-
         GRUPO_FAMILIAR, TITULARES, ASEGURADOS
     }
 
@@ -72,7 +71,6 @@ public class Dominios {
     }
 
     public static enum EstatusPago {
-
         PENDIENTE, SELECCIONADO, EN_ADMINISTRACION, PAGADO, ANULADO
     }
 
@@ -87,7 +85,6 @@ public class Dominios {
     }
 
     public static enum TipoTramiteSiniestro {
-
         MEDICO, QUIRURGICO
     }
 
@@ -102,7 +99,6 @@ public class Dominios {
     }
 
     public static enum TratamientoEfectuado {
-
         Ninguno, DESCONOCIDO, MEDICO, QUIRURGICO
     }
 
@@ -117,7 +113,6 @@ public class Dominios {
     }
 
     public static enum TipoPago {
-
         PAGO_SIGECOF, TRANSFERENCIA_SWIFT,
         ABONO_EN_CUENTA_BANCO_DE_VENEZUELA,
         CHEQUE_DE_GERENCIA
@@ -134,7 +129,6 @@ public class Dominios {
     }
 
     public static enum DuracionCheque {
-
         _30, _45, _60, _90, _120, _180
     }
 
@@ -149,7 +143,6 @@ public class Dominios {
     }
 
     public static enum TipoEnfermedad {
-
         DESCONOCIDO, AGUDA, PREEXISTENTE, AGUDA_PREEXISTENTE
     }
 
@@ -164,7 +157,6 @@ public class Dominios {
     }
 
     public static enum EstadoSiniestro {
-
         ABIERTO, CERRADO
     }
 
@@ -179,7 +171,6 @@ public class Dominios {
     }
 
     public static enum TipoDetalleSiniestro {
-
         Todos(DetalleSiniestro.class.getName()),
         Reembolso(Reembolso.class.getName()),
         Aps(APS.class.getName()),
@@ -222,7 +213,6 @@ public class Dominios {
     }
 
     public static enum TipoDescuentoProntoPago {
-
         POR_CONVENIO, POR_PORCENTAJE_DESCUENTO, POR_MONTO_DESCUENTO
     }
 
