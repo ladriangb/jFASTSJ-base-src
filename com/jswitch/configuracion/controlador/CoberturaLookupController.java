@@ -34,7 +34,7 @@ public class CoberturaLookupController extends DefaultLookupController {
 
     public CoberturaLookupController() {
         this.setLookupDataLocator(new MarcaModeloLookupDataLocator(Diagnostico.class.getName()));
-        this.setFramePreferedSize(new Dimension(500, 500));
+        this.setFramePreferedSize(new Dimension(700, 500));
         this.setCodeSelectionWindow(CoberturaLookupController.TREE_GRID_FRAME);
         this.getLookupDataLocator().setNodeNameAttribute("nombre");
         this.setLookupValueObjectClassName(Cobertura.class.getName());
@@ -44,14 +44,30 @@ public class CoberturaLookupController extends DefaultLookupController {
 //        this.setVisibleColumn("ramo.nombre", true);
 
         this.setVisibleColumn("nombre", true);
-//        this.setPreferredWidthColumn("id", 50);
-        this.setPreferredWidthColumn("nombre", 300);
-        //this.setPreferredWidthColumn("marca.nombre", 150);
+        this.setPreferredWidthColumn("nombre",300);
         this.setFilterableColumn("nombre", true);
-        //this.setFilterableColumn("marca.nombre", true);
-        //this.setSortableColumn("marca.nombre", true);
         this.setSortableColumn("nombre", true);
         this.setSortedColumn("nombre", Consts.ASC_SORTED);
+
+        this.setVisibleColumn("iva", true);
+        this.setPreferredWidthColumn("iva", 50);
+        this.setFilterableColumn("iva", true);
+        this.setSortableColumn("iva", true);
+
+        this.setVisibleColumn("islr", true);
+        this.setPreferredWidthColumn("islr", 50);
+        this.setFilterableColumn("islr", true);
+        this.setSortableColumn("islr", true);
+
+        this.setVisibleColumn("gastosClinicos", true);
+        this.setPreferredWidthColumn("gastosClinicos", 50);
+        this.setFilterableColumn("gastosClinicos", true);
+        this.setSortableColumn("gastosClinicos", true);
+
+        this.setVisibleColumn("honorariosMedicos", true);
+        this.setPreferredWidthColumn("honorariosMedicos", 50);
+        this.setFilterableColumn("honorariosMedicos", true);
+        this.setSortableColumn("honorariosMedicos", true);
 
     }
 
@@ -92,8 +108,8 @@ public class CoberturaLookupController extends DefaultLookupController {
                                     currentSortedVersusColumns,
                                     valueObjectType,
                                     sql,
-                                    new Object[]{ new Boolean(true)},
-                                    new Type[]{ new BooleanType()},
+                                    new Object[]{Boolean.TRUE},
+                                    new Type[]{new BooleanType()},
                                     "C",
                                     sf,
                                     s);

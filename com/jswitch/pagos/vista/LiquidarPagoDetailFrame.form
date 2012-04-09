@@ -109,14 +109,9 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="labelControl12" linkSize="18" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="codLookupTM" pref="259" max="32767" attributes="0"/>
-                      </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="labelControl14" linkSize="18" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -152,11 +147,6 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="labelControl12" linkSize="19" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="codLookupTM" alignment="1" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="labelControl14" linkSize="19" min="-2" max="-2" attributes="0"/>
                       <Component id="comboBoxControl2" linkSize="19" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -180,7 +170,7 @@
                       <Component id="labelControl4" linkSize="19" min="-2" max="-2" attributes="0"/>
                       <Component id="currencyControl1" linkSize="19" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="27" max="32767" attributes="0"/>
+                  <EmptySpace pref="21" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -263,24 +253,6 @@
             <Property name="maxCharacters" type="int" value="25"/>
             <Property name="required" type="boolean" value="true"/>
             <Property name="toolTipText" type="java.lang.String" value="Etapa en la que quedaran todos los Detalle Siniestro Asociados al pago"/>
-          </Properties>
-        </Component>
-        <Component class="org.openswing.swing.client.CodLookupControl" name="codLookupTM">
-          <Properties>
-            <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="&quot;timbreMunicipal.zipCode&quot;" type="code"/>
-            </Property>
-            <Property name="maxCharacters" type="int" value="25"/>
-            <Property name="required" type="boolean" value="true"/>
-            <Property name="toolTipText" type="java.lang.String" value="Etapa en la que quedaran todos los Detalle Siniestro Asociados al pago"/>
-          </Properties>
-        </Component>
-        <Component class="org.openswing.swing.client.LabelControl" name="labelControl12">
-          <Properties>
-            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Cursor predeterminado"/>
-            </Property>
-            <Property name="label" type="java.lang.String" value="timbreMunicipal.zipCode"/>
           </Properties>
         </Component>
       </SubComponents>

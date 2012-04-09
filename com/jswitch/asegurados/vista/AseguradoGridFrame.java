@@ -28,6 +28,7 @@ public class AseguradoGridFrame extends DefaultGridFrame {
         navigatorBar1 = new org.openswing.swing.client.NavigatorBar();
         gridData = new org.openswing.swing.client.GridControl();
         decimalColumn1 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        textColumn12 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn1 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn2 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn10 = new org.openswing.swing.table.columns.client.TextColumn();
@@ -89,6 +90,12 @@ public class AseguradoGridFrame extends DefaultGridFrame {
         decimalColumn1.setPreferredWidth(40);
         decimalColumn1.setSortVersus(org.openswing.swing.util.java.Consts.DESC_SORTED);
         gridData.getColumnContainer().add(decimalColumn1);
+
+        textColumn12.setColumnFilterable(true);
+        textColumn12.setColumnName("certificado.poliza.numero");
+        textColumn12.setColumnRequired(false);
+        textColumn12.setColumnSortable(true);
+        gridData.getColumnContainer().add(textColumn12);
 
         textColumn1.setColumnFilterable(true);
         textColumn1.setColumnName("persona.rif.rif");
@@ -262,6 +269,7 @@ public class AseguradoGridFrame extends DefaultGridFrame {
     private org.openswing.swing.client.ReloadButton reloadButton1;
     private org.openswing.swing.table.columns.client.TextColumn textColumn1;
     private org.openswing.swing.table.columns.client.TextColumn textColumn10;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn12;
     private org.openswing.swing.table.columns.client.TextColumn textColumn2;
     private org.openswing.swing.table.columns.client.TextColumn textColumn3;
     private org.openswing.swing.table.columns.client.TextColumn textColumn4;

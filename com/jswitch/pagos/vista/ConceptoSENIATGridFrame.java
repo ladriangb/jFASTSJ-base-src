@@ -32,6 +32,8 @@ public class ConceptoSENIATGridFrame extends DefaultGridFrame {
         textColumn4 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn1 = new org.openswing.swing.table.columns.client.TextColumn();
         currencyColumn1 = new org.openswing.swing.table.columns.client.CurrencyColumn();
+        decimalColumn3 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        decimalColumn2 = new org.openswing.swing.table.columns.client.DecimalColumn();
         checkBoxColumn1 = new org.openswing.swing.table.columns.client.CheckBoxColumn();
         dateTimeColumn1 = new org.openswing.swing.table.columns.client.DateTimeColumn();
         textColumn2 = new org.openswing.swing.table.columns.client.TextColumn();
@@ -117,6 +119,14 @@ public class ConceptoSENIATGridFrame extends DefaultGridFrame {
         currencyColumn1.setPreferredWidth(70);
         gridData.getColumnContainer().add(currencyColumn1);
 
+        decimalColumn3.setColumnName("sustraendo");
+        decimalColumn3.setDecimals(2);
+        gridData.getColumnContainer().add(decimalColumn3);
+
+        decimalColumn2.setColumnName("aPartirDe");
+        decimalColumn2.setDecimals(2);
+        gridData.getColumnContainer().add(decimalColumn2);
+
         checkBoxColumn1.setColumnName("auditoria.activo");
         checkBoxColumn1.setEditableOnEdit(true);
         checkBoxColumn1.setEditableOnInsert(true);
@@ -151,7 +161,7 @@ public class ConceptoSENIATGridFrame extends DefaultGridFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(gridData, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+                .addComponent(gridData, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -176,6 +186,8 @@ public class ConceptoSENIATGridFrame extends DefaultGridFrame {
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn1;
     private org.openswing.swing.table.columns.client.DateTimeColumn dateTimeColumn2;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn1;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn2;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn3;
     private org.openswing.swing.client.DeleteButton deleteButton1;
     private org.openswing.swing.client.EditButton editButton1;
     private org.openswing.swing.client.ExportButton exportButton1;

@@ -2,7 +2,6 @@ package com.jswitch.pagos.vista;
 
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.base.vista.util.DefaultDetailFrame;
-import com.jswitch.configuracion.controlador.TimbreMunicipalLookupController;
 import com.jswitch.fas.modelo.Dominios;
 import com.jswitch.fas.modelo.Dominios.TipoDescuentoProntoPago;
 import com.jswitch.pagos.controlador.EtapasPagadasLookupController;
@@ -42,8 +41,6 @@ public class LiquidarPagoDetailFrame extends DefaultDetailFrame {
         comboBoxControl2 = new org.openswing.swing.client.ComboBoxControl();
         labelControl14 = new org.openswing.swing.client.LabelControl();
         codLookupControl1 = new org.openswing.swing.client.CodLookupControl();
-        codLookupTM = new org.openswing.swing.client.CodLookupControl();
-        labelControl12 = new org.openswing.swing.client.LabelControl();
 
         setTitle("Pagar");
 
@@ -115,14 +112,6 @@ public class LiquidarPagoDetailFrame extends DefaultDetailFrame {
         codLookupControl1.setRequired(true);
         codLookupControl1.setToolTipText("Etapa en la que quedaran todos los Detalle Siniestro Asociados al pago");
 
-        codLookupTM.setAttributeName("timbreMunicipal.zipCode");
-        codLookupTM.setMaxCharacters(25);
-        codLookupTM.setRequired(true);
-        codLookupTM.setToolTipText("Etapa en la que quedaran todos los Detalle Siniestro Asociados al pago");
-
-        labelControl12.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        labelControl12.setLabel("timbreMunicipal.zipCode");
-
         javax.swing.GroupLayout form1Layout = new javax.swing.GroupLayout(form1);
         form1.setLayout(form1Layout);
         form1Layout.setHorizontalGroup(
@@ -130,10 +119,6 @@ public class LiquidarPagoDetailFrame extends DefaultDetailFrame {
             .addGroup(form1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(form1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(form1Layout.createSequentialGroup()
-                        .addComponent(labelControl12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(codLookupTM, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE))
                     .addGroup(form1Layout.createSequentialGroup()
                         .addComponent(labelControl14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -157,16 +142,12 @@ public class LiquidarPagoDetailFrame extends DefaultDetailFrame {
                 .addContainerGap())
         );
 
-        form1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {labelControl10, labelControl11, labelControl12, labelControl14, labelControl2, labelControl4});
+        form1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {labelControl10, labelControl11, labelControl14, labelControl2, labelControl4});
 
         form1Layout.setVerticalGroup(
             form1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(form1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(form1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(labelControl12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(codLookupTM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(form1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelControl14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comboBoxControl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -186,10 +167,10 @@ public class LiquidarPagoDetailFrame extends DefaultDetailFrame {
                 .addGroup(form1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelControl4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(currencyControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
-        form1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {codLookupControl1, comboBoxControl2, currencyControl1, dateControl3, labelControl10, labelControl11, labelControl12, labelControl14, labelControl2, labelControl4, textControl2});
+        form1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {codLookupControl1, comboBoxControl2, currencyControl1, dateControl3, labelControl10, labelControl11, labelControl14, labelControl2, labelControl4, textControl2});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -252,9 +233,9 @@ public class LiquidarPagoDetailFrame extends DefaultDetailFrame {
         lookupDiagnostico.addLookup2ParentLink(
                 "etapaSiniestro");
         codLookupControl1.setLookupController(lookupDiagnostico);
-        TimbreMunicipalLookupController tm = new TimbreMunicipalLookupController();
-        tm.addLookup2ParentLink("timbreMunicipal");
-        codLookupTM.setLookupController(tm);
+//        TimbreMunicipalLookupController tm = new TimbreMunicipalLookupController();
+//        tm.addLookup2ParentLink("timbreMunicipal");
+//        codLookupTM.setLookupController(tm);
         this.getRootPane().setDefaultButton(jButton1);
         form1.setCreateInnerVO(
                 false);
@@ -313,7 +294,6 @@ public class LiquidarPagoDetailFrame extends DefaultDetailFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.openswing.swing.client.CodLookupControl codLookupControl1;
-    private org.openswing.swing.client.CodLookupControl codLookupTM;
     private org.openswing.swing.client.ComboBoxControl comboBoxControl2;
     private org.openswing.swing.client.CurrencyControl currencyControl1;
     private org.openswing.swing.client.DateControl dateControl3;
@@ -323,7 +303,6 @@ public class LiquidarPagoDetailFrame extends DefaultDetailFrame {
     private javax.swing.JPanel jPanel1;
     private org.openswing.swing.client.LabelControl labelControl10;
     private org.openswing.swing.client.LabelControl labelControl11;
-    private org.openswing.swing.client.LabelControl labelControl12;
     private org.openswing.swing.client.LabelControl labelControl14;
     private org.openswing.swing.client.LabelControl labelControl2;
     private org.openswing.swing.client.LabelControl labelControl4;

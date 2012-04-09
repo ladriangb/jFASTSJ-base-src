@@ -30,6 +30,7 @@ public class PolizasGridFrame extends DefaultGridFrame {
         navigatorBar1 = new org.openswing.swing.client.NavigatorBar();
         gridData = new org.openswing.swing.client.GridControl();
         decimalColumn1 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        textColumn3 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn1 = new org.openswing.swing.table.columns.client.TextColumn();
         dateColumn1 = new org.openswing.swing.table.columns.client.DateColumn();
         dateColumn2 = new org.openswing.swing.table.columns.client.DateColumn();
@@ -84,6 +85,13 @@ public class PolizasGridFrame extends DefaultGridFrame {
         decimalColumn1.setPreferredWidth(40);
         decimalColumn1.setSortVersus(org.openswing.swing.util.java.Consts.DESC_SORTED);
         gridData.getColumnContainer().add(decimalColumn1);
+
+        textColumn3.setColumnFilterable(true);
+        textColumn3.setColumnName("numero");
+        textColumn3.setColumnSortable(true);
+        textColumn3.setEditableOnEdit(true);
+        textColumn3.setEditableOnInsert(true);
+        gridData.getColumnContainer().add(textColumn3);
 
         textColumn1.setColumnFilterable(true);
         textColumn1.setColumnName("nombre");
@@ -148,7 +156,7 @@ public class PolizasGridFrame extends DefaultGridFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(gridData, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
+                .addComponent(gridData, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -200,6 +208,7 @@ public class PolizasGridFrame extends DefaultGridFrame {
     private org.openswing.swing.client.ReloadButton reloadButton1;
     private org.openswing.swing.table.columns.client.TextColumn textColumn1;
     private org.openswing.swing.table.columns.client.TextColumn textColumn2;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn3;
     private org.openswing.swing.table.columns.client.TextColumn textColumn4;
     private org.openswing.swing.table.columns.client.TextColumn textColumn5;
     // End of variables declaration//GEN-END:variables

@@ -250,4 +250,7 @@ public class DetalleSiniestroGridFrameController extends DefaultGridFrameControl
             s.close();
         }
     }
+    
+    
+     
 }

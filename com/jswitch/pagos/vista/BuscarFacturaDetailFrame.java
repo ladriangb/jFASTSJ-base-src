@@ -75,7 +75,7 @@ public class BuscarFacturaDetailFrame extends DefaultDetailFrame {
 
         numericControl1.setAttributeName("ayo");
 
-        numericControl2.setAttributeName("ayo");
+        numericControl2.setAttributeName("mes");
 
         labelControl9.setLabel("numeroFactura");
 
@@ -132,7 +132,7 @@ public class BuscarFacturaDetailFrame extends DefaultDetailFrame {
                 .addGroup(form1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelControl10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textControl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         form1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {labelControl10, labelControl7, labelControl8, labelControl9, numericControl1, numericControl2, textControl1, textControl2});

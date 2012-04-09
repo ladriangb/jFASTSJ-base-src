@@ -117,7 +117,6 @@ public class PolizaDetailFrame extends DefaultDetailFrame {
         deleteButtonDoc = new org.openswing.swing.client.DeleteButton();
         saveButtonDoc = new org.openswing.swing.client.SaveButton();
         reloadButtonDoc = new org.openswing.swing.client.ReloadButton();
-        filterButtonDoc = new org.openswing.swing.client.FilterButton();
 
         setTitle("Poliza");
 
@@ -276,12 +275,12 @@ public class PolizaDetailFrame extends DefaultDetailFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 244, Short.MAX_VALUE)
+            .addGap(0, 248, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(form1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(31, Short.MAX_VALUE)))
+                    .addContainerGap(35, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.addTab("Detalle de Poliza", jPanel4);
@@ -341,7 +340,6 @@ public class PolizaDetailFrame extends DefaultDetailFrame {
 
         decimalColumn1.setColumnName("id");
         decimalColumn1.setColumnRequired(false);
-        decimalColumn1.setGrouping(false);
         decimalColumn1.setPreferredWidth(40);
         gridData.getColumnContainer().add(decimalColumn1);
 
@@ -394,7 +392,7 @@ public class PolizaDetailFrame extends DefaultDetailFrame {
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(gridData, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                .addComponent(gridData, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -413,7 +411,6 @@ public class PolizaDetailFrame extends DefaultDetailFrame {
 
         decimalColumnObs.setColumnName("id");
         decimalColumnObs.setColumnRequired(false);
-        decimalColumnObs.setGrouping(false);
         decimalColumnObs.setPreferredWidth(40);
         gridControlObs.getColumnContainer().add(decimalColumnObs);
 
@@ -466,8 +463,8 @@ public class PolizaDetailFrame extends DefaultDetailFrame {
             jPanelObsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelObsLayout.createSequentialGroup()
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(120, Short.MAX_VALUE))
-            .addComponent(gridControlObs, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                .addContainerGap(124, Short.MAX_VALUE))
+            .addComponent(gridControlObs, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout observacionesLayout = new javax.swing.GroupLayout(observaciones);
@@ -483,7 +480,7 @@ public class PolizaDetailFrame extends DefaultDetailFrame {
         );
         observacionesLayout.setVerticalGroup(
             observacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 244, Short.MAX_VALUE)
+            .addGap(0, 248, Short.MAX_VALUE)
             .addGroup(observacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(observacionesLayout.createSequentialGroup()
                     .addContainerGap()
@@ -504,7 +501,6 @@ public class PolizaDetailFrame extends DefaultDetailFrame {
 
         decimalColumnNot.setColumnName("id");
         decimalColumnNot.setColumnRequired(false);
-        decimalColumnNot.setGrouping(false);
         decimalColumnNot.setPreferredWidth(40);
         gridControlNot.getColumnContainer().add(decimalColumnNot);
 
@@ -555,8 +551,8 @@ public class PolizaDetailFrame extends DefaultDetailFrame {
             jPanelNotLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelNotLayout.createSequentialGroup()
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(120, Short.MAX_VALUE))
-            .addComponent(gridControlNot, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                .addContainerGap(124, Short.MAX_VALUE))
+            .addComponent(gridControlNot, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout notasTecnicasLayout = new javax.swing.GroupLayout(notasTecnicas);
@@ -572,7 +568,7 @@ public class PolizaDetailFrame extends DefaultDetailFrame {
         );
         notasTecnicasLayout.setVerticalGroup(
             notasTecnicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 244, Short.MAX_VALUE)
+            .addGap(0, 248, Short.MAX_VALUE)
             .addGroup(notasTecnicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(notasTecnicasLayout.createSequentialGroup()
                     .addContainerGap()
@@ -586,7 +582,6 @@ public class PolizaDetailFrame extends DefaultDetailFrame {
 
         gridControlDoc.setDeleteButton(deleteButtonDoc);
         gridControlDoc.setEditButton(editButtonDoc);
-        gridControlDoc.setFilterButton(filterButtonDoc);
         gridControlDoc.setInsertButton(insertButtonDoc);
         gridControlDoc.setMaxNumberOfRowsOnInsert(4);
         gridControlDoc.setReloadButton(reloadButtonDoc);
@@ -604,7 +599,6 @@ public class PolizaDetailFrame extends DefaultDetailFrame {
 
         decimalColumnNot1.setColumnName("id");
         decimalColumnNot1.setColumnRequired(false);
-        decimalColumnNot1.setGrouping(false);
         decimalColumnNot1.setPreferredWidth(40);
         gridControlDoc.getColumnContainer().add(decimalColumnNot1);
 
@@ -632,7 +626,6 @@ public class PolizaDetailFrame extends DefaultDetailFrame {
         jPanel11.add(deleteButtonDoc);
         jPanel11.add(saveButtonDoc);
         jPanel11.add(reloadButtonDoc);
-        jPanel11.add(filterButtonDoc);
 
         javax.swing.GroupLayout jPanelDocLayout = new javax.swing.GroupLayout(jPanelDoc);
         jPanelDoc.setLayout(jPanelDocLayout);
@@ -649,7 +642,7 @@ public class PolizaDetailFrame extends DefaultDetailFrame {
             .addGroup(jPanelDocLayout.createSequentialGroup()
                 .addGroup(jPanelDocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(gridControlDoc, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE))
+                    .addComponent(gridControlDoc, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -666,7 +659,7 @@ public class PolizaDetailFrame extends DefaultDetailFrame {
         );
         DocAnexosLayout.setVerticalGroup(
             DocAnexosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 244, Short.MAX_VALUE)
+            .addGap(0, 248, Short.MAX_VALUE)
             .addGroup(DocAnexosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(DocAnexosLayout.createSequentialGroup()
                     .addContainerGap()
@@ -691,7 +684,7 @@ public class PolizaDetailFrame extends DefaultDetailFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -830,7 +823,6 @@ public class PolizaDetailFrame extends DefaultDetailFrame {
     private org.openswing.swing.client.EditButton editButtonObs;
     private org.openswing.swing.client.ExportButton exportButton1;
     private org.openswing.swing.client.FilterButton filterButton1;
-    private org.openswing.swing.client.FilterButton filterButtonDoc;
     private org.openswing.swing.form.client.Form form1;
     private org.openswing.swing.client.GridControl gridControlDoc;
     private org.openswing.swing.client.GridControl gridControlNot;

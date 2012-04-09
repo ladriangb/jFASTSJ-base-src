@@ -108,93 +108,120 @@
       <SubComponents>
         <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn3">
           <Properties>
+            <Property name="columnFilterable" type="boolean" value="true"/>
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;detalleSiniestro.personaPago.rif.rif&quot;" type="code"/>
             </Property>
             <Property name="columnRequired" type="boolean" value="false"/>
+            <Property name="columnSortable" type="boolean" value="true"/>
             <Property name="upperCase" type="boolean" value="true"/>
           </Properties>
         </Component>
         <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn4">
           <Properties>
+            <Property name="columnFilterable" type="boolean" value="true"/>
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;numeroFactura&quot;" type="code"/>
             </Property>
             <Property name="columnRequired" type="boolean" value="false"/>
+            <Property name="columnSortable" type="boolean" value="true"/>
             <Property name="upperCase" type="boolean" value="true"/>
           </Properties>
         </Component>
         <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn5">
           <Properties>
+            <Property name="columnFilterable" type="boolean" value="true"/>
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;numeroControl&quot;" type="code"/>
             </Property>
             <Property name="columnRequired" type="boolean" value="false"/>
+            <Property name="columnSortable" type="boolean" value="true"/>
             <Property name="upperCase" type="boolean" value="true"/>
           </Properties>
         </Component>
         <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn6">
           <Properties>
+            <Property name="columnFilterable" type="boolean" value="true"/>
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;tipoConceptoSeniat.codigo&quot;" type="code"/>
             </Property>
             <Property name="columnRequired" type="boolean" value="false"/>
+            <Property name="columnSortable" type="boolean" value="true"/>
             <Property name="upperCase" type="boolean" value="true"/>
           </Properties>
         </Component>
         <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn1">
           <Properties>
+            <Property name="columnFilterable" type="boolean" value="true"/>
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;totalLiquidado&quot;" type="code"/>
             </Property>
             <Property name="columnRequired" type="boolean" value="false"/>
+            <Property name="columnSortable" type="boolean" value="true"/>
             <Property name="decimals" type="int" value="2"/>
           </Properties>
         </Component>
         <Component class="org.openswing.swing.table.columns.client.CurrencyColumn" name="currencyColumn1">
           <Properties>
+            <Property name="columnFilterable" type="boolean" value="true"/>
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;porcentajeRetencionIslr&quot;" type="code"/>
             </Property>
             <Property name="columnRequired" type="boolean" value="false"/>
+            <Property name="columnSortable" type="boolean" value="true"/>
             <Property name="currencySymbol" type="java.lang.String" value="%"/>
             <Property name="decimals" type="int" value="2"/>
           </Properties>
         </Component>
         <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn2">
           <Properties>
+            <Property name="columnFilterable" type="boolean" value="true"/>
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;montoRetencionIslr&quot;" type="code"/>
             </Property>
             <Property name="columnRequired" type="boolean" value="false"/>
+            <Property name="columnSortable" type="boolean" value="true"/>
             <Property name="decimals" type="int" value="2"/>
           </Properties>
         </Component>
         <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn3">
           <Properties>
+            <Property name="columnFilterable" type="boolean" value="true"/>
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;baseIslr&quot;" type="code"/>
             </Property>
             <Property name="columnRequired" type="boolean" value="false"/>
+            <Property name="columnSortable" type="boolean" value="true"/>
+            <Property name="decimals" type="int" value="2"/>
+          </Properties>
+        </Component>
+        <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn4">
+          <Properties>
+            <Property name="columnFilterable" type="boolean" value="true"/>
+            <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;sustraendo&quot;" type="code"/>
+            </Property>
+            <Property name="columnRequired" type="boolean" value="false"/>
+            <Property name="columnSortable" type="boolean" value="true"/>
             <Property name="decimals" type="int" value="2"/>
           </Properties>
         </Component>
         <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn7">
           <Properties>
+            <Property name="columnFilterable" type="boolean" value="true"/>
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;detalleSiniestro.siniestro.numero&quot;" type="code"/>
             </Property>
             <Property name="columnRequired" type="boolean" value="false"/>
+            <Property name="columnSortable" type="boolean" value="true"/>
             <Property name="upperCase" type="boolean" value="true"/>
           </Properties>
         </Component>
-        <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn8">
+        <Component class="org.openswing.swing.table.columns.client.DateColumn" name="dateColumn1">
           <Properties>
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="&quot;detalleSiniestro.ordenDePago.remesa.numeroRemesa&quot;" type="code"/>
+              <Connection code="&quot;fechaFactura&quot;" type="code"/>
             </Property>
-            <Property name="columnRequired" type="boolean" value="false"/>
-            <Property name="upperCase" type="boolean" value="true"/>
           </Properties>
         </Component>
       </SubComponents>

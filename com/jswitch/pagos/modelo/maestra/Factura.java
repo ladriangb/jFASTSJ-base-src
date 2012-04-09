@@ -119,6 +119,12 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     @BusinessKey
     private ConceptoSENIAT tipoConceptoSeniat;
     /**
+     * sustraendo si el tipo de consepto seniat es 
+     */
+    @Column
+    @BusinessKey
+    private Double sustraendo;
+    /**
      * UT Unidad Tributaria
      */
     @Column
@@ -269,6 +275,7 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     private AuditoriaBasica auditoria;
 
     public Factura() {
+        sustraendo = 0d;
         baseIslr = 0d;
         baseIva = 0d;
         montoIva = 0d;
@@ -876,4 +883,21 @@ public class Factura extends BeanVO implements Serializable, Auditable {
     public void setValorUT(Double valorUT) {
         this.valorUT = valorUT;
     }
+
+    /**
+     * sustraendo si el tipo de consepto seniat es
+     * @return the sustraendo
+     */
+    public Double getSustraendo() {
+        return sustraendo;
+    }
+
+    /**
+     * sustraendo si el tipo de consepto seniat es
+     * @param sustraendo the sustraendo to set
+     */
+    public void setSustraendo(Double sustraendo) {
+        this.sustraendo = sustraendo;
+    }
+    
 }

@@ -1401,6 +1401,10 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
         }
     }
 
+    /**
+     * pone las cosas invisibles mientras el grid no lo permita
+     * @param enabled 
+     */
     private void setEnableGridInternalButtons(boolean enabled) {
         insertButton7.setVisible(enabled);
         deleteButton7.setVisible(enabled);
@@ -1551,4 +1555,10 @@ public class RemesaDetailFrame extends DefaultDetailFrame {
     private org.openswing.swing.client.TextControl textControl3;
     private org.openswing.swing.client.TextControl textControl4;
     // End of variables declaration//GEN-END:variables
+    public void hideButtons(Remesa rem) {
+        jButton3.setVisible(true);
+        if (rem.getEstatusPago().equals(EstatusPago.ANULADO)) {
+            jButton3.setVisible(false);
+        }
+    }
 }

@@ -36,6 +36,7 @@ public class FacturaSeniatGridFrame extends DefaultGridFrame {
         currencyColumn1 = new org.openswing.swing.table.columns.client.CurrencyColumn();
         decimalColumn2 = new org.openswing.swing.table.columns.client.DecimalColumn();
         decimalColumn3 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        decimalColumn4 = new org.openswing.swing.table.columns.client.DecimalColumn();
         textColumn7 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn8 = new org.openswing.swing.table.columns.client.TextColumn();
 
@@ -126,6 +127,9 @@ public class FacturaSeniatGridFrame extends DefaultGridFrame {
         decimalColumn3.setDecimals(2);
         gridData.getColumnContainer().add(decimalColumn3);
 
+        decimalColumn4.setColumnName("sustraendo");
+        gridData.getColumnContainer().add(decimalColumn4);
+
         textColumn7.setColumnName("detalleSiniestro.siniestro.numero");
         textColumn7.setColumnRequired(false);
         textColumn7.setUpperCase(true);
@@ -193,6 +197,7 @@ public class FacturaSeniatGridFrame extends DefaultGridFrame {
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn1;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn2;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn3;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn4;
     private org.openswing.swing.client.ExportButton exportButton1;
     private org.openswing.swing.client.GridControl gridData;
     private javax.swing.JPanel jPanel1;

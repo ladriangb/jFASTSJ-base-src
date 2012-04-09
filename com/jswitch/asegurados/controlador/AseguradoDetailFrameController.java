@@ -100,8 +100,8 @@ public class AseguradoDetailFrameController extends DefaultDetailFrameController
 
     @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
-
-        if (canInsert((Asegurado) newPersistentObject)) {
+        String x = canInsert((Asegurado) newPersistentObject);
+        if (x == null) {
             ((Asegurado) newPersistentObject).setCertificado(familia);
             Response res = super.insertRecord(newPersistentObject);
             if (res instanceof VOResponse && familia != null) {
@@ -109,7 +109,7 @@ public class AseguradoDetailFrameController extends DefaultDetailFrameController
             }
             return res;
         }
-        return null;
+        return new ErrorResponse(x);
     }
 
     @Override
@@ -161,17 +161,20 @@ public class AseguradoDetailFrameController extends DefaultDetailFrameController
         }
     }
 
-    public boolean canInsert(Asegurado aseg) {
+    public String canInsert(Asegurado aseg) {
 
         Session s = null;
         Titular data = null;
         try {
             s = HibernateUtil.getSessionFactory().openSession();
-            Transaction tx = s.beginTransaction();
-            Query query = s.createQuery("From " + Titular.class.getName()
-                    + " WHERE persona.rif.rif=?").setString(0, aseg.getPersona().getRif().getRif());
+//            Transaction tx = s.beginTransaction();
+            Query query = s.createQuery("SELECT C.titular FROM " + Certificado.class.getName()
+                    + " C WHERE C.titular.persona.rif.rif=?"
+                    + " AND C.poliza.id=?").
+                    setString(0, aseg.getPersona().getRif().getRif()).
+                    setLong(1, familia.getPoliza().getId());
             data = (Titular) query.uniqueResult();
-            tx.commit();
+//            tx.commit();
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
@@ -181,10 +184,9 @@ public class AseguradoDetailFrameController extends DefaultDetailFrameController
         if (data != null
                 && !data.getPersona().getRif().getRif().equals(
                 familia.getTitular().getPersona().getRif().getRif())) {
-            JOptionPane.showMessageDialog(new JFrame(), "El Asegurado seleccionado es ya un"
-                    + "Titular en \"" + General.empresa.getNombre() + "\"");
-            return false;
+            return "El Asegurado seleccionado es ya un"
+                    + "Titular en \"" + General.empresa.getNombre() + "\"";
         }
-        return true;
+        return null;
     }
 }

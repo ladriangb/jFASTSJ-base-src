@@ -7,7 +7,9 @@ import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.modelo.util.bean.BeanVO;
 import com.jswitch.configuracion.modelo.dominio.Ramo;
 import com.jswitch.configuracion.modelo.maestra.Plan;
+import com.jswitch.configuracion.modelo.transaccional.RangoValor;
 import com.jswitch.pagos.controlador.FacturaDetailFrameController;
+import com.jswitch.pagos.modelo.maestra.Factura;
 import com.jswitch.pagos.vista.FacturaDetailFrame;
 import com.jswitch.persona.modelo.dominio.TipoPersona;
 import com.jswitch.siniestros.controlador.DiagnosticoPorRamoGridFrameController;
@@ -31,6 +33,7 @@ import javax.swing.JOptionPane;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.classic.Session;
+import org.hibernate.transform.AliasedTupleSRT;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
@@ -164,7 +167,8 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
             ((DetalleSiniestro) newPersistentObject).setRamo(ramo);
 
             if (newPersistentObject instanceof Emergencia) {
-                ((Emergencia) newPersistentObject).setClave(siniestro.getNumero());
+                ((Emergencia) newPersistentObject).setClave(siniestro.getNumero()
+                        + "-" + ((DetalleSiniestro) newPersistentObject).getNumero());
             }
 
             if (newPersistentObject instanceof Reembolso) {
@@ -191,6 +195,11 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
         }
     }
 
+    /**
+     * mira si el ramo esta para ese asegurado
+     * @param nombreRamo
+     * @return 
+     */
     private boolean checkRamo(String nombreRamo) {
         Session s = null;
         try {
@@ -238,15 +247,52 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
                 }
 
             }
+
+            if (!General.empresa.getLiquidarEnOrden()) {
+                if (!(persistentObject instanceof Reembolso)) {
+                    Response res =
+                            liquidar(
+                            (DetalleSiniestro) persistentObject, s);
+                    if (res instanceof ErrorResponse) {
+                        return res;
+                    } else {
+                        persistentObject =
+                                (ValueObject) ((VOResponse) res).getVo();
+                    }
+
+                } else {
+                    liquidarDetalle((DetalleSiniestro) persistentObject, s, 0d);
+                }
+            }
+            if (!General.empresa.getSustraendoEnOrden()) {
+                sustraendoACancelar((DetalleSiniestro) persistentObject, s);
+            }
+
         } catch (Exception e) {
             LoggerUtil.error(this.getClass(), "logicade negocios", e);
             return new ErrorResponse(e.getMessage());
         } finally {
             s.close();
         }
+        if (d instanceof Reembolso) {
+            Reembolso r = (Reembolso) d;
+            if (r.getFechaOcurrencia().getTime() > r.getFechaNotificacion().getTime()) {
+                return new ErrorResponse("El siniestro no puede ser  antes de su ocurrencia.\nInconsistencia en fecha de notificación y ocurrencia.");
+            }
+        }
+        if (d instanceof Emergencia) {
+            Emergencia r = (Emergencia) d;
+            if (r.getFechaEntrada().getTime() > r.getFechaSalida().getTime()) {
+                return new ErrorResponse("Inconsistencia en fecha de Entrada y Salida.");
+            }
+        }
+
         return new VOResponse(d);
     }
 
+    /**
+     * estatus y si permite o no edicion
+     */
     private void checkStatus() {
         DetalleSiniestro ds = ((DetalleSiniestro) beanVO);
         if (ds.getEtapaSiniestro().getIdPropio().compareTo("ORD_PAG") == 0
@@ -258,5 +304,147 @@ public class DetalleSiniestroDetailFrameController extends DefaultDetailFrameCon
                 && !General.usuario.getSuperusuario()) {
             ((DetalleSiniestroDetailFrame) vista).hideAll();
         }
+    }
+
+    /**
+     * Liquida el siniestro
+     * @param detalle de Siniestro
+     * @param s Session 
+     * @return 
+     */
+    private Response liquidar(DetalleSiniestro detalle, Session s) {
+        String zipCode = "";
+        if (detalle.getPersonaPago() != null && detalle.getPersonaPago().getDireccionFiscal() != null) {
+            zipCode = detalle.getPersonaPago().getDireccionFiscal().getZonaPostal();
+        }
+        if (zipCode == null) {
+            zipCode = "";
+        }
+        if (zipCode.trim().isEmpty()) {
+            Double tm = timbreACancelar(detalle, zipCode, s);
+            liquidarDetalle(detalle, s, tm);
+        }
+        return new VOResponse(detalle);
+    }
+
+    /**
+     * Paga una serie de facturas especificas de reembolsos donde 
+     * @param tm Timbre municipal 
+     * @param detalle Detalle Siniestro
+     * @param s session
+     */
+    private void liquidarDetalle(DetalleSiniestro detalle, Session s, Double tm) {
+        s.beginTransaction();
+        s.createQuery("UPDATE " + Factura.class.getName()
+                + " f SET f.porcentajeRetencionTM=:tm,"
+                + " f.valorUT=:ut"
+                + " WHERE id in (SELECT P.id FROM "
+                + Factura.class.getName()
+                + " P WHERE P.detalleSiniestro.id=:det"
+                + ")").
+                setDouble("tm", tm).
+                setDouble("ut", General.parametros.get("ut").getValorDouble()).
+                setLong("det", detalle.getId()).
+                executeUpdate();
+        s.getTransaction().commit();
+    }
+
+    /**
+     * calcular el timbre municipal a cancelar por DetalleSiniestro
+     * @param detalle
+     * @param pagar
+     * @return timbre municipal a cancelar 
+     */
+    private Double timbreACancelar(DetalleSiniestro detalle, String zipCode, Session s) {
+        int totalUT = (int) (detalle.getSumaDetalle().getTotalACancelar()
+                / General.parametros.get("ut").getValorDouble());
+        List<RangoValor> list = s.createQuery("FROM "
+                + RangoValor.class.getName() + " R WHERE R.timbreMunicipal.zipCode=?").
+                setString(0, zipCode).list();
+        if (list.isEmpty()) {
+            if (General.parametros.get("tm") != null
+                    && General.parametros.get("tm").getValorDouble() != null
+                    && General.parametros.get("minTM") != null
+                    && General.parametros.get("minTM").getValorInteger() != null) {
+                if (totalUT >= General.parametros.get("minTM").getValorInteger()) {
+                    return General.parametros.get("tm").getValorDouble();
+                }
+            }
+        } else {
+            for (RangoValor rangoValor : list) {
+                if (totalUT >= rangoValor.getMinValue()
+                        && totalUT <= rangoValor.getMaxValue()) {
+                    return rangoValor.getMonto();
+                }
+            }
+        }
+        return 0d;
+    }
+
+    /**
+     * calcular el sustraendo a cancelar por DetalleSiniestro
+     * @param detalle DetalleSiniestro
+     * @param s Session
+     */
+    private void sustraendoACancelar(DetalleSiniestro detalle, Session s) {
+        int aPartirDe = (int) (General.parametros.get("ut").getValorDouble()
+                * General.parametros.get("factorISLR").getValorDouble());
+        Double sustraendo = 0d;
+        String sql = "SELECT SUM(C.baseIslr) FROM " + Factura.class.getName()
+                + " C WHERE C.detalleSiniestro.id=? and C.tipoConceptoSeniat.codigo=?";
+
+        Double baseIslr = (Double) s.createQuery(sql).
+                setLong(0, detalle.getId()).
+                setString(1, "004").uniqueResult();
+        if (baseIslr == null) {
+            baseIslr = 0d;
+        }
+        if (baseIslr >= aPartirDe) {
+            String update = "UPDATE "
+                    + Factura.class.getName()
+                    + " SET sustraendo="
+                    + " CAST(baseIslr/:base*:base2*porcentajeRetencionIslr AS big_decimal),"
+                    + " montoRetencionIslr="
+                    + " (baseIslr*porcentajeRetencionIslr)"
+                    + " -CAST(baseIslr/:base*:base2*porcentajeRetencionIslr AS big_decimal)"
+                    + " WHERE  id IN (SELECT C.id FROM " + Factura.class.getName()
+                    + " C WHERE C.detalleSiniestro.id=:det and C.tipoConceptoSeniat.codigo=:co)";
+            s.beginTransaction();
+            s.createQuery(update).
+                    setDouble("base", baseIslr).
+                    setDouble("base2", aPartirDe).
+                    setLong("det", detalle.getId()).
+                    setString("co", "004").
+                    executeUpdate();
+            sql = "SELECT SUM(C.sustraendo),porcentajeRetencionIslr FROM " + Factura.class.getName()
+                    + " C WHERE C.detalleSiniestro.id=? and C.tipoConceptoSeniat.codigo=? GROUP BY"
+                    + " porcentajeRetencionIslr";
+            Object[] su = (Object[]) s.createQuery(sql).
+                    setLong(0, detalle.getId()).
+                    setString(1, "004").uniqueResult();
+            if (su != null) {
+                sustraendo = (Double) su[0] - ((Double) su[1] * aPartirDe);
+                if (sustraendo != 0) {
+                    sql = "(SELECT C.id FROM " + Factura.class.getName()
+                            + " C WHERE C.detalleSiniestro.id=:det and C.tipoConceptoSeniat.codigo=:co )";
+                    Integer id = (Integer) s.createQuery(sql).
+                            setLong(0, detalle.getId()).
+                            setString(1, "004").setMaxResults(1).uniqueResult();
+                    update = "UPDATE "
+                            + Factura.class.getName()
+                            + " SET sustraendo="
+                            + " (sustraendo+:su),"
+                            + " montoRetencionIslr=(sustraendo+:su)"
+                            + " WHERE  id = :id";
+                    s.createQuery(update).
+                            setLong("id", id).
+                            setDouble("su", sustraendo).
+                            executeUpdate();
+                }
+            }
+
+            s.getTransaction().commit();
+        }
+//        return sustraendo;
     }
 }

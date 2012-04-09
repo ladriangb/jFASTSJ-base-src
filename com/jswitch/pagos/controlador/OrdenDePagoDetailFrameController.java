@@ -23,6 +23,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import org.hibernate.Hibernate;
 import org.hibernate.classic.Session;
+import org.hibernate.validator.constraints.Email;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.client.InsertButton;
 import org.openswing.swing.form.client.Form;
@@ -94,6 +95,7 @@ public class OrdenDePagoDetailFrameController
         Hibernate.initialize(sin.getNotasTecnicas());
         s.close();
         getVista().hideAll(sin.getEstatusPago());
+        getVista().hideButtons(sin);
         beanVO = sin;
         return new VOResponse(beanVO);
     }
@@ -149,8 +151,8 @@ public class OrdenDePagoDetailFrameController
     }
 
     @Override
-    public void afterInsertData(Form form) {
-        vista.getMainPanel().getReloadButton().doClick();   
+    public void afterInsertData() {
+        vista.getMainPanel().getReloadButton().doClick();
     }
 
     @Override
@@ -159,7 +161,11 @@ public class OrdenDePagoDetailFrameController
             OrdenDePago ordenDePago = (OrdenDePago) beanVO;
             new BuscarDetallesGridFrameController(this, ordenDePago);
         } else if (((JButton) e.getSource()).getText().equalsIgnoreCase("Liquidar")) {
-            new LiquidarPagoDetailFrameController(vista.getMainPanel());
+            if (General.empresa.getLiquidarEnOrden()) {
+                new LiquidarPagoDetailFrameController(vista.getMainPanel());
+            } else {
+                new LiquidarPagoSinTMDetailFrameController(vista.getMainPanel());
+            }
         } else {
             int res = JOptionPane.showConfirmDialog(vista, "Esta a punto de Anular la \"Orden de Pago\"\nEsta acción no se puede revertir\n¿Desea Continuar? ",
                     General.empresa.getNombre(), JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
@@ -188,7 +194,9 @@ public class OrdenDePagoDetailFrameController
             }
 
             s.createQuery("UPDATE " + DetalleSiniestro.class.getName()
-                    + " D SET D.etapaSiniestro=:es, D.ordenDePago=null WHERE D.ordenDePago.id=:ds").
+                    + " D SET D.etapaSiniestro=:es,"
+                    + " D.ordenDePago=null,"
+                    + " D.fechaAprobado=null WHERE D.ordenDePago.id=:ds").
                     setEntity("es", etS).
                     setLong("ds", pago.getId()).executeUpdate();
 

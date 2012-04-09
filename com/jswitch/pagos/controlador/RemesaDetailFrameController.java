@@ -75,6 +75,7 @@ public class RemesaDetailFrameController
         Hibernate.initialize(remesa.getNotasTecnicas());
         s.close();
         getVista().hideAll(remesa.getEstatusPago());
+        getVista().hideButtons(remesa);
         beanVO = remesa;
         return new VOResponse(beanVO);
     }
@@ -129,7 +130,7 @@ public class RemesaDetailFrameController
                 if (remesa.getTipoDetalleSiniestro().equals(TipoDetalleSiniestro.Todos)) {
                     op = q.setString("Sep", EstatusPago.EN_ADMINISTRACION.toString()).list();
                 } else {
-                    op =    q.setString("Sep", EstatusPago.EN_ADMINISTRACION.toString()).
+                    op = q.setString("Sep", EstatusPago.EN_ADMINISTRACION.toString()).
                             setString("Stds", remesa.getTipoDetalleSiniestro().toString()).list();
                 }
                 s.createQuery("UPDATE " + OrdenDePago.class.getName()
@@ -251,19 +252,20 @@ public class RemesaDetailFrameController
             s.beginTransaction();
             s.createQuery("UPDATE " + OrdenDePago.class.getName()
                     + " D SET D.estatusPago=:es, D.remesa=null WHERE D.remesa.id=:ds").
-                    setString("es", EstatusPago.PENDIENTE.toString()).
+                    setString("es", EstatusPago.EN_ADMINISTRACION.toString()).
                     setLong("ds", remesa.getId()).executeUpdate();
             s.update(remesa);
 
             s.getTransaction().commit();
-        }catch (Exception ex) {
-         ex.printStackTrace();   
-        
+        } catch (Exception ex) {
+            ex.printStackTrace();
+
         } finally {
             s.close();
             vista.getMainPanel().getReloadButton().doClick();
         }
     }
+     
 
     /**
      * La vista de detalle de remesa

@@ -37,7 +37,7 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" pref="405" max="32767" attributes="0"/>
+              <Component id="jTabbedPane1" pref="409" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -278,7 +278,7 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="checkBoxControl2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="49" max="32767" attributes="0"/>
+                          <EmptySpace pref="53" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -492,7 +492,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="377" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="381" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -527,9 +527,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanel13" min="-2" max="-2" attributes="1"/>
-                          <EmptySpace pref="253" max="32767" attributes="0"/>
+                          <EmptySpace pref="257" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="gridControlObs" alignment="0" pref="353" max="32767" attributes="2"/>
+                      <Component id="gridControlObs" alignment="0" pref="357" max="32767" attributes="2"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -670,7 +670,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="377" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="381" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -705,9 +705,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanel15" min="-2" max="-2" attributes="1"/>
-                          <EmptySpace pref="253" max="32767" attributes="0"/>
+                          <EmptySpace pref="257" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="gridControlNot" alignment="0" pref="353" max="32767" attributes="2"/>
+                      <Component id="gridControlNot" alignment="0" pref="357" max="32767" attributes="2"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -838,7 +838,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="377" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="381" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -875,7 +875,7 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jPanel11" alignment="0" min="-2" max="-2" attributes="1"/>
-                              <Component id="gridControlDoc" alignment="0" pref="342" max="32767" attributes="1"/>
+                              <Component id="gridControlDoc" alignment="0" pref="346" max="32767" attributes="1"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -999,8 +999,8 @@
         <Container class="javax.swing.JPanel" name="reviciones">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Reviciones">
-                <Property name="tabTitle" type="java.lang.String" value="Reviciones"/>
+              <JTabbedPaneConstraints tabName="Revisiones">
+                <Property name="tabTitle" type="java.lang.String" value="Revisiones"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -1020,7 +1020,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="377" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="381" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -1055,9 +1055,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanel16" min="-2" max="-2" attributes="1"/>
-                          <EmptySpace pref="253" max="32767" attributes="0"/>
+                          <EmptySpace pref="257" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="gridControlNot1" alignment="0" pref="353" max="32767" attributes="2"/>
+                      <Component id="gridControlNot1" alignment="0" pref="357" max="32767" attributes="2"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -1185,11 +1185,11 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="377" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="381" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="gridReportes" pref="355" max="32767" attributes="2"/>
+                          <Component id="gridReportes" pref="359" max="32767" attributes="2"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>

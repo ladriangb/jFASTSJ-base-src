@@ -35,7 +35,7 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" pref="272" max="32767" attributes="0"/>
+              <Component id="jTabbedPane1" pref="276" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -104,12 +104,12 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="244" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="248" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="form1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="31" max="32767" attributes="0"/>
+                          <EmptySpace pref="35" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -358,7 +358,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="gridData" pref="156" max="32767" attributes="0"/>
+                      <Component id="gridData" pref="160" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -468,7 +468,6 @@
                       <Connection code="&quot;id&quot;" type="code"/>
                     </Property>
                     <Property name="columnRequired" type="boolean" value="false"/>
-                    <Property name="grouping" type="boolean" value="false"/>
                     <Property name="preferredWidth" type="int" value="40"/>
                   </Properties>
                 </Component>
@@ -562,7 +561,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="244" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="248" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -597,9 +596,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanel13" min="-2" max="-2" attributes="1"/>
-                          <EmptySpace pref="120" max="32767" attributes="0"/>
+                          <EmptySpace pref="124" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="gridControlObs" alignment="0" pref="220" max="32767" attributes="2"/>
+                      <Component id="gridControlObs" alignment="0" pref="224" max="32767" attributes="2"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -636,7 +635,6 @@
                           <Connection code="&quot;id&quot;" type="code"/>
                         </Property>
                         <Property name="columnRequired" type="boolean" value="false"/>
-                        <Property name="grouping" type="boolean" value="false"/>
                         <Property name="preferredWidth" type="int" value="40"/>
                       </Properties>
                     </Component>
@@ -740,7 +738,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="244" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="248" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -775,9 +773,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanel15" min="-2" max="-2" attributes="1"/>
-                          <EmptySpace pref="120" max="32767" attributes="0"/>
+                          <EmptySpace pref="124" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="gridControlNot" alignment="0" pref="220" max="32767" attributes="2"/>
+                      <Component id="gridControlNot" alignment="0" pref="224" max="32767" attributes="2"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -808,7 +806,6 @@
                           <Connection code="&quot;id&quot;" type="code"/>
                         </Property>
                         <Property name="columnRequired" type="boolean" value="false"/>
-                        <Property name="grouping" type="boolean" value="false"/>
                         <Property name="preferredWidth" type="int" value="40"/>
                       </Properties>
                     </Component>
@@ -908,7 +905,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="244" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="248" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -945,7 +942,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jPanel11" alignment="0" min="-2" max="-2" attributes="1"/>
-                              <Component id="gridControlDoc" alignment="0" pref="209" max="32767" attributes="1"/>
+                              <Component id="gridControlDoc" alignment="0" pref="213" max="32767" attributes="1"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -962,7 +959,7 @@
                       <ComponentRef name="editButtonDoc"/>
                     </Property>
                     <Property name="filterButton" type="org.openswing.swing.client.FilterButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="filterButtonDoc"/>
+                      <ComponentRef name="default"/>
                     </Property>
                     <Property name="insertButton" type="org.openswing.swing.client.InsertButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
                       <ComponentRef name="insertButtonDoc"/>
@@ -1002,7 +999,6 @@
                           <Connection code="&quot;id&quot;" type="code"/>
                         </Property>
                         <Property name="columnRequired" type="boolean" value="false"/>
-                        <Property name="grouping" type="boolean" value="false"/>
                         <Property name="preferredWidth" type="int" value="40"/>
                       </Properties>
                     </Component>
@@ -1058,8 +1054,6 @@
                     <Component class="org.openswing.swing.client.SaveButton" name="saveButtonDoc">
                     </Component>
                     <Component class="org.openswing.swing.client.ReloadButton" name="reloadButtonDoc">
-                    </Component>
-                    <Component class="org.openswing.swing.client.FilterButton" name="filterButtonDoc">
                     </Component>
                   </SubComponents>
                 </Container>

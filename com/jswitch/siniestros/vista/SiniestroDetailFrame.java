@@ -128,7 +128,6 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
         deleteButtonDoc = new org.openswing.swing.client.DeleteButton();
         saveButtonDoc = new org.openswing.swing.client.SaveButton();
         reloadButtonDoc = new org.openswing.swing.client.ReloadButton();
-        filterButtonDoc = new org.openswing.swing.client.FilterButton();
 
         setTitle("Siniestro");
         setPreferredSize(new java.awt.Dimension(675, 542));
@@ -339,7 +338,6 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
 
         decimalColumn1.setColumnName("id");
         decimalColumn1.setColumnRequired(false);
-        decimalColumn1.setGrouping(false);
         decimalColumn1.setPreferredWidth(40);
         gridData.getColumnContainer().add(decimalColumn1);
 
@@ -584,7 +582,6 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
 
         gridControlDoc.setDeleteButton(deleteButtonDoc);
         gridControlDoc.setEditButton(editButtonDoc);
-        gridControlDoc.setFilterButton(filterButtonDoc);
         gridControlDoc.setInsertButton(insertButtonDoc);
         gridControlDoc.setMaxNumberOfRowsOnInsert(4);
         gridControlDoc.setReloadButton(reloadButtonDoc);
@@ -629,7 +626,6 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
         jPanel11.add(deleteButtonDoc);
         jPanel11.add(saveButtonDoc);
         jPanel11.add(reloadButtonDoc);
-        jPanel11.add(filterButtonDoc);
 
         javax.swing.GroupLayout jPanelDocLayout = new javax.swing.GroupLayout(jPanelDoc);
         jPanelDoc.setLayout(jPanelDocLayout);
@@ -855,7 +851,6 @@ public class SiniestroDetailFrame extends DefaultDetailFrame {
     private org.openswing.swing.client.EditButton editButtonObs;
     private org.openswing.swing.client.ExportButton exportButton1;
     private org.openswing.swing.client.FilterButton filterButton1;
-    private org.openswing.swing.client.FilterButton filterButtonDoc;
     private org.openswing.swing.form.client.Form form1;
     private org.openswing.swing.client.GridControl gridControlDoc;
     private org.openswing.swing.client.GridControl gridControlNot;

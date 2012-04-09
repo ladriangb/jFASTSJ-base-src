@@ -27,6 +27,7 @@ public class AgotamientoGridFrame extends DefaultGridFrame {
         exportButton1 = new org.openswing.swing.client.ExportButton();
         navigatorBar1 = new org.openswing.swing.client.NavigatorBar();
         gridData = new org.openswing.swing.client.GridControl();
+        textColumn12 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn1 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn2 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn4 = new org.openswing.swing.table.columns.client.TextColumn();
@@ -81,6 +82,12 @@ public class AgotamientoGridFrame extends DefaultGridFrame {
         gridData.setReloadButton(reloadButton1);
         gridData.setSearchAdditionalRows(true);
         gridData.setValueObjectClassName(Agotamiento.class.getName());
+
+        textColumn12.setColumnFilterable(true);
+        textColumn12.setColumnName("asegurado.certificado.poliza.numero");
+        textColumn12.setColumnRequired(false);
+        textColumn12.setColumnSortable(true);
+        gridData.getColumnContainer().add(textColumn12);
 
         textColumn1.setColumnFilterable(true);
         textColumn1.setColumnName("asegurado.persona.rif.rif");
@@ -266,6 +273,7 @@ public class AgotamientoGridFrame extends DefaultGridFrame {
     private org.openswing.swing.table.columns.client.TextColumn textColumn1;
     private org.openswing.swing.table.columns.client.TextColumn textColumn10;
     private org.openswing.swing.table.columns.client.TextColumn textColumn11;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn12;
     private org.openswing.swing.table.columns.client.TextColumn textColumn2;
     private org.openswing.swing.table.columns.client.TextColumn textColumn3;
     private org.openswing.swing.table.columns.client.TextColumn textColumn4;

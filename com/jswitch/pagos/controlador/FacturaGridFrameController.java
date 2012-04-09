@@ -45,13 +45,13 @@ public class FacturaGridFrameController extends DefaultGridFrameController {
             ArrayList<Type> ty = new ArrayList<Type>(0);
             if (bf != null) {
                 if (bf.getAyo() != null) {
-                    where = " year(fechaPagado)=? ";
+                    where = " year(fechaFactura)=? ";
                     ob.add(bf.getAyo());
                     ty.add(new IntegerType());
                     and = " AND ";
                 }
                 if (bf.getMes() != null) {
-                    where += and + " month(fechaPagado)=? ";
+                    where += and + " month(fechaFactura)=? ";
                     ob.add(bf.getMes());
                     ty.add(new IntegerType());
                     and = " AND ";
@@ -74,9 +74,8 @@ public class FacturaGridFrameController extends DefaultGridFrameController {
             String tableName = "C";
             String select = gridFrame.getGridControl().getVOListTableModel().
                     createSelect("C", AliasedTupleSRT.SEPARATOR);
-            String sql = select + " FROM " + claseModeloFullPath + " " + tableName + " WHERE "
-                    + "C.fechaPagado is not null";
-            sql += (!where.isEmpty() ? (" AND " + where) : "");
+            String sql = select + " FROM " + claseModeloFullPath + " " + tableName ;
+            sql += (!where.isEmpty() ? (" WHERE " + where) : "");
             SessionFactory sf = HibernateUtil.getSessionFactory();
             s = sf.openSession();
             Response res = HibernateUtils.getBlockFromQuery(

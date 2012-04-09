@@ -6,6 +6,7 @@ import com.jswitch.base.controlador.util.DefaultDetailFrameController;
 import com.jswitch.base.modelo.HibernateUtil;
 import com.jswitch.base.vista.util.ProgressDialog;
 import com.jswitch.configuracion.modelo.maestra.ConfiguracionProntoPago;
+import com.jswitch.configuracion.modelo.maestra.TimbreMunicipal;
 import com.jswitch.configuracion.modelo.transaccional.RangoValor;
 import com.jswitch.fas.modelo.Dominios.EstatusPago;
 import com.jswitch.fas.modelo.Dominios.TipoDescuentoProntoPago;
@@ -28,7 +29,7 @@ import org.openswing.swing.util.java.Consts;
  * Pagar Siniestro
  * @author Luis Adrian Gonzalez Benavides
  */
-public class LiquidarPagoDetailFrameController extends DefaultDetailFrameController {
+public class LiquidarPagoSinTMDetailFrameController extends DefaultDetailFrameController {
 
     /**
      * panel a pagar 
@@ -51,7 +52,7 @@ public class LiquidarPagoDetailFrameController extends DefaultDetailFrameControl
      * 
      * @param mainPane 
      */
-    public LiquidarPagoDetailFrameController(Form mainPane) {
+    public LiquidarPagoSinTMDetailFrameController(Form mainPane) {
         super(LiquidarPagoDetailFrame.class.getName(), null, null, false);
         this.mainPane = mainPane;
     }
@@ -92,8 +93,6 @@ public class LiquidarPagoDetailFrameController extends DefaultDetailFrameControl
                         sustraendoACancelar((OrdenDePago) valueObject, s);
                     }
                 }
-
-
                 s.getTransaction().commit();
             } catch (Exception e) {
                 LoggerUtil.error(this.getClass(), "insertRecord", e);
@@ -133,7 +132,6 @@ public class LiquidarPagoDetailFrameController extends DefaultDetailFrameControl
         ordenDePago.setCodigoSIGECOF(pagar.getReferencia());
         ordenDePago.setEstatusPago(EstatusPago.EN_ADMINISTRACION);
         s.update(ordenDePago);
-        Double tm = 0d;
         facturas = s.createQuery("SELECT C.id FROM " + Factura.class.getName() + " C "
                 + "WHERE C.detalleSiniestro.ordenDePago.id=?").setLong(0, ordenDePago.getId()).list();
         value++;
@@ -141,16 +139,15 @@ public class LiquidarPagoDetailFrameController extends DefaultDetailFrameControl
         if (ordenDePago.getTipoDetalleSiniestro().equals(TipoDetalleSiniestro.Reembolso)) {
             pagarReembolso(ordenDePago, pagar, s);
         } else {
-            tm = timbreACancelar(ordenDePago, pagar, s);
             switch (pagar.getTipoDescuentoProntoPago()) {
                 case POR_CONVENIO:
-                    pagarConvenio(ordenDePago, pagar, s, tm);
+                    pagarConvenio(ordenDePago, pagar, s);
                     break;
                 case POR_MONTO_DESCUENTO:
                     pagar.setPorcentajeDescuento(pagar.getMontoDescuento()
                             / ordenDePago.getSumaOrden().getTotalLiquidado());
                 case POR_PORCENTAJE_DESCUENTO:
-                    pagarConPorcentaje(ordenDePago, pagar, s, tm, pagar.getPorcentajeDescuento());
+                    pagarConPorcentaje(ordenDePago, pagar, s, pagar.getPorcentajeDescuento());
 
             }
         }
@@ -170,51 +167,7 @@ public class LiquidarPagoDetailFrameController extends DefaultDetailFrameControl
                 setParameterList("li", list).
                 executeUpdate();
 
-
-
         return new VOResponse();
-    }
-
-    /**
-     * calcular el timbre municipal a cancelar por orden de pago
-     * @param ordenDePago
-     * @param pagar
-     * @return timbre municipal a cancelar 
-     */
-    private Double timbreACancelar(OrdenDePago ordenDePago, Pagar pagar, Session s) {
-
-        int totalUT = (int) (ordenDePago.getSumaOrden().getTotalACancelar()
-                / General.parametros.get("ut").getValorDouble());
-        String zipCode = "";
-        if (ordenDePago.getPersonaPago().
-                getDireccionFiscal() != null) {
-            zipCode = ordenDePago.getPersonaPago().
-                    getDireccionFiscal().getZonaPostal();
-            if (zipCode == null) {
-                zipCode = "";
-            }
-        }
-        List<RangoValor> list = s.createQuery("FROM "
-                + RangoValor.class.getName() + " R WHERE R.timbreMunicipal.zipCode=?").
-                setString(0, zipCode).list();
-        if (list.isEmpty()) {
-            if (General.parametros.get("tm") != null
-                    && General.parametros.get("tm").getValorDouble() != null
-                    && General.parametros.get("minTM") != null
-                    && General.parametros.get("minTM").getValorInteger() != null) {
-                if (totalUT >= General.parametros.get("minTM").getValorInteger()) {
-                    return General.parametros.get("tm").getValorDouble();
-                }
-            }
-        } else {
-            for (RangoValor rangoValor : list) {
-                if (totalUT >= rangoValor.getMinValue()
-                        && totalUT <= rangoValor.getMaxValue()) {
-                    return rangoValor.getMonto();
-                }
-            }
-        }
-        return 0d;
     }
 
     /**
@@ -246,9 +199,9 @@ public class LiquidarPagoDetailFrameController extends DefaultDetailFrameControl
      * @param ordenDePago
      * @param pagar
      * @param s
-     * @param tm 
+    
      */
-    private void pagarConvenio(OrdenDePago ordenDePago, Pagar pagar, Session s, Double tm) {
+    private void pagarConvenio(OrdenDePago ordenDePago, Pagar pagar, Session s) {
         progress.setEventoActual("Convenio Pronto pago con " + ordenDePago.getPersonaPago().getNombreCorto());
         value++;
         progress.setValue(value);
@@ -258,14 +211,14 @@ public class LiquidarPagoDetailFrameController extends DefaultDetailFrameControl
                 + ConfiguracionProntoPago.class.getName() + " C "
                 + "WHERE C.persona.id=?").setLong(0, val).uniqueResult();
         if (cpp == null) {
-            pagarConPorcentaje(ordenDePago, pagar, s, tm, 0d);
+            pagarConPorcentaje(ordenDePago, pagar, s, 0d);
 
         } else {
             progress.setEventoActual("Actualizando estado de "
                     + ordenDePago.getSumaOrden().getCantidadFacturas()
                     + " Facturas");
             s.createQuery("UPDATE " + Factura.class.getName()
-                    + " AS f SET f.f=:fp, porcentajeRetencionTM=:tm,"
+                    + " AS f SET f.f=:fp,"
                     + " valorUT=:ut,"
                     + " porcentajeRetencionProntoPago=coalesce("
                     + "(SELECT V.monto FROM "
@@ -279,7 +232,6 @@ public class LiquidarPagoDetailFrameController extends DefaultDetailFrameControl
                     + " ,:cero)"
                     + " WHERE id in (:li)").
                     setDate("fp", pagar.getFechaDePago()).
-                    setDouble("tm", tm).
                     setDouble("ut", General.parametros.get("ut").getValorDouble()).
                     setLong("pp", cpp.getId()).
                     setDouble("cero", 0d).
@@ -294,21 +246,19 @@ public class LiquidarPagoDetailFrameController extends DefaultDetailFrameControl
      * @param ordenDePago
      * @param pagar
      * @param s
-     * @param tm 
      */
-    private void pagarConPorcentaje(OrdenDePago ordenDePago, Pagar pagar, Session s, Double tm, Double porcentaje) {
+    private void pagarConPorcentaje(OrdenDePago ordenDePago, Pagar pagar, Session s, Double porcentaje) {
         progress.setEventoActual("Actualizando estado de "
                 + ordenDePago.getSumaOrden().getCantidadFacturas()
                 + " Facturas");
         value++;
         progress.setValue(value);
         s.createQuery("UPDATE " + Factura.class.getName()
-                + " f SET f.fechaAprobado=:fp, f.porcentajeRetencionTM=:tm,"
+                + " f SET f.fechaAprobado=:fp, "
                 + " f.valorUT=:ut,"
                 + " f.porcentajeRetencionProntoPago=:pp"
                 + " WHERE id in (:li)").
                 setDate("fp", pagar.getFechaDePago()).
-                setDouble("tm", tm).
                 setDouble("ut", General.parametros.get("ut").getValorDouble()).
                 setDouble("pp", porcentaje).
                 setParameterList("li", facturas).
@@ -343,7 +293,7 @@ public class LiquidarPagoDetailFrameController extends DefaultDetailFrameControl
                     + " -CAST(baseIslr/:base*:base2*porcentajeRetencionIslr AS big_decimal)"
                     + " WHERE  id IN (SELECT C.id FROM " + Factura.class.getName()
                     + " C WHERE C.detalleSiniestro.ordenDePago.id=:det and C.tipoConceptoSeniat.codigo=:co)";
-//            s.beginTransaction();
+            s.beginTransaction();
             s.createQuery(update).
                     setDouble("base", baseIslr).
                     setDouble("base2", aPartirDe).
@@ -377,7 +327,7 @@ public class LiquidarPagoDetailFrameController extends DefaultDetailFrameControl
                 }
             }
 
-//            s.getTransaction().commit();
+            s.getTransaction().commit();
         }
 
     }

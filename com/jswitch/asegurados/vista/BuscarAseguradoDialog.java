@@ -83,6 +83,7 @@ public class BuscarAseguradoDialog extends InternalFrame {
         jPanel12 = new javax.swing.JPanel();
         gridControl4 = new org.openswing.swing.client.GridControl();
         decimalColumn4 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        textColumn12 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn2 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn1 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn3 = new org.openswing.swing.table.columns.client.TextColumn();
@@ -190,6 +191,12 @@ public class BuscarAseguradoDialog extends InternalFrame {
         decimalColumn4.setPreferredWidth(40);
         gridControl4.getColumnContainer().add(decimalColumn4);
 
+        textColumn12.setColumnFilterable(true);
+        textColumn12.setColumnName("certificado.poliza.numero");
+        textColumn12.setColumnRequired(false);
+        textColumn12.setColumnSortable(true);
+        gridControl4.getColumnContainer().add(textColumn12);
+
         textColumn2.setColumnName("certificado.titular.persona.rif.cedulaCompleta");
         textColumn2.setColumnSortable(true);
         gridControl4.getColumnContainer().add(textColumn2);
@@ -227,7 +234,7 @@ public class BuscarAseguradoDialog extends InternalFrame {
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(gridControl4, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+            .addComponent(gridControl4, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
         );
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/check1.png"))); // NOI18N
@@ -289,6 +296,7 @@ public class BuscarAseguradoDialog extends InternalFrame {
     private org.openswing.swing.client.LabelControl labelControl2;
     private org.openswing.swing.client.LabelControl labelControl4;
     private org.openswing.swing.table.columns.client.TextColumn textColumn1;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn12;
     private org.openswing.swing.table.columns.client.TextColumn textColumn2;
     private org.openswing.swing.table.columns.client.TextColumn textColumn3;
     private org.openswing.swing.table.columns.client.TextColumn textColumn4;

@@ -197,6 +197,13 @@
             <Property name="decimals" type="int" value="2"/>
           </Properties>
         </Component>
+        <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn4">
+          <Properties>
+            <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;sustraendo&quot;" type="code"/>
+            </Property>
+          </Properties>
+        </Component>
         <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn7">
           <Properties>
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">

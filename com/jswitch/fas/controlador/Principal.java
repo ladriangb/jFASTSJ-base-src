@@ -190,11 +190,12 @@ public class Principal implements MDIController, LoginController {
         ClientSettings.ALLOW_OR_OPERATOR = false;
         ClientSettings.INCLUDE_IN_OPERATOR = false;
         ClientSettings.ICON_FILENAME = "jsw.png";
+        ClientSettings.BUTTON_SAVE_IMAGE_NAME = "save02.png";
+        ClientSettings.BUTTON_FILTER_IMAGE_NAME = "filter01.png";//filter2.png";
         ClientSettings.BUTTON_RELOAD_IMAGE_NAME = "reload.png";
         ClientSettings.BUTTON_INSERT_IMAGE_NAME = "insert.png";
         ClientSettings.BUTTON_DELETE_IMAGE_NAME = "delete.png";
-        ClientSettings.BUTTON_EXPORT_IMAGE_NAME = "printer.png";
-        ClientSettings.BUTTON_FILTER_IMAGE_NAME = "filter2.png";
+        ClientSettings.BUTTON_EXPORT_IMAGE_NAME = "printer.png";   
         //ClientSettings.FILTER_PANEL_ON_GRID_POLICY=Consts.FILTER_PANEL_ON_GRID_USE_CLOSE_BUTTON;
 
         if (General.empresa.getFileGridProfileManager()) {

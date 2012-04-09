@@ -34,8 +34,9 @@ public class FacturaGridFrame extends DefaultGridFrame {
         currencyColumn1 = new org.openswing.swing.table.columns.client.CurrencyColumn();
         decimalColumn2 = new org.openswing.swing.table.columns.client.DecimalColumn();
         decimalColumn3 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        decimalColumn4 = new org.openswing.swing.table.columns.client.DecimalColumn();
         textColumn7 = new org.openswing.swing.table.columns.client.TextColumn();
-        textColumn8 = new org.openswing.swing.table.columns.client.TextColumn();
+        dateColumn1 = new org.openswing.swing.table.columns.client.DateColumn();
 
         setTitle("Facturas");
         setPreferredSize(new java.awt.Dimension(700, 540));
@@ -73,56 +74,79 @@ public class FacturaGridFrame extends DefaultGridFrame {
         gridData.setSearchAdditionalRows(true);
         gridData.setValueObjectClassName(Factura.class.getName());
 
+        textColumn3.setColumnFilterable(true);
         textColumn3.setColumnName("detalleSiniestro.personaPago.rif.rif");
         textColumn3.setColumnRequired(false);
+        textColumn3.setColumnSortable(true);
         textColumn3.setUpperCase(true);
         gridData.getColumnContainer().add(textColumn3);
 
+        textColumn4.setColumnFilterable(true);
         textColumn4.setColumnName("numeroFactura");
         textColumn4.setColumnRequired(false);
+        textColumn4.setColumnSortable(true);
         textColumn4.setUpperCase(true);
         gridData.getColumnContainer().add(textColumn4);
 
+        textColumn5.setColumnFilterable(true);
         textColumn5.setColumnName("numeroControl");
         textColumn5.setColumnRequired(false);
+        textColumn5.setColumnSortable(true);
         textColumn5.setUpperCase(true);
         gridData.getColumnContainer().add(textColumn5);
 
+        textColumn6.setColumnFilterable(true);
         textColumn6.setColumnName("tipoConceptoSeniat.codigo");
         textColumn6.setColumnRequired(false);
+        textColumn6.setColumnSortable(true);
         textColumn6.setUpperCase(true);
         gridData.getColumnContainer().add(textColumn6);
 
+        decimalColumn1.setColumnFilterable(true);
         decimalColumn1.setColumnName("totalLiquidado");
         decimalColumn1.setColumnRequired(false);
+        decimalColumn1.setColumnSortable(true);
         decimalColumn1.setDecimals(2);
         gridData.getColumnContainer().add(decimalColumn1);
 
+        currencyColumn1.setColumnFilterable(true);
         currencyColumn1.setColumnName("porcentajeRetencionIslr");
         currencyColumn1.setColumnRequired(false);
+        currencyColumn1.setColumnSortable(true);
         currencyColumn1.setCurrencySymbol("%");
         currencyColumn1.setDecimals(2);
         gridData.getColumnContainer().add(currencyColumn1);
 
+        decimalColumn2.setColumnFilterable(true);
         decimalColumn2.setColumnName("montoRetencionIslr");
         decimalColumn2.setColumnRequired(false);
+        decimalColumn2.setColumnSortable(true);
         decimalColumn2.setDecimals(2);
         gridData.getColumnContainer().add(decimalColumn2);
 
+        decimalColumn3.setColumnFilterable(true);
         decimalColumn3.setColumnName("baseIslr");
         decimalColumn3.setColumnRequired(false);
+        decimalColumn3.setColumnSortable(true);
         decimalColumn3.setDecimals(2);
         gridData.getColumnContainer().add(decimalColumn3);
 
+        decimalColumn4.setColumnFilterable(true);
+        decimalColumn4.setColumnName("sustraendo");
+        decimalColumn4.setColumnRequired(false);
+        decimalColumn4.setColumnSortable(true);
+        decimalColumn4.setDecimals(2);
+        gridData.getColumnContainer().add(decimalColumn4);
+
+        textColumn7.setColumnFilterable(true);
         textColumn7.setColumnName("detalleSiniestro.siniestro.numero");
         textColumn7.setColumnRequired(false);
+        textColumn7.setColumnSortable(true);
         textColumn7.setUpperCase(true);
         gridData.getColumnContainer().add(textColumn7);
 
-        textColumn8.setColumnName("detalleSiniestro.ordenDePago.remesa.numeroRemesa");
-        textColumn8.setColumnRequired(false);
-        textColumn8.setUpperCase(true);
-        gridData.getColumnContainer().add(textColumn8);
+        dateColumn1.setColumnName("fechaFactura");
+        gridData.getColumnContainer().add(dateColumn1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -178,9 +202,11 @@ public class FacturaGridFrame extends DefaultGridFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.openswing.swing.table.columns.client.CurrencyColumn currencyColumn1;
+    private org.openswing.swing.table.columns.client.DateColumn dateColumn1;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn1;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn2;
     private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn3;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn4;
     private org.openswing.swing.client.ExportButton exportButton1;
     private org.openswing.swing.client.GridControl gridData;
     private javax.swing.JPanel jPanel1;
@@ -191,6 +217,5 @@ public class FacturaGridFrame extends DefaultGridFrame {
     private org.openswing.swing.table.columns.client.TextColumn textColumn5;
     private org.openswing.swing.table.columns.client.TextColumn textColumn6;
     private org.openswing.swing.table.columns.client.TextColumn textColumn7;
-    private org.openswing.swing.table.columns.client.TextColumn textColumn8;
     // End of variables declaration//GEN-END:variables
 }

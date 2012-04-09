@@ -41,7 +41,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="form1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" pref="269" max="32767" attributes="0"/>
+              <Component id="jTabbedPane1" pref="277" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -288,7 +288,7 @@
                 </Component>
                 <Component class="org.openswing.swing.client.LabelControl" name="labelControl21">
                   <Properties>
-                    <Property name="label" type="java.lang.String" value="fechaRebicion"/>
+                    <Property name="label" type="java.lang.String" value="fechaRevision"/>
                   </Properties>
                 </Component>
                 <Component class="org.openswing.swing.client.DateControl" name="dateControl3">
@@ -927,9 +927,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel15" min="-2" max="-2" attributes="1"/>
-                      <EmptySpace pref="128" max="32767" attributes="0"/>
+                      <EmptySpace pref="136" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="gridControl5" alignment="0" pref="228" max="32767" attributes="2"/>
+                  <Component id="gridControl5" alignment="0" pref="236" max="32767" attributes="2"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -985,7 +985,6 @@
                     <Property name="columnSortable" type="boolean" value="true"/>
                     <Property name="editableOnEdit" type="boolean" value="true"/>
                     <Property name="editableOnInsert" type="boolean" value="true"/>
-                    <Property name="hideButton" type="boolean" value="true"/>
                   </Properties>
                 </Component>
                 <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn1">
@@ -1113,9 +1112,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel17" min="-2" max="-2" attributes="1"/>
-                      <EmptySpace pref="128" max="32767" attributes="0"/>
+                      <EmptySpace pref="136" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="gridControl6" alignment="0" pref="228" max="32767" attributes="2"/>
+                  <Component id="gridControl6" alignment="0" pref="236" max="32767" attributes="2"/>
               </Group>
             </DimensionLayout>
           </Layout>

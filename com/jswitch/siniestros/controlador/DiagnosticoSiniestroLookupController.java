@@ -1,36 +1,60 @@
 package com.jswitch.siniestros.controlador;
 
 import com.jswitch.base.controlador.logger.LoggerUtil;
-import com.jswitch.base.controlador.util.DefaultLookupController;
 import com.jswitch.base.controlador.util.DefaultLookupDataLocator;
 import com.jswitch.base.controlador.util.DefaultLookupGridController;
 import com.jswitch.base.modelo.HibernateUtil;
+import com.jswitch.base.modelo.entidades.auditoria.Auditable;
 import com.jswitch.siniestros.modelo.maestra.DetalleSiniestro;
 import com.jswitch.siniestros.modelo.maestra.DiagnosticoSiniestro;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
+import org.hibernate.transform.AliasedTupleSRT;
 import org.hibernate.type.BooleanType;
+import org.hibernate.type.LongType;
 import org.hibernate.type.Type;
+import org.openswing.swing.lookup.client.LookupController;
+import org.openswing.swing.lookup.client.LookupParent;
 import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
 import org.openswing.swing.message.receive.java.VOListResponse;
-import org.openswing.swing.message.send.java.FilterWhereClause;
 import org.openswing.swing.util.java.Consts;
 import org.openswing.swing.util.server.HibernateUtils;
 
 /**
  * @author adrian
  */
-public class DiagnosticoSiniestroLookupController extends DefaultLookupController {
+public class DiagnosticoSiniestroLookupController extends LookupController {
 
     private DetalleSiniestro detalleSiniestro;
 
+    @Override
+    public void doubleClick(int rowNumber, LookupParent lookupParent) {
+        selectedRow = rowNumber;
+        lookupVO =
+                getLookupFrame().getTable().getVOListTableModel().getObjectForRow(selectedRow);
+        Session s = null;
+        try {
+            s = HibernateUtil.getSessionFactory().openSession();
+            lookupVO = (DiagnosticoSiniestro) s.get(DiagnosticoSiniestro.class, ((Auditable) lookupVO).getId());
+        } finally {
+            s.close();
+        }
+        updateParentModel(lookupParent);
+        if (!disableFrameClosing) {
+            getLookupFrame().setVisible(false);
+            getLookupFrame().dispose();
+        }
+        codeValid = true;
+    }
+
     public DiagnosticoSiniestroLookupController() {
         this.detalleSiniestro = null;
-        this.setLookupDataLocator(new DiagnosticoSiniestroLookupDataLocator(DiagnosticoSiniestro.class.getName()));
+        this.setLookupDataLocator(new DiagnosticoSiniestroLookupDataLocator(this));
         this.setLookupGridController(new DefaultLookupGridController());
         setLookupValueObjectClassName(DiagnosticoSiniestro.class.getName());
         setAllColumnVisible(false);
@@ -58,6 +82,7 @@ public class DiagnosticoSiniestroLookupController extends DefaultLookupControlle
         setFramePreferedSize(new java.awt.Dimension(400, 340));
         setCodeSelectionWindow(GRID_FRAME);
         setOnInvalidCode(ON_INVALID_CODE_RESTORE_FOCUS);
+        removeUnvisibleColumns();
 
     }
 
@@ -67,8 +92,11 @@ public class DiagnosticoSiniestroLookupController extends DefaultLookupControlle
 
     class DiagnosticoSiniestroLookupDataLocator extends DefaultLookupDataLocator {
 
-        public DiagnosticoSiniestroLookupDataLocator(String classFullName) {
-            super(classFullName);
+        private DiagnosticoSiniestroLookupController controller;
+
+        public DiagnosticoSiniestroLookupDataLocator(DiagnosticoSiniestroLookupController controller) {
+            super(DiagnosticoSiniestro.class.getName());
+            this.controller = controller;
         }
 
         @Override
@@ -80,25 +108,28 @@ public class DiagnosticoSiniestroLookupController extends DefaultLookupControlle
                 Class valueObjectType) {
             if (detalleSiniestro != null) {
                 Session s = null;
+
+
+
                 try {
-                    String sql = "FROM " + DiagnosticoSiniestro.class.getName()
-                            + " C WHERE C.auditoria.activo=? AND C.montoPendiente > 0";
-                    filteredColumns.put(
-                            "detalleSiniestro.id",
-                            new FilterWhereClause[]{
-                                new FilterWhereClause("detalleSiniestro.id", "=", detalleSiniestro.getId()),
-                                null
-                            });
+                    String select = controller.createSelect(
+                            "C", AliasedTupleSRT.SEPARATOR);
+
+                    String sql = select + "FROM " + DiagnosticoSiniestro.class.getName()
+                            + " C WHERE C.auditoria.activo=? AND C.montoPendiente > 0 AND C.detalleSiniestro.id=?";
+
                     SessionFactory sf = HibernateUtil.getSessionFactory();
                     s = sf.openSession();
                     Response res = HibernateUtils.getAllFromQuery(
+                            new AliasedTupleSRT(DiagnosticoSiniestro.class),
+                            new HashMap(),
                             filteredColumns,
                             currentSortedColumns,
                             currentSortedVersusColumns,
                             valueObjectType,
                             sql,
-                            new Object[]{new Boolean(true)},
-                            new Type[]{new BooleanType()},
+                            new Object[]{Boolean.TRUE, detalleSiniestro.getId()},
+                            new Type[]{new BooleanType(), new LongType()},
                             "C",
                             sf,
                             s);
@@ -121,14 +152,24 @@ public class DiagnosticoSiniestroLookupController extends DefaultLookupControlle
             if (detalleSiniestro != null) {
                 Session s = null;
                 try {
-                    String sql = "FROM " + DiagnosticoSiniestro.class.getName()
+                    String select = controller.createSelect(
+                            "C", AliasedTupleSRT.SEPARATOR);
+                    String sql = select + "FROM " + DiagnosticoSiniestro.class.getName()
                             + " C WHERE C.detalleSiniestro.id = ?";// + detalleSiniestro.getId() ;
                     sql += " AND C.auditoria.activo=? AND upper(C.diagnostico.nombre) like ?";
                     s = HibernateUtil.getSessionFactory().openSession();
                     List list = s.createQuery(sql).
                             setLong(0, detalleSiniestro.getId()).
                             setBoolean(1, Boolean.TRUE).
-                            setString(2, "%" + code.toUpperCase().trim() + "%").list();
+                            setString(2, "%" + code.toUpperCase().trim() + "%").
+                            setResultTransformer(new AliasedTupleSRT(DiagnosticoSiniestro.class)).
+                            list();
+                    if (list.size() == 1) {
+                        DiagnosticoSiniestro ob = ((DiagnosticoSiniestro) list.get(0));
+                        ob = (DiagnosticoSiniestro) s.get(DiagnosticoSiniestro.class, ob.getId());
+                        list.clear();
+                        list.add(ob);
+                    }
                     return new VOListResponse(list, false, list.size());
                 } catch (Exception ex) {
                     LoggerUtil.error(this.getClass(), "validateCode", ex);
